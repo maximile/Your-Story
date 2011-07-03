@@ -43,10 +43,12 @@ Room *room = nil;
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 	
+	glScalef(2.0,2.0,1.0);
 	if (room == nil) {
 		room = [[Room alloc] initWithName:@"Test"];
 	}
 	[room draw];
+	glScalef(0.5,0.5,1.0);
 	
 	[[self openGLContext] flushBuffer];
 }

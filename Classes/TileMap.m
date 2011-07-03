@@ -79,23 +79,19 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 - (void)drawTile:(tileCoords)tile at:(tileCoords)loc {
 	// get texture coordinates
-	float tTop = (tile.y * 16.0) / (float)height;
-	float tBottom = ((tile.y + 1) * 16.0) / (float)height;
+	float tBottom = (tile.y * 16.0) / (float)height;
+	float tTop = ((tile.y + 1) * 16.0) / (float)height;
 	float tLeft = (tile.x * 16.0) / (float)width;
 	float tRight = ((tile.x + 1) * 16.0) / (float)width;
 	GLfloat texCoords[] = {tLeft, tTop, tRight, tTop, tRight, tBottom, tLeft, tBottom};
-	
-	NSLog(@"tex: %f %f %f %f", tTop, tBottom, tLeft, tRight);
-	
+		
 	// space coordinates
 	float top = loc.y * 16.0; 
 	float bottom = (loc.y + 1) * 16.0; 
 	float left = loc.x * 16.0; 
 	float right = (loc.x + 1) * 16.0; 
 	GLfloat vertices[] = {left, top, right, top, right, bottom, left, bottom};
-	
-	NSLog(@"space: %f %f %f %f", top, bottom, left, right);
-	
+		
 	glBindTexture(GL_TEXTURE_2D, name);
 	glVertexPointer(2, GL_FLOAT, 0, vertices);
 	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);

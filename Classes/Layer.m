@@ -47,9 +47,7 @@
 			}
 		} 
 	}
-	
-	NSLog(@"%@", rows);
-	
+		
 	// check that all rows are the same length
 	if (rows.count < 1) {
 		NSLog(@"No rows in string.");
@@ -91,10 +89,8 @@
 - (void)draw {
 	for (int y=0; y<height; y++) {
 		for (int x=0; x<width; x++) {
-			int index = y*width + x;
+			int index = (height-1-y)*width + x;
 			tileCoords coords = tiles[index];
-			NSLog(@"%i", index);
-			NSLog(@"%i, %i", coords.x, coords.y);
 			if (coords.x < 0 || coords.y < 0) {
 				continue;
 			}
