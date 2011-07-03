@@ -11,6 +11,9 @@
 		660B7F5513BF60C2001ECF63 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B7F5413BF60C2001ECF63 /* GameView.m */; };
 		660B7FA113BF8EC8001ECF63 /* TileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B7FA013BF8EC8001ECF63 /* TileMap.m */; };
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
+		660B803713BFD4AB001ECF63 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B803613BFD4AB001ECF63 /* Room.m */; };
+		660B803A13BFD4C0001ECF63 /* Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.plist */; };
+		660B803F13C0D88D001ECF63 /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B803E13C0D88D001ECF63 /* Layer.m */; };
 		66C75B8C13BE801C002D8411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75B8B13BE801C002D8411 /* AppDelegate.m */; };
 		66C75BF413BE83A0002D8411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75BF313BE83A0002D8411 /* main.m */; };
 		66C75C3913BE83F8002D8411 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C75C1813BE83F8002D8411 /* chipmunk.c */; };
@@ -61,6 +64,11 @@
 		660B7F9F13BF8EC8001ECF63 /* TileMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileMap.h; sourceTree = "<group>"; };
 		660B7FA013BF8EC8001ECF63 /* TileMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileMap.m; sourceTree = "<group>"; };
 		660B7FA413BFBC31001ECF63 /* Test.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.psd; sourceTree = "<group>"; };
+		660B803513BFD4AB001ECF63 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
+		660B803613BFD4AB001ECF63 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
+		660B803913BFD4C0001ECF63 /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
+		660B803D13C0D88D001ECF63 /* Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer.h; sourceTree = "<group>"; };
+		660B803E13C0D88D001ECF63 /* Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Layer.m; sourceTree = "<group>"; };
 		66C75B8A13BE801C002D8411 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66C75B8B13BE801C002D8411 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		66C75B9213BE8060002D8411 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -148,6 +156,10 @@
 				660B7F5413BF60C2001ECF63 /* GameView.m */,
 				660B7F9F13BF8EC8001ECF63 /* TileMap.h */,
 				660B7FA013BF8EC8001ECF63 /* TileMap.m */,
+				660B803513BFD4AB001ECF63 /* Room.h */,
+				660B803613BFD4AB001ECF63 /* Room.m */,
+				660B803D13C0D88D001ECF63 /* Layer.h */,
+				660B803E13C0D88D001ECF63 /* Layer.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -214,6 +226,7 @@
 		660B7FA213BFBC31001ECF63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				660B803813BFD4AF001ECF63 /* Rooms */,
 				660B7FA313BFBC31001ECF63 /* Tiles */,
 			);
 			path = Resources;
@@ -225,6 +238,14 @@
 				660B7FA413BFBC31001ECF63 /* Test.psd */,
 			);
 			path = Tiles;
+			sourceTree = "<group>";
+		};
+		660B803813BFD4AF001ECF63 /* Rooms */ = {
+			isa = PBXGroup;
+			children = (
+				660B803913BFD4C0001ECF63 /* Test.plist */,
+			);
+			path = Rooms;
 			sourceTree = "<group>";
 		};
 		66C75BB113BE8385002D8411 /* Other Sources */ = {
@@ -382,6 +403,7 @@
 				66C75C3A13BE83F8002D8411 /* CMakeLists.txt in Resources */,
 				66C75C5713BE83F8002D8411 /* LICENSE.txt in Resources */,
 				660B7FA513BFBC31001ECF63 /* Test.psd in Resources */,
+				660B803A13BFD4C0001ECF63 /* Test.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +447,8 @@
 				66C75C5613BE83F8002D8411 /* cpVect.c in Sources */,
 				660B7F5513BF60C2001ECF63 /* GameView.m in Sources */,
 				660B7FA113BF8EC8001ECF63 /* TileMap.m in Sources */,
+				660B803713BFD4AB001ECF63 /* Room.m in Sources */,
+				660B803F13C0D88D001ECF63 /* Layer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

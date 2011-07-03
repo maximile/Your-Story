@@ -9,7 +9,7 @@
 #import "GameView.h"
 #import <OpenGL/gl.h>
 
-#import "TileMap.h"
+#import "Room.h"
 
 static NSOpenGLPixelFormatAttribute Attributes[] = {
 	NSOpenGLPFANoRecovery,
@@ -24,7 +24,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 
 @implementation GameView
 
-TileMap *map;
+Room *room = nil;
 
 - (id)initWithFrame:(NSRect)frame {
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:Attributes];	
@@ -42,30 +42,11 @@ TileMap *map;
 	glClearColor(0.75, 0.75, 0.75, 1.0);	
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
-	// glBegin(GL_QUADS);
-	// 
-	// glVertex2f(0, 0);
-	// glVertex2f(canvasSize.width*scaleFactor, 0);
-	// glVertex2f(canvasSize.width*scaleFactor, canvasSize.height*scaleFactor);
-	// glVertex2f(0, canvasSize.height*scaleFactor);
-	// 
-	// glEnd();
 	
-	
-	rect = NSMakeRect(0, 0, canvasSize.width*scaleFactor, canvasSize.height*scaleFactor);
-	
-	GLfloat	coordinates[] = {0, 1, 1, 1, 0, 0, 1, 0};
-	GLfloat	vertices[] = {	rect.origin.x,							rect.origin.y,							0.0,
-							rect.origin.x + rect.size.width,		rect.origin.y,							0.0,
-							rect.origin.x,							rect.origin.y + rect.size.height,		0.0,
-							rect.origin.x + rect.size.width,		rect.origin.y + rect.size.height,		0.0 };
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	
-	glBindTexture(GL_TEXTURE_2D, map.name);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glTexCoordPointer(2, GL_FLOAT, 0, coordinates);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	if (room == nil) {
+		room = [[Room alloc] initWithName:@"Test"];
+	}
+	[room draw];
 	
 	[[self openGLContext] flushBuffer];
 }
@@ -80,15 +61,13 @@ TileMap *map;
 	glEnable(GL_TEXTURE_2D);
 	glAlphaFunc(GL_GREATER,0.5f);
 	glEnable(GL_ALPHA_TEST);
-
-	// glEnable(GL_BLEND);
-	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	GLint swapInterval = 1;
 	[[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
 	[self reshape];
-	
-	map = [[TileMap alloc] initWithImage:[NSImage imageNamed:@"Test"]];
 }
 
 - (void)reshape {

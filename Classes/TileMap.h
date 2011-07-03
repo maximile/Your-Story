@@ -9,6 +9,18 @@
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/gl.h>
 
+typedef struct {
+	int x;
+	int y;
+} tileCoords;
+
+static inline tileCoords tileCoordsMake(int x, int y) {
+	return (tileCoords){x, y};
+}
+
+#define NO_TILE (tileCoords){-1,-1}
+
+
 @interface TileMap : NSObject {
 	GLuint name;
 	int width;
@@ -18,5 +30,6 @@
 @property(readonly) GLuint name;
 
 - (TileMap *)initWithImage:(NSImage *)image;
+- (void)drawTile:(tileCoords)tile at:(tileCoords)loc;
 
 @end
