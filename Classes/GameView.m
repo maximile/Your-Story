@@ -36,19 +36,29 @@ Room *room = nil;
 	return self;
 }
 
-
+- (void)drawGame {
+	if (room == nil) {
+		room = [[Room alloc] initWithName:@"Test"];
+	}
+	[room draw];
+}
 
 - (void)drawRect:(NSRect)rect {
 	glClearColor(0.75, 0.75, 0.75, 1.0);	
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
+
+	[FBO bindFramebuffer:canvasFBO];
+	[self drawGame];
+	[FBO bindFramebuffer:nil];
 	
-	glScalef(2.0,2.0,1.0);
-	if (room == nil) {
-		room = [[Room alloc] initWithName:@"Test"];
-	}
-	[room draw];
-	glScalef(0.5,0.5,1.0);
+	int stretchedCanvasWidth = canvasSize.width * scaleFactor;
+	int stretchedCanvasHeight = canvasSize.height * scaleFactor;
+	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
+	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
+	NSRect centreRect = NSMakeRect(leftEdge, topEdge, stretchedCanvasWidth, stretchedCanvasHeight);
+	
+	[canvasFBO drawInRect:centreRect];
 	
 	[[self openGLContext] flushBuffer];
 }
@@ -68,6 +78,9 @@ Room *room = nil;
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	GLint swapInterval = 1;
+	
+	canvasFBO = [[FBO alloc] initWithWidth:canvasSize.width height:canvasSize.height];
+	
 	[[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
 	[self reshape];
 }
@@ -102,6 +115,11 @@ Room *room = nil;
 	if (self.frame.size.height < minContentSize.height) {
 		[window setContentSize:NSMakeSize(self.frame.size.width, minContentSize.height)];
 	}
+}
+
+- (void)dealloc {
+	[canvasFBO release];
+	[super dealloc];
 }
 
 

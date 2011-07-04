@@ -12,6 +12,8 @@
     NSWindow *window;
 }
 
+- (IBAction)toggleFullScreen:(id)sender;
+
 @property (assign) IBOutlet NSWindow *window;
 
 @end

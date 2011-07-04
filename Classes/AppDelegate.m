@@ -16,4 +16,22 @@
 	// Insert code here to initialize your application 
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+	return YES;
+}
+
+- (IBAction)toggleFullScreen:(id)sender {
+    NSDictionary *fullScreenOptions = [[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:NSFullScreenModeSetting] retain];
+	NSView *mainView = [self.window contentView];
+	BOOL fullScreen = [mainView isInFullScreenMode];
+	
+	if (!fullScreen) {
+		[mainView enterFullScreenMode:[NSScreen mainScreen] withOptions:fullScreenOptions];
+	}
+	else {
+		[mainView exitFullScreenModeWithOptions:fullScreenOptions];
+	}
+}
+
+
 @end
