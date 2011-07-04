@@ -31,7 +31,7 @@ Room *room = nil;
 	[super initWithFrame:frame pixelFormat:pixelFormat];
 	
 	[pixelFormat release];
-	canvasSize = NSMakeSize(320,180);
+	canvasSize = NSMakeSize(240,180);
 	
 	return self;
 }
