@@ -1,0 +1,49 @@
+PLOT
+
+[CHAR] = Player character (M or F)
+[CORP] = Large mining corporation
+
+A few decades in the future:
+
+Having spent many years as an excellent employee at [CORP], [CHAR] makes a costly mistake and is sent to work down the mine as punishment. There s/he meets the mine workers who spend months at a time down there working for very little money. Deeper s/he discovers settlements of people who could never readjust to life on the surface, and who have dedicated their lives to the mine. 
+
+MAIN CHARACTERS
+
+Choose between two, one male and one female.
+
+ - Office worker, good employee
+ - Nothing extraordinary
+ - Changed physically and emotionally by their experience in the mine
+ - By the end, they're not sure whether they can go back to their old life
+
+Artwork:
+ - A few full-screen illustrations showing the developing character at key points in the story
+ - Thumbnail size avatar for dialogue sections
+
+
+SUPPORTING CAST
+
+ - Office workers
+ - Miners
+
+All can be spoken to, but only a few will have much to say. 
+
+Artwork:
+	Avatars only
+
+
+GAMEPLAY
+
+ - Navigate through the levels, jumping. May be challenging in some of the later mine levels
+ - After you receive a weapon from a miner, start encountering some enemies
+ - A boss enemy?
+ - Vehicle sections?
+ - Speak to miners and office workers
+ - A few objectives - find items, find and speak to characters, fight enemies
+ - Overall goal - escape from mine
+
+
+TECHNICAL RESTRICTIONS
+
+ - Limited palette (no gradients, no anti-aliasing)
+ - Low resolution
