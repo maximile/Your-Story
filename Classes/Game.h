@@ -21,6 +21,7 @@
 }
 
 - (void)draw;
+- (void)update;
 
 - (void)upUp;
 - (void)leftUp;

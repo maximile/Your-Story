@@ -7,6 +7,7 @@
 //
 
 #import "TileMap.h"
+#import <OpenGL/glu.h>
 
 NSString *InvalidImageError = @"InvalidImageError";
 
@@ -72,6 +73,7 @@ NSString *InvalidImageError = @"InvalidImageError";
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data);
 	glBindTexture(GL_TEXTURE_2D, saveName);
+	
 
 	free(data);
 	return self;
@@ -91,7 +93,7 @@ NSString *InvalidImageError = @"InvalidImageError";
 	float left = loc.x * 16.0; 
 	float right = (loc.x + 1) * 16.0; 
 	GLfloat vertices[] = {left, top, right, top, right, bottom, left, bottom};
-		
+	
 	glBindTexture(GL_TEXTURE_2D, name);
 	glVertexPointer(2, GL_FLOAT, 0, vertices);
 	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);

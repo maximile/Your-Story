@@ -17,8 +17,12 @@
 	FBO *canvasFBO;
 	
 	Game *game;
+	BOOL playing;
+	NSTimer *animationTimer;
 }
 
+@property BOOL playing;
+@property (nonatomic, assign) NSTimer *animationTimer;
 @property (retain) Game *game;
 
 @end

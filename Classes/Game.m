@@ -31,27 +31,32 @@
 }
 
 - (void)draw {
-	// glTranslatef(-player.position.x, -player.position.y, 0.0);
-	NSLog(@"%@", currentRoom);
+	glPushMatrix();
+	glTranslatef(-player.position.x, -player.position.y, 0.0);
 	[currentRoom draw];
 	for (GameObject *item in items) {
 		[item draw];
 	}
+	glPopMatrix();
 }
 
 - (void)update {
+	if (upKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y + 1);
+	if (downKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y - 1);
+	if (leftKeyCount > 0) player.position = NSMakePoint(player.position.x - 1, player.position.y);
+	if (rightKeyCount > 0) player.position = NSMakePoint(player.position.x + 1, player.position.y);
 	for (GameObject *item in items) {
 		[item update];
 	}
 }
 
-- (void)upDown {upKeyCount++;}
-- (void)downDown {downKeyCount++;}
-- (void)leftDown {leftKeyCount++;}
-- (void)rightDown {rightKeyCount++;}
-- (void)upUp {upKeyCount--;}
-- (void)downUp {downKeyCount--;}
-- (void)leftUp {leftKeyCount--;}
-- (void)rightUp {rightKeyCount--;}
+- (void)upDown {upKeyCount=1;}
+- (void)downDown {downKeyCount=1;}
+- (void)leftDown {leftKeyCount=1;}
+- (void)rightDown {rightKeyCount=1;}
+- (void)upUp {upKeyCount=0;}
+- (void)downUp {downKeyCount=0;}
+- (void)leftUp {leftKeyCount=0;}
+- (void)rightUp {rightKeyCount=0;}
 
 @end

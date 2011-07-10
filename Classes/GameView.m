@@ -25,6 +25,8 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 @implementation GameView
 
 @synthesize game;
+@synthesize animationTimer;
+@synthesize playing;
 
 - (id)initWithFrame:(NSRect)frame {
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:Attributes];	
@@ -32,15 +34,28 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	
 	[pixelFormat release];
 	canvasSize = NSMakeSize(240,180);
-	
-	game = [[Game alloc] init];
-	
+		
 	return self;
 }
 
-- (void)drawGame {
-	NSLog(@"aginbui");
-	[game draw];
+- (void)updateGame {
+	[game update];
+	[self setNeedsDisplay:YES];
+}
+
+- (void)play {
+	if (playing) return;
+	self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/1000 target:self selector:@selector(updateGame) userInfo:nil repeats:YES];
+}
+
+- (void)pause {
+	if (!playing) return;
+	self.animationTimer = nil;
+}
+
+- (void)setAnimationTimer:(NSTimer *)newTimer {
+	[animationTimer invalidate];
+	animationTimer = newTimer;
 }
 
 - (void)drawRect:(NSRect)rect {
@@ -49,8 +64,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	glColor3f(1.0, 1.0, 1.0);
 
 	[FBO bindFramebuffer:canvasFBO];
-	NSLog(@"agi");
-	[self drawGame];
+	[game draw];
 	[FBO bindFramebuffer:nil];
 	
 	int stretchedCanvasWidth = canvasSize.width * scaleFactor;
@@ -84,6 +98,9 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	
 	[[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
 	[self reshape];
+	
+	game = [[Game alloc] init];
+	[self play];
 }
 
 - (void)reshape {
@@ -136,6 +153,10 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 		case 123: [game leftDown]; break;
 		default: break;
 	}
+}
+
+- (BOOL)acceptsFirstResponder {
+	return YES;
 }
 
 - (void)dealloc {
