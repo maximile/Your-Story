@@ -34,6 +34,7 @@
 
 - (void)draw {
 	[midLayer draw];
+	NSLog(@"awegrija");
 }
 
 - (void)dealloc {

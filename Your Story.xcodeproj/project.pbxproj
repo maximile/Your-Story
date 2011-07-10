@@ -48,6 +48,8 @@
 		66C75C5613BE83F8002D8411 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C75C3613BE83F8002D8411 /* cpVect.c */; };
 		66C75C5713BE83F8002D8411 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66C75C3713BE83F8002D8411 /* LICENSE.txt */; };
 		66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C75C8E13BE87EA002D8411 /* OpenGL.framework */; };
+		66CAD5A313CA2C4500798383 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A213CA2C4500798383 /* Player.m */; };
+		66CAD5A613CA2EF600798383 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A513CA2EF600798383 /* GameObject.m */; };
 		66CBE08D13C25AED00D73D1F /* FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE08C13C25AED00D73D1F /* FBO.m */; };
 		66CBE0B713C26C8B00D73D1F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE0B613C26C8B00D73D1F /* Game.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -133,6 +135,10 @@
 		66C75C3713BE83F8002D8411 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		66C75C3813BE83F8002D8411 /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prime.h; sourceTree = "<group>"; };
 		66C75C8E13BE87EA002D8411 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		66CAD5A113CA2C4500798383 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		66CAD5A213CA2C4500798383 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		66CAD5A413CA2EF600798383 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		66CAD5A513CA2EF600798383 /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		66CBE08B13C25AED00D73D1F /* FBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBO.h; sourceTree = "<group>"; };
 		66CBE08C13C25AED00D73D1F /* FBO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBO.m; sourceTree = "<group>"; };
 		66CBE0B513C26C8B00D73D1F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -156,6 +162,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				66CAD5A413CA2EF600798383 /* GameObject.h */,
+				66CAD5A513CA2EF600798383 /* GameObject.m */,
 				66C75B8A13BE801C002D8411 /* AppDelegate.h */,
 				66C75B8B13BE801C002D8411 /* AppDelegate.m */,
 				66CBE08B13C25AED00D73D1F /* FBO.h */,
@@ -170,6 +178,8 @@
 				660B803613BFD4AB001ECF63 /* Room.m */,
 				660B7F9F13BF8EC8001ECF63 /* TileMap.h */,
 				660B7FA013BF8EC8001ECF63 /* TileMap.m */,
+				66CAD5A113CA2C4500798383 /* Player.h */,
+				66CAD5A213CA2C4500798383 /* Player.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -461,6 +471,8 @@
 				660B803F13C0D88D001ECF63 /* Layer.m in Sources */,
 				66CBE08D13C25AED00D73D1F /* FBO.m in Sources */,
 				66CBE0B713C26C8B00D73D1F /* Game.m in Sources */,
+				66CAD5A313CA2C4500798383 /* Player.m in Sources */,
+				66CAD5A613CA2EF600798383 /* GameObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

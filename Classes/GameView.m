@@ -24,7 +24,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 
 @implementation GameView
 
-Room *room = nil;
+@synthesize game;
 
 - (id)initWithFrame:(NSRect)frame {
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:Attributes];	
@@ -33,14 +33,14 @@ Room *room = nil;
 	[pixelFormat release];
 	canvasSize = NSMakeSize(240,180);
 	
+	game = [[Game alloc] init];
+	
 	return self;
 }
 
 - (void)drawGame {
-	if (room == nil) {
-		room = [[Room alloc] initWithName:@"Test"];
-	}
-	[room draw];
+	NSLog(@"aginbui");
+	[game draw];
 }
 
 - (void)drawRect:(NSRect)rect {
@@ -49,6 +49,7 @@ Room *room = nil;
 	glColor3f(1.0, 1.0, 1.0);
 
 	[FBO bindFramebuffer:canvasFBO];
+	NSLog(@"agi");
 	[self drawGame];
 	[FBO bindFramebuffer:nil];
 	
@@ -114,6 +115,26 @@ Room *room = nil;
 	}
 	if (self.frame.size.height < minContentSize.height) {
 		[window setContentSize:NSMakeSize(self.frame.size.width, minContentSize.height)];
+	}
+}
+
+- (void)keyUp:(NSEvent *)event {
+	switch (event.keyCode) {
+		case 126: [game upUp]; break;
+		case 125: [game downUp]; break;
+		case 124: [game rightUp]; break;
+		case 123: [game leftUp]; break;
+		default: break;
+	}
+}
+
+- (void)keyDown:(NSEvent *)event {
+	switch (event.keyCode) {
+		case 126: [game upDown]; break;
+		case 125: [game downDown]; break;
+		case 124: [game rightDown]; break;
+		case 123: [game leftDown]; break;
+		default: break;
 	}
 }
 

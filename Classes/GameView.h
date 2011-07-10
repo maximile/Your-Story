@@ -9,11 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 #import "FBO.h"
+#import "Game.h"
 
 @interface GameView : NSOpenGLView {
 	NSSize canvasSize;
 	int scaleFactor;
 	FBO *canvasFBO;
+	
+	Game *game;
 }
+
+@property (retain) Game *game;
 
 @end

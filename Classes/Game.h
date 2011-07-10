@@ -8,10 +8,27 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Room.h"
+#import "Player.h"
 
 @interface Game : NSObject {
 	Room *currentRoom;
 	NSPoint focus;
+	
+	NSMutableArray *items;
+	Player *player;
+	
+	int upKeyCount, downKeyCount, leftKeyCount, rightKeyCount;
 }
+
+- (void)draw;
+
+- (void)upUp;
+- (void)leftUp;
+- (void)downUp;
+- (void)rightUp;
+- (void)upDown;
+- (void)downDown;
+- (void)leftDown;
+- (void)rightDown;
 
 @end
