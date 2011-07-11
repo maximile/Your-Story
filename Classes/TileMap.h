@@ -14,6 +14,14 @@ typedef struct {
 	int y;
 } tileCoords;
 
+typedef struct {
+	int width;
+	int height;
+} mapSize;
+
+static inline mapSize mapSizeMake(int width, int height) {
+	return (mapSize){width, height};
+}
 static inline tileCoords tileCoordsMake(int x, int y) {
 	return (tileCoords){x, y};
 }

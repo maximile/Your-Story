@@ -11,11 +11,24 @@
 #import "Layer.h"
 
 @interface Room : NSObject {
-	TileMap *midMap;
-	Layer *midLayer;
+	mapSize size;
+
+	TileMap *mainMap;
+	Layer *mainLayer;
+
+	TileMap *bgMap;
+	Layer *bgLayer;
+	float bgParallax;
+	
+	NSMutableDictionary *maps;
 }
 
+
+@property mapSize size;
+@property (readonly) Layer *mainLayer;
+@property (readonly) Layer *bgLayer;
+
+- (TileMap *)getMap:(NSString *)mapName;
 - (id)initWithName:(NSString *)roomName;
-- (void)draw;
 
 @end

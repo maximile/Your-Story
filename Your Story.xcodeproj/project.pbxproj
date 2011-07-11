@@ -143,6 +143,7 @@
 		66CBE08C13C25AED00D73D1F /* FBO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBO.m; sourceTree = "<group>"; };
 		66CBE0B513C26C8B00D73D1F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		66CBE0B613C26C8B00D73D1F /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -165,6 +166,7 @@
 				66CAD5A413CA2EF600798383 /* GameObject.h */,
 				66CAD5A513CA2EF600798383 /* GameObject.m */,
 				66C75B8A13BE801C002D8411 /* AppDelegate.h */,
+				66CDF22313CB8EC80097FBF8 /* Constants.h */,
 				66C75B8B13BE801C002D8411 /* AppDelegate.m */,
 				66CBE08B13C25AED00D73D1F /* FBO.h */,
 				66CBE08C13C25AED00D73D1F /* FBO.m */,

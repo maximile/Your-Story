@@ -8,6 +8,7 @@
 
 #import "TileMap.h"
 #import <OpenGL/glu.h>
+#import "Constants.h"
 
 NSString *InvalidImageError = @"InvalidImageError";
 
@@ -30,14 +31,14 @@ NSString *InvalidImageError = @"InvalidImageError";
 	if (width != height) {
 		[NSException raise:InvalidImageError format:@"Image must be square"];
 	}
-	if (width < 16 || height < 16) {
-		[NSException raise:InvalidImageError format:@"Image must be larger than 16x16"];
+	if (width < TILE_SIZE || height < TILE_SIZE) {
+		[NSException raise:InvalidImageError format:@"Image must be larger than %ix%i", TILE_SIZE, TILE_SIZE];
 	}
 	if (width > 2048 || height > 2048) {
 		[NSException raise:InvalidImageError format:@"Image must be no bigger than 2048x2048"];
 	}
 	// check that it's a power of two
-	int test = 16;
+	int test = 1;
 	while (test <= 2048) {
 		if (width == test) {
 			// it's a power of two
@@ -81,17 +82,17 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 - (void)drawTile:(tileCoords)tile at:(tileCoords)loc {
 	// get texture coordinates
-	float tBottom = (tile.y * 16.0) / (float)height;
-	float tTop = ((tile.y + 1) * 16.0) / (float)height;
-	float tLeft = (tile.x * 16.0) / (float)width;
-	float tRight = ((tile.x + 1) * 16.0) / (float)width;
+	float tBottom = (tile.y * TILE_SIZE) / (float)height;
+	float tTop = ((tile.y + 1) * TILE_SIZE) / (float)height;
+	float tLeft = (tile.x * TILE_SIZE) / (float)width;
+	float tRight = ((tile.x + 1) * TILE_SIZE) / (float)width;
 	GLfloat texCoords[] = {tLeft, tTop, tRight, tTop, tRight, tBottom, tLeft, tBottom};
 		
 	// space coordinates
-	float top = loc.y * 16.0; 
-	float bottom = (loc.y + 1) * 16.0; 
-	float left = loc.x * 16.0; 
-	float right = (loc.x + 1) * 16.0; 
+	float top = loc.y * TILE_SIZE; 
+	float bottom = (loc.y + 1) * TILE_SIZE; 
+	float left = loc.x * TILE_SIZE;
+	float right = (loc.x + 1) * TILE_SIZE;
 	GLfloat vertices[] = {left, top, right, top, right, bottom, left, bottom};
 	
 	glBindTexture(GL_TEXTURE_2D, name);

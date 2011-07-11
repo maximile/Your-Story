@@ -11,6 +11,8 @@
 
 @implementation Layer
 
+@synthesize size, parallax;
+
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap {
 	if ([super init] == nil) return nil;
 		
@@ -62,8 +64,9 @@
 	}
 	
 	// now make the tile data
-	width = rowLength;
-	height = rows.count;
+	int width = rowLength;
+	int height = rows.count;
+	size = mapSizeMake(width, height);
 	tiles = calloc(width*height, sizeof(tileCoords));
 	
 	for (int y=0; y<height; y++) {
@@ -83,13 +86,37 @@
 	
 	map = [newMap retain];
 	
+	parallax = 1.0;
+	
 	return self;
 }
 
-- (void)draw {
-	for (int y=0; y<height; y++) {
-		for (int x=0; x<width; x++) {
-			int index = (height-1-y)*width + x;
+- (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax {
+	if ([self initWithString:string map:newMap] == nil) return nil;
+	
+	parallax = newParallax;
+	
+	return self;
+}
+
+
+- (tileCoords)tileCoordsForMapCoords:(tileCoords)coords {
+	if (self.parallax != 1.0) {
+		// it repeats
+		coords.x = coords.x % size.width;
+		coords.y = coords.y % size.height;
+	}
+	if (coords.x < 0 || coords.y < 0 || coords.x >= size.width || coords.y >= size.height) {
+		return NO_TILE;
+	}
+	int index = (size.height - 1 - coords.y)*size.width + coords.x;
+	return tiles[index];
+}
+
+- (void)drawFrom:(tileCoords)topLeft to:(tileCoords)bottomRight {
+	for (int y=bottomRight.y; y<topLeft.y; y++) {
+		for (int x=topLeft.x; x<bottomRight.x; x++) {
+			int index = (size.height-1-y)*size.width + x;
 			tileCoords coords = tiles[index];
 			if (coords.x < 0 || coords.y < 0) {
 				continue;
@@ -98,6 +125,22 @@
 			[map drawTile:coords at:loc];
 		}
 	}
+}
+
+- (void)draw {
+	tileCoords topLeft = tileCoordsMake(0, size.height);
+	tileCoords bottomRight = tileCoordsMake(size.width, 0);
+	[self drawFrom:topLeft to:bottomRight];
+	// for (int y=0; y<size.height; y++) {
+	// 	for (int x=0; x<size.width; x++) {
+	// 		tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
+	// 		if (coords.x < 0 || coords.y < 0) {
+	// 			continue;
+	// 		}
+	// 		tileCoords loc = tileCoordsMake(x, y);
+	// 		[map drawTile:coords at:loc];
+	// 	}
+	// }
 }
 
 - (void)dealloc {

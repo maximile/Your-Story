@@ -10,13 +10,17 @@
 #import "TileMap.h"
 
 @interface Layer : NSObject {
-	int width;
-	int height;
+	mapSize size;
 	tileCoords *tiles;
 	TileMap *map;
+	float parallax;
 }
 
+@property mapSize size;
+@property float parallax;
+
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap;
+- (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
 - (void)draw;
 
 @end

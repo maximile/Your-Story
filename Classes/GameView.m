@@ -6,9 +6,10 @@
 //  Copyright 2011 Max Williams. All rights reserved.
 //
 
-#import "GameView.h"
 #import <OpenGL/gl.h>
 
+#import "GameView.h"
+#import "Constants.h"
 #import "Room.h"
 
 static NSOpenGLPixelFormatAttribute Attributes[] = {
@@ -33,7 +34,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	[super initWithFrame:frame pixelFormat:pixelFormat];
 	
 	[pixelFormat release];
-	canvasSize = NSMakeSize(240,180);
+	canvasSize = NSMakeSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 		
 	return self;
 }
@@ -45,7 +46,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 
 - (void)play {
 	if (playing) return;
-	self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/1000 target:self selector:@selector(updateGame) userInfo:nil repeats:YES];
+	self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/60.0 target:self selector:@selector(updateGame) userInfo:nil repeats:YES];
 }
 
 - (void)pause {
@@ -92,10 +93,9 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
-	GLint swapInterval = 1;
-	
 	canvasFBO = [[FBO alloc] initWithWidth:canvasSize.width height:canvasSize.height];
 	
+	GLint swapInterval = 1;
 	[[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
 	[self reshape];
 	

@@ -8,6 +8,7 @@
 
 #import "Game.h"
 #import "GameObject.h"
+#import "Constants.h"
 
 @implementation Game
 
@@ -31,9 +32,51 @@
 }
 
 - (void)draw {
+	// camera target
+	focus = player.position;
+	
+	if (currentRoom.mainLayer.size.height * TILE_SIZE <= CANVAS_HEIGHT) {
+		// room is shorter than the screen, center it vertically
+		focus.y = CANVAS_HEIGHT / 2;
+	}
+	else {
+		// clamp focus to height of room
+		focus.y = player.position.y;
+		if (focus.y < CANVAS_HEIGHT / 2) {
+			focus.y = CANVAS_HEIGHT / 2;
+		}
+		else if (focus.y > (currentRoom.size.height * TILE_SIZE) - CANVAS_HEIGHT / 2) {
+			focus.y = (currentRoom.size.height * TILE_SIZE) - CANVAS_HEIGHT / 2;
+		}
+	}
+	
+	if (currentRoom.mainLayer.size.width * TILE_SIZE <= CANVAS_WIDTH) {
+		// room is thinner than the screen, center it horizontally
+		focus.x = CANVAS_WIDTH / 2;
+	}
+	else {
+		// clamp focus to width of room
+		focus.x = player.position.x;
+		if (focus.x < CANVAS_WIDTH / 2) {
+			focus.x = CANVAS_WIDTH / 2;
+		}
+		else if (focus.x > (currentRoom.size.width * TILE_SIZE) - CANVAS_WIDTH / 2) {
+			focus.x = (currentRoom.size.width * TILE_SIZE) - CANVAS_WIDTH / 2;
+		}
+	}
+	
+	// bg elements
 	glPushMatrix();
-	glTranslatef(-player.position.x, -player.position.y, 0.0);
-	[currentRoom draw];
+	float bgParallax = currentRoom.bgLayer.parallax;
+	glTranslatef(-(focus.x - CANVAS_WIDTH / 2) * bgParallax, -(focus.y - CANVAS_HEIGHT / 2) * bgParallax, 0.0);
+	[currentRoom.bgLayer draw];
+	glPopMatrix();
+	
+	// midground elements
+	glPushMatrix();
+	glTranslatef(-(focus.x - CANVAS_WIDTH / 2), -(focus.y - CANVAS_HEIGHT / 2), 0.0);
+	[currentRoom.mainLayer draw];
+	
 	for (GameObject *item in items) {
 		[item draw];
 	}

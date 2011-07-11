@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>MidLayer</key>
+	<key>MainLayer</key>
 	<string>
 		0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0 
 		1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0
@@ -17,7 +17,17 @@
 		0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0 
 		1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0  1,0  0,0
 	</string>
-	<key>MidMap</key>
+	<key>MainMap</key>
 	<string>Test</string>
+
+
+	<key>BGLayer</key>
+	<string>
+		5,3  6,3
+	</string>
+	<key>BGMap</key>
+	<string>Test</string>
+	<key>BGParallax</key>
+	<real>0.8</real>
 </dict>
 </plist>
