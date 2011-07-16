@@ -22,5 +22,6 @@
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap;
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
 - (void)draw;
+- (void)drawFrom:(tileCoords)bottomLeft to:(tileCoords)topRight;
 
 @end

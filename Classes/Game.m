@@ -65,17 +65,34 @@
 		}
 	}
 	
+	// draw layers. first get screen bounds in map coords
+	int left = (focus.x - CANVAS_WIDTH / 2) / TILE_SIZE;
+	int right = (focus.x + CANVAS_WIDTH / 2) / TILE_SIZE + 1;
+	int top = (focus.y + CANVAS_HEIGHT / 2) / TILE_SIZE + 1;
+	int bottom = (focus.y - CANVAS_HEIGHT / 2) / TILE_SIZE;
+	
 	// bg elements
 	glPushMatrix();
 	float bgParallax = currentRoom.bgLayer.parallax;
-	glTranslatef(-(focus.x - CANVAS_WIDTH / 2) * bgParallax, -(focus.y - CANVAS_HEIGHT / 2) * bgParallax, 0.0);
-	[currentRoom.bgLayer draw];
+	NSPoint parallaxFocus = NSMakePoint(focus.x * bgParallax, focus.y * bgParallax);
+	
+	int pLeft = (parallaxFocus.x - CANVAS_WIDTH / 2) / TILE_SIZE - 1;
+	int pRight = (parallaxFocus.x + CANVAS_WIDTH / 2) / TILE_SIZE + 1;
+	int pTop = (parallaxFocus.y + CANVAS_HEIGHT / 2) / TILE_SIZE + 1;
+	int pBottom = (parallaxFocus.y - CANVAS_HEIGHT / 2) / TILE_SIZE - 1;
+		
+	// glTranslatef(-focus.x, -focus.y, 0.0);
+	// glTranslatef(parallaxOffset.width, parallaxOffset.height, 0.0);
+	// glTranslatef(-parallaxFocus.x, -parallaxFocus.y, 0.0);
+	glTranslatef(-(parallaxFocus.x - CANVAS_WIDTH / 2), -(parallaxFocus.y - CANVAS_HEIGHT / 2), 0.0);
+	
+	[currentRoom.bgLayer drawFrom:tileCoordsMake(pLeft, pBottom) to:tileCoordsMake(pRight, pTop)];
 	glPopMatrix();
 	
 	// midground elements
 	glPushMatrix();
 	glTranslatef(-(focus.x - CANVAS_WIDTH / 2), -(focus.y - CANVAS_HEIGHT / 2), 0.0);
-	[currentRoom.mainLayer draw];
+	[currentRoom.mainLayer drawFrom:tileCoordsMake(left, bottom) to:tileCoordsMake(right, top)];
 	
 	for (GameObject *item in items) {
 		[item draw];

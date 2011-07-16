@@ -14,6 +14,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
+	for (int i=-5; i<=5; i++) { NSLog(@"%i", abs(i)%3); }
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

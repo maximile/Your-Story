@@ -42,6 +42,7 @@
 		if ([info valueForKey:@"BGParallax"]) {
 			bgParallax = [[info valueForKey:@"BGParallax"] floatValue];
 		}
+		bgLayer.parallax = bgParallax;
 	}
 	
 	return self;

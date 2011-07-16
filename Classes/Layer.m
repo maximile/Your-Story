@@ -101,10 +101,12 @@
 
 
 - (tileCoords)tileCoordsForMapCoords:(tileCoords)coords {
-	if (self.parallax != 1.0) {
+	if (parallax != 1.0) {
 		// it repeats
 		coords.x = coords.x % size.width;
+		if (coords.x < 0) coords.x = size.width + coords.x;
 		coords.y = coords.y % size.height;
+		if (coords.y < 0) coords.y = size.height + coords.y;
 	}
 	if (coords.x < 0 || coords.y < 0 || coords.x >= size.width || coords.y >= size.height) {
 		return NO_TILE;
@@ -113,24 +115,24 @@
 	return tiles[index];
 }
 
-- (void)drawFrom:(tileCoords)topLeft to:(tileCoords)bottomRight {
-	for (int y=bottomRight.y; y<topLeft.y; y++) {
-		for (int x=topLeft.x; x<bottomRight.x; x++) {
-			int index = (size.height-1-y)*size.width + x;
-			tileCoords coords = tiles[index];
+- (void)drawFrom:(tileCoords)bottomLeft to:(tileCoords)topRight {
+	for (int y=bottomLeft.y; y<topRight.y; y++) {
+		for (int x=bottomLeft.x; x<topRight.x; x++) {
+			// int index = (size.height-1-y)*size.width + x;
+			// tileCoords coords = tiles[index];
+			tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
 			if (coords.x < 0 || coords.y < 0) {
 				continue;
 			}
-			tileCoords loc = tileCoordsMake(x, y);
-			[map drawTile:coords at:loc];
+			[map drawTile:coords at:tileCoordsMake(x,y)];
 		}
 	}
 }
 
 - (void)draw {
-	tileCoords topLeft = tileCoordsMake(0, size.height);
-	tileCoords bottomRight = tileCoordsMake(size.width, 0);
-	[self drawFrom:topLeft to:bottomRight];
+	tileCoords bottomLeft = tileCoordsMake(0, 0);
+	tileCoords topRight = tileCoordsMake(size.width, size.height);
+	[self drawFrom:bottomLeft to:topRight];
 	// for (int y=0; y<size.height; y++) {
 	// 	for (int x=0; x<size.width; x++) {
 	// 		tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
