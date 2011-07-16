@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<array>
+		<dict>
+			<key>Tile</key>
+			<string>0,0</string>
+			<key>Shape</key>
+			<string>0,0  16,0  16,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>1,0</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>2,0</string>
+			<key>Shape</key>
+			<string>0,0  16,0  16,8  0,8</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>3,0</string>
+			<key>Shape</key>
+			<string>0,8  16,8  16,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>4,0</string>
+			<key>Shape</key>
+			<string>0,0  8,0  8,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>5,0</string>
+			<key>Shape</key>
+			<string>8,0  16,0  16,16  8,16</string>
+		</dict>
+		
+		
+		<dict>
+			<key>Tile</key>
+			<string>0,1</string>
+			<key>Shape</key>
+			<string>0,0  16,0  16,8  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>1,1</string>
+			<key>Shape</key>
+			<string>0,0  16,0  0,8</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>2,1</string>
+			<key>Shape</key>
+			<string>0,0  16,0  16,8</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>3,1</string>
+			<key>Shape</key>
+			<string>0,0  16,0  16,16  0,8</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>4,1</string>
+			<key>Shape</key>
+			<string>8,0  16,0  16,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>5,1</string>
+			<key>Shape</key>
+			<string>0,0  8,0  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>6,1</string>
+			<key>Shape</key>
+			<string>8,0  16,0  16,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>7,1</string>
+			<key>Shape</key>
+			<string>0,0  8,0  16,16  0,16</string>
+		</dict>
+		
+		
+		<dict>
+			<key>Tile</key>
+			<string>0,2</string>
+			<key>Shape</key>
+			<string>16,8  16,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>1,2</string>
+			<key>Shape</key>
+			<string>16,16  16,0  0,0  0,8</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>2,2</string>
+			<key>Shape</key>
+			<string>0,0  16,8  16,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>3,2</string>
+			<key>Shape</key>
+			<string>0,8  16,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>4,2</string>
+			<key>Shape</key>
+			<string>16,0  16,16  8,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>5,2</string>
+			<key>Shape</key>
+			<string>0,0  16,0  8,16  0,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>6,2</string>
+			<key>Shape</key>
+			<string>0,0  16,0  16,16  8,16</string>
+		</dict>
+		<dict>
+			<key>Tile</key>
+			<string>7,2</string>
+			<key>Shape</key>
+			<string>0,0  8,16  0,16</string>
+		</dict>
+		
+	</array>
+</plist>
