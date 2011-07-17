@@ -8,36 +8,25 @@
 
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/gl.h>
-
-typedef struct {
-	int x;
-	int y;
-} tileCoords;
-
-typedef struct {
-	int width;
-	int height;
-} mapSize;
-
-static inline mapSize mapSizeMake(int width, int height) {
-	return (mapSize){width, height};
-}
-static inline tileCoords tileCoordsMake(int x, int y) {
-	return (tileCoords){x, y};
-}
-
-#define NO_TILE (tileCoords){-1,-1}
+#import "Constants.h"
+#import "Collision.h"
 
 
 @interface TileMap : NSObject {
 	GLuint name;
 	int width;
 	int height;
+	NSMutableArray *collisionShapes;
 }
 
 @property(readonly) GLuint name;
 
++ (tileCoords)tileCoordsFromString:(NSString *)string;
+
 - (TileMap *)initWithImage:(NSImage *)image;
+- (id)initWithImage:(NSImage *)image generateCollision:(BOOL)shouldGenerateCollision;
 - (void)drawTile:(tileCoords)tile at:(tileCoords)loc;
+- (CollisionShape *)shapeForTile:(tileCoords)coords;
+
 
 @end

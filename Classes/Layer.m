@@ -145,6 +145,21 @@
 	// }
 }
 
+- (void)drawCollision {
+	for (int y=0; y<size.height; y++) {
+		for (int x=0; x<size.width; x++) {
+			tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
+			CollisionShape *collision = [map shapeForTile:coords];
+			glBegin(GL_LINE_LOOP);
+			for (int i=0; i<collision.shapeVertCount; i++) {
+				tileCoords coords = collision.shapeVerts[i];
+				glVertex2f(x*TILE_SIZE + coords.x, y*TILE_SIZE + coords.y);
+			}
+			glEnd();
+		}
+	}
+}
+
 - (void)dealloc {
 	free(tiles);
 	[map release];

@@ -98,9 +98,6 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	GLint swapInterval = 1;
 	[[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
 	[self reshape];
-	
-	game = [[Game alloc] init];
-	[self play];
 }
 
 - (void)reshape {

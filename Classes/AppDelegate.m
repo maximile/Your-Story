@@ -7,14 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import "GameView.h"
+#import "Game.h"
 
 @implementation AppDelegate
 
-@synthesize window;
+@synthesize window, gameView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
-	for (int i=-5; i<=5; i++) { NSLog(@"%i", abs(i)%3); }
+	Game *game = [[Game alloc] init];
+	
+	[gameView setGame:game];
+	[gameView play];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

@@ -7,13 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GameView.h"
 
 @interface AppDelegate : NSObject {
     NSWindow *window;
+	GameView *gameView;
 }
 
 - (IBAction)toggleFullScreen:(id)sender;
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet GameView *gameView;
 
 @end

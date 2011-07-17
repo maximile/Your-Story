@@ -25,4 +25,6 @@
 @property (nonatomic, assign) NSTimer *animationTimer;
 @property (retain) Game *game;
 
+- (void)play;
+
 @end

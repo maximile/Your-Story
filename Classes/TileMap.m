@@ -9,6 +9,7 @@
 #import "TileMap.h"
 #import <OpenGL/glu.h>
 #import "Constants.h"
+#import "Collision.h"
 
 NSString *InvalidImageError = @"InvalidImageError";
 
@@ -16,7 +17,20 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 @synthesize name;
 
-- (id)initWithImage:(NSImage *)image {
++ (tileCoords)tileCoordsFromString:(NSString *)string {
+	NSArray *components = [string componentsSeparatedByString:@","];
+
+	int x = [[components objectAtIndex:0] intValue];
+	int y = [[components objectAtIndex:1] intValue];
+	
+	return tileCoordsMake(x, y);
+}
+
+- (TileMap *)initWithImage:(NSImage *)image {
+	return [self initWithImage:image generateCollision:YES];
+}
+
+- (id)initWithImage:(NSImage *)image generateCollision:(BOOL)shouldGenerateCollision {
 	if ([super init]==nil) return nil;
 	
 	NSBitmapImageRep *bitmap = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
@@ -75,6 +89,17 @@ NSString *InvalidImageError = @"InvalidImageError";
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data);
 	glBindTexture(GL_TEXTURE_2D, saveName);
 	
+	if (shouldGenerateCollision) {
+		collisionShapes = [[NSMutableArray arrayWithCapacity:width*height] retain];
+		for (int y=0; y<height / TILE_SIZE; y++) {
+			for (int x=0; x<width / TILE_SIZE; x++) {
+				tileCoords coords = tileCoordsMake(x,y);
+				mapSize dataSize = mapSizeMake(width, height);
+				CollisionShape *shape = [Collision shapeForCoords:coords data:data dataSize:dataSize];
+				[collisionShapes addObject:shape];
+			}
+		}
+	}
 
 	free(data);
 	return self;
@@ -101,8 +126,15 @@ NSString *InvalidImageError = @"InvalidImageError";
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }
 
+- (CollisionShape *)shapeForTile:(tileCoords)coords {
+	if (coords.x < 0 || coords.y < 0) return nil;
+	int index = coords.y * (width/TILE_SIZE) + coords.x;
+	return [collisionShapes objectAtIndex:index];
+}
+
 - (void)dealloc {
 	glDeleteTextures(1, &name);
+	[collisionShapes release];
 	[super dealloc];	
 }
 

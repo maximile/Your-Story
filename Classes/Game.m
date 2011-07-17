@@ -94,6 +94,8 @@
 	glTranslatef(-(focus.x - CANVAS_WIDTH / 2), -(focus.y - CANVAS_HEIGHT / 2), 0.0);
 	[currentRoom.mainLayer drawFrom:tileCoordsMake(left, bottom) to:tileCoordsMake(right, top)];
 	
+	[currentRoom.mainLayer drawCollision];
+	
 	for (GameObject *item in items) {
 		[item draw];
 	}
