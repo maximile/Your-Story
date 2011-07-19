@@ -1,16 +1,9 @@
-//
-//  GameView.m
-//  Your Story
-//
-//  Created by Max Williams on 02/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import <OpenGL/gl.h>
 
 #import "GameView.h"
 #import "Constants.h"
 #import "Room.h"
+#import "Types.h"
 
 static NSOpenGLPixelFormatAttribute Attributes[] = {
 	NSOpenGLPFANoRecovery,
@@ -34,7 +27,6 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	[super initWithFrame:frame pixelFormat:pixelFormat];
 	
 	[pixelFormat release];
-	canvasSize = NSMakeSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 		
 	return self;
 }
@@ -60,20 +52,24 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 }
 
 - (void)drawRect:(NSRect)rect {
+	// clear the scren
 	glClearColor(0.75, 0.75, 0.75, 1.0);	
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
-
+	
+	// draw game to main FBO
 	[FBO bindFramebuffer:canvasFBO];
+	glColor3f(1.0, 1.0, 1.0);
 	[game draw];
 	[FBO bindFramebuffer:nil];
 	
-	int stretchedCanvasWidth = canvasSize.width * scaleFactor;
-	int stretchedCanvasHeight = canvasSize.height * scaleFactor;
+	// get centred rect to draw FBO to
+	int stretchedCanvasWidth = CANVAS_SIZE.width * scaleFactor;
+	int stretchedCanvasHeight = CANVAS_SIZE.height * scaleFactor;
 	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
 	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
-	NSRect centreRect = NSMakeRect(leftEdge, topEdge, stretchedCanvasWidth, stretchedCanvasHeight);
+	pixelRect centreRect = pixelRectMake(leftEdge, topEdge, stretchedCanvasWidth, stretchedCanvasHeight);
 	
+	// draw FBO contents
 	[canvasFBO drawInRect:centreRect];
 	
 	[[self openGLContext] flushBuffer];
@@ -84,16 +80,18 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	glDisable(GL_STENCIL_TEST);
 	glDisable(GL_FOG);
 	glDisable(GL_DEPTH_TEST);
-
 	glDisable(GL_BLEND);
+	
 	glEnable(GL_TEXTURE_2D);
-	glAlphaFunc(GL_GREATER,0.5f);
 	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER,0.5f);
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
-	canvasFBO = [[FBO alloc] initWithWidth:canvasSize.width height:canvasSize.height];
+	// create an FBO which will be scaled up to draw in the screen
+	// (why do I need that cast there?)
+	canvasFBO = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];
 	
 	GLint swapInterval = 1;
 	[[self openGLContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
@@ -104,15 +102,14 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	NSRect visibleRect = [self visibleRect];
 	float windowWidth = NSWidth(visibleRect);
 	float windowHeight = NSHeight(visibleRect);
-	float canvasWidth = canvasSize.width;
-	float canvasHeight = canvasSize.height;
 
 	glLoadIdentity();
 	glViewport(0, 0, windowWidth, windowHeight);
 	glOrtho(0, windowWidth, 0, windowHeight, -1.0, 1.0);
 	
+	// set the scaleFactor so that the canvas will be scaled to the largest rect that will fit in the window while keeping all pixels square
 	scaleFactor = 1;
-	while ((canvasWidth*(scaleFactor+1) <= windowWidth) && (canvasHeight*(scaleFactor+1) <= windowHeight)) {
+	while ((CANVAS_SIZE.width*(scaleFactor+1) <= windowWidth) && (CANVAS_SIZE.height*(scaleFactor+1) <= windowHeight)) {
 		scaleFactor++;
 	}
 	
@@ -122,7 +119,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 - (void)awakeFromNib {
 	// set minimum size and make sure it's not already smaller
 	NSWindow *window = self.window;
-	NSSize minContentSize = NSMakeSize(canvasSize.width * 2, canvasSize.height * 2);
+	NSSize minContentSize = NSMakeSize(CANVAS_SIZE.width * 2, CANVAS_SIZE.height * 2);
 	[window setContentMinSize:minContentSize];
 	if (self.frame.size.width < minContentSize.width) {
 		[window setContentSize:NSMakeSize(minContentSize.width, self.frame.size.height)];

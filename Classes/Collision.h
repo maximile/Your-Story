@@ -1,42 +1,38 @@
-//
-//  Collision.h
-//  Your Story
-//
-//  Created by Max Williams on 17/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
+#import "Types.h"
 
+
+// Class to store the collision shape data that matches a tile
 @interface CollisionShape : NSObject {
-	tileCoords tile;
-	tileCoords *shapeVerts;
+	mapCoords tile;
+	pixelCoords *shapeVerts;
 	int shapeVertCount;
 }
 
-@property (readonly) tileCoords tile;
-@property (readonly) tileCoords *shapeVerts;
+@property (readonly) mapCoords tile;
+@property (readonly) pixelCoords *shapeVerts;
 @property (readonly) int shapeVertCount;
 
-- (id)initWithTile:(tileCoords)newTileCoords shapeString:(NSString *)string;
+- (id)initWithTile:(mapCoords)newMapCoords shapeString:(NSString *)string;
 
 @end
 
-@interface Collision : NSObject {
+
+// General class to store collision data, and get a matching collision shape for a given tile
+@interface Collision : NSObject {	
 	unsigned short *collisionMap;
-	int width;
-	int height;
+	pixelSize collisionMapSize;
 	
 	NSMutableArray *shapes;
 }
 
 @property (readonly) unsigned short *collisionMap;
-@property (readonly) int width;
-@property (readonly) int height;
+@property (readonly) pixelSize collisionMapSize;
 
 + (Collision *)collision;
-// + (void)generateCollisionFromData:(unsigned short *)data width:(int)width height:(int)height;
-+ (CollisionShape *)shapeForCoords:(tileCoords)coords data:(unsigned short *)data dataSize:(mapSize)dataSize;
-- (CollisionShape *)shapeForTile:(tileCoords)coords;
++ (CollisionShape *)shapeForCoords:(mapCoords)coords data:(unsigned short *)data dataSize:(pixelSize)dataSize;
+- (CollisionShape *)shapeForTile:(mapCoords)coords;
 
 @end
+
+

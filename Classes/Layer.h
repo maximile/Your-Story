@@ -1,17 +1,13 @@
-//
-//  Layer.h
-//  Your Story
-//
-//  Created by Max Williams on 03/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 #import "TileMap.h"
+#import "Types.h"
 
 @interface Layer : NSObject {
+	// an array of tiles for the layer, each tile represented by
+	// the coordinates of the corresponding tile on the map
+	mapCoords *tiles;
 	mapSize size;
-	tileCoords *tiles;
+
 	TileMap *map;
 	float parallax;
 }
@@ -21,8 +17,7 @@
 
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap;
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
-- (void)draw;
-- (void)drawFrom:(tileCoords)bottomLeft to:(tileCoords)topRight;
+- (void)drawRect:(mapRect)rect;
 - (void)drawCollision;
 
 @end

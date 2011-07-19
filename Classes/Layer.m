@@ -15,7 +15,7 @@
 
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap {
 	if ([super init] == nil) return nil;
-		
+	
 	// build some heavy Obj-C data up first to check integrity
 	NSArray *lines = [string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 	NSMutableArray *rows = [NSMutableArray arrayWithCapacity:lines.count];
@@ -67,7 +67,7 @@
 	int width = rowLength;
 	int height = rows.count;
 	size = mapSizeMake(width, height);
-	tiles = calloc(width*height, sizeof(tileCoords));
+	tiles = calloc(width*height, sizeof(mapCoords));
 	
 	for (int y=0; y<height; y++) {
 		for (int x=0; x<width; x++) {
@@ -79,13 +79,12 @@
 			else {
 				int xCoord = [[tileInfo valueForKey:@"x"] intValue];
 				int yCoord = [[tileInfo valueForKey:@"y"] intValue];
-				tiles[index] = tileCoordsMake(xCoord, yCoord);
+				tiles[index] = mapCoordsMake(xCoord, yCoord);
 			}
 		}
 	}
 	
 	map = [newMap retain];
-	
 	parallax = 1.0;
 	
 	return self;
@@ -93,14 +92,12 @@
 
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax {
 	if ([self initWithString:string map:newMap] == nil) return nil;
-	
 	parallax = newParallax;
-	
 	return self;
 }
 
-
-- (tileCoords)tileCoordsForMapCoords:(tileCoords)coords {
+- (mapCoords)tileCoordsForMapCoords:(mapCoords)coords {
+	// get the coordinates for the tile on the map that corresponds to the given tile on the layer
 	if (parallax != 1.0) {
 		// it repeats
 		coords.x = coords.x % size.width;
@@ -115,44 +112,28 @@
 	return tiles[index];
 }
 
-- (void)drawFrom:(tileCoords)bottomLeft to:(tileCoords)topRight {
-	for (int y=bottomLeft.y; y<topRight.y; y++) {
-		for (int x=bottomLeft.x; x<topRight.x; x++) {
-			// int index = (size.height-1-y)*size.width + x;
-			// tileCoords coords = tiles[index];
-			tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
+- (void)drawRect:(mapRect)rect {
+	// draw the tiles specified by the given rect
+	for (int y = rect.origin.y; y < rect.origin.y + rect.size.width; y++) {
+		for (int x = rect.origin.x; x < rect.origin.x + rect.size.width; x++) {
+			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y)];
 			if (coords.x < 0 || coords.y < 0) {
 				continue;
 			}
-			[map drawTile:coords at:tileCoordsMake(x,y)];
+			[map drawTile:coords at:mapCoordsMake(x,y)];
 		}
 	}
 }
 
-- (void)draw {
-	tileCoords bottomLeft = tileCoordsMake(0, 0);
-	tileCoords topRight = tileCoordsMake(size.width, size.height);
-	[self drawFrom:bottomLeft to:topRight];
-	// for (int y=0; y<size.height; y++) {
-	// 	for (int x=0; x<size.width; x++) {
-	// 		tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
-	// 		if (coords.x < 0 || coords.y < 0) {
-	// 			continue;
-	// 		}
-	// 		tileCoords loc = tileCoordsMake(x, y);
-	// 		[map drawTile:coords at:loc];
-	// 	}
-	// }
-}
-
 - (void)drawCollision {
+	// for debugging; draw lines for the collision data
 	for (int y=0; y<size.height; y++) {
 		for (int x=0; x<size.width; x++) {
-			tileCoords coords = [self tileCoordsForMapCoords:tileCoordsMake(x, y)];
+			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y)];
 			CollisionShape *collision = [map shapeForTile:coords];
 			glBegin(GL_LINE_LOOP);
 			for (int i=0; i<collision.shapeVertCount; i++) {
-				tileCoords coords = collision.shapeVerts[i];
+				pixelCoords coords = collision.shapeVerts[i];
 				glVertex2f(x*TILE_SIZE + coords.x, y*TILE_SIZE + coords.y);
 			}
 			glEnd();

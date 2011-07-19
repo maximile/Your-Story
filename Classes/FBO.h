@@ -1,25 +1,20 @@
-
 #import <Cocoa/Cocoa.h>
-
+#import "Types.h"
 
 @interface FBO : NSObject {
 	GLuint name;
 	GLuint textureName;
-	unsigned int textureWidth;
-	unsigned int textureHeight;
-	unsigned int width;
-	unsigned int height;
+	pixelSize size;
+	pixelSize textureSize;
 }
 
 + (void)bindFramebuffer:(FBO *)buffer;
 
-- (id)initWithWidth:(int)width height:(int)height;
-- (void)drawInRect:(NSRect)rect;
+- (id)initWithSize:(pixelSize)newSize;
+- (void)drawInRect:(pixelRect)rect;
 
-@property (readonly) unsigned int width;
-@property (readonly) unsigned int height;
-@property (readonly) unsigned int textureWidth;
-@property (readonly) unsigned int textureHeight;
+@property (readonly) pixelSize size;
+@property (readonly) pixelSize textureSize;
 @property (readonly) GLuint name;
 
 @end

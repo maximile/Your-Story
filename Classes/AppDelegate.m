@@ -27,7 +27,7 @@
 }
 
 - (IBAction)toggleFullScreen:(id)sender {
-    NSDictionary *fullScreenOptions = [[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:NSFullScreenModeSetting] retain];
+    NSDictionary *fullScreenOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:NSFullScreenModeSetting];
 	NSView *mainView = [self.window contentView];
 	BOOL fullScreen = [mainView isInFullScreenMode];
 	

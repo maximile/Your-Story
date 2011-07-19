@@ -20,9 +20,9 @@
 	Layer *bgLayer;
 	float bgParallax;
 	
+	// dictionary so that if more than one layer uses the same tile map we only load it once
 	NSMutableDictionary *maps;
 }
-
 
 @property mapSize size;
 @property (readonly) Layer *mainLayer;

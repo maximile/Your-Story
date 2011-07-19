@@ -1,17 +1,8 @@
-//
-//  FBO.m
-//  Your Story
-//
-//  Created by Max Williams on 02/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import "FBO.h"
-
 
 @implementation FBO
 
-@synthesize width, height, textureWidth, textureHeight, name;
+@synthesize size, textureSize, name;
 
 + (void)bindFramebuffer:(FBO *)buffer {
 	GLuint bufferName = 0;
@@ -21,17 +12,16 @@
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, bufferName);
 }
 
-- (id)initWithWidth:(int)newWidth height:(int)newHeight {
+- (id)initWithSize:(pixelSize)newSize {
 	if ([super init] == nil) return nil;
 	
-	width = newWidth;
-	height = newHeight;
+	size = newSize;
 	
 	// get enclosing power of two dimensions
-	textureWidth = 2;
-	while (textureWidth<width) textureWidth *= 2;
-	textureHeight = 2;
-	while (textureHeight<height) textureHeight *= 2;
+	int textureWidth = 2;
+	int textureHeight = 2;
+	while (textureWidth < size.width) textureWidth *= 2;
+	while (textureHeight < size.height) textureHeight *= 2;
 	
 	glGenTextures(1, &textureName);
 	glBindTexture(GL_TEXTURE_2D, textureName);
@@ -50,7 +40,9 @@
 	if (status != GL_FRAMEBUFFER_COMPLETE_EXT) {
 		NSLog(@"Something terrible happened.");
 	}
-			
+	
+	textureSize = pixelSizeMake(textureWidth, textureHeight);
+	
 	return self;
 }
 
@@ -58,17 +50,22 @@
 	glBindTexture(GL_TEXTURE_2D, textureName);
 }
 
-- (void)drawInRect:(NSRect)rect {
+- (void)drawInRect:(pixelRect)rect {
 	[self bind];
+	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnable(GL_TEXTURE_2D);
 	
+	float left = 0;
+	float bottom = 0;
+	float right = (float)size.width / (float)textureSize.width;
+	float top = (float)size.height / (float)textureSize.height;
 	GLfloat	coordinates[] = {
-		0, 0,
-		(float)width/(float)textureWidth, 0,
-		0, (float)height/(float)textureHeight,
-		(float)width/(float)textureWidth, (float)height/(float)textureHeight,
+		left, bottom,
+		right, bottom,
+		left, top,
+		right, top
 	};
 	GLfloat vertices[] = {
 		rect.origin.x, rect.origin.y,

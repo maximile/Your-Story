@@ -17,7 +17,8 @@
 	if ([super init]==nil) return nil;
 	
 	maps = [[NSMutableDictionary alloc] initWithCapacity:0];
-
+	
+	// populate dictionary from plist
 	NSDictionary *info;
 	NSString *errorDesc = nil;
 	NSString *infoPath = [[NSBundle mainBundle] pathForResource:roomName ofType:@"plist"];
@@ -28,6 +29,7 @@
 		return nil;
 	}
 	
+	// create the layers specified in the plist
 	NSString *mainMapName = [info valueForKey:@"MainMap"];
 	mainMap = [self getMap:mainMapName];
 	NSString *mainLayerString = [info valueForKey:@"MainLayer"];
@@ -49,6 +51,7 @@
 }
 
 - (TileMap *)getMap:(NSString *)mapName {
+	// get the map with the given name, caching the results for future use
 	if ([maps valueForKey:mapName]) {
 		return [maps valueForKey:mapName];
 	}
@@ -57,10 +60,6 @@
 	[maps setValue:newMap forKey:mapName];
 	return newMap;
 }
-
-// - (void)draw {
-// 	[mainLayer draw];
-// }
 
 - (void)dealloc {
 	[maps release];

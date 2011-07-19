@@ -17,13 +17,13 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 @synthesize name;
 
-+ (tileCoords)tileCoordsFromString:(NSString *)string {
++ (mapCoords)mapCoordsFromString:(NSString *)string {
 	NSArray *components = [string componentsSeparatedByString:@","];
 
 	int x = [[components objectAtIndex:0] intValue];
 	int y = [[components objectAtIndex:1] intValue];
 	
-	return tileCoordsMake(x, y);
+	return mapCoordsMake(x, y);
 }
 
 - (TileMap *)initWithImage:(NSImage *)image {
@@ -39,22 +39,20 @@ NSString *InvalidImageError = @"InvalidImageError";
 	}
 
 	// check image dimensions
-	NSSize bitmapSize = bitmap.size;
-	width = bitmapSize.width;
-	height = bitmapSize.height;
-	if (width != height) {
+	imageSize = pixelSizeMake(bitmap.size.width, bitmap.size.height);
+	if (imageSize.width != imageSize.height) {
 		[NSException raise:InvalidImageError format:@"Image must be square"];
 	}
-	if (width < TILE_SIZE || height < TILE_SIZE) {
+	if (imageSize.width < TILE_SIZE || imageSize.height < TILE_SIZE) {
 		[NSException raise:InvalidImageError format:@"Image must be larger than %ix%i", TILE_SIZE, TILE_SIZE];
 	}
-	if (width > 2048 || height > 2048) {
+	if (imageSize.width > 2048 || imageSize.height > 2048) {
 		[NSException raise:InvalidImageError format:@"Image must be no bigger than 2048x2048"];
 	}
 	// check that it's a power of two
 	int test = 1;
 	while (test <= 2048) {
-		if (width == test) {
+		if (imageSize.width == test) {
 			// it's a power of two
 			break;
 		}
@@ -65,9 +63,9 @@ NSString *InvalidImageError = @"InvalidImageError";
 	}
 		
 	// prepare image data
-	unsigned short *data = calloc(width*height, sizeof(unsigned short));
-	for (int y=0; y<height; y++) {
-		for (int x=0; x<width; x++) {
+	unsigned short *data = calloc(imageSize.width * imageSize.height, sizeof(unsigned short));
+	for (int y=0; y<imageSize.height; y++) {
+		for (int x=0; x<imageSize.width; x++) {
 			NSColor *pixelColor = [bitmap colorAtX:x y:y];
 			// get 5 bit int for every component
 			unsigned short red = round([pixelColor redComponent] * 31);
@@ -75,7 +73,7 @@ NSString *InvalidImageError = @"InvalidImageError";
 			unsigned short blue = round([pixelColor blueComponent] * 31);
 			unsigned short alpha = round([pixelColor alphaComponent] * 1);
 			// RRRRRGGGGGBBBBBA
-			data[y*width+x] = (red << 11) | (green << 6) | (blue << 1) | (alpha);
+			data[y*imageSize.width+x] = (red << 11) | (green << 6) | (blue << 1) | (alpha);
 		}
 	}
 
@@ -86,15 +84,20 @@ NSString *InvalidImageError = @"InvalidImageError";
 	glBindTexture(GL_TEXTURE_2D, name);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageSize.width, imageSize.height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data);
 	glBindTexture(GL_TEXTURE_2D, saveName);
 	
+	// how many tiles fit on the map
+	size = mapSizeMake(imageSize.width / TILE_SIZE, imageSize.height / TILE_SIZE);
+	
+	// generate collision shapes if necessary
 	if (shouldGenerateCollision) {
-		collisionShapes = [[NSMutableArray arrayWithCapacity:width*height] retain];
-		for (int y=0; y<height / TILE_SIZE; y++) {
-			for (int x=0; x<width / TILE_SIZE; x++) {
-				tileCoords coords = tileCoordsMake(x,y);
-				mapSize dataSize = mapSizeMake(width, height);
+		int tileCount = size.width * size.height;
+		collisionShapes = [[NSMutableArray arrayWithCapacity:tileCount] retain];
+		for (int y = 0; y < size.height; y++) {
+			for (int x = 0; x < size.width; x++) {
+				mapCoords coords = mapCoordsMake(x, y);
+				pixelSize dataSize = pixelSizeMake(imageSize.width, imageSize.height);
 				CollisionShape *shape = [Collision shapeForCoords:coords data:data dataSize:dataSize];
 				[collisionShapes addObject:shape];
 			}
@@ -105,12 +108,14 @@ NSString *InvalidImageError = @"InvalidImageError";
 	return self;
 }
 
-- (void)drawTile:(tileCoords)tile at:(tileCoords)loc {
+- (void)drawTile:(mapCoords)tile at:(mapCoords)loc {
+	// could do a million things to speed this up if necessary
+	
 	// get texture coordinates
-	float tBottom = (tile.y * TILE_SIZE) / (float)height;
-	float tTop = ((tile.y + 1) * TILE_SIZE) / (float)height;
-	float tLeft = (tile.x * TILE_SIZE) / (float)width;
-	float tRight = ((tile.x + 1) * TILE_SIZE) / (float)width;
+	float tBottom = (tile.y * TILE_SIZE) / (float)imageSize.height;
+	float tTop = ((tile.y + 1) * TILE_SIZE) / (float)imageSize.height;
+	float tLeft = (tile.x * TILE_SIZE) / (float)imageSize.width;
+	float tRight = ((tile.x + 1) * TILE_SIZE) / (float)imageSize.width;
 	GLfloat texCoords[] = {tLeft, tTop, tRight, tTop, tRight, tBottom, tLeft, tBottom};
 		
 	// space coordinates
@@ -126,9 +131,9 @@ NSString *InvalidImageError = @"InvalidImageError";
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }
 
-- (CollisionShape *)shapeForTile:(tileCoords)coords {
+- (CollisionShape *)shapeForTile:(mapCoords)coords {
 	if (coords.x < 0 || coords.y < 0) return nil;
-	int index = coords.y * (width/TILE_SIZE) + coords.x;
+	int index = coords.y * (size.width) + coords.x;
 	return [collisionShapes objectAtIndex:index];
 }
 
