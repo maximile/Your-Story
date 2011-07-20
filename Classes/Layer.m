@@ -1,13 +1,4 @@
-//
-//  Layer.m
-//  Your Story
-//
-//  Created by Max Williams on 03/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import "Layer.h"
-
 
 @implementation Layer
 
@@ -84,7 +75,7 @@
 		}
 	}
 	
-	map = [newMap retain];
+	map = newMap;
 	parallax = 1.0;
 	
 	return self;
@@ -141,10 +132,9 @@
 	}
 }
 
-- (void)dealloc {
+- (void)finalize {
 	free(tiles);
-	[map release];
-	[super dealloc];
+	[super finalize];
 }
 
 @end

@@ -93,7 +93,7 @@ NSString *InvalidImageError = @"InvalidImageError";
 	// generate collision shapes if necessary
 	if (shouldGenerateCollision) {
 		int tileCount = size.width * size.height;
-		collisionShapes = [[NSMutableArray arrayWithCapacity:tileCount] retain];
+		collisionShapes = [NSMutableArray arrayWithCapacity:tileCount];
 		for (int y = 0; y < size.height; y++) {
 			for (int x = 0; x < size.width; x++) {
 				mapCoords coords = mapCoordsMake(x, y);
@@ -137,10 +137,9 @@ NSString *InvalidImageError = @"InvalidImageError";
 	return [collisionShapes objectAtIndex:index];
 }
 
-- (void)dealloc {
+- (void)finalize {
 	glDeleteTextures(1, &name);
-	[collisionShapes release];
-	[super dealloc];	
+	[super finalize];	
 }
 
 @end

@@ -153,10 +153,4 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	return YES;
 }
 
-- (void)dealloc {
-	[canvasFBO release];
-	[super dealloc];
-}
-
-
 @end

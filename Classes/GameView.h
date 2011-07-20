@@ -13,8 +13,8 @@
 }
 
 @property BOOL playing;
-@property (nonatomic, assign) NSTimer *animationTimer;
-@property (retain) Game *game;
+@property (assign) NSTimer *animationTimer;
+@property (assign) Game *game;
 
 - (void)play;
 

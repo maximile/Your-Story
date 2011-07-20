@@ -61,13 +61,4 @@
 	return newMap;
 }
 
-- (void)dealloc {
-	[maps release];
-	
-	[mainLayer release];
-	[bgLayer release];
-	
-	[super dealloc];
-}
-
 @end

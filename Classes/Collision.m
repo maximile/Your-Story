@@ -79,9 +79,6 @@ static Collision *sharedCollision = nil;
 	int colTilesWide = collision.collisionMapSize.width / TILE_SIZE;
 	int colTilesHigh = collision.collisionMapSize.height / TILE_SIZE;
 	int dataWidth = dataSize.width;
-//	int dataHeight = dataSize.height;
-//	int tilesWide = dataWidth / TILE_SIZE;
-//	int tilesHigh = dataHeight / TILE_SIZE;
 	
 	CollisionShape *closestShape = nil;
 	int lowestDiff = TILE_SIZE * TILE_SIZE;

@@ -79,10 +79,10 @@
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void)dealloc {
+- (void)finalize {
 	glDeleteFramebuffersEXT(1, &name);
 	glDeleteTextures(1,&textureName);
-	[super dealloc];
+	[super finalize];
 }
 
 @end
