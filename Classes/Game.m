@@ -31,10 +31,15 @@
 	return self;
 }
 
-- (void)draw {
+- (void)drawEditor {
+	return;
+}
+
+- (void)drawGame {
+//	tiles[loc.y * size.width + loc.x]
 	// camera target
 	focus = player.position;
-	
+
 	if (currentRoom.mainLayer.size.height * TILE_SIZE <= CANVAS_SIZE.height) {
 		// room is shorter than the screen, center it vertically
 		focus.y = CANVAS_SIZE.height / 2;
@@ -49,7 +54,7 @@
 			focus.y = (currentRoom.size.height * TILE_SIZE) - CANVAS_SIZE.height / 2;
 		}
 	}
-	
+
 	if (currentRoom.mainLayer.size.width * TILE_SIZE <= CANVAS_SIZE.width) {
 		// room is thinner than the screen, center it horizontally
 		focus.x = CANVAS_SIZE.width / 2;
@@ -64,42 +69,55 @@
 			focus.x = (currentRoom.size.width * TILE_SIZE) - CANVAS_SIZE.width / 2;
 		}
 	}
-	
+
 	// draw layers. first get screen bounds in map coords
 	int left = (focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;
 	int right = (focus.x + CANVAS_SIZE.width / 2) / TILE_SIZE + 1;
 	int top = (focus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
 	int bottom = (focus.y - CANVAS_SIZE.height / 2) / TILE_SIZE;
-	
+
 	// bg elements
 	glPushMatrix();
 	float bgParallax = currentRoom.bgLayer.parallax;
 	NSPoint parallaxFocus = NSMakePoint(focus.x * bgParallax, focus.y * bgParallax);
-	
+
 	int pLeft = (parallaxFocus.x - CANVAS_SIZE.width / 2) / TILE_SIZE - 1;
 	int pRight = (parallaxFocus.x + CANVAS_SIZE.width / 2) / TILE_SIZE + 1;
 	int pTop = (parallaxFocus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
 	int pBottom = (parallaxFocus.y - CANVAS_SIZE.height / 2) / TILE_SIZE - 1;
-		
+
 	// glTranslatef(-focus.x, -focus.y, 0.0);
 	// glTranslatef(parallaxOffset.width, parallaxOffset.height, 0.0);
 	// glTranslatef(-parallaxFocus.x, -parallaxFocus.y, 0.0);
 	glTranslatef(-(parallaxFocus.x - CANVAS_SIZE.width / 2), -(parallaxFocus.y - CANVAS_SIZE.height / 2), 0.0);
-	
+
 	[currentRoom.bgLayer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom)];
 	glPopMatrix();
-	
+
 	// midground elements
 	glPushMatrix();
 	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	[currentRoom.mainLayer drawRect:mapRectMake(left, bottom, right-left, top-bottom)];
-	
+
 	[currentRoom.mainLayer drawCollision];
-	
+
 	for (GameObject *item in items) {
 		[item draw];
 	}
 	glPopMatrix();
+}
+
+- (void)draw {
+	switch (mode) {
+		case GAME_MODE:
+			[self drawGame];
+			break;
+		case EDITOR_MODE:
+			[self drawEditor];
+			break;
+		default:
+			break;
+	}
 }
 
 - (void)update {

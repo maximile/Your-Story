@@ -1,16 +1,15 @@
-//
-//  Game.h
-//  Your Story
-//
-//  Created by Max Williams on 04/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 #import "Room.h"
 #import "Player.h"
 
+typedef enum {
+	GAME_MODE,
+	EDITOR_MODE
+} gameMode;
+
 @interface Game : NSObject {
+	gameMode mode;
+
 	Room *currentRoom;
 	NSPoint focus;
 	
@@ -18,10 +17,14 @@
 	Player *player;
 	
 	int upKeyCount, downKeyCount, leftKeyCount, rightKeyCount;
+	
 }
 
 - (void)draw;
 - (void)update;
+
+- (void)drawEditor;
+- (void)drawGame;
 
 - (void)upUp;
 - (void)leftUp;

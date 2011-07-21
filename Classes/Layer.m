@@ -4,6 +4,28 @@
 
 @synthesize size, parallax;
 
+- (NSString *)stringRepresentation {
+	NSMutableString *stringRep = [NSMutableString stringWithCapacity:0];
+	for (int y = 0; y < size.height; y++) {
+		for (int x = 0; x < size.height; x++) {
+			mapCoords tile = [self tileAt:mapCoordsMake(x, y)];
+			NSString *tileString = [NSString stringWithFormat:@"%i,%i", tile.x, tile.y];
+			[stringRep appendString:tileString];
+			[stringRep appendString:@" "];
+		}
+		[stringRep appendString:@"\n"];
+	}
+	return [stringRep copy];
+}
+
+- (void)setTile:(mapCoords)tile at:(mapCoords)loc {
+	tiles[loc.y * size.width + loc.x] = tile;
+}
+
+- (mapCoords)tileAt:(mapCoords)loc {
+	return tiles[loc.y * size.width + loc.x];
+}
+
 - (id)initWithString:(NSString *)string map:(TileMap *)newMap {
 	if ([super init] == nil) return nil;
 	

@@ -20,4 +20,9 @@
 - (void)drawRect:(mapRect)rect;
 - (void)drawCollision;
 
+- (NSString *)stringRepresentation;
+- (void)setTile:(mapCoords)tile at:(mapCoords)loc;
+- (mapCoords)tileAt:(mapCoords)loc;
+
+
 @end
