@@ -15,14 +15,16 @@
 @property mapSize size;
 @property float parallax;
 
-- (id)initWithString:(NSString *)string map:(TileMap *)newMap;
-- (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
+// - (id)initWithString:(NSString *)string map:(TileMap *)newMap;
+// - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
+- (id)initWithDictionary:(NSDictionary *)infoDict;
 - (void)drawRect:(mapRect)rect;
 - (void)drawCollision;
 
 - (NSString *)stringRepresentation;
 - (void)setTile:(mapCoords)tile at:(mapCoords)loc;
 - (mapCoords)tileAt:(mapCoords)loc;
+- (void)setTilesFromString:(NSString *)string;
 
 
 @end

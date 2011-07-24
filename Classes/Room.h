@@ -1,32 +1,20 @@
-//
-//  Room.h
-//  Your Story
-//
-//  Created by Max Williams on 02/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 #import "TileMap.h"
 #import "Layer.h"
 
-@interface Room : NSObject {
-	mapSize size;
-
-	TileMap *mainMap;
+@interface Room : NSObject {	
+	NSMutableArray *layers;
 	Layer *mainLayer;
-
-	TileMap *bgMap;
-	Layer *bgLayer;
-	float bgParallax;
 	
-	// dictionary so that if more than one layer uses the same tile map we only load it once
+	// dictionary so that if more than one layer uses the same tile map we only load it once:
 	NSMutableDictionary *maps;
 }
 
-@property mapSize size;
+// layers, in order front to back:
+@property (readonly) NSArray *layers;
+// the layer that the player interacts with
 @property (readonly) Layer *mainLayer;
-@property (readonly) Layer *bgLayer;
+
 
 - (TileMap *)getMap:(NSString *)mapName;
 - (id)initWithName:(NSString *)roomName;

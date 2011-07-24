@@ -17,6 +17,29 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 @synthesize name;
 
+static NSMutableDictionary *mapCache = nil;
++ (TileMap *)mapNamed:(NSString *)mapName {
+	// initialise cache if necessary
+	if (mapCache == nil) {
+		mapCache = [NSMutableDictionary dictionaryWithCapacity:0];
+	}
+	
+	// check if the cache contains a map with the given name
+	TileMap *map = [mapCache valueForKey:mapName];
+	if (map == nil) {
+		// not cached; load it as usual
+		NSImage *mapImage = [NSImage imageNamed:mapName];
+		
+		map = [[TileMap alloc] initWithImage:mapImage];		
+		[mapCache setValue:map forKey:mapName];
+	}
+	return map;
+}
+
++ (void)emptyCache {
+	[mapCache removeAllObjects];
+}
+
 + (mapCoords)mapCoordsFromString:(NSString *)string {
 	NSArray *components = [string componentsSeparatedByString:@","];
 

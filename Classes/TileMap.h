@@ -24,6 +24,8 @@
 
 @property(readonly) GLuint name;
 
++ (TileMap *)mapNamed:(NSString *)mapName;
+
 + (mapCoords)mapCoordsFromString:(NSString *)string;
 
 - (TileMap *)initWithImage:(NSImage *)image;

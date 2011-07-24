@@ -92,7 +92,6 @@ static Collision *sharedCollision = nil;
 			CollisionShape *referenceShape = [collision shapeForTile:mapCoordsMake(colTileX, colTileY)];
 			if (referenceShape == nil) continue;
 			
-			NSLog(@"%i %i    %i %i", coords.x, coords.y, colTileX, colTileY);
 			int diff = 0;
 			
 			int left = coords.x * TILE_SIZE;
@@ -121,9 +120,7 @@ static Collision *sharedCollision = nil;
 			}
 		}
 	}
-	
-	NSLog(@"closest: %i, %i", closestShape.tile.x, closestShape.tile.y);
-	
+		
 	return closestShape;
 }
 

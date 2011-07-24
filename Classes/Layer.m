@@ -26,9 +26,28 @@
 	return tiles[loc.y * size.width + loc.x];
 }
 
-- (id)initWithString:(NSString *)string map:(TileMap *)newMap {
+- (id)initWithDictionary:(NSDictionary *)info {
 	if ([super init] == nil) return nil;
 	
+	// set map
+	NSString *mapName = [info valueForKey:@"Map"];
+	map = [TileMap mapNamed:mapName];
+		
+	// set parallax
+	parallax = 1.0;
+	id parallaxValue = [info valueForKey:@"Parallax"];
+	if (parallaxValue) {
+		parallax = [parallaxValue floatValue];
+	}
+	
+	// set tile data
+	NSString *tileString = [info valueForKey:@"Tiles"];
+	[self setTilesFromString:tileString];
+	
+	return self;
+}
+
+- (void)setTilesFromString:(NSString *)string {	
 	// build some heavy Obj-C data up first to check integrity
 	NSArray *lines = [string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 	NSMutableArray *rows = [NSMutableArray arrayWithCapacity:lines.count];
@@ -60,19 +79,17 @@
 				NSDictionary *tileDict = [NSDictionary dictionaryWithObjectsAndKeys:xNumber, @"x", yNumber, @"y", nil];
 				[tileArray addObject:tileDict];
 			}
-		} 
+		}
 	}
 		
 	// check that all rows are the same length
 	if (rows.count < 1) {
 		NSLog(@"No rows in string.");
-		return nil;
 	}
 	int rowLength = [[rows objectAtIndex:0] count];
 	for (NSArray *row in rows) {
 		if (row.count != rowLength) {
 			NSLog(@"All rows must be the same length.");
-			return nil;
 		}
 	}
 	
@@ -96,18 +113,13 @@
 			}
 		}
 	}
-	
-	map = newMap;
-	parallax = 1.0;
-	
-	return self;
 }
 
-- (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax {
-	if ([self initWithString:string map:newMap] == nil) return nil;
-	parallax = newParallax;
-	return self;
-}
+// - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax {
+// 	if ([self initWithString:string map:newMap] == nil) return nil;
+// 	parallax = newParallax;
+// 	return self;
+// }
 
 - (mapCoords)tileCoordsForMapCoords:(mapCoords)coords {
 	// get the coordinates for the tile on the map that corresponds to the given tile on the layer
