@@ -15,7 +15,7 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 @implementation TileMap
 
-@synthesize name;
+@synthesize textureName, name;
 
 static NSMutableDictionary *mapCache = nil;
 + (TileMap *)mapNamed:(NSString *)mapName {
@@ -33,6 +33,8 @@ static NSMutableDictionary *mapCache = nil;
 		map = [[TileMap alloc] initWithImage:mapImage];		
 		[mapCache setValue:map forKey:mapName];
 	}
+	
+	mapName = mapName;
 	return map;
 }
 
@@ -102,9 +104,9 @@ static NSMutableDictionary *mapCache = nil;
 
 	// assign to OpenGL texture
 	GLint saveName;
-	glGenTextures(1, &name);
+	glGenTextures(1, &textureName);
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &saveName);
-	glBindTexture(GL_TEXTURE_2D, name);
+	glBindTexture(GL_TEXTURE_2D, textureName);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageSize.width, imageSize.height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data);
@@ -148,7 +150,7 @@ static NSMutableDictionary *mapCache = nil;
 	float right = (loc.x + 1) * TILE_SIZE;
 	GLfloat vertices[] = {left, top, right, top, right, bottom, left, bottom};
 	
-	glBindTexture(GL_TEXTURE_2D, name);
+	glBindTexture(GL_TEXTURE_2D, textureName);
 	glVertexPointer(2, GL_FLOAT, 0, vertices);
 	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
@@ -161,7 +163,7 @@ static NSMutableDictionary *mapCache = nil;
 }
 
 - (void)finalize {
-	glDeleteTextures(1, &name);
+	glDeleteTextures(1, &textureName);
 	[super finalize];	
 }
 

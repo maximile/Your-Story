@@ -21,10 +21,11 @@
 - (void)drawRect:(mapRect)rect;
 - (void)drawCollision;
 
-- (NSString *)stringRepresentation;
 - (void)setTile:(mapCoords)tile at:(mapCoords)loc;
 - (mapCoords)tileAt:(mapCoords)loc;
 - (void)setTilesFromString:(NSString *)string;
+- (NSDictionary *)dictionaryRepresentation;
+- (NSString *)tilesString;
 
 
 @end

@@ -4,7 +4,7 @@
 
 @synthesize size, parallax;
 
-- (NSString *)stringRepresentation {
+- (NSString *)tilesString {
 	NSMutableString *stringRep = [NSMutableString stringWithCapacity:0];
 	for (int y = 0; y < size.height; y++) {
 		for (int x = 0; x < size.height; x++) {
@@ -45,6 +45,15 @@
 	[self setTilesFromString:tileString];
 	
 	return self;
+}
+
+- (NSDictionary *)dictionaryRepresentation {
+	NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:0];
+	[info setValue:map.name forKey:@"Map"];
+	if (parallax != 1.0)
+		[info setValue:[NSNumber numberWithFloat:parallax] forKey:@"Parallax"];
+	[info setValue:[self tilesString] forKey:@"Tiles"];
+	return info;
 }
 
 - (void)setTilesFromString:(NSString *)string {	

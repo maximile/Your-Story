@@ -13,16 +13,19 @@
 
 
 @interface TileMap : NSObject {
-	GLuint name;
+	GLuint textureName;
 	
 	mapSize size;  // tiles wide, tiles high
 	pixelSize imageSize;  // size in pixels of the source image
 	pixelSize textureSize;  // size in pixels of the texture
 	
 	NSMutableArray *collisionShapes;
+	
+	NSString *name;
 }
 
-@property(readonly) GLuint name;
+@property(readonly) GLuint textureName;
+@property(readonly) NSString *name;
 
 + (TileMap *)mapNamed:(NSString *)mapName;
 
