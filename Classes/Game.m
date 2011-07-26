@@ -1,11 +1,3 @@
-//
-//  Game.m
-//  Your Story
-//
-//  Created by Max Williams on 04/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import "Game.h"
 #import "GameObject.h"
 #import "Constants.h"
@@ -35,18 +27,13 @@
 	return;
 }
 
-- (void)drawGame {
-//	tiles[loc.y * size.width + loc.x]
-	// camera target
-	focus = player.position;
-
+- (mapCoords)cameraTargetForFocus:(NSPoint)focus {
 	if (currentRoom.mainLayer.size.height * TILE_SIZE <= CANVAS_SIZE.height) {
 		// room is shorter than the screen, center it vertically
 		focus.y = CANVAS_SIZE.height / 2;
 	}
 	else {
 		// clamp focus to height of room
-		focus.y = player.position.y;
 		if (focus.y < CANVAS_SIZE.height / 2) {
 			focus.y = CANVAS_SIZE.height / 2;
 		}
@@ -61,7 +48,6 @@
 	}
 	else {
 		// clamp focus to width of room
-		focus.x = player.position.x;
 		if (focus.x < CANVAS_SIZE.width / 2) {
 			focus.x = CANVAS_SIZE.width / 2;
 		}
@@ -69,12 +55,20 @@
 			focus.x = (currentRoom.mainLayer.size.width * TILE_SIZE) - CANVAS_SIZE.width / 2;
 		}
 	}
+	
+	return mapCoordsMake(focus.x, focus.y);
+}
+
+- (void)drawGame {
+//	tiles[loc.y * size.width + loc.x]
+	// camera target
+	mapCoords focus = [self cameraTargetForFocus:player.position];
 
 	// draw layers. first get screen bounds in map coords
-	int left = (focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;
-	int right = (focus.x + CANVAS_SIZE.width / 2) / TILE_SIZE + 1;
-	int top = (focus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
-	int bottom = (focus.y - CANVAS_SIZE.height / 2) / TILE_SIZE;
+	int left = ((float)focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;
+	int right = ((float)focus.x + CANVAS_SIZE.width / 2) / TILE_SIZE + 1;
+	int top = ((float)focus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
+	int bottom = ((float)focus.y - CANVAS_SIZE.height / 2) / TILE_SIZE;
 
 	// draw layers
 	for (Layer *layer in currentRoom.layers) {
@@ -98,9 +92,12 @@
 
 		glPopMatrix();
 	}
+	glPushMatrix();
+	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	for (GameObject *item in items) {
 		[item draw];
 	}
+	glPopMatrix();
 }
 
 - (void)draw {

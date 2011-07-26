@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Room.h"
 #import "Player.h"
+#import "Types.h"
 
 typedef enum {
 	GAME_MODE,
@@ -11,18 +12,17 @@ typedef enum {
 	gameMode mode;
 
 	Room *currentRoom;
-	NSPoint focus;
 	
 	NSMutableArray *items;
 	Player *player;
 	
 	int upKeyCount, downKeyCount, leftKeyCount, rightKeyCount;
-	
 }
 
 - (void)draw;
 - (void)update;
 
+- (mapCoords)cameraTargetForFocus:(NSPoint)focus;
 - (void)drawEditor;
 - (void)drawGame;
 
