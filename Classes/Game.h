@@ -12,6 +12,9 @@ typedef enum {
 	gameMode mode;
 
 	Room *currentRoom;
+	Layer *editingLayer;
+	
+	NSPoint editorFocus;
 	
 	NSMutableArray *items;
 	Player *player;

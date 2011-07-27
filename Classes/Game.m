@@ -20,11 +20,19 @@
 	
 	currentRoom = [[Room alloc] initWithName:@"Test"];
 	
+	mode = EDITOR_MODE;
+	
 	return self;
 }
 
 - (void)drawEditor {
-	return;
+	mapCoords focus = [self cameraTargetForFocus:editorFocus];
+	editingLayer = currentRoom.mainLayer;
+	glPushMatrix();
+	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
+	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height)];
+	glPopMatrix();
+	
 }
 
 - (mapCoords)cameraTargetForFocus:(NSPoint)focus {
@@ -60,7 +68,6 @@
 }
 
 - (void)drawGame {
-//	tiles[loc.y * size.width + loc.x]
 	// camera target
 	mapCoords focus = [self cameraTargetForFocus:player.position];
 
@@ -114,12 +121,45 @@
 }
 
 - (void)update {
-	if (upKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y + 1);
-	if (downKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y - 1);
-	if (leftKeyCount > 0) player.position = NSMakePoint(player.position.x - 1, player.position.y);
-	if (rightKeyCount > 0) player.position = NSMakePoint(player.position.x + 1, player.position.y);
-	for (GameObject *item in items) {
-		[item update];
+	switch (mode) {
+		case GAME_MODE:
+			if (upKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y + 1);
+			if (downKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y - 1);
+			if (leftKeyCount > 0) player.position = NSMakePoint(player.position.x - 1, player.position.y);
+			if (rightKeyCount > 0) player.position = NSMakePoint(player.position.x + 1, player.position.y);
+			for (GameObject *item in items) {
+				[item update];
+			}
+			break;
+		case EDITOR_MODE:
+			if (upKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y + 1);
+			if (downKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y - 1);
+			if (leftKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x - 1, editorFocus.y);
+			if (rightKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x + 1, editorFocus.y);
+			
+			if (CANVAS_SIZE.width > editingLayer.size.width * TILE_SIZE) {
+				editorFocus.x = editingLayer.size.width * TILE_SIZE / 2;
+			}
+			else if (editorFocus.x < CANVAS_SIZE.width / 2) {
+				editorFocus.x = CANVAS_SIZE.width / 2;
+			}
+			else if (editorFocus.x > editingLayer.size.width * TILE_SIZE - CANVAS_SIZE.width / 2) {
+				editorFocus.x = editingLayer.size.width * TILE_SIZE - CANVAS_SIZE.width / 2;
+			}
+			
+			if (CANVAS_SIZE.height > editingLayer.size.height * TILE_SIZE) {
+				editorFocus.y = editingLayer.size.height * TILE_SIZE / 2;
+			}
+			else if (editorFocus.y < CANVAS_SIZE.height / 2) {
+				editorFocus.y = CANVAS_SIZE.height / 2;
+			}
+			else if (editorFocus.y > editingLayer.size.height * TILE_SIZE - CANVAS_SIZE.height / 2) {
+				editorFocus.y = editingLayer.size.height * TILE_SIZE - CANVAS_SIZE.height / 2;
+			}
+
+			break;
+		default:
+			break;
 	}
 }
 
