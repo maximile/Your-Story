@@ -26,7 +26,6 @@ typedef enum {
 - (void)update;
 
 - (mapCoords)cameraTargetForFocus:(NSPoint)focus;
-- (void)drawEditor;
 - (void)drawGame;
 
 - (void)upUp;
@@ -37,5 +36,7 @@ typedef enum {
 - (void)downDown;
 - (void)leftDown;
 - (void)rightDown;
+
+- (void)mouseDown:(pixelCoords)coords;
 
 @end

@@ -149,6 +149,12 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	}
 }
 
+- (void)mouseDown:(NSEvent *)event {
+	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
+	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
+	[game mouseDown:scaledCoords];
+}
+
 - (BOOL)acceptsFirstResponder {
 	return YES;
 }

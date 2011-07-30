@@ -1,6 +1,7 @@
 #import "Game.h"
 #import "GameObject.h"
 #import "Constants.h"
+#import "Game+Editor.h"
 
 @implementation Game
 
@@ -23,16 +24,6 @@
 	mode = EDITOR_MODE;
 	
 	return self;
-}
-
-- (void)drawEditor {
-	mapCoords focus = [self cameraTargetForFocus:editorFocus];
-	editingLayer = currentRoom.mainLayer;
-	glPushMatrix();
-	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
-	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height)];
-	glPopMatrix();
-	
 }
 
 - (mapCoords)cameraTargetForFocus:(NSPoint)focus {
@@ -132,31 +123,18 @@
 			}
 			break;
 		case EDITOR_MODE:
-			if (upKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y + 1);
-			if (downKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y - 1);
-			if (leftKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x - 1, editorFocus.y);
-			if (rightKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x + 1, editorFocus.y);
-			
-			if (CANVAS_SIZE.width > editingLayer.size.width * TILE_SIZE) {
-				editorFocus.x = editingLayer.size.width * TILE_SIZE / 2;
-			}
-			else if (editorFocus.x < CANVAS_SIZE.width / 2) {
-				editorFocus.x = CANVAS_SIZE.width / 2;
-			}
-			else if (editorFocus.x > editingLayer.size.width * TILE_SIZE - CANVAS_SIZE.width / 2) {
-				editorFocus.x = editingLayer.size.width * TILE_SIZE - CANVAS_SIZE.width / 2;
-			}
-			
-			if (CANVAS_SIZE.height > editingLayer.size.height * TILE_SIZE) {
-				editorFocus.y = editingLayer.size.height * TILE_SIZE / 2;
-			}
-			else if (editorFocus.y < CANVAS_SIZE.height / 2) {
-				editorFocus.y = CANVAS_SIZE.height / 2;
-			}
-			else if (editorFocus.y > editingLayer.size.height * TILE_SIZE - CANVAS_SIZE.height / 2) {
-				editorFocus.y = editingLayer.size.height * TILE_SIZE - CANVAS_SIZE.height / 2;
-			}
+			[self updateEditor];
+			break;
+		default:
+			break;
+	}
+}
 
+
+- (void)mouseDown:(pixelCoords)coords {
+	switch (mode) {
+		case EDITOR_MODE:
+			[self changeTileAt:[self mapCoordsForViewCoords:coords]];
 			break;
 		default:
 			break;
