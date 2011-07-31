@@ -22,6 +22,9 @@ typedef enum {
 	int upKeyCount, downKeyCount, leftKeyCount, rightKeyCount;
 }
 
+@property gameMode mode;
+@property (readonly) Room *currentRoom;
+
 - (void)draw;
 - (void)update;
 

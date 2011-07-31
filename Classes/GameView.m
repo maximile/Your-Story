@@ -151,6 +151,14 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 
 - (void)mouseDown:(NSEvent *)event {
 	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
+	
+	// compensate for offset
+	int stretchedCanvasWidth = CANVAS_SIZE.width * scaleFactor;
+	int stretchedCanvasHeight = CANVAS_SIZE.height * scaleFactor;
+	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
+	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
+	viewCoords = NSMakePoint(viewCoords.x - leftEdge, viewCoords.y - topEdge);
+	
 	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
 	[game mouseDown:scaledCoords];
 }

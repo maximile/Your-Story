@@ -24,6 +24,7 @@
 	// get the point in layer space
 	mapCoords focus = [self cameraTargetForFocus:editorFocus];
 	pixelCoords translatedCoords = pixelCoordsMake(viewCoords.x + focus.x - CANVAS_SIZE.width / 2, viewCoords.y + focus.y - CANVAS_SIZE.height / 2);
+	// and get the tile coords from that
 	return mapCoordsMake(translatedCoords.x / TILE_SIZE, editingLayer.size.height - translatedCoords.y / TILE_SIZE - 1);
 }
 

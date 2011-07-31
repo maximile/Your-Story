@@ -8,15 +8,14 @@
 
 #import "AppDelegate.h"
 #import "GameView.h"
-#import "Game.h"
 
 @implementation AppDelegate
 
-@synthesize window, gameView;
+@synthesize window, gameView, editorPanel;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
-	Game *game = [[Game alloc] init];
+	game = [[Game alloc] init];
 	
 	[gameView setGame:game];
 	[gameView play];
@@ -39,5 +38,17 @@
 	}
 }
 
+- (IBAction)toggleEditor:(id)sender {
+	if (game.mode == GAME_MODE) {
+		game.mode = EDITOR_MODE;
+		[editorPanel makeKeyAndOrderFront:self];
+		[editorPanel setLayer:game.currentRoom.mainLayer];
+	}
+		
+	else if (game.mode == EDITOR_MODE) {
+		game.mode = GAME_MODE;
+		[editorPanel performClose:self];
+	}
+}
 
 @end

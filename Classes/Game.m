@@ -5,6 +5,8 @@
 
 @implementation Game
 
+@synthesize mode, currentRoom;
+
 - (id)init {
 	if ([super init] == nil) {
 		return nil;
