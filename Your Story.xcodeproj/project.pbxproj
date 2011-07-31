@@ -12,7 +12,7 @@
 		660B7FA113BF8EC8001ECF63 /* TileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B7FA013BF8EC8001ECF63 /* TileMap.m */; };
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
 		660B803713BFD4AB001ECF63 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B803613BFD4AB001ECF63 /* Room.m */; };
-		660B803A13BFD4C0001ECF63 /* Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.plist */; };
+		660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.ysroom */; };
 		660B803F13C0D88D001ECF63 /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B803E13C0D88D001ECF63 /* Layer.m */; };
 		6677DDE813D2F51F00A43DF4 /* Collision Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE613D2F51F00A43DF4 /* Collision Data.plist */; };
 		6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */; };
@@ -74,7 +74,7 @@
 		660B7FA413BFBC31001ECF63 /* Test.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.psd; sourceTree = "<group>"; };
 		660B803513BFD4AB001ECF63 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
 		660B803613BFD4AB001ECF63 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
-		660B803913BFD4C0001ECF63 /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
+		660B803913BFD4C0001ECF63 /* Test.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.ysroom; sourceTree = "<group>"; };
 		660B803D13C0D88D001ECF63 /* Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer.h; sourceTree = "<group>"; };
 		660B803E13C0D88D001ECF63 /* Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Layer.m; sourceTree = "<group>"; };
 		6677DDE613D2F51F00A43DF4 /* Collision Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Collision Data.plist"; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 		660B803813BFD4AF001ECF63 /* Rooms */ = {
 			isa = PBXGroup;
 			children = (
-				660B803913BFD4C0001ECF63 /* Test.plist */,
+				660B803913BFD4C0001ECF63 /* Test.ysroom */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 				66C75C3A13BE83F8002D8411 /* CMakeLists.txt in Resources */,
 				66C75C5713BE83F8002D8411 /* LICENSE.txt in Resources */,
 				660B7FA513BFBC31001ECF63 /* Test.psd in Resources */,
-				660B803A13BFD4C0001ECF63 /* Test.plist in Resources */,
+				660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */,
 				6677DDE813D2F51F00A43DF4 /* Collision Data.plist in Resources */,
 				6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */,
 			);

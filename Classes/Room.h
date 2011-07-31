@@ -18,6 +18,7 @@
 
 - (TileMap *)getMap:(NSString *)mapName;
 - (id)initWithName:(NSString *)roomName;
+- (id)initWithFile:(NSString *)path;
 - (void)writeToFile:(NSString *)path;
 
 @end

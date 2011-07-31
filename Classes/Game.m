@@ -5,7 +5,7 @@
 
 @implementation Game
 
-@synthesize mode, currentRoom;
+@synthesize mode, currentRoom, editingLayer;
 
 - (id)init {
 	if ([super init] == nil) {
@@ -115,6 +115,12 @@
 	}
 }
 
+- (void)setCurrentRoom:(Room *)newRoom {
+	if (currentRoom == newRoom) return;
+	currentRoom = newRoom;
+	[self setEditingLayer:currentRoom.mainLayer];
+}
+
 - (void)update {
 	switch (mode) {
 		case GAME_MODE:
@@ -180,5 +186,14 @@
 		[self setEditingLayer:[currentRoom.layers objectAtIndex:number - 1]];
 	}
 }
+
+- (void)setCurrentRoomFromPath:(NSString *)path {
+	self.currentRoom = [[Room alloc] initWithFile:path];
+}
+
+- (void)writeCurrentRoomToPath:(NSString *)path {
+	[self.currentRoom writeToFile:path];
+}
+
 
 @end

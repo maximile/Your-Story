@@ -48,4 +48,22 @@
 	}
 }
 
+- (IBAction)openMap:(id)sender {
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	
+	[openPanel beginSheetForDirectory:nil file:nil types:[NSArray arrayWithObject:@"ysroom"] modalForWindow:window modalDelegate:self didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+	roomPath = panel.filenames.lastObject;
+	if (roomPath.length) {
+		[game setCurrentRoomFromPath:roomPath];
+	}
+}
+
+- (IBAction)saveMap:(id)sender {
+	[game writeCurrentRoomToPath:roomPath];
+}
+
+
 @end

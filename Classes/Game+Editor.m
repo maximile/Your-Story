@@ -1,13 +1,4 @@
-//
-//  Game+Editor.m
-//  Your Story
-//
-//  Created by Max Williams on 28/07/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import "Game+Editor.h"
-
 
 @implementation Game (Editor)
 
@@ -30,7 +21,6 @@
 		int top = palette.size.height * TILE_SIZE;
 		int left = 0;
 		int right = palette.size.width * TILE_SIZE;
-		
 		
 		// draw black background
 		glColor3f(0.0, 0.0, 0.0);

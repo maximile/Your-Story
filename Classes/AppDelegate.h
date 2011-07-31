@@ -14,10 +14,13 @@
     NSWindow *window;
 	GameView *gameView;
 	Game *game;
+	NSString *roomPath;
 }
 
 - (IBAction)toggleFullScreen:(id)sender;
 - (IBAction)toggleEditor:(id)sender;
+- (IBAction)saveMap:(id)sender;
+- (IBAction)openMap:(id)sender;
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet GameView *gameView;

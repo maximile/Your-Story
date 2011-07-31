@@ -29,7 +29,8 @@ typedef enum {
 }
 
 @property gameMode mode;
-@property (readonly) Room *currentRoom;
+@property (assign) Room *currentRoom;
+@property (assign) Layer *editingLayer;
 
 - (void)draw;
 - (void)update;
@@ -53,5 +54,8 @@ typedef enum {
 
 - (void)mouseDown:(pixelCoords)coords;
 - (void)mouseDragged:(pixelCoords)coords;
+
+- (void)setCurrentRoomFromPath:(NSString *)path;
+- (void)writeCurrentRoomToPath:(NSString *)path;
 
 @end

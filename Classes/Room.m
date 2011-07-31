@@ -9,15 +9,18 @@
 }
 
 - (id)initWithName:(NSString *)roomName {
+	NSString *roomFilePath = [[NSBundle mainBundle] pathForResource:roomName ofType:@"ysroom"];
+	if ([self initWithFile:roomFilePath] == nil) return nil;
+	return self;
+}
+
+- (id)initWithFile:(NSString *)path {
 	if ([super init]==nil) return nil;
 	
 	// dictionary to cache maps used
 	maps = [[NSMutableDictionary alloc] initWithCapacity:0];
-	// populate dictionary from plist
-	NSString *roomFilePath = [[NSBundle mainBundle] pathForResource:roomName ofType:@"plist"];
-	NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:roomFilePath];
 	
-	
+	NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:path];
 	// create layer objects
 	layers = [NSMutableArray arrayWithCapacity:0];
 	for (NSDictionary *layerInfo in [info valueForKey:@"Layers"]) {
@@ -27,8 +30,6 @@
 			mainLayer = layer;
 		}
 	}
-	
-	[self writeToFile:@"/Users/maximile/Desktop/Test.plist"];
 		
 	return self;
 }
