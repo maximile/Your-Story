@@ -76,11 +76,11 @@
 			int pTop = (parallaxFocus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
 			int pBottom = (parallaxFocus.y - CANVAS_SIZE.height / 2) / TILE_SIZE - 1;
 			glTranslatef(-(parallaxFocus.x - CANVAS_SIZE.width / 2), -(parallaxFocus.y - CANVAS_SIZE.height / 2), 0.0);
-			[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom)];		
+			[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom) ignoreParallax:NO];		
 		}
 		else {
 			glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
-	        [layer drawRect:mapRectMake(left, bottom, right-left, top-bottom)];
+	        [layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
 		}
 
 		glPopMatrix();
@@ -110,6 +110,7 @@
 	if (mode == newMode) return;
 	mode = newMode;
 	if (newMode == EDITOR_MODE) {
+		editorFocus = player.position;
 		[self setEditingLayer:currentRoom.mainLayer];
 	}
 }
@@ -149,16 +150,12 @@
 }
 
 - (void)mouseDragged:(pixelCoords)coords {
-	switch (mode) {
-		case EDITOR_MODE:
-			if (showPalette)
-				[self selectTileFromPaletteAt:coords];
-			else {
-				[self changeTileAt:[self mapCoordsForViewCoords:coords]];
-			}
-			break;
-		default:
-			break;
+	if (mode == EDITOR_MODE) {
+		if (showPalette)
+			[self selectTileFromPaletteAt:coords];
+		else {
+			[self changeTileAt:[self mapCoordsForViewCoords:coords]];
+		}
 	}
 }
 
@@ -173,5 +170,15 @@
 
 - (void)tabDown {tabKey=YES;}
 - (void)tabUp {tabKey=NO;}
+
+- (void)numberDown:(int)number {
+	if (mode == EDITOR_MODE) {
+		if (number - 1 >= currentRoom.layers.count) {
+			NSBeep();
+			return;
+		}
+		[self setEditingLayer:[currentRoom.layers objectAtIndex:number - 1]];
+	}
+}
 
 @end

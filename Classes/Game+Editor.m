@@ -13,10 +13,9 @@
 
 - (void)drawEditor {
 	mapCoords focus = [self cameraTargetForFocus:editorFocus];
-	editingLayer = currentRoom.mainLayer;
 	glPushMatrix();
 	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
-	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height)];
+	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height) ignoreParallax:YES];
 	glPopMatrix();
 	
 	if (showPalette) {
@@ -36,10 +35,10 @@
 		// draw black background
 		glColor3f(0.0, 0.0, 0.0);
 		glBegin(GL_QUADS);
-		glVertex2f(left - 2, bottom - 2);
-		glVertex2f(right + 2, bottom - 2);
-		glVertex2f(right + 2, top + 2);
-		glVertex2f(left - 2, top + 2);
+		glVertex2f(left - 3, bottom - 4);
+		glVertex2f(right + 4, bottom - 4);
+		glVertex2f(right + 4, top + 3);
+		glVertex2f(left - 3, top + 3);
 		glEnd();
 		
 		// draw outline
@@ -53,7 +52,7 @@
 		
 		// draw palette
 		glColor3f(1.0, 1.0, 1.0);
-		[palette drawRect:mapRectMake(0, 0, palette.size.width, palette.size.height)];
+		[palette drawRect:mapRectMake(0, 0, palette.size.width, palette.size.height) ignoreParallax:YES];
 		
 		// highlight selected palette tile
 		glBegin(GL_LINE_LOOP);

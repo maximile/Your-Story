@@ -49,6 +49,8 @@ typedef enum {
 - (void)tabDown;
 - (void)tabUp;
 
+- (void)numberDown:(int)number;
+
 - (void)mouseDown:(pixelCoords)coords;
 - (void)mouseDragged:(pixelCoords)coords;
 

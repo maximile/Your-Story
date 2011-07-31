@@ -145,9 +145,9 @@
 	return [[Layer alloc] initWithDictionary:info];
 }
 
-- (mapCoords)tileCoordsForMapCoords:(mapCoords)coords {
+- (mapCoords)tileCoordsForMapCoords:(mapCoords)coords ignoreParallax:(BOOL)ignoreParallax {
 	// get the coordinates for the tile on the map that corresponds to the given tile on the layer
-	if (parallax != 1.0) {
+	if (parallax != 1.0 && !ignoreParallax) {
 		// it repeats
 		coords.x = coords.x % size.width;
 		if (coords.x < 0) coords.x = size.width + coords.x;
@@ -161,11 +161,11 @@
 	return tiles[index];
 }
 
-- (void)drawRect:(mapRect)rect {
+- (void)drawRect:(mapRect)rect ignoreParallax:(BOOL)ignoreParallax {
 	// draw the tiles specified by the given rect
 	for (int y = rect.origin.y; y < rect.origin.y + rect.size.width; y++) {
 		for (int x = rect.origin.x; x < rect.origin.x + rect.size.width; x++) {
-			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y)];
+			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y) ignoreParallax:ignoreParallax];
 			if (coords.x < 0 || coords.y < 0) {
 				continue;
 			}
@@ -178,7 +178,7 @@
 	// for debugging; draw lines for the collision data
 	for (int y=0; y<size.height; y++) {
 		for (int x=0; x<size.width; x++) {
-			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y)];
+			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y) ignoreParallax:NO];
 			CollisionShape *collision = [map shapeForTile:coords];
 			glBegin(GL_LINE_LOOP);
 			for (int i=0; i<collision.shapeVertCount; i++) {

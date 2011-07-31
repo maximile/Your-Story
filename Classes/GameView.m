@@ -159,6 +159,12 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 		case 48: [game tabDown]; break; // tab
 		default: break;
 	}
+	// test for number input
+	for (int i = 0; i <= 9; i++) {
+		if ([event.characters isEqualToString:[NSString stringWithFormat:@"%i", i]]) {
+			[game numberDown:i];
+		}
+	}
 }
 
 - (void)mouseDown:(NSEvent *)event {
