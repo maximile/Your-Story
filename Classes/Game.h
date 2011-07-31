@@ -12,14 +12,20 @@ typedef enum {
 	gameMode mode;
 
 	Room *currentRoom;
-	Layer *editingLayer;
 	
-	NSPoint editorFocus;
-	
+	// game variables
 	NSMutableArray *items;
 	Player *player;
 	
-	int upKeyCount, downKeyCount, leftKeyCount, rightKeyCount;
+	// editor variables
+	NSPoint editorFocus;
+	Layer *editingLayer;
+	Layer *palette;
+	BOOL showPalette;
+	mapCoords paletteTile;
+	
+	// key pressed flags
+	BOOL upKey, downKey, leftKey, rightKey, tabKey;
 }
 
 @property gameMode mode;
@@ -40,6 +46,10 @@ typedef enum {
 - (void)leftDown;
 - (void)rightDown;
 
+- (void)tabDown;
+- (void)tabUp;
+
 - (void)mouseDown:(pixelCoords)coords;
+- (void)mouseDragged:(pixelCoords)coords;
 
 @end

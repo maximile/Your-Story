@@ -17,7 +17,74 @@
 	glPushMatrix();
 	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height)];
-	glPopMatrix();	
+	glPopMatrix();
+	
+	if (showPalette) {
+		glPushMatrix();
+		// offset to centre in screen
+		int xOffset = CANVAS_SIZE.width / 2 - palette.size.width * TILE_SIZE / 2;
+		int yOffset = CANVAS_SIZE.height / 2 - palette.size.height * TILE_SIZE / 2;
+		glTranslatef(xOffset, yOffset, 0.0);
+
+		// palette coords
+		int bottom = 0;
+		int top = palette.size.height * TILE_SIZE;
+		int left = 0;
+		int right = palette.size.width * TILE_SIZE;
+		
+		
+		// draw black background
+		glColor3f(0.0, 0.0, 0.0);
+		glBegin(GL_QUADS);
+		glVertex2f(left - 2, bottom - 2);
+		glVertex2f(right + 2, bottom - 2);
+		glVertex2f(right + 2, top + 2);
+		glVertex2f(left - 2, top + 2);
+		glEnd();
+		
+		// draw outline
+		glColor3f(1.0, 1.0, 0.0);
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(left - 2, bottom - 2);
+		glVertex2f(right + 2, bottom - 2);
+		glVertex2f(right + 2, top + 2);
+		glVertex2f(left - 2, top + 2);
+		glEnd();
+		
+		// draw palette
+		glColor3f(1.0, 1.0, 1.0);
+		[palette drawRect:mapRectMake(0, 0, palette.size.width, palette.size.height)];
+		
+		// highlight selected palette tile
+		glBegin(GL_LINE_LOOP);
+		pixelCoords selectedOffset = pixelCoordsMake(paletteTile.x * TILE_SIZE, (palette.size.height - paletteTile.y - 1) * TILE_SIZE);
+		glVertex2f(selectedOffset.x - 1, selectedOffset.y);
+		glVertex2f(selectedOffset.x + TILE_SIZE, selectedOffset.y);
+		glVertex2f(selectedOffset.x + TILE_SIZE, selectedOffset.y + TILE_SIZE + 1);
+		glVertex2f(selectedOffset.x - 1, selectedOffset.y + TILE_SIZE + 1);
+		glEnd();
+		
+		glPopMatrix();
+	}
+	
+}
+
+- (void)selectTileFromPaletteAt:(pixelCoords)coords {
+	int xOffset = CANVAS_SIZE.width / 2 - palette.size.width * TILE_SIZE / 2;
+	int yOffset = CANVAS_SIZE.height / 2 - palette.size.height * TILE_SIZE / 2;
+	coords.x -= xOffset;
+	coords.y -= yOffset;
+	
+	paletteTile = mapCoordsMake(coords.x / TILE_SIZE, palette.size.height - coords.y / TILE_SIZE - 1);
+}
+
+- (void)setEditingLayer:(Layer *)newLayer {
+	if (newLayer == editingLayer) return;
+	editingLayer = newLayer;
+	
+	// generate palette layer from new layer's tilemap
+	palette = [editingLayer makePaletteLayer];
+	NSLog(@"setting palette: %@", palette);
 }
 
 - (mapCoords)mapCoordsForViewCoords:(pixelCoords)viewCoords {
@@ -29,10 +96,12 @@
 }
 
 - (void)updateEditor {
-	if (upKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y + 1);
-	if (downKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y - 1);
-	if (leftKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x - 1, editorFocus.y);
-	if (rightKeyCount > 0) editorFocus = NSMakePoint(editorFocus.x + 1, editorFocus.y);
+	if (upKey) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y + 1);
+	if (downKey) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y - 1);
+	if (leftKey) editorFocus = NSMakePoint(editorFocus.x - 1, editorFocus.y);
+	if (rightKey) editorFocus = NSMakePoint(editorFocus.x + 1, editorFocus.y);
+	
+	showPalette = tabKey;
 	
 	if (CANVAS_SIZE.width > editingLayer.size.width * TILE_SIZE) {
 		editorFocus.x = editingLayer.size.width * TILE_SIZE / 2;
@@ -56,8 +125,7 @@
 }
 
 - (void)changeTileAt:(mapCoords)coords {
-	NSLog(@"%i, %i", coords.x, coords.y);
-	[editingLayer setTile:mapCoordsMake(1,1) at:coords];
+	[editingLayer setTile:paletteTile at:coords];
 }
 
 

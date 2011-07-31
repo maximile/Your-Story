@@ -24,8 +24,9 @@
 	NSString *name;
 }
 
-@property(readonly) GLuint textureName;
-@property(readonly) NSString *name;
+@property (readonly) GLuint textureName;
+@property (assign) NSString *name;
+@property (readonly) mapSize size;
 
 + (TileMap *)mapNamed:(NSString *)mapName;
 

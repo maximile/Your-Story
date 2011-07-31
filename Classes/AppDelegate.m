@@ -11,7 +11,7 @@
 
 @implementation AppDelegate
 
-@synthesize window, gameView, editorPanel;
+@synthesize window, gameView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
@@ -41,13 +41,10 @@
 - (IBAction)toggleEditor:(id)sender {
 	if (game.mode == GAME_MODE) {
 		game.mode = EDITOR_MODE;
-		[editorPanel makeKeyAndOrderFront:self];
-		[editorPanel setLayer:game.currentRoom.mainLayer];
 	}
 		
 	else if (game.mode == EDITOR_MODE) {
 		game.mode = GAME_MODE;
-		[editorPanel performClose:self];
 	}
 }
 

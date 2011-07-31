@@ -15,7 +15,7 @@ NSString *InvalidImageError = @"InvalidImageError";
 
 @implementation TileMap
 
-@synthesize textureName, name;
+@synthesize textureName, name, size;
 
 static NSMutableDictionary *mapCache = nil;
 + (TileMap *)mapNamed:(NSString *)mapName {
@@ -34,7 +34,7 @@ static NSMutableDictionary *mapCache = nil;
 		[mapCache setValue:map forKey:mapName];
 	}
 	
-	mapName = mapName;
+	map.name = mapName;
 	return map;
 }
 
@@ -154,6 +154,7 @@ static NSMutableDictionary *mapCache = nil;
 	glVertexPointer(2, GL_FLOAT, 0, vertices);
 	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 - (CollisionShape *)shapeForTile:(mapCoords)coords {

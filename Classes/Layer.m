@@ -30,8 +30,13 @@
 	if ([super init] == nil) return nil;
 	
 	// set map
-	NSString *mapName = [info valueForKey:@"Map"];
-	map = [TileMap mapNamed:mapName];
+	id mapId = [info valueForKey:@"Map"];
+	if ([mapId isKindOfClass:[TileMap class]]) {
+		map = (TileMap *)mapId;
+	}
+	else {
+		map = [TileMap mapNamed:(NSString *)mapId];	
+	}
 		
 	// set parallax
 	parallax = 1.0;
@@ -124,11 +129,21 @@
 	}
 }
 
-// - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax {
-// 	if ([self initWithString:string map:newMap] == nil) return nil;
-// 	parallax = newParallax;
-// 	return self;
-// }
+- (Layer *)makePaletteLayer {
+	NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:0];
+	[info setValue:map forKey:@"Map"];
+	
+	NSMutableString *tilesString = [NSMutableString stringWithCapacity:0];
+	for (int y = 0; y < map.size.height; y++) {
+		for (int x = 0; x < map.size.width; x++) {
+			[tilesString appendString:[NSString stringWithFormat:@"%i,%i  ", x, y]];
+		}
+		[tilesString appendString:@"\n"];
+	}
+	[info setValue:tilesString forKey:@"Tiles"];
+	
+	return [[Layer alloc] initWithDictionary:info];
+}
 
 - (mapCoords)tileCoordsForMapCoords:(mapCoords)coords {
 	// get the coordinates for the tile on the map that corresponds to the given tile on the layer

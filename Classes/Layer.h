@@ -26,6 +26,7 @@
 - (void)setTilesFromString:(NSString *)string;
 - (NSDictionary *)dictionaryRepresentation;
 - (NSString *)tilesString;
+- (Layer *)makePaletteLayer;
 
 
 @end

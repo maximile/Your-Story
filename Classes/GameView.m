@@ -53,11 +53,13 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 
 - (void)drawRect:(NSRect)rect {
 	// clear the scren
-	glClearColor(0.75, 0.75, 0.75, 1.0);	
+	glClearColor(0.75, 0.75, 0.75, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	// draw game to main FBO
 	[FBO bindFramebuffer:canvasFBO];
+	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 	[game draw];
 	[FBO bindFramebuffer:nil];
@@ -131,20 +133,30 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 
 - (void)keyUp:(NSEvent *)event {
 	switch (event.keyCode) {
-		case 126: [game upUp]; break;
-		case 125: [game downUp]; break;
-		case 124: [game rightUp]; break;
-		case 123: [game leftUp]; break;
+		case 126: [game upUp]; break; // upArrow
+		case 13: [game upUp]; break; // w
+		case 125: [game downUp]; break; // downArrow
+		case 1: [game downUp]; break; // s
+		case 124: [game rightUp]; break; // rightArrow
+		case 2: [game rightUp]; break; // d
+		case 123: [game leftUp]; break; // leftArrow
+		case 0: [game leftUp]; break; // a
+		case 48: [game tabUp]; break; // tab
 		default: break;
 	}
 }
 
 - (void)keyDown:(NSEvent *)event {
 	switch (event.keyCode) {
-		case 126: [game upDown]; break;
-		case 125: [game downDown]; break;
-		case 124: [game rightDown]; break;
-		case 123: [game leftDown]; break;
+		case 126: [game upDown]; break; // upArrow
+		case 13: [game upDown]; break; // w
+		case 125: [game downDown]; break; // downArrow
+		case 1: [game downDown]; break; // s
+		case 124: [game rightDown]; break; // rightArrow
+		case 2: [game rightDown]; break; // d
+		case 123: [game leftDown]; break; // leftArrow
+		case 0: [game leftDown]; break; // a
+		case 48: [game tabDown]; break; // tab
 		default: break;
 	}
 }
@@ -161,6 +173,20 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	
 	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
 	[game mouseDown:scaledCoords];
+}
+
+- (void)mouseDragged:(NSEvent *)event {
+	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
+	
+	// compensate for offset
+	int stretchedCanvasWidth = CANVAS_SIZE.width * scaleFactor;
+	int stretchedCanvasHeight = CANVAS_SIZE.height * scaleFactor;
+	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
+	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
+	viewCoords = NSMakePoint(viewCoords.x - leftEdge, viewCoords.y - topEdge);
+	
+	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
+	[game mouseDragged:scaledCoords];
 }
 
 - (BOOL)acceptsFirstResponder {

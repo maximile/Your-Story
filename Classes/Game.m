@@ -16,15 +16,8 @@
 	[items addObject:player];
 	player.position = NSMakePoint(50, 50);
 	
-	upKeyCount = 0;
-	downKeyCount = 0;
-	leftKeyCount = 0;
-	rightKeyCount = 0;
-	
 	currentRoom = [[Room alloc] initWithName:@"Test"];
-	
-	mode = EDITOR_MODE;
-	
+		
 	return self;
 }
 
@@ -113,13 +106,21 @@
 	}
 }
 
+- (void)setMode:(gameMode)newMode {
+	if (mode == newMode) return;
+	mode = newMode;
+	if (newMode == EDITOR_MODE) {
+		[self setEditingLayer:currentRoom.mainLayer];
+	}
+}
+
 - (void)update {
 	switch (mode) {
 		case GAME_MODE:
-			if (upKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y + 1);
-			if (downKeyCount > 0) player.position = NSMakePoint(player.position.x, player.position.y - 1);
-			if (leftKeyCount > 0) player.position = NSMakePoint(player.position.x - 1, player.position.y);
-			if (rightKeyCount > 0) player.position = NSMakePoint(player.position.x + 1, player.position.y);
+			if (upKey > 0) player.position = NSMakePoint(player.position.x, player.position.y + 1);
+			if (downKey > 0) player.position = NSMakePoint(player.position.x, player.position.y - 1);
+			if (leftKey > 0) player.position = NSMakePoint(player.position.x - 1, player.position.y);
+			if (rightKey > 0) player.position = NSMakePoint(player.position.x + 1, player.position.y);
 			for (GameObject *item in items) {
 				[item update];
 			}
@@ -136,20 +137,41 @@
 - (void)mouseDown:(pixelCoords)coords {
 	switch (mode) {
 		case EDITOR_MODE:
-			[self changeTileAt:[self mapCoordsForViewCoords:coords]];
+			if (showPalette)
+				[self selectTileFromPaletteAt:coords];
+			else {
+				[self changeTileAt:[self mapCoordsForViewCoords:coords]];
+			}
 			break;
 		default:
 			break;
 	}
 }
 
-- (void)upDown {upKeyCount=1;}
-- (void)downDown {downKeyCount=1;}
-- (void)leftDown {leftKeyCount=1;}
-- (void)rightDown {rightKeyCount=1;}
-- (void)upUp {upKeyCount=0;}
-- (void)downUp {downKeyCount=0;}
-- (void)leftUp {leftKeyCount=0;}
-- (void)rightUp {rightKeyCount=0;}
+- (void)mouseDragged:(pixelCoords)coords {
+	switch (mode) {
+		case EDITOR_MODE:
+			if (showPalette)
+				[self selectTileFromPaletteAt:coords];
+			else {
+				[self changeTileAt:[self mapCoordsForViewCoords:coords]];
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+- (void)upDown {upKey=YES;}
+- (void)downDown {downKey=YES;}
+- (void)leftDown {leftKey=YES;}
+- (void)rightDown {rightKey=YES;}
+- (void)upUp {upKey=NO;}
+- (void)downUp {downKey=NO;}
+- (void)leftUp {leftKey=NO;}
+- (void)rightUp {rightKey=NO;}
+
+- (void)tabDown {tabKey=YES;}
+- (void)tabUp {tabKey=NO;}
 
 @end

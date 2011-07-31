@@ -56,8 +56,6 @@
 		66CAD5A613CA2EF600798383 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A513CA2EF600798383 /* GameObject.m */; };
 		66CBE08D13C25AED00D73D1F /* FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE08C13C25AED00D73D1F /* FBO.m */; };
 		66CBE0B713C26C8B00D73D1F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE0B613C26C8B00D73D1F /* Game.m */; };
-		66CF15BA13E59E2B00E84CB2 /* PaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CF15B913E59E2B00E84CB2 /* PaletteView.m */; };
-		66CF15BE13E5A42000E84CB2 /* EditorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CF15BD13E5A42000E84CB2 /* EditorPanel.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -156,10 +154,6 @@
 		66CBE0B513C26C8B00D73D1F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		66CBE0B613C26C8B00D73D1F /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		66CF15B813E59E2B00E84CB2 /* PaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteView.h; sourceTree = "<group>"; };
-		66CF15B913E59E2B00E84CB2 /* PaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteView.m; sourceTree = "<group>"; };
-		66CF15BC13E5A42000E84CB2 /* EditorPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorPanel.h; sourceTree = "<group>"; };
-		66CF15BD13E5A42000E84CB2 /* EditorPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorPanel.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -184,10 +178,6 @@
 				6677DE2D13D3085200A43DF4 /* Collision.h */,
 				6677DE2E13D3085200A43DF4 /* Collision.m */,
 				66CDF22313CB8EC80097FBF8 /* Constants.h */,
-				66CF15B813E59E2B00E84CB2 /* PaletteView.h */,
-				66CF15B913E59E2B00E84CB2 /* PaletteView.m */,
-				66CF15BC13E5A42000E84CB2 /* EditorPanel.h */,
-				66CF15BD13E5A42000E84CB2 /* EditorPanel.m */,
 				66CBE08B13C25AED00D73D1F /* FBO.h */,
 				66CBE08C13C25AED00D73D1F /* FBO.m */,
 				66C5C2B813E20C3700F7CFED /* Game+Editor.h */,
@@ -513,8 +503,6 @@
 				66CAD5A613CA2EF600798383 /* GameObject.m in Sources */,
 				6677DE2F13D3085200A43DF4 /* Collision.m in Sources */,
 				66C5C2BA13E20C3700F7CFED /* Game+Editor.m in Sources */,
-				66CF15BA13E59E2B00E84CB2 /* PaletteView.m in Sources */,
-				66CF15BE13E5A42000E84CB2 /* EditorPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
