@@ -14,10 +14,14 @@
 	items = [[NSMutableArray alloc] initWithCapacity:0];
 	player = [[Player alloc] init];
 	[items addObject:player];
-	player.position = NSMakePoint(50, 50);
 	
-	currentRoom = [[Room alloc] initWithName:@"Test"];
-		
+	
+	space = cpSpaceNew();
+	cpSpaceSetGravity(space, cpv(0, -100));
+	
+	[self setCurrentRoom:[[Room alloc] initWithName:@"Test"]];
+	[player addToSpace:space];
+	
 	return self;
 }
 
@@ -55,7 +59,7 @@
 
 - (void)drawGame {
 	// camera target
-	mapCoords focus = [self cameraTargetForFocus:player.position];
+	mapCoords focus = [self cameraTargetForFocus:[player getPosition]];
 
 	// draw layers. first get screen bounds in map coords
 	int left = ((float)focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;
@@ -110,27 +114,41 @@
 	if (mode == newMode) return;
 	mode = newMode;
 	if (newMode == EDITOR_MODE) {
-		editorFocus = player.position;
+		editorFocus = [player getPosition];
 		[self setEditingLayer:currentRoom.mainLayer];
 	}
 }
 
 - (void)setCurrentRoom:(Room *)newRoom {
 	if (currentRoom == newRoom) return;
+	[currentRoom.mainLayer removeFromSpace:space];
 	currentRoom = newRoom;
+	[currentRoom.mainLayer addToSpace:space];
 	[self setEditingLayer:currentRoom.mainLayer];
 }
 
 - (void)update {
+	cpVect playerForce = cpv(0,0);
+
 	switch (mode) {
 		case GAME_MODE:
-			if (upKey > 0) player.position = NSMakePoint(player.position.x, player.position.y + 1);
-			if (downKey > 0) player.position = NSMakePoint(player.position.x, player.position.y - 1);
-			if (leftKey > 0) player.position = NSMakePoint(player.position.x - 1, player.position.y);
-			if (rightKey > 0) player.position = NSMakePoint(player.position.x + 1, player.position.y);
+			if (upKey > 0) {
+				playerForce.y += 1000.0;
+			}
+			if (downKey > 0) {
+				playerForce.y -= 1000.0;
+			}
+			if (leftKey > 0) {
+				playerForce.x -= 1000.0;
+			}
+			if (rightKey > 0) {
+				playerForce.x += 1000.0;
+			}
+			[player updateForce:playerForce];
 			for (GameObject *item in items) {
 				[item update];
 			}
+			cpSpaceStep(space, 1.0/60.0);
 			break;
 		case EDITOR_MODE:
 			[self updateEditor];

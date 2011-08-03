@@ -8,11 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 #import "GameObject.h"
+#import "chipmunk.h"
 
 @interface Player : GameObject {
-	NSPoint position;
+	// NSPoint position;
+	
+	cpBody *body;
+	cpShape *shape;
 }
 
-@property NSPoint position;
+- (NSPoint)getPosition;
+
+- (void)addToSpace:(cpSpace *)space;
+- (void)removeFromSpace:(cpSpace *)space;
+- (void)updateForce:(cpVect)force;
+
 
 @end

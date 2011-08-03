@@ -174,6 +174,60 @@
 	}
 }
 
+- (void)addToSpace:(cpSpace *)space {
+	cpBody *staticBody = cpSpaceGetStaticBody(space);
+	
+	// temp array big enough to hold all shapes
+	cpShape **tempShapes = calloc(size.height * size.width, sizeof(cpShape *));
+	shapeCount = 0;
+	// add static polygon shape for every tile
+	for (int y=0; y<size.height; y++) {
+		for (int x=0; x<size.width; x++) {
+			// get collision shape for this tile
+			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y) ignoreParallax:NO];
+			CollisionShape *collision = [map shapeForTile:coords];
+			
+			if (collision.shapeVertCount < 1) {
+				// skip empty tile
+				continue;
+			}
+			
+			// create polygon shape data
+			cpVect *polyShapeVerts = calloc(collision.shapeVertCount, sizeof(cpVect));
+			NSLog(@" ");
+			for (int i=0; i<collision.shapeVertCount; i++) {
+				pixelCoords coords = collision.shapeVerts[i];
+				coords = pixelCoordsMake(coords.x + x*TILE_SIZE, coords.y + y*TILE_SIZE);
+				NSLog(@"%i, %i", coords.x, coords.y);
+				// temporary fix for incorrect winding
+				polyShapeVerts[(collision.shapeVertCount - i) - 1] = cpv(coords.x, coords.y);
+			}
+			// create the shape and add it to the temporary array
+			cpShape *shape = cpPolyShapeNew(staticBody, collision.shapeVertCount, polyShapeVerts, cpvzero);
+			cpSpaceAddShape(space, shape);
+			tempShapes[shapeCount] = shape;
+			shapeCount++;
+		}
+	}
+	
+	// store the array in the ivar
+	shapes = calloc(shapeCount, sizeof(cpShape *));
+	for (int i=0; i<shapeCount; i++) {
+		shapes[i] = tempShapes[i];
+	}
+	
+	free(tempShapes);
+}
+
+- (void)removeFromSpace:(cpSpace *)space {
+	for (int i=0; i<shapeCount; i++) {
+		cpShape *shape = shapes[i];
+		cpSpaceRemoveShape(space, shape);
+		cpShapeFree(shape);
+	}
+	free(shapes);
+}
+
 - (void)drawCollision {
 	// for debugging; draw lines for the collision data
 	for (int y=0; y<size.height; y++) {

@@ -2,6 +2,7 @@
 #import "Room.h"
 #import "Player.h"
 #import "Types.h"
+#import "chipmunk.h"
 
 typedef enum {
 	GAME_MODE,
@@ -26,6 +27,9 @@ typedef enum {
 	
 	// key pressed flags
 	BOOL upKey, downKey, leftKey, rightKey, tabKey;
+	
+	// physics variables
+	cpSpace *space;
 }
 
 @property gameMode mode;

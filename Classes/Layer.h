@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TileMap.h"
 #import "Types.h"
+#import "chipmunk.h"
 
 @interface Layer : NSObject {
 	// an array of tiles for the layer, each tile represented by
@@ -10,6 +11,10 @@
 
 	TileMap *map;
 	float parallax;
+	
+	// collision data
+	cpShape **shapes;
+	int shapeCount;
 }
 
 @property mapSize size;
@@ -27,6 +32,9 @@
 - (NSDictionary *)dictionaryRepresentation;
 - (NSString *)tilesString;
 - (Layer *)makePaletteLayer;
+
+- (void)addToSpace:(cpSpace *)space;
+- (void)removeFromSpace:(cpSpace *)space;
 
 
 @end
