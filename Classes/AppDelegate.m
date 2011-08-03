@@ -62,6 +62,10 @@
 }
 
 - (IBAction)saveMap:(id)sender {
+	if (!roomPath.length) {
+		NSBeep();
+		return;
+	}
 	[game writeCurrentRoomToPath:roomPath];
 }
 
