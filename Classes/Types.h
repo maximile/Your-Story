@@ -1,4 +1,5 @@
 // structs for dealing with tiles on a tile map
+
 typedef struct {
 	int x;
 	int y;
@@ -26,7 +27,9 @@ static inline mapRect mapRectMake(int originX, int originY, int width, int heigh
 	return (mapRect){originX, originY, width, height};
 }
 
+
 // structs for dealing with areas on a bitmap
+
 typedef struct {
 	int x;
 	int y;
@@ -53,3 +56,14 @@ typedef struct {
 static inline pixelRect pixelRectMake(int originX, int originY, int width, int height) {
 	return (pixelRect){originX, originY, width, height};
 }
+
+
+// direction bitmask, e.g. for arrow key input
+
+typedef enum {
+	NOWHERE = 0,
+	LEFT = 1,
+	RIGHT = 2,
+	UP = 4,
+	DOWN = 8
+} directionMask;

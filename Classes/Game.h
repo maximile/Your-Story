@@ -19,7 +19,7 @@ typedef enum {
 	Player *player;
 	
 	// editor variables
-	NSPoint editorFocus;
+	cpVect editorFocus;
 	Layer *editingLayer;
 	Layer *palette;
 	BOOL showPalette;
@@ -39,7 +39,7 @@ typedef enum {
 - (void)draw;
 - (void)update;
 
-- (mapCoords)cameraTargetForFocus:(NSPoint)focus;
+- (mapCoords)cameraTargetForFocus:(cpVect)focus;
 - (void)drawGame;
 
 - (void)upUp;

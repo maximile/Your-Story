@@ -7,7 +7,7 @@
 - (NSString *)tilesString {
 	NSMutableString *stringRep = [NSMutableString stringWithCapacity:0];
 	for (int y = 0; y < size.height; y++) {
-		for (int x = 0; x < size.height; x++) {
+		for (int x = 0; x < size.width; x++) {
 			mapCoords tile = [self tileAt:mapCoordsMake(x, y)];
 			NSString *tileString = [NSString stringWithFormat:@"%i,%i", tile.x, tile.y];
 			[stringRep appendString:tileString];
@@ -201,6 +201,9 @@
 				NSLog(@"%i, %i", coords.x, coords.y);
 				// temporary fix for incorrect winding
 				polyShapeVerts[(collision.shapeVertCount - i) - 1] = cpv(coords.x, coords.y);
+			}
+			if (!cpPolyValidate(polyShapeVerts, collision.shapeVertCount)) {
+				NSLog(@"Invalid collision shape data at %i, %i", collision.tile.x, collision.tile.y);
 			}
 			// create the shape and add it to the temporary array
 			cpShape *shape = cpPolyShapeNew(staticBody, collision.shapeVertCount, polyShapeVerts, cpvzero);

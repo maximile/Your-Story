@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		6606005B13EB4C5000DE53B8 /* CaveStory.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6606005A13EB4C5000DE53B8 /* CaveStory.psd */; };
 		660B7F5513BF60C2001ECF63 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B7F5413BF60C2001ECF63 /* GameView.m */; };
 		660B7FA113BF8EC8001ECF63 /* TileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 660B7FA013BF8EC8001ECF63 /* TileMap.m */; };
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
@@ -17,6 +18,7 @@
 		6677DDE813D2F51F00A43DF4 /* Collision Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE613D2F51F00A43DF4 /* Collision Data.plist */; };
 		6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */; };
 		6677DE2F13D3085200A43DF4 /* Collision.m in Sources */ = {isa = PBXBuildFile; fileRef = 6677DE2E13D3085200A43DF4 /* Collision.m */; };
+		66C3D8E713EDE911007CBD54 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D8E613EDE911007CBD54 /* PhysicsObject.m */; };
 		66C5C2BA13E20C3700F7CFED /* Game+Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C5C2B913E20C3700F7CFED /* Game+Editor.m */; };
 		66C75B8C13BE801C002D8411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75B8B13BE801C002D8411 /* AppDelegate.m */; };
 		66C75BF413BE83A0002D8411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75BF313BE83A0002D8411 /* main.m */; };
@@ -52,6 +54,7 @@
 		66C75C5613BE83F8002D8411 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C75C3613BE83F8002D8411 /* cpVect.c */; };
 		66C75C5713BE83F8002D8411 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66C75C3713BE83F8002D8411 /* LICENSE.txt */; };
 		66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C75C8E13BE87EA002D8411 /* OpenGL.framework */; };
+		66CA29D913EA15440022E906 /* Messing.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CA29D813EA15440022E906 /* Messing.ysroom */; };
 		66CAD5A313CA2C4500798383 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A213CA2C4500798383 /* Player.m */; };
 		66CAD5A613CA2EF600798383 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A513CA2EF600798383 /* GameObject.m */; };
 		66CBE08D13C25AED00D73D1F /* FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE08C13C25AED00D73D1F /* FBO.m */; };
@@ -67,6 +70,7 @@
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		6606005A13EB4C5000DE53B8 /* CaveStory.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaveStory.psd; sourceTree = "<group>"; };
 		660B7F5313BF60C2001ECF63 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		660B7F5413BF60C2001ECF63 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		660B7F9F13BF8EC8001ECF63 /* TileMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileMap.h; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 		6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collision Shapes.psd"; sourceTree = "<group>"; };
 		6677DE2D13D3085200A43DF4 /* Collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collision.h; sourceTree = "<group>"; };
 		6677DE2E13D3085200A43DF4 /* Collision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collision.m; sourceTree = "<group>"; };
+		66C3D8E513EDE911007CBD54 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
+		66C3D8E613EDE911007CBD54 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
 		66C5C2B813E20C3700F7CFED /* Game+Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Game+Editor.h"; sourceTree = "<group>"; };
 		66C5C2B913E20C3700F7CFED /* Game+Editor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Editor.m"; sourceTree = "<group>"; };
 		66C75B8A13BE801C002D8411 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +151,7 @@
 		66C75C3713BE83F8002D8411 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		66C75C3813BE83F8002D8411 /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prime.h; sourceTree = "<group>"; };
 		66C75C8E13BE87EA002D8411 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		66CA29D813EA15440022E906 /* Messing.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Messing.ysroom; sourceTree = "<group>"; };
 		66CAD5A113CA2C4500798383 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		66CAD5A213CA2C4500798383 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		66CAD5A413CA2EF600798383 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
@@ -186,6 +193,8 @@
 				66CBE0B613C26C8B00D73D1F /* Game.m */,
 				66CAD5A413CA2EF600798383 /* GameObject.h */,
 				66CAD5A513CA2EF600798383 /* GameObject.m */,
+				66C3D8E513EDE911007CBD54 /* PhysicsObject.h */,
+				66C3D8E613EDE911007CBD54 /* PhysicsObject.m */,
 				660B7F5313BF60C2001ECF63 /* GameView.h */,
 				660B7F5413BF60C2001ECF63 /* GameView.m */,
 				660B803D13C0D88D001ECF63 /* Layer.h */,
@@ -272,6 +281,7 @@
 		660B7FA313BFBC31001ECF63 /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				6606005A13EB4C5000DE53B8 /* CaveStory.psd */,
 				660B7FA413BFBC31001ECF63 /* Test.psd */,
 			);
 			path = Tiles;
@@ -280,6 +290,7 @@
 		660B803813BFD4AF001ECF63 /* Rooms */ = {
 			isa = PBXGroup;
 			children = (
+				66CA29D813EA15440022E906 /* Messing.ysroom */,
 				660B803913BFD4C0001ECF63 /* Test.ysroom */,
 			);
 			path = Rooms;
@@ -452,6 +463,8 @@
 				660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */,
 				6677DDE813D2F51F00A43DF4 /* Collision Data.plist in Resources */,
 				6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */,
+				66CA29D913EA15440022E906 /* Messing.ysroom in Resources */,
+				6606005B13EB4C5000DE53B8 /* CaveStory.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +516,7 @@
 				66CAD5A613CA2EF600798383 /* GameObject.m in Sources */,
 				6677DE2F13D3085200A43DF4 /* Collision.m in Sources */,
 				66C5C2BA13E20C3700F7CFED /* Game+Editor.m in Sources */,
+				66C3D8E713EDE911007CBD54 /* PhysicsObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

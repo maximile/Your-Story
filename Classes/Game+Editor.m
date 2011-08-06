@@ -85,10 +85,10 @@
 }
 
 - (void)updateEditor {
-	if (upKey) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y + 1);
-	if (downKey) editorFocus = NSMakePoint(editorFocus.x, editorFocus.y - 1);
-	if (leftKey) editorFocus = NSMakePoint(editorFocus.x - 1, editorFocus.y);
-	if (rightKey) editorFocus = NSMakePoint(editorFocus.x + 1, editorFocus.y);
+	if (upKey) editorFocus = cpv(editorFocus.x, editorFocus.y + 1);
+	if (downKey) editorFocus = cpv(editorFocus.x, editorFocus.y - 1);
+	if (leftKey) editorFocus = cpv(editorFocus.x - 1, editorFocus.y);
+	if (rightKey) editorFocus = cpv(editorFocus.x + 1, editorFocus.y);
 	
 	showPalette = tabKey;
 	

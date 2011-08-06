@@ -98,7 +98,7 @@
 			<key>Tile</key>
 			<string>1,2</string>
 			<key>Shape</key>
-			<string>16,16  16,0  0,0  0,8</string>
+			<string>0,8  0,0  16,0  16,16</string>
 		</dict>
 		<dict>
 			<key>Tile</key>

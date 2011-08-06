@@ -15,20 +15,19 @@
 	player = [[Player alloc] init];
 	[items addObject:player];
 	
-	
 	space = cpSpaceNew();
 	cpSpaceSetGravity(space, cpv(0, -100));
 	
-	[self setCurrentRoom:[[Room alloc] initWithName:@"Test"]];
+	[self setCurrentRoom:[[Room alloc] initWithName:@"Messing"]];
 	[player addToSpace:space];
-	
+	player.position = cpv(50,50);
 	return self;
 }
 
-- (mapCoords)cameraTargetForFocus:(NSPoint)focus {
+- (mapCoords)cameraTargetForFocus:(cpVect)focus {
 	if (currentRoom.mainLayer.size.height * TILE_SIZE <= CANVAS_SIZE.height) {
 		// room is shorter than the screen, center it vertically
-		focus.y = CANVAS_SIZE.height / 2;
+		focus.y = (currentRoom.mainLayer.size.height * TILE_SIZE) / 2;
 	}
 	else {
 		// clamp focus to height of room
@@ -42,7 +41,7 @@
 
 	if (currentRoom.mainLayer.size.width * TILE_SIZE <= CANVAS_SIZE.width) {
 		// room is thinner than the screen, center it horizontally
-		focus.x = CANVAS_SIZE.width / 2;
+		focus.x = (currentRoom.mainLayer.size.width * TILE_SIZE) / 2;
 	}
 	else {
 		// clamp focus to width of room
@@ -59,7 +58,7 @@
 
 - (void)drawGame {
 	// camera target
-	mapCoords focus = [self cameraTargetForFocus:[player getPosition]];
+	mapCoords focus = [self cameraTargetForFocus:player.position];
 
 	// draw layers. first get screen bounds in map coords
 	int left = ((float)focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;
@@ -74,17 +73,18 @@
 		// parallax transformation
 		float parallax = layer.parallax;
 		if (parallax != 1.0) {
-			NSPoint parallaxFocus = NSMakePoint(focus.x * parallax, focus.y * parallax);
+			cpVect parallaxFocus = cpv(focus.x * parallax, focus.y * parallax);
 			int pLeft = (parallaxFocus.x - CANVAS_SIZE.width / 2) / TILE_SIZE - 1;
 			int pRight = (parallaxFocus.x + CANVAS_SIZE.width / 2) / TILE_SIZE + 1;
 			int pTop = (parallaxFocus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
 			int pBottom = (parallaxFocus.y - CANVAS_SIZE.height / 2) / TILE_SIZE - 1;
 			glTranslatef(-(parallaxFocus.x - CANVAS_SIZE.width / 2), -(parallaxFocus.y - CANVAS_SIZE.height / 2), 0.0);
-			[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom) ignoreParallax:NO];		
+			[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom) ignoreParallax:NO];
 		}
 		else {
 			glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	        [layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
+			[layer drawCollision];
 		}
 
 		glPopMatrix();
@@ -114,7 +114,7 @@
 	if (mode == newMode) return;
 	mode = newMode;
 	if (newMode == EDITOR_MODE) {
-		editorFocus = [player getPosition];
+		editorFocus = player.position;
 		[self setEditingLayer:currentRoom.mainLayer];
 	}
 }
@@ -127,28 +127,26 @@
 	[self setEditingLayer:currentRoom.mainLayer];
 }
 
-- (void)update {
-	cpVect playerForce = cpv(0,0);
+- (void)updateGame {
+	directionMask directionInput = NOWHERE;
+	// get keyboard input
+	if (upKey) { directionInput |= UP; }
+	if (downKey) { directionInput |= DOWN; }
+	if (leftKey) { directionInput |= LEFT; }
+	if (rightKey) { directionInput |= RIGHT; }
+	[player setInput:directionInput];
+	
+	// update physics and let objects update
+	for (GameObject *item in items) {
+		[item update];
+	}
+	cpSpaceStep(space, 1.0/60.0);
+}
 
+- (void)update {
 	switch (mode) {
 		case GAME_MODE:
-			if (upKey > 0) {
-				playerForce.y += 1000.0;
-			}
-			if (downKey > 0) {
-				playerForce.y -= 1000.0;
-			}
-			if (leftKey > 0) {
-				playerForce.x -= 1000.0;
-			}
-			if (rightKey > 0) {
-				playerForce.x += 1000.0;
-			}
-			[player updateForce:playerForce];
-			for (GameObject *item in items) {
-				[item update];
-			}
-			cpSpaceStep(space, 1.0/60.0);
+			[self updateGame];
 			break;
 		case EDITOR_MODE:
 			[self updateEditor];

@@ -7,21 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "GameObject.h"
+#import "PhysicsObject.h"
 #import "chipmunk.h"
+#import "Types.h"
 
-@interface Player : GameObject {
-	// NSPoint position;
-	
-	cpBody *body;
+@interface Player : PhysicsObject {
 	cpShape *shape;
+	directionMask directionInput;
 }
-
-- (NSPoint)getPosition;
 
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
-- (void)updateForce:(cpVect)force;
-
+- (void)setInput:(directionMask)direction;
 
 @end
