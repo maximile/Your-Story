@@ -194,11 +194,9 @@
 			
 			// create polygon shape data
 			cpVect *polyShapeVerts = calloc(collision.shapeVertCount, sizeof(cpVect));
-			NSLog(@" ");
 			for (int i=0; i<collision.shapeVertCount; i++) {
 				pixelCoords coords = collision.shapeVerts[i];
 				coords = pixelCoordsMake(coords.x + x*TILE_SIZE, coords.y + y*TILE_SIZE);
-				NSLog(@"%i, %i", coords.x, coords.y);
 				// temporary fix for incorrect winding
 				polyShapeVerts[(collision.shapeVertCount - i) - 1] = cpv(coords.x, coords.y);
 			}

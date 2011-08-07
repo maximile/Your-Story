@@ -19,6 +19,8 @@
 		6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */; };
 		6677DE2F13D3085200A43DF4 /* Collision.m in Sources */ = {isa = PBXBuildFile; fileRef = 6677DE2E13D3085200A43DF4 /* Collision.m */; };
 		66C3D8E713EDE911007CBD54 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D8E613EDE911007CBD54 /* PhysicsObject.m */; };
+		66C3D93213EE0809007CBD54 /* Another.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66C3D93113EE0809007CBD54 /* Another.ysroom */; };
+		66C3D93413EE0811007CBD54 /* WhoKnows.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66C3D93313EE0811007CBD54 /* WhoKnows.psd */; };
 		66C5C2BA13E20C3700F7CFED /* Game+Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C5C2B913E20C3700F7CFED /* Game+Editor.m */; };
 		66C75B8C13BE801C002D8411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75B8B13BE801C002D8411 /* AppDelegate.m */; };
 		66C75BF413BE83A0002D8411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75BF313BE83A0002D8411 /* main.m */; };
@@ -87,6 +89,8 @@
 		6677DE2E13D3085200A43DF4 /* Collision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collision.m; sourceTree = "<group>"; };
 		66C3D8E513EDE911007CBD54 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
 		66C3D8E613EDE911007CBD54 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
+		66C3D93113EE0809007CBD54 /* Another.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Another.ysroom; sourceTree = "<group>"; };
+		66C3D93313EE0811007CBD54 /* WhoKnows.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = WhoKnows.psd; sourceTree = "<group>"; };
 		66C5C2B813E20C3700F7CFED /* Game+Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Game+Editor.h"; sourceTree = "<group>"; };
 		66C5C2B913E20C3700F7CFED /* Game+Editor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Editor.m"; sourceTree = "<group>"; };
 		66C75B8A13BE801C002D8411 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 		660B7FA313BFBC31001ECF63 /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				66C3D93313EE0811007CBD54 /* WhoKnows.psd */,
 				6606005A13EB4C5000DE53B8 /* CaveStory.psd */,
 				660B7FA413BFBC31001ECF63 /* Test.psd */,
 			);
@@ -290,6 +295,7 @@
 		660B803813BFD4AF001ECF63 /* Rooms */ = {
 			isa = PBXGroup;
 			children = (
+				66C3D93113EE0809007CBD54 /* Another.ysroom */,
 				66CA29D813EA15440022E906 /* Messing.ysroom */,
 				660B803913BFD4C0001ECF63 /* Test.ysroom */,
 			);
@@ -465,6 +471,8 @@
 				6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */,
 				66CA29D913EA15440022E906 /* Messing.ysroom in Resources */,
 				6606005B13EB4C5000DE53B8 /* CaveStory.psd in Resources */,
+				66C3D93213EE0809007CBD54 /* Another.ysroom in Resources */,
+				66C3D93413EE0811007CBD54 /* WhoKnows.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

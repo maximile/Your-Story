@@ -31,11 +31,6 @@
 	cpSpaceRemoveShape(space, shape);
 }
 
-// - (void)updateForce:(cpVect)force {
-// 	cpBodyResetForces(body);
-// 	cpBodyApplyForce(body, force, cpvzero);
-// }
-
 - (void)update {
 	cpBodyResetForces(body);
 	if (directionInput & LEFT) {

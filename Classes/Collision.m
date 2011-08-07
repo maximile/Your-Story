@@ -105,8 +105,33 @@ static Collision *sharedCollision = nil;
 					int tilePixelY = top + py;
 					int colPixelX = colLeft + px;
 					int colPixelY = colTop + py;
+					
 					unsigned short tilePixel = data[tilePixelY * dataWidth + tilePixelX];
 					unsigned short colPixel = collisionMap[colPixelY * colWidth + colPixelX];
+					
+					// ignore 1px lines; check for more than two neighbouring pixels
+					if (colPixel == 1) {
+						int neighbourCount = 0;
+						for (int ny = -1; ny <= 1; ny++) {
+							if (py + ny < 0) continue;
+							if (py + ny >= TILE_SIZE) continue;
+							for (int nx = -1; nx <= 1; nx++) {
+								if (px + nx < 0) continue;
+								if (px + nx >= TILE_SIZE) continue;
+								if (nx == 0 && ny == 0) continue;
+								
+								// check the offset pixel
+								if (data[(top + py + nx) * dataWidth + (left + px + nx)] & 1) {
+									neighbourCount++;
+								}
+							}
+						}
+						if (neighbourCount < 3) {
+							// fewer than two nighbouring pixels; assume it's part of a 1px line
+							tilePixel = 0;
+						}
+					}
+					
 					if ((tilePixel & 1) != colPixel) {
 						diff++;
 					}

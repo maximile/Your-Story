@@ -84,7 +84,7 @@
 		else {
 			glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	        [layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
-			[layer drawCollision];
+			// [layer drawCollision];
 		}
 
 		glPopMatrix();
