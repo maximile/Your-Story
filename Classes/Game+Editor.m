@@ -7,6 +7,7 @@
 	glPushMatrix();
 	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height) ignoreParallax:YES];
+	[uiMap drawTile:mapCoordsMake(0,0) at:mapCoordsMake(cursorLoc.x, editingLayer.size.height - cursorLoc.y - 1)];
 	glPopMatrix();
 	
 	if (showPalette) {

@@ -27,7 +27,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	[super initWithFrame:frame pixelFormat:pixelFormat];
 	
 	[pixelFormat release];
-		
+	
 	return self;
 }
 
@@ -129,6 +129,8 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	if (self.frame.size.height < minContentSize.height) {
 		[window setContentSize:NSMakeSize(self.frame.size.width, minContentSize.height)];
 	}
+	[self.window makeFirstResponder:self];
+	[self.window setAcceptsMouseMovedEvents:YES];
 }
 
 - (void)keyUp:(NSEvent *)event {
@@ -165,6 +167,19 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 			[game numberDown:i];
 		}
 	}
+}
+
+- (void)mouseMoved:(NSEvent *)event {
+	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
+	// compensate for offset
+	int stretchedCanvasWidth = CANVAS_SIZE.width * scaleFactor;
+	int stretchedCanvasHeight = CANVAS_SIZE.height * scaleFactor;
+	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
+	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
+	viewCoords = NSMakePoint(viewCoords.x - leftEdge, viewCoords.y - topEdge);
+	
+	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
+	[game mouseMoved:scaledCoords];
 }
 
 - (void)mouseDown:(NSEvent *)event {

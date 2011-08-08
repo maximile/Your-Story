@@ -5,7 +5,7 @@
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer;
+@synthesize mode, currentRoom, editingLayer, cursorLoc;
 
 - (id)init {
 	if ([super init] == nil) {
@@ -21,6 +21,9 @@
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Messing"]];
 	[player addToSpace:space];
 	player.position = cpv(50,50);
+	
+	uiMap = [TileMap mapNamed:@"UI"];
+	
 	return self;
 }
 
@@ -181,6 +184,14 @@
 			[self selectTileFromPaletteAt:coords];
 		else {
 			[self changeTileAt:[self mapCoordsForViewCoords:coords]];
+		}
+	}
+}
+
+- (void)mouseMoved:(pixelCoords)coords {
+	if (mode == EDITOR_MODE) {
+		if (!showPalette) {
+			self.cursorLoc = [self mapCoordsForViewCoords:coords];
 		}
 	}
 }

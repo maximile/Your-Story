@@ -2,6 +2,7 @@
 #import "Room.h"
 #import "Player.h"
 #import "Types.h"
+#import "TileMap.h"
 #import "chipmunk.h"
 
 typedef enum {
@@ -24,6 +25,8 @@ typedef enum {
 	Layer *palette;
 	BOOL showPalette;
 	mapCoords paletteTile;
+	TileMap *uiMap;
+	mapCoords cursorLoc;
 	
 	// key pressed flags
 	BOOL upKey, downKey, leftKey, rightKey, tabKey;
@@ -35,6 +38,7 @@ typedef enum {
 @property gameMode mode;
 @property (assign) Room *currentRoom;
 @property (assign) Layer *editingLayer;
+@property mapCoords cursorLoc;
 
 - (void)draw;
 - (void)update;
@@ -58,6 +62,7 @@ typedef enum {
 
 - (void)mouseDown:(pixelCoords)coords;
 - (void)mouseDragged:(pixelCoords)coords;
+- (void)mouseMoved:(pixelCoords)coords;
 
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;
