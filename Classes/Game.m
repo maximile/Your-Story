@@ -117,6 +117,10 @@
 		editorFocus = player.position;
 		[self setEditingLayer:currentRoom.mainLayer];
 	}
+	if (newMode == GAME_MODE) {
+		[currentRoom.mainLayer removeFromSpace:space];
+		[currentRoom.mainLayer addToSpace:space];
+	}
 }
 
 - (void)setCurrentRoom:(Room *)newRoom {
