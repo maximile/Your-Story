@@ -87,17 +87,17 @@
 		else {
 			glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 	        [layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
-			// [layer drawCollision];
+			if (drawCollision && layer == currentRoom.mainLayer) [layer drawCollision];
+		}
+		
+		if (layer == currentRoom.mainLayer) {
+			for (GameObject *item in items) {
+				[item draw];
+			}
 		}
 
 		glPopMatrix();
 	}
-	glPushMatrix();
-	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
-	for (GameObject *item in items) {
-		[item draw];
-	}
-	glPopMatrix();
 }
 
 - (void)draw {
@@ -143,6 +143,8 @@
 	if (rightKey) { directionInput |= RIGHT; }
 	[player setInput:directionInput];
 	
+	drawCollision = tabKey;
+		
 	// update physics and let objects update
 	for (GameObject *item in items) {
 		[item update];

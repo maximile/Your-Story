@@ -27,6 +27,8 @@ typedef enum {
 	mapCoords paletteTile;
 	TileMap *uiMap;
 	mapCoords cursorLoc;
+	BOOL drawOtherLayers;
+	BOOL drawCollision;
 	
 	// key pressed flags
 	BOOL upKey, downKey, leftKey, rightKey, tabKey;

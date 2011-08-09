@@ -4,11 +4,36 @@
 
 - (void)drawEditor {
 	mapCoords focus = [self cameraTargetForFocus:editorFocus];
-	glPushMatrix();
-	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
-	[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height) ignoreParallax:YES];
-	[uiMap drawTile:mapCoordsMake(0,0) at:mapCoordsMake(cursorLoc.x, editingLayer.size.height - cursorLoc.y - 1)];
-	glPopMatrix();
+	if (drawOtherLayers) {
+		for (Layer *layer in currentRoom.layers) {
+			glPushMatrix();
+
+			// parallax transformation
+			float parallax = layer.parallax;
+			if (parallax != 1.0) {
+				cpVect parallaxFocus = cpv(focus.x * parallax, focus.y * parallax);
+				int pLeft = (parallaxFocus.x - CANVAS_SIZE.width / 2) / TILE_SIZE - 1;
+				int pRight = (parallaxFocus.x + CANVAS_SIZE.width / 2) / TILE_SIZE + 1;
+				int pTop = (parallaxFocus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
+				int pBottom = (parallaxFocus.y - CANVAS_SIZE.height / 2) / TILE_SIZE - 1;
+				glTranslatef(-(parallaxFocus.x - CANVAS_SIZE.width / 2), -(parallaxFocus.y - CANVAS_SIZE.height / 2), 0.0);
+				[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom) ignoreParallax:NO];
+			}
+			else {
+				glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
+		        [layer drawRect:mapRectMake(0, 0, layer.size.width, layer.size.height) ignoreParallax:NO];
+			}
+
+			glPopMatrix();
+		}
+	}
+	else {
+		glPushMatrix();
+		glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
+		[editingLayer drawRect:mapRectMake(0, 0, editingLayer.size.width, editingLayer.size.height) ignoreParallax:YES];
+		[uiMap drawTile:mapCoordsMake(0,0) at:mapCoordsMake(cursorLoc.x, editingLayer.size.height - cursorLoc.y - 1)];
+		glPopMatrix();
+	}
 	
 	if (showPalette) {
 		glPushMatrix();
@@ -69,9 +94,12 @@
 }
 
 - (void)setEditingLayer:(Layer *)newLayer {
-	if (newLayer == editingLayer) return;
+	if (newLayer == editingLayer) {
+		drawOtherLayers = !drawOtherLayers;
+		return;
+	}
 	editingLayer = newLayer;
-	
+	drawOtherLayers = NO;
 	// generate palette layer from new layer's tilemap
 	palette = [editingLayer makePaletteLayer];
 	NSLog(@"setting palette: %@", palette);
