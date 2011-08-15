@@ -11,7 +11,7 @@
 #import "Constants.h"
 #import "Collision.h"
 
-NSString *InvalidImageError = @"InvalidImageError";
+NSString *InvalidImageErrorABOUTTOGO = @"InvalidImageError";
 
 @implementation TileMap
 
@@ -60,19 +60,19 @@ static NSMutableDictionary *mapCache = nil;
 	
 	NSBitmapImageRep *bitmap = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 	if (bitmap == nil) {
-		[NSException raise:InvalidImageError format:@"Invalid image"];
+		[NSException raise:InvalidImageErrorABOUTTOGO format:@"Invalid image"];
 	}
 
 	// check image dimensions
 	imageSize = pixelSizeMake(bitmap.size.width, bitmap.size.height);
 	if (imageSize.width != imageSize.height) {
-		[NSException raise:InvalidImageError format:@"Image must be square"];
+		[NSException raise:InvalidImageErrorABOUTTOGO format:@"Image must be square"];
 	}
 	if (imageSize.width < TILE_SIZE || imageSize.height < TILE_SIZE) {
-		[NSException raise:InvalidImageError format:@"Image must be larger than %ix%i", TILE_SIZE, TILE_SIZE];
+		[NSException raise:InvalidImageErrorABOUTTOGO format:@"Image must be larger than %ix%i", TILE_SIZE, TILE_SIZE];
 	}
 	if (imageSize.width > 2048 || imageSize.height > 2048) {
-		[NSException raise:InvalidImageError format:@"Image must be no bigger than 2048x2048"];
+		[NSException raise:InvalidImageErrorABOUTTOGO format:@"Image must be no bigger than 2048x2048"];
 	}
 	// check that it's a power of two
 	int test = 1;
@@ -84,7 +84,7 @@ static NSMutableDictionary *mapCache = nil;
 		test *= 2;
 	}
 	if (test > 2048) {
-		[NSException raise:InvalidImageError format:@"Image dimensions must be a power of 2"];
+		[NSException raise:InvalidImageErrorABOUTTOGO format:@"Image dimensions must be a power of 2"];
 	}
 		
 	// prepare image data

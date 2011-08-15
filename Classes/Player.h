@@ -10,10 +10,14 @@
 #import "PhysicsObject.h"
 #import "chipmunk.h"
 #import "Types.h"
+#import "Texture.h"
 
 @interface Player : PhysicsObject {
-	cpShape *shape;
+	cpShape *shape1;
+	cpShape *shape2;
+	cpShape *shape3;
 	directionMask directionInput;
+	Texture *t;
 }
 
 - (void)addToSpace:(cpSpace *)space;

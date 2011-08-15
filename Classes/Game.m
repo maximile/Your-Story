@@ -18,9 +18,9 @@
 	space = cpSpaceNew();
 	cpSpaceSetGravity(space, cpv(0, -100));
 	
-	[self setCurrentRoom:[[Room alloc] initWithName:@"Messing"]];
+	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 	[player addToSpace:space];
-	player.position = cpv(50,50);
+	player.position = cpv(235, 232);
 	
 	uiMap = [TileMap mapNamed:@"UI"];
 	

@@ -205,6 +205,7 @@
 			}
 			// create the shape and add it to the temporary array
 			cpShape *shape = cpPolyShapeNew(staticBody, collision.shapeVertCount, polyShapeVerts, cpvzero);
+			cpShapeSetFriction(shape, 1.0);
 			cpSpaceAddShape(space, shape);
 			tempShapes[shapeCount] = shape;
 			shapeCount++;
