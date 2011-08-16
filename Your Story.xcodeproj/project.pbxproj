@@ -65,6 +65,7 @@
 		66CBE0B713C26C8B00D73D1F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE0B613C26C8B00D73D1F /* Game.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +172,8 @@
 		66CBE0B613C26C8B00D73D1F /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
+		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +333,8 @@
 		66C75BB113BE8385002D8411 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */,
+				D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */,
 				66C75BFC13BE83F8002D8411 /* Chipmunk */,
 				66C75BF313BE83A0002D8411 /* main.m */,
 			);
@@ -543,6 +548,7 @@
 				66C5C2BA13E20C3700F7CFED /* Game+Editor.m in Sources */,
 				66C3D8E713EDE911007CBD54 /* PhysicsObject.m in Sources */,
 				6622CEF113F83921004E77FF /* Texture.m in Sources */,
+				D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,7 +619,7 @@
 				INFOPLIST_OUTPUT_FORMAT = xml;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				SYMROOT = Build;
 			};
@@ -631,7 +637,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_OUTPUT_FORMAT = xml;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				SYMROOT = Build;
 			};

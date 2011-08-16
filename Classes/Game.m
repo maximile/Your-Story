@@ -3,6 +3,8 @@
 #import "Constants.h"
 #import "Game+Editor.h"
 
+#import "ChipmunkDebugDraw.h"
+
 @implementation Game
 
 @synthesize mode, currentRoom, editingLayer, cursorLoc;
@@ -82,12 +84,21 @@
 			int pTop = (parallaxFocus.y + CANVAS_SIZE.height / 2) / TILE_SIZE + 1;
 			int pBottom = (parallaxFocus.y - CANVAS_SIZE.height / 2) / TILE_SIZE - 1;
 			glTranslatef(-(parallaxFocus.x - CANVAS_SIZE.width / 2), -(parallaxFocus.y - CANVAS_SIZE.height / 2), 0.0);
+			
+			glColor4f(1,1,1,1);
 			[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom) ignoreParallax:NO];
 		}
 		else {
 			glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
-	        [layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
-			if (drawCollision && layer == currentRoom.mainLayer) [layer drawCollision];
+			
+			glColor4f(1,1,1,1);
+			[layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
+			
+			if(drawCollision && layer == currentRoom.mainLayer){
+				glEnableClientState(GL_VERTEX_ARRAY);
+				ChipmunkDebugDrawShapes(space);
+				glDisableClientState(GL_VERTEX_ARRAY);
+			}
 		}
 		
 		if (layer == currentRoom.mainLayer) {
