@@ -61,6 +61,7 @@
 		66CA29D913EA15440022E906 /* Messing.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CA29D813EA15440022E906 /* Messing.ysroom */; };
 		66CAD5A313CA2C4500798383 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A213CA2C4500798383 /* Player.m */; };
 		66CAD5A613CA2EF600798383 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAD5A513CA2EF600798383 /* GameObject.m */; };
+		66CAEFC813FB2EE10054987B /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAEFC713FB2EE10054987B /* Sprite.m */; };
 		66CBE08D13C25AED00D73D1F /* FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE08C13C25AED00D73D1F /* FBO.m */; };
 		66CBE0B713C26C8B00D73D1F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE0B613C26C8B00D73D1F /* Game.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -166,6 +167,8 @@
 		66CAD5A213CA2C4500798383 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		66CAD5A413CA2EF600798383 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		66CAD5A513CA2EF600798383 /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
+		66CAEFC613FB2EE10054987B /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		66CAEFC713FB2EE10054987B /* Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sprite.m; sourceTree = "<group>"; };
 		66CBE08B13C25AED00D73D1F /* FBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBO.h; sourceTree = "<group>"; };
 		66CBE08C13C25AED00D73D1F /* FBO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBO.m; sourceTree = "<group>"; };
 		66CBE0B513C26C8B00D73D1F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				66CAD5A213CA2C4500798383 /* Player.m */,
 				660B803513BFD4AB001ECF63 /* Room.h */,
 				660B803613BFD4AB001ECF63 /* Room.m */,
+				66CAEFC613FB2EE10054987B /* Sprite.h */,
+				66CAEFC713FB2EE10054987B /* Sprite.m */,
 				6622CEEF13F83921004E77FF /* Texture.h */,
 				6622CEF013F83921004E77FF /* Texture.m */,
 				660B7F9F13BF8EC8001ECF63 /* TileMap.h */,
@@ -549,6 +554,7 @@
 				66C3D8E713EDE911007CBD54 /* PhysicsObject.m in Sources */,
 				6622CEF113F83921004E77FF /* Texture.m in Sources */,
 				D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */,
+				66CAEFC813FB2EE10054987B /* Sprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

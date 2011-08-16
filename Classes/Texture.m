@@ -1,9 +1,29 @@
 #import "Texture.h"
 
 NSString *InvalidImageError = @"InvalidImageError";
+static NSMutableDictionary * texturesForNames;
 
 @implementation Texture
 
++ (void)initialize {
+	texturesForNames = [[NSMutableDictionary dictionaryWithCapacity:20] retain];
+}
+
++ (Texture *)textureNamed:(NSString *)name {
+	Texture * texture = [texturesForNames objectForKey:name];
+	if (texture != nil) return texture;
+	
+	NSImage *image = [NSImage imageNamed:name];
+	texture = [[Texture alloc] initWithImage:image];
+	if (texture == nil) {NSLog(@"Nil texture generated for name: %@",name); return nil;}
+	
+	[texturesForNames setObject:texture forKey:name];
+	return texture;
+}
+
++ (NSArray *)textures {
+	return texturesForNames.allValues;
+}
 
 - (void)finalize {
 	glDeleteTextures(1, &textureName);

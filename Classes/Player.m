@@ -13,24 +13,27 @@
 	cpShapeSetFriction(shape1, 1.5);
 	cpShapeSetFriction(shape2, 1.5);
 	cpShapeSetFriction(shape3, 1.5);
-	t = [[Texture alloc] initWithImage:[NSImage imageNamed:@"MainSprites.psd"]];
+	
+	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
+	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(0, 0, 32, 16)];
 	
 	return self;
 }
 
 - (void)draw {
 	cpVect pos = self.position;
-	glBegin(GL_LINES);
-	glVertex2f(pos.x - 5, pos.y);
-	glVertex2f(pos.x + 5, pos.y);
-	glVertex2f(pos.x, pos.y - 5);
-	glVertex2f(pos.x, pos.y + 5);
-	glEnd();
-	
-	pixelRect testTexRect = pixelRectMake(0, 0, 32, 16);
-	pixelRect testRect = pixelRectMake(pos.x - 16, pos.y - 8, 32, 16);
-	[t addRect:testRect texRect:testTexRect];
-	[t drawRects];
+	// glBegin(GL_LINES);
+	// glVertex2f(pos.x - 5, pos.y);
+	// glVertex2f(pos.x + 5, pos.y);
+	// glVertex2f(pos.x, pos.y - 5);
+	// glVertex2f(pos.x, pos.y + 5);
+	// glEnd();
+	// 
+	// pixelRect testTexRect = pixelRectMake(0, 0, 32, 16);
+	// pixelRect testRect = pixelRectMake(pos.x - 16, pos.y - 8, 32, 16);
+	// [t addRect:testRect texRect:testTexRect];
+	// [t drawRects];
+	[sprite drawAt:pixelCoordsMake(pos.x, pos.y)];
 }
 
 - (void)addToSpace:(cpSpace *)space {

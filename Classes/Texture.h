@@ -12,6 +12,9 @@
 	int slots;
 }
 
++ (Texture *)textureNamed:(NSString *)name;
++ (NSArray *)textures;
+
 - (id)initWithImage:(NSImage *)image;
 - (void)addRect:(pixelRect)rect texRect:(pixelRect)texRect;
 - (void)drawRects;

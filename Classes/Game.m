@@ -105,6 +105,10 @@
 			for (GameObject *item in items) {
 				[item draw];
 			}
+			NSArray *allTextures = [Texture textures];
+			for (Texture *texture in allTextures) {
+				[texture drawRects];
+			}
 		}
 
 		glPopMatrix();
