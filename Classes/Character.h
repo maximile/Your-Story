@@ -18,6 +18,7 @@
 	cpShape *feetShape;
 	
 	bool lastJumpState;
+	bool grounded;
 	cpFloat remainingBoost;
 }
 

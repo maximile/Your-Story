@@ -19,14 +19,51 @@
 @implementation Character
 
 static void
+SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, cpVect *groundNormal){
+	cpVect n = cpvneg(cpArbiterGetNormal(arb, 0));
+	
+	if(n.y > groundNormal->y){
+		(*groundNormal) = n;
+	}
+}
+
+static void
 playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 {
 	Character *self = cpBodyGetUserData(body);
 	
-	cpBool boost = ((self->directionInput & UP) && self->remainingBoost > 0.0f);
-	cpVect g = (boost ? cpvzero : gravity);
-	cpBodyUpdateVelocity(body, g, damping, dt);
+	// Grab the grounding normal from last frame
+	cpVect groundNormal = cpvzero;
+	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)SelectPlayerGroundNormal, &groundNormal);
 	
+	self->grounded = (groundNormal.y > 0.0);
+	
+	// Reset jump boosting if you hit your head.
+	if(groundNormal.y < 0.0f) self->remainingBoost = 0.0f;
+	
+	// Target horizontal velocity used by air/ground control
+	cpFloat target_vx = PLAYER_VELOCITY*((self->directionInput & RIGHT ? 1 : 0) - (self->directionInput & LEFT ? 1 : 0));
+	
+	// Update the surface velocity and friction
+	cpVect surface_v = cpv(target_vx, 0.0);
+	self->feetShape->surface_v = surface_v;
+	self->feetShape->u = (self->grounded ? -PLAYER_GROUND_ACCEL/gravity.y : 0.0);
+	
+	// Apply air control if not grounded
+	if(!self->grounded){
+		// Smoothly accelerate the velocity
+		body->v.x = cpflerpconst(body->v.x, target_vx, PLAYER_AIR_ACCEL*dt);
+	}
+	
+	// Perform a normal-ish update
+	int jumpState = (self->directionInput & UP);
+	cpBool boost = (jumpState && self->remainingBoost > 0.0f);
+	cpBodyUpdateVelocity(body, (boost ? cpvzero : gravity), damping, dt);
+	
+	// Decrement the jump boosting
+	self->remainingBoost -= dt;
+	
+	// TODO does it make sense to have an upwards limit?
 	body->v.y = cpfclamp(body->v.y, -FALL_VELOCITY, INFINITY);
 }
 
@@ -73,55 +110,23 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpSpaceRemoveShape(space, feetShape);
 }
 
-static void
-SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, cpVect *groundNormal){
-	cpVect n = cpvneg(cpArbiterGetNormal(arb, 0));
-	
-	if(n.y > groundNormal->y){
-		(*groundNormal) = n;
-	}
-}
-
 - (void)update {
-	// TODO get rid of this magic number
-	cpFloat dt = 1.0/60.0;
+	int jumpState = (self->directionInput & UP);
 	
-	// TODO weird hack to get the gravity value
-	cpFloat gravity = -cpSpaceGetGravity(body->CP_PRIVATE(space)).y;
-	
-	int jumpState = (directionInput & UP);
-	
-	// Grab the grounding normal from last frame
-	cpVect groundNormal = cpvzero;
-	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)SelectPlayerGroundNormal, &groundNormal);
-	
-	cpBool grounded = (groundNormal.y > 0.0);
-	cpFloat target_vx = PLAYER_VELOCITY*((directionInput & RIGHT ? 1 : 0) - (directionInput & LEFT ? 1 : 0));
-	
-	// Update the surface velocity and friction
-	cpVect surface_v = cpv(target_vx, 0.0);
-	feetShape->surface_v = surface_v;
-	feetShape->u = (grounded ? PLAYER_GROUND_ACCEL/gravity : 0.0);
-	
-	// Apply air control if not grounded
-	if(!grounded){
-		// Smoothly accelerate the velocity
-		body->v.x = cpflerpconst(body->v.x, target_vx, PLAYER_AIR_ACCEL*dt);
-	}
+	// TODO gravity getting hack
+	cpVect gravity = cpSpaceGetGravity(body->CP_PRIVATE(space));
 	
 	// If the jump key was just pressed this frame, jump!
 	if(jumpState && !lastJumpState && grounded){
-		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*gravity);
+		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*-gravity.y);
 		body->v = cpvadd(body->v, cpv(0.0, jump_v));
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
+	} else if(!jumpState){
+		remainingBoost = 0.0;
 	}
 	
-	// Decrement the jump boosting or reset it if you bump your head.
-	remainingBoost -= dt;
-	if(groundNormal.y < 0.0f) remainingBoost = 0.0f;
-	
-	lastJumpState = jumpState;
+	self->lastJumpState = jumpState;
 }
 
 - (void)finalize {
