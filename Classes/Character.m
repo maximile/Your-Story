@@ -39,7 +39,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpBodySetUserData(body, self);
 	body->velocity_func = playerUpdateVelocity;
 	
-	feetShape = cpCircleShapeNew(body, 8.0, cpv(-8,-1));
+	feetShape = cpCircleShapeNew(body, 8.0, cpvzero);
+//	feetShape = cpBoxShapeNew(body, 16, 16);
 	cpShapeSetFriction(feetShape, 1.5);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
