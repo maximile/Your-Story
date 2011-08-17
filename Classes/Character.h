@@ -15,7 +15,7 @@
 #import "Player.h"
 
 @interface Character : Player {
-	cpShape *feetShape;
+	cpShape *headShape, *feetShape;
 	
 	Sprite *jumpSprite;
 	Sprite *normalSprite;

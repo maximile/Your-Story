@@ -76,9 +76,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpBodySetUserData(body, self);
 	body->velocity_func = playerUpdateVelocity;
 	
-	feetShape = cpCircleShapeNew(body, 8.0, cpvzero);
+	// Make the head shape smaller so it doesn't cause friction with walls.
+	// Maybe should dynamically assign friction like with the feetShape?
+	headShape = cpCircleShapeNew(body, 4.0, cpv(0, 4));
+	cpShapeSetFriction(headShape, 0.7);
+	
+	feetShape = cpCircleShapeNew(body, 6.0, cpv(0, -2));
 //	feetShape = cpBoxShapeNew(body, 16, 16);
-	cpShapeSetFriction(feetShape, 1.5);
 	
 	// drawing resources
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
@@ -135,11 +139,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)addToSpace:(cpSpace *)space {
 	cpSpaceAddBody(space, body);
+	cpSpaceAddShape(space, headShape);
 	cpSpaceAddShape(space, feetShape);
 }
 
 - (void)removeFromSpace:(cpSpace *)space {
 	cpSpaceRemoveBody(space, body);
+	cpSpaceRemoveShape(space, headShape);
 	cpSpaceRemoveShape(space, feetShape);
 }
 
@@ -166,6 +172,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)finalize {
+	cpShapeFree(headShape);
 	cpShapeFree(feetShape);
 	cpBodyFree(body);
 }
