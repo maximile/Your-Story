@@ -67,6 +67,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
+		D3BA93DD13FB91DD0005173B /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93DC13FB91DD0005173B /* Character.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +178,8 @@
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
 		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
+		D3BA93DB13FB91DD0005173B /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		D3BA93DC13FB91DD0005173B /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +219,8 @@
 				660B803E13C0D88D001ECF63 /* Layer.m */,
 				66CAD5A113CA2C4500798383 /* Player.h */,
 				66CAD5A213CA2C4500798383 /* Player.m */,
+				D3BA93DB13FB91DD0005173B /* Character.h */,
+				D3BA93DC13FB91DD0005173B /* Character.m */,
 				660B803513BFD4AB001ECF63 /* Room.h */,
 				660B803613BFD4AB001ECF63 /* Room.m */,
 				66CAEFC613FB2EE10054987B /* Sprite.h */,
@@ -555,6 +560,7 @@
 				6622CEF113F83921004E77FF /* Texture.m in Sources */,
 				D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */,
 				66CAEFC813FB2EE10054987B /* Sprite.m in Sources */,
+				D3BA93DD13FB91DD0005173B /* Character.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

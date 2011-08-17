@@ -3,9 +3,9 @@
 
 pixelCoords pixelCoordsRotate(pixelCoords point, cpVect angle) {
 	cpVect v = cpv(point.x, point.y);
-	NSLog(@"%4.2f", v.x);
+//	NSLog(@"%4.2f", v.x);
 	cpVect result = CGPointMake(v.x * angle.x - v.y * angle.y, v.x * angle.y + v.y * angle.x);
-	NSLog(@"%4.2f", result.x);
+//	NSLog(@"%4.2f", result.x);
 	return pixelCoordsMake(result.x, result.y);
 }
 
@@ -49,7 +49,7 @@ pixelCoords pixelCoordsRotate(pixelCoords point, cpVect angle) {
 	coords[2] = pixelCoordsMake(coords[2].x + point.x, coords[2].y + point.y);
 	coords[3] = pixelCoordsMake(coords[3].x + point.x, coords[3].y + point.y);
 	
-	NSLog(@"%i, %i", coords[0].x, coords[0].y);
+//	NSLog(@"%i, %i", coords[0].x, coords[0].y);
 	
 	texCoords[0] = pixelCoordsMake(texRect.origin.x, texRect.origin.y);
 	texCoords[1] = pixelCoordsMake(texRect.origin.x + texRect.size.width, texRect.origin.y);

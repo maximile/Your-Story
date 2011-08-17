@@ -2,6 +2,7 @@
 #import "GameObject.h"
 #import "Constants.h"
 #import "Game+Editor.h"
+#import "Character.h"
 
 #import "ChipmunkDebugDraw.h"
 
@@ -14,11 +15,12 @@
 		return nil;
 	}
 	items = [[NSMutableArray alloc] initWithCapacity:0];
-	player = [[Player alloc] init];
+	player = [[Character alloc] init];
 	[items addObject:player];
 	
 	space = cpSpaceNew();
-	cpSpaceSetGravity(space, cpv(0, -100));
+	cpSpaceSetGravity(space, cpv(0, -1000));
+	cpSpaceSetEnableContactGraph(space, TRUE);
 	
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 	[player addToSpace:space];
