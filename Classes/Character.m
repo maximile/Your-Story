@@ -80,24 +80,57 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 //	feetShape = cpBoxShapeNew(body, 16, 16);
 	cpShapeSetFriction(feetShape, 1.5);
 	
+	// drawing resources
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(0, 0, 32, 16)];
+	walkCycle = [NSArray arrayWithObjects:@"normal", @"walk1", @"normal", @"walk2", nil];
+	
+	rightSprites = [NSDictionary dictionaryWithObjectsAndKeys:
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(32, 0, 16, 16)], @"normal",
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(48, 0, 16, 16)], @"jump",
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(64, 0, 16, 16)], @"walk1",
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(80, 0, 16, 16)], @"walk2",
+	nil];
+	leftSprites = [NSDictionary dictionaryWithObjectsAndKeys:
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(32, 16, 16, 16)], @"normal",
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(48, 16, 16, 16)], @"jump",
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(64, 16, 16, 16)], @"walk1",
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(80, 16, 16, 16)], @"walk2",
+	nil];
+	
+	facing = RIGHT;
 	
 	return self;
 }
 
 - (void)draw {
-	cpVect pos = self.position;
-	float angle = cpBodyGetAngle(body);
+	cpVect pos = cpBodyGetPos(body);
+	cpVect vel = cpBodyGetVel(body);
+	NSString *spriteKey = nil;
+	if (grounded) {  // touching the floor
+		if (abs(vel.x) > 1) {  // walking
+			// take one step every 16px (unrealistic but it's the only way you can see anything)
+			int cycleIndex = (int)pos.x / 16 % walkCycle.count;
+			if (cycleIndex < 0) cycleIndex += walkCycle.count;
+			spriteKey = [walkCycle objectAtIndex:cycleIndex];
+		}
+		else {  // standing still
+			spriteKey = @"normal";
+		}
+	}
 	
-	// discrete steps
-	angle /= (M_PI*2);
-	angle *= 72.0;
-	angle = round(angle);
-	angle /= 72.0;
-	angle *= (M_PI*2);
-
-	[sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:angle];
+	else {  // jumping or falling
+		if (cpBodyGetVel(body).y < -100.0) {  // falling
+			spriteKey = @"jump";
+		}
+		else {  // jumping
+			spriteKey = @"normal";
+		}
+	}
+	
+	Sprite *sprite = nil;
+	if (facing & LEFT) sprite = [leftSprites valueForKey:spriteKey];
+	else sprite = [rightSprites valueForKey:spriteKey];
+	[sprite drawAt:pixelCoordsMake(pos.x, round(pos.y))];
 }
 
 - (void)addToSpace:(cpSpace *)space {
@@ -127,6 +160,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	}
 	
 	self->lastJumpState = jumpState;
+	
+	if (cpBodyGetVel(body).x < -1) { facing = LEFT; }
+	if (cpBodyGetVel(body).x > 1) { facing = RIGHT; }
 }
 
 - (void)finalize {

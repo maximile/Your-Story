@@ -17,7 +17,6 @@
 	cpShape *shape2;
 	cpShape *shape3;
 	directionMask directionInput;
-	Sprite *sprite;
 }
 
 - (void)addToSpace:(cpSpace *)space;

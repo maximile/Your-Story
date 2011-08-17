@@ -17,6 +17,13 @@
 @interface Character : Player {
 	cpShape *feetShape;
 	
+	Sprite *jumpSprite;
+	Sprite *normalSprite;
+	NSArray *walkCycle;
+	NSDictionary *leftSprites;
+	NSDictionary *rightSprites;
+	directionMask facing;
+	
 	bool lastJumpState;
 	bool grounded;
 	cpFloat remainingBoost;

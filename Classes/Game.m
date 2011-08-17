@@ -65,7 +65,7 @@
 
 - (void)drawGame {
 	// camera target
-	mapCoords focus = [self cameraTargetForFocus:player.position];
+	mapCoords focus = [self cameraTargetForFocus:cpv(player.position.x, round(player.position.y))];
 
 	// draw layers. first get screen bounds in map coords
 	int left = ((float)focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;

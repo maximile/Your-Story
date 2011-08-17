@@ -14,24 +14,16 @@
 	cpShapeSetFriction(shape2, 1.5);
 	cpShapeSetFriction(shape3, 1.5);
 	
-	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(0, 0, 32, 16)];
+	// Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
+	// sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(0, 0, 32, 16)];
 	
 	return self;
 }
 
 - (void)draw {
-	cpVect pos = self.position;
-	float angle = cpBodyGetAngle(body);
-	
-	// discrete steps
-	angle /= (M_PI*2);
-	angle *= 72.0;
-	angle = round(angle);
-	angle /= 72.0;
-	angle *= (M_PI*2);
+	NSLog(@"Should be overridden");
 
-	[sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:angle];
+	// [sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:angle];
 }
 
 - (void)addToSpace:(cpSpace *)space {
