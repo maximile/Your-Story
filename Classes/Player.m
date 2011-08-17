@@ -6,7 +6,7 @@
 - (id)init {
 	if ([super init]==nil) return nil;
 	
-	body = cpBodyNew(5, INFINITY);
+	body = cpBodyNew(5, 50);
 	shape1 = cpCircleShapeNew(body, 8.0, cpv(-8,-1));
 	shape2 = cpCircleShapeNew(body, 8.0, cpvzero);
 	shape3 = cpCircleShapeNew(body, 8.0, cpv(8,-1));
@@ -22,18 +22,16 @@
 
 - (void)draw {
 	cpVect pos = self.position;
-	// glBegin(GL_LINES);
-	// glVertex2f(pos.x - 5, pos.y);
-	// glVertex2f(pos.x + 5, pos.y);
-	// glVertex2f(pos.x, pos.y - 5);
-	// glVertex2f(pos.x, pos.y + 5);
-	// glEnd();
-	// 
-	// pixelRect testTexRect = pixelRectMake(0, 0, 32, 16);
-	// pixelRect testRect = pixelRectMake(pos.x - 16, pos.y - 8, 32, 16);
-	// [t addRect:testRect texRect:testTexRect];
-	// [t drawRects];
-	[sprite drawAt:pixelCoordsMake(pos.x, pos.y)];
+	float angle = cpBodyGetAngle(body);
+	
+	// discrete steps
+	angle /= (M_PI*2);
+	angle *= 72.0;
+	angle = round(angle);
+	angle /= 72.0;
+	angle *= (M_PI*2);
+
+	[sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:angle];
 }
 
 - (void)addToSpace:(cpSpace *)space {
@@ -53,16 +51,18 @@
 - (void)update {
 	cpBodyResetForces(body);
 	if (directionInput & LEFT) {
-		cpBodyApplyForce(body, cpv(-1000.0, 0.0), cpvzero);
+		// cpBodyApplyForce(body, cpvrotate(cpv(-1000.0, 0.0), cpBodyGetRot(body)), cpvzero);
+		cpBodySetTorque(body, 500.0);
 	}
 	if (directionInput & RIGHT) {
-		cpBodyApplyForce(body, cpv(1000.0, 0.0), cpvzero);
+		// cpBodyApplyForce(body, cpvrotate(cpv(1000.0, 0.0), cpBodyGetRot(body)), cpvzero);
+		cpBodySetTorque(body, -500.0);
 	}
 	if (directionInput & UP) {
-		cpBodyApplyForce(body, cpv(0.0, 1000.0), cpvzero);
+		cpBodyApplyForce(body, cpvrotate(cpv(0.0, 1000.0), cpBodyGetRot(body)), cpvzero);
 	}
 	if (directionInput & DOWN) {
-		cpBodyApplyForce(body, cpv(0.0, -1000.0), cpvzero);
+		cpBodyApplyForce(body, cpvrotate(cpv(0.0, -1000.0), cpBodyGetRot(body)), cpvzero);
 	}
 }
 

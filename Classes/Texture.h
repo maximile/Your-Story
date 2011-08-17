@@ -8,7 +8,7 @@
 	NSString *name;
 	GLfloat* coords;
 	GLfloat* texCoords;
-	int drawCount;
+	int quadCount;
 	int slots;
 }
 
@@ -16,7 +16,9 @@
 + (NSArray *)textures;
 
 - (id)initWithImage:(NSImage *)image;
+
+- (void)addQuad:(pixelCoords *)quadCoords texCoords:(pixelCoords *)quadTexCoords;
 - (void)addRect:(pixelRect)rect texRect:(pixelRect)texRect;
-- (void)drawRects;
+- (void)draw;
 
 @end

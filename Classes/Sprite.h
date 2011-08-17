@@ -9,5 +9,6 @@
 
 - (id)initWithTexture:(Texture *)newTexture texRect:(pixelRect)newTexRect;
 - (void)drawAt:(pixelCoords)point;
+- (void)drawAt:(pixelCoords)point angle:(float)angle;
 
 @end

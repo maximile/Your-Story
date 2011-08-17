@@ -107,7 +107,7 @@
 			}
 			NSArray *allTextures = [Texture textures];
 			for (Texture *texture in allTextures) {
-				[texture drawRects];
+				[texture draw];
 			}
 		}
 

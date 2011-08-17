@@ -92,60 +92,73 @@ static NSMutableDictionary * texturesForNames;
 	return self;
 }
 
-- (void)addRect:(pixelRect)rect texRect:(pixelRect)texRect {
-	NSUInteger index = drawCount*12;
+- (void)addQuad:(pixelCoords *)quadCoords texCoords:(pixelCoords *)quadTexCoords {
+	NSUInteger index = quadCount*12;
 	
-	GLfloat texCoordsLeft = texRect.origin.x / (float)size.width;
-	GLfloat texCoordsRight = (texRect.origin.x + texRect.size.width) / (float)size.width;
-	GLfloat texCoordsTop = texRect.origin.y / (float)size.height;
-	GLfloat texCoordsBottom = (texRect.origin.y + texRect.size.height) / (float)size.height;
-		
-	if (drawCount >= slots) { // not enough space
+	// take an array of four coords and four tex coords
+	if (quadCount >= slots) { // not enough space
 		slots *= 2;
 		if (slots == 0) slots = 1;
 		size_t spaceSize = sizeof(GLfloat)*6*2*(slots);
 		coords = realloc(coords, spaceSize);
 		texCoords = realloc(texCoords, spaceSize);
 	}
-			
-	coords[index+0]  = rect.origin.x;
-	coords[index+1]  = rect.origin.y + rect.size.height;
-	coords[index+2]  = rect.origin.x + rect.size.width;
-	coords[index+3]  = rect.origin.y + rect.size.height;
-	coords[index+4]  = rect.origin.x;
-	coords[index+5]  = rect.origin.y;
-	coords[index+6]  = rect.origin.x + rect.size.width;
-	coords[index+7]  = rect.origin.y + rect.size.height;
-	coords[index+8]  = rect.origin.x;
-	coords[index+9]  = rect.origin.y;
-	coords[index+10] = rect.origin.x + rect.size.width;
-	coords[index+11] = rect.origin.y;
-
-	texCoords[index+0]  = texCoordsLeft;
-	texCoords[index+1]  = texCoordsTop;
-	texCoords[index+2]  = texCoordsRight;
-	texCoords[index+3]  = texCoordsTop;
-	texCoords[index+4]  = texCoordsLeft;
-	texCoords[index+5]  = texCoordsBottom;
-	texCoords[index+6]  = texCoordsRight;
-	texCoords[index+7]  = texCoordsTop;
-	texCoords[index+8]  = texCoordsLeft;
-	texCoords[index+9]  = texCoordsBottom;
-	texCoords[index+10] = texCoordsRight;
-	texCoords[index+11] = texCoordsBottom;
 	
-	drawCount++;
+	coords[index+0]  = (float)quadCoords[0].x;
+	coords[index+1]  = (float)quadCoords[0].y;
+	coords[index+2]  = (float)quadCoords[1].x;
+	coords[index+3]  = (float)quadCoords[1].y;
+	coords[index+4]  = (float)quadCoords[2].x;
+	coords[index+5]  = (float)quadCoords[2].y;
+	coords[index+6]  = (float)quadCoords[2].x;
+	coords[index+7]  = (float)quadCoords[2].y;
+	coords[index+8]  = (float)quadCoords[1].x;
+	coords[index+9]  = (float)quadCoords[1].y;
+	coords[index+10] = (float)quadCoords[3].x;
+	coords[index+11] = (float)quadCoords[3].y;
+
+	texCoords[index+0]  = (float)quadTexCoords[0].x / size.width;
+	texCoords[index+1]  = (float)quadTexCoords[0].y / size.height;
+	texCoords[index+2]  = (float)quadTexCoords[1].x / size.width;
+	texCoords[index+3]  = (float)quadTexCoords[1].y / size.height;
+	texCoords[index+4]  = (float)quadTexCoords[2].x / size.width;
+	texCoords[index+5]  = (float)quadTexCoords[2].y / size.height;
+	texCoords[index+6]  = (float)quadTexCoords[2].x / size.width;
+	texCoords[index+7]  = (float)quadTexCoords[2].y / size.height;
+	texCoords[index+8]  = (float)quadTexCoords[1].x / size.width;
+	texCoords[index+9]  = (float)quadTexCoords[1].y / size.height;
+	texCoords[index+10] = (float)quadTexCoords[3].x / size.width;
+	texCoords[index+11] = (float)quadTexCoords[3].y / size.height;
+	
+	quadCount++;
 }
 
-- (void)drawRects {
-	if (drawCount == 0) return;
+- (void)addRect:(pixelRect)rect texRect:(pixelRect)texRect {
+	pixelCoords quadCoords[4];
+	pixelCoords quadTexCoords[4];
+	
+	quadCoords[0] = pixelCoordsMake(rect.origin.x, rect.origin.y + rect.size.height);
+	quadCoords[1] = pixelCoordsMake(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+	quadCoords[2] = pixelCoordsMake(rect.origin.x, rect.origin.y);
+	quadCoords[3] = pixelCoordsMake(rect.origin.x + rect.size.width, rect.origin.y);
+	
+	quadTexCoords[0] = pixelCoordsMake(texRect.origin.x, texRect.origin.y);
+	quadTexCoords[1] = pixelCoordsMake(texRect.origin.x + texRect.size.width, texRect.origin.y);
+	quadTexCoords[2] = pixelCoordsMake(texRect.origin.x, texRect.origin.y + texRect.size.height);
+	quadTexCoords[3] = pixelCoordsMake(texRect.origin.x + texRect.size.width, texRect.origin.y + texRect.size.height);
+	
+	[self addQuad:quadCoords texCoords:quadTexCoords];
+}
+
+- (void)draw {
+	if (quadCount == 0) return;
 		
 	glBindTexture(GL_TEXTURE_2D, textureName);
 	glVertexPointer(2, GL_FLOAT, 0, coords);
 	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
-	glDrawArrays(GL_TRIANGLES, 0, drawCount * 6);
+	glDrawArrays(GL_TRIANGLES, 0, quadCount * 6);
 		
-	drawCount = 0;
+	quadCount = 0;
 }
 
 
