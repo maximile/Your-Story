@@ -1,8 +1,9 @@
 #import "Room.h"
+#import "ItemLayer.h"
 
 @implementation Room
 
-@synthesize layers, mainLayer;
+@synthesize layers, mainLayer, itemLayer;
 
 - (mapSize)getSize {
 	return mainLayer.size;
@@ -24,13 +25,18 @@
 	// create layer objects
 	layers = [NSMutableArray arrayWithCapacity:0];
 	for (NSDictionary *layerInfo in [info valueForKey:@"Layers"]) {
+		if ([[layerInfo valueForKey:@"Items"] boolValue]) {
+			// special layer for locating items; don't add to array
+			itemLayer = [[ItemLayer alloc] initWithDictionary:layerInfo];
+			continue;
+		}
 		Layer *layer = [[Layer alloc] initWithDictionary:layerInfo];
 		[layers addObject:layer];
 		if ([[layerInfo valueForKey:@"Main"] boolValue]) {
 			mainLayer = layer;
 		}
 	}
-		
+	
 	return self;
 }
 
@@ -43,6 +49,14 @@
 			[layerInfo setValue:[NSNumber numberWithBool:YES] forKey:@"Main"];
 		[layerArray addObject:layerInfo];
 	}
+	
+	if (itemLayer) {
+		NSMutableDictionary *layerInfo = [[itemLayer dictionaryRepresentation] mutableCopy];
+		[layerInfo setValue:[NSNumber numberWithBool:YES] forKey:@"Items"];
+		[layerInfo removeObjectForKey:@"Map"];
+		[layerArray addObject:layerInfo];
+	}
+	
 	[info setValue:layerArray forKey:@"Layers"];
 	
 	[info writeToFile:path atomically:NO];

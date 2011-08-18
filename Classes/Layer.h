@@ -24,7 +24,6 @@
 // - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
 - (id)initWithDictionary:(NSDictionary *)infoDict;
 - (void)drawRect:(mapRect)rect ignoreParallax:(BOOL)ignoreParallax;
-- (void)drawCollision;
 
 - (void)setTile:(mapCoords)tile at:(mapCoords)loc;
 - (mapCoords)tileAt:(mapCoords)loc;

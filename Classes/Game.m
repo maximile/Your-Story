@@ -3,6 +3,7 @@
 #import "Constants.h"
 #import "Game+Editor.h"
 #import "Character.h"
+#import "ItemLayer.h"
 
 #import "ChipmunkDebugDraw.h"
 
@@ -76,6 +77,7 @@
 	// draw layers
 	for (Layer *layer in currentRoom.layers) {
 		glPushMatrix();
+		if ([layer isKindOfClass:[ItemLayer class]]) continue;
 		
 		// parallax transformation
 		float parallax = layer.parallax;
