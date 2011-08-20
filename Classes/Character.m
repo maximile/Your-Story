@@ -2,17 +2,17 @@
 #import "Texture.h"
 
 
-#define PLAYER_VELOCITY 150.0
+#define PLAYER_VELOCITY 100.0
 
-#define PLAYER_GROUND_ACCEL_TIME 0.1
+#define PLAYER_GROUND_ACCEL_TIME 0.05
 #define PLAYER_GROUND_ACCEL (PLAYER_VELOCITY/PLAYER_GROUND_ACCEL_TIME)
 
 #define PLAYER_AIR_ACCEL_TIME 0.25
 #define PLAYER_AIR_ACCEL (PLAYER_VELOCITY/PLAYER_AIR_ACCEL_TIME)
 
-#define JUMP_HEIGHT 12.0
-#define JUMP_BOOST_HEIGHT 13.0
-#define FALL_VELOCITY 350.0
+#define JUMP_HEIGHT 16.0
+#define JUMP_BOOST_HEIGHT 24.0
+#define FALL_VELOCITY 250.0
 
 #define HEAD_FRICTION 0.7
 
@@ -49,8 +49,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	// Update the surface velocity and friction
 	cpVect surface_v = cpv(target_vx, 0.0);
 	self->feetShape->surface_v = surface_v;
-	self->feetShape->u = (self->grounding.body ? -PLAYER_GROUND_ACCEL/gravity.y : 0.0);
-	self->headShape->u = (self->grounding.body ? HEAD_FRICTION : 0.0);
+	if(self->grounding.body){
+		self->feetShape->u = -PLAYER_GROUND_ACCEL/gravity.y;
+		self->headShape->u = HEAD_FRICTION;
+	} else {
+		self->feetShape->u = self->headShape->u = 0.0;
+	}
 	
 	// Apply air control if not grounded
 	if(!self->grounding.body){
@@ -111,10 +115,10 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpVect pos = cpBodyGetPos(body);
 	cpVect vel = cpBodyGetVel(body);
 	NSString *spriteKey = nil;
-	if (grounding.body) {  // touching the floor
+	if (wellGrounded) {  // touching the floor
 		if (abs(vel.x) > 1) {  // walking
 			// take one step every 16px (unrealistic but it's the only way you can see anything)
-			int cycleIndex = (int)pos.x / 16 % walkCycle.count;
+			int cycleIndex = ((int)pos.x / 6) % walkCycle.count;
 			if (cycleIndex < 0) cycleIndex += walkCycle.count;
 			spriteKey = [walkCycle objectAtIndex:cycleIndex];
 		}
@@ -124,7 +128,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	}
 	
 	else {  // jumping or falling
-		if (cpBodyGetVel(body).y < -100.0) {  // falling
+		if (cpBodyGetVel(body).y < -50.0) {  // falling
 			spriteKey = @"jump";
 		}
 		else {  // jumping
@@ -153,22 +157,21 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 - (void)update {
 	int jumpState = (directionInput & UP);
 	
-	// TODO gravity getting hack
-	cpVect gravity = cpSpaceGetGravity(body->CP_PRIVATE(space));
-	
-	if(grounding.body) groundVelocity = grounding.body->v;
+	wellGrounded = (grounding.body && cpfabs(grounding.normal.x/grounding.normal.y) < feetShape->u);
+	if(wellGrounded){
+		groundVelocity = grounding.body->v;
+		remainingAirJumps = 1;
+	}
 	
 	// If the jump key was just pressed this frame, jump!
-	if(jumpState && !lastJumpKeyState && (grounding.body || remainingAirJumps)){
-		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*-gravity.y);
+	bool jump = (jumpState && !lastJumpKeyState);
+	
+	if(jump && (wellGrounded || remainingAirJumps)){
+		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*GRAVITY);
 		body->v.y = groundVelocity.y + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
-		if(grounding.body){
-			remainingAirJumps = 1;
-		} else {
-			remainingAirJumps--;
-		}
+		if(!wellGrounded) remainingAirJumps--;
 	} else if(!jumpState){
 		remainingBoost = 0.0;
 	}

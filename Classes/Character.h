@@ -35,6 +35,9 @@ struct GroundingContext {
 	// Body you are standing on and it's normal.
 	struct GroundingContext grounding;
 	
+	// Standing on ground that can be walked up.
+	bool wellGrounded;
+	
 	// Amount of jump "boost" time remaining.
 	// Gravity is not applied until boost runs out or the jump key is released.
 	// This is very mario-esque.

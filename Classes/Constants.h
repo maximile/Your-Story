@@ -6,3 +6,5 @@
 
 #define FIXED_DT (1.0/240.0)
 #define MAX_FRAMESKIP 10
+
+#define GRAVITY 1000.0
