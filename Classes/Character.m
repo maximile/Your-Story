@@ -20,12 +20,13 @@
 @implementation Character
 
 static void
-SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, struct GroundingContext *grounding){
+SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, struct CharacterGroundingContext *grounding){
 	CP_ARBITER_GET_BODIES(arb, b1, b2);
 	cpVect n = cpvneg(cpArbiterGetNormal(arb, 0));
 	
 	if(n.y > grounding->normal.y){
 		grounding->normal = n;
+		grounding->penetration = -cpArbiterGetDepth(arb, 0);
 		grounding->body = b2;
 	}
 }
@@ -36,8 +37,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	Character *self = cpBodyGetUserData(body);
 	
 	// Get the grounding information.
-	self->grounding.normal = cpvzero;
-	self->grounding.body = NULL;
+	self->grounding = (struct CharacterGroundingContext){cpvzero, 0.0, NULL};
 	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)SelectPlayerGroundNormal, &self->grounding);
 	
 	// Reset jump boosting if you hit your head.
@@ -111,13 +111,20 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	return self;
 }
 
+-(cpVect)position
+{
+	// Correct the drawn position for overlap with the grounding object.
+	return cpvadd(cpBodyGetPos(body), cpvmult(grounding.normal, grounding.penetration - COLLISION_SLOP));
+}
+
 - (void)draw {
-	cpVect pos = cpBodyGetPos(body);
+	cpVect pos = self.position;
 	cpVect vel = cpBodyGetVel(body);
+	
 	NSString *spriteKey = nil;
 	if (wellGrounded) {  // touching the floor
 		if (abs(vel.x) > 1) {  // walking
-			// take one step every 16px (unrealistic but it's the only way you can see anything)
+			// walk frame based on x-position
 			int cycleIndex = ((int)pos.x / 6) % walkCycle.count;
 			if (cycleIndex < 0) cycleIndex += walkCycle.count;
 			spriteKey = [walkCycle objectAtIndex:cycleIndex];
@@ -128,7 +135,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	}
 	
 	else {  // jumping or falling
-		if (cpBodyGetVel(body).y < -50.0) {  // falling
+		if (cpBodyGetVel(body).y < -20.0) {  // falling
 			spriteKey = @"jump";
 		}
 		else {  // jumping

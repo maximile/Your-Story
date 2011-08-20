@@ -15,8 +15,10 @@
 #import "Player.h"
 
 
-struct GroundingContext {
+struct CharacterGroundingContext {
 	cpVect normal;
+	cpFloat penetration;
+	
 	cpBody *body;
 };
 
@@ -33,7 +35,7 @@ struct GroundingContext {
 	bool lastJumpKeyState;
 	
 	// Body you are standing on and it's normal.
-	struct GroundingContext grounding;
+	struct CharacterGroundingContext grounding;
 	
 	// Standing on ground that can be walked up.
 	bool wellGrounded;
