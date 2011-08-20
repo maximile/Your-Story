@@ -68,6 +68,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
 		D3BA93DD13FB91DD0005173B /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93DC13FB91DD0005173B /* Character.m */; };
+		D3BA942813FE61010005173B /* libTileVectorizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BA942713FE61010005173B /* libTileVectorizer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +181,7 @@
 		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
 		D3BA93DB13FB91DD0005173B /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		D3BA93DC13FB91DD0005173B /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		D3BA942713FE61010005173B /* libTileVectorizer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTileVectorizer.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */,
+				D3BA942813FE61010005173B /* libTileVectorizer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +346,7 @@
 		66C75BB113BE8385002D8411 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D3BA942713FE61010005173B /* libTileVectorizer.a */,
 				D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */,
 				D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */,
 				66C75BFC13BE83F8002D8411 /* Chipmunk */,
@@ -599,6 +603,11 @@
 				GCC_PREFIX_HEADER = Crap/Prefix.pch;
 				INFOPLIST_FILE = Crap/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Crap\"",
+					"\"$(SRCROOT)/Other Sources\"",
+				);
 				PRODUCT_NAME = "Your Story";
 			};
 			name = Debug;
@@ -613,6 +622,11 @@
 				GCC_PREFIX_HEADER = Crap/Prefix.pch;
 				INFOPLIST_FILE = Crap/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Crap\"",
+					"\"$(SRCROOT)/Other Sources\"",
+				);
 				PRODUCT_NAME = "Your Story";
 			};
 			name = Release;

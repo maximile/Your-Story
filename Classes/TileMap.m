@@ -118,13 +118,16 @@ static NSMutableDictionary *mapCache = nil;
 	// generate collision shapes if necessary
 	if (shouldGenerateCollision) {
 		int tileCount = size.width * size.height;
-		collisionShapes = [NSMutableArray arrayWithCapacity:tileCount];
+		int cursor = 0;
+		collisionShapes = calloc(tileCount, sizeof(mapCoords));
+		
 		for (int y = 0; y < size.height; y++) {
 			for (int x = 0; x < size.width; x++) {
 				mapCoords coords = mapCoordsMake(x, y);
 				pixelSize dataSize = pixelSizeMake(imageSize.width, imageSize.height);
-				CollisionShape *shape = [Collision shapeForCoords:coords data:data dataSize:dataSize];
-				[collisionShapes addObject:shape];
+				mapCoords collisionTileCoords = [Collision shapeForCoords:coords data:data dataSize:dataSize];
+				collisionShapes[cursor] = collisionTileCoords;
+				cursor++;
 			}
 		}
 	}
@@ -157,14 +160,17 @@ static NSMutableDictionary *mapCache = nil;
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-- (CollisionShape *)shapeForTile:(mapCoords)coords {
-	if (coords.x < 0 || coords.y < 0) return nil;
+- (mapCoords)collisionTileForTile:(mapCoords)coords;
+{
+	if (coords.x < 0 || coords.y < 0) return mapCoordsMake(-1, -1);
 	int index = coords.y * (size.width) + coords.x;
-	return [collisionShapes objectAtIndex:index];
+	return collisionShapes[index];
 }
 
 - (void)finalize {
 	glDeleteTextures(1, &textureName);
+	free(collisionShapes);
+	
 	[super finalize];	
 }
 

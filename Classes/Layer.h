@@ -4,17 +4,19 @@
 #import "chipmunk.h"
 
 @interface Layer : NSObject {
+@public
+	mapSize size;
+	TileMap *map;
+
+@private
 	// an array of tiles for the layer, each tile represented by
 	// the coordinates of the corresponding tile on the map
 	mapCoords *tiles;
-	mapSize size;
-
-	TileMap *map;
+	
 	float parallax;
 	
 	// collision data
-	cpShape **shapes;
-	int shapeCount;
+	NSArray *shapes;
 }
 
 @property mapSize size;
@@ -24,7 +26,6 @@
 // - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
 - (id)initWithDictionary:(NSDictionary *)infoDict;
 - (void)drawRect:(mapRect)rect ignoreParallax:(BOOL)ignoreParallax;
-- (void)drawCollision;
 
 - (void)setTile:(mapCoords)tile at:(mapCoords)loc;
 - (mapCoords)tileAt:(mapCoords)loc;
@@ -32,6 +33,8 @@
 - (NSDictionary *)dictionaryRepresentation;
 - (NSString *)tilesString;
 - (Layer *)makePaletteLayer;
+
+- (mapCoords)tileCoordsForMapCoords:(mapCoords)coords ignoreParallax:(BOOL)ignoreParallax;
 
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
