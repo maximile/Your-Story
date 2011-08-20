@@ -33,6 +33,7 @@ struct GroundingContext {
 	bool lastJumpState;
 	struct GroundingContext grounding;
 	cpFloat remainingBoost;
+	int remainingAirJumps;
 }
 
 - (void)addToSpace:(cpSpace *)space;

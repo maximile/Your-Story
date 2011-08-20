@@ -2,7 +2,7 @@
 #import "Texture.h"
 
 
-#define PLAYER_VELOCITY 200.0
+#define PLAYER_VELOCITY 150.0
 
 #define PLAYER_GROUND_ACCEL_TIME 0.1
 #define PLAYER_GROUND_ACCEL (PLAYER_VELOCITY/PLAYER_GROUND_ACCEL_TIME)
@@ -10,10 +10,9 @@
 #define PLAYER_AIR_ACCEL_TIME 0.25
 #define PLAYER_AIR_ACCEL (PLAYER_VELOCITY/PLAYER_AIR_ACCEL_TIME)
 
-#define JUMP_HEIGHT 16.0
-#define JUMP_BOOST_HEIGHT 18.0
-#define FALL_VELOCITY 900.0
-//#define GRAVITY 2000.0
+#define JUMP_HEIGHT 12.0
+#define JUMP_BOOST_HEIGHT 13.0
+#define FALL_VELOCITY 350.0
 
 
 @implementation Character
@@ -157,11 +156,17 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpVect gravity = cpSpaceGetGravity(body->CP_PRIVATE(space));
 	
 	// If the jump key was just pressed this frame, jump!
-	if(jumpState && !lastJumpState && grounding.body){
+	if(jumpState && !lastJumpState && (grounding.body || remainingAirJumps)){
 		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*-gravity.y);
-		body->v.y = grounding.body->v.y + jump_v;
+		cpFloat ground_v = (grounding.body ? body->v.y : 0.0);
+		body->v.y = ground_v + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
+		if(grounding.body){
+			remainingAirJumps = 1;
+		} else {
+			remainingAirJumps--;
+		}
 	} else if(!jumpState){
 		remainingBoost = 0.0;
 	}
