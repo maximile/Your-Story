@@ -8,4 +8,4 @@
 #define MAX_FRAMESKIP 10
 
 #define GRAVITY 1000.0
-#define COLLISION_SLOP 0.5
+#define COLLISION_SLOP 0.25
