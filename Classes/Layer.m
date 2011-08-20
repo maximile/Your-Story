@@ -1,5 +1,6 @@
 #import "Layer.h"
 
+
 @implementation Layer
 
 @synthesize size, parallax;
@@ -145,7 +146,8 @@
 	return [[Layer alloc] initWithDictionary:info];
 }
 
-- (mapCoords)tileCoordsForMapCoords:(mapCoords)coords ignoreParallax:(BOOL)ignoreParallax {
+- (mapCoords)tileCoordsForMapCoords:(mapCoords)coords ignoreParallax:(BOOL)ignoreParallax;
+{
 	// get the coordinates for the tile on the map that corresponds to the given tile on the layer
 	if (parallax != 1.0 && !ignoreParallax) {
 		// it repeats
@@ -174,60 +176,16 @@
 	}
 }
 
+extern NSMutableArray *GenerateTilemapOutline(Layer *layer, cpSpace *space);
+
 - (void)addToSpace:(cpSpace *)space {
-	cpBody *staticBody = cpSpaceGetStaticBody(space);
-	
-	// temp array big enough to hold all shapes
-	cpShape **tempShapes = calloc(size.height * size.width, sizeof(cpShape *));
-	shapeCount = 0;
-	// add static polygon shape for every tile
-	for (int y=0; y<size.height; y++) {
-		for (int x=0; x<size.width; x++) {
-			// get collision shape for this tile
-			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y) ignoreParallax:NO];
-			CollisionShape *collision = [map shapeForTile:coords];
-			
-			if (collision.shapeVertCount < 1) {
-				// skip empty tile
-				continue;
-			}
-			
-			// create polygon shape data
-			cpVect *polyShapeVerts = calloc(collision.shapeVertCount, sizeof(cpVect));
-			for (int i=0; i<collision.shapeVertCount; i++) {
-				pixelCoords coords = collision.shapeVerts[i];
-				coords = pixelCoordsMake(coords.x + x*TILE_SIZE, coords.y + y*TILE_SIZE);
-				// temporary fix for incorrect winding
-				polyShapeVerts[(collision.shapeVertCount - i) - 1] = cpv(coords.x, coords.y);
-			}
-			if (!cpPolyValidate(polyShapeVerts, collision.shapeVertCount)) {
-				NSLog(@"Invalid collision shape data at %i, %i", collision.tile.x, collision.tile.y);
-			}
-			// create the shape and add it to the temporary array
-			cpShape *shape = cpPolyShapeNew(staticBody, collision.shapeVertCount, polyShapeVerts, cpvzero);
-			cpShapeSetFriction(shape, 1.0);
-			cpSpaceAddShape(space, shape);
-			tempShapes[shapeCount] = shape;
-			shapeCount++;
-		}
-	}
-	
-	// store the array in the ivar
-	shapes = calloc(shapeCount, sizeof(cpShape *));
-	for (int i=0; i<shapeCount; i++) {
-		shapes[i] = tempShapes[i];
-	}
-	
-	free(tempShapes);
+	shapes = [GenerateTilemapOutline(self, space) retain];
 }
 
 - (void)removeFromSpace:(cpSpace *)space {
-	for (int i=0; i<shapeCount; i++) {
-		cpShape *shape = shapes[i];
-		cpSpaceRemoveShape(space, shape);
-		cpShapeFree(shape);
+	for(NSData *data in shapes){
+		cpSpaceRemoveShape(space, (cpShape *)[data bytes]);
 	}
-	free(shapes);
 }
 
 - (void)finalize {

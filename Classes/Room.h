@@ -6,7 +6,7 @@
 	NSMutableArray *layers;
 	Layer *mainLayer;
 	Layer *itemLayer;
-	// mapSize size;
+	mapSize size;
 	
 	// dictionary so that if more than one layer uses the same tile map we only load it once:
 	NSMutableDictionary *maps;

@@ -35,6 +35,10 @@ typedef enum {
 	
 	// physics variables
 	cpSpace *space;
+	
+	double fixedTime;
+	double lastTime;
+	double accumulator;
 }
 
 @property gameMode mode;

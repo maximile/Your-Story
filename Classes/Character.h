@@ -14,6 +14,12 @@
 
 #import "Player.h"
 
+
+struct GroundingContext {
+	cpVect normal;
+	cpBody *body;
+};
+
 @interface Character : Player {
 	cpShape *headShape, *feetShape;
 	
@@ -25,7 +31,7 @@
 	directionMask facing;
 	
 	bool lastJumpState;
-	bool grounded;
+	struct GroundingContext grounding;
 	cpFloat remainingBoost;
 }
 

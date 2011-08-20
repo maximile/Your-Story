@@ -30,7 +30,7 @@
 @property (readonly) pixelSize collisionMapSize;
 
 + (Collision *)collision;
-+ (CollisionShape *)shapeForCoords:(mapCoords)coords data:(unsigned short *)data dataSize:(pixelSize)dataSize;
++ (mapCoords)shapeForCoords:(mapCoords)coords data:(unsigned short *)data dataSize:(pixelSize)dataSize;
 - (CollisionShape *)shapeForTile:(mapCoords)coords;
 
 @end

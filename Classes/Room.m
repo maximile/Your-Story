@@ -5,10 +5,6 @@
 
 @synthesize layers, mainLayer, itemLayer;
 
-- (mapSize)getSize {
-	return mainLayer.size;
-}
-
 - (id)initWithName:(NSString *)roomName {
 	NSString *roomFilePath = [[NSBundle mainBundle] pathForResource:roomName ofType:@"ysroom"];
 	if ([self initWithFile:roomFilePath] == nil) return nil;

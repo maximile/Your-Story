@@ -72,7 +72,8 @@ static Collision *sharedCollision = nil;
 	return nil;
 }
 
-+ (CollisionShape *)shapeForCoords:(mapCoords)coords data:(unsigned short *)data dataSize:(pixelSize)dataSize {
++ (mapCoords)shapeForCoords:(mapCoords)coords data:(unsigned short *)data dataSize:(pixelSize)dataSize;
+{
 	Collision *collision = [Collision collision];
 	unsigned short *collisionMap = collision.collisionMap;
 	int colWidth = collision.collisionMapSize.width;
@@ -80,7 +81,7 @@ static Collision *sharedCollision = nil;
 	int colTilesHigh = collision.collisionMapSize.height / TILE_SIZE;
 	int dataWidth = dataSize.width;
 	
-	CollisionShape *closestShape = nil;
+	mapCoords closestCoords = mapCoordsMake(-1, -1);
 	int lowestDiff = TILE_SIZE * TILE_SIZE;
 	
 	// check against every collision tile
@@ -141,12 +142,12 @@ static Collision *sharedCollision = nil;
 			if (diff < lowestDiff) {
 				// it's a better match
 				lowestDiff = diff;
-				closestShape = referenceShape;
+				closestCoords = mapCoordsMake(colTileX, colTileY);
 			}
 		}
 	}
 		
-	return closestShape;
+	return closestCoords;
 }
 
 @end
