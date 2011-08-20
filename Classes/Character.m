@@ -14,6 +14,8 @@
 #define JUMP_BOOST_HEIGHT 13.0
 #define FALL_VELOCITY 350.0
 
+#define HEAD_FRICTION 0.7
+
 
 @implementation Character
 
@@ -48,11 +50,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpVect surface_v = cpv(target_vx, 0.0);
 	self->feetShape->surface_v = surface_v;
 	self->feetShape->u = (self->grounding.body ? -PLAYER_GROUND_ACCEL/gravity.y : 0.0);
+	self->headShape->u = (self->grounding.body ? HEAD_FRICTION : 0.0);
 	
 	// Apply air control if not grounded
 	if(!self->grounding.body){
 		// Smoothly accelerate the velocity
-		body->v.x = cpflerpconst(body->v.x, target_vx, PLAYER_AIR_ACCEL*dt);
+		body->v.x = cpflerpconst(body->v.x, target_vx + self->groundVelocity.x, PLAYER_AIR_ACCEL*dt);
 	}
 	
 	// Perform a normal-ish update
@@ -70,8 +73,6 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 - (id)init {
 	if ([super init]==nil) return nil;
 	
-	lastJumpState = TRUE;
-	
 	body = cpBodyNew(5, INFINITY);
 	cpBodySetUserData(body, self);
 	body->velocity_func = playerUpdateVelocity;
@@ -81,7 +82,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	headShape = cpCircleShapeNew(body, 4.0, cpv(0, 4));
 	cpShapeSetFriction(headShape, 0.7);
 	
-	feetShape = cpCircleShapeNew(body, 6.0, cpv(0, -2));
+	feetShape = cpCircleShapeNew(body, 4.0, cpv(0, -4));
 //	feetShape = cpBoxShapeNew(body, 12, 16);
 	
 	// drawing resources
@@ -150,16 +151,17 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)update {
-	int jumpState = (self->directionInput & UP);
+	int jumpState = (directionInput & UP);
 	
 	// TODO gravity getting hack
 	cpVect gravity = cpSpaceGetGravity(body->CP_PRIVATE(space));
 	
+	if(grounding.body) groundVelocity = grounding.body->v;
+	
 	// If the jump key was just pressed this frame, jump!
-	if(jumpState && !lastJumpState && (grounding.body || remainingAirJumps)){
+	if(jumpState && !lastJumpKeyState && (grounding.body || remainingAirJumps)){
 		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*-gravity.y);
-		cpFloat ground_v = (grounding.body ? body->v.y : 0.0);
-		body->v.y = ground_v + jump_v;
+		body->v.y = groundVelocity.y + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
 		if(grounding.body){
@@ -171,7 +173,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		remainingBoost = 0.0;
 	}
 	
-	self->lastJumpState = jumpState;
+	lastJumpKeyState = jumpState;
 	
 	if (cpBodyGetVel(body).x < -1) { facing = LEFT; }
 	if (cpBodyGetVel(body).x > 1) { facing = RIGHT; }

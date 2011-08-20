@@ -30,10 +30,21 @@ struct GroundingContext {
 	NSDictionary *rightSprites;
 	directionMask facing;
 	
-	bool lastJumpState;
+	bool lastJumpKeyState;
+	
+	// Body you are standing on and it's normal.
 	struct GroundingContext grounding;
+	
+	// Amount of jump "boost" time remaining.
+	// Gravity is not applied until boost runs out or the jump key is released.
+	// This is very mario-esque.
 	cpFloat remainingBoost;
+	
+	// Number of mid-air jumps remaining to be triggered.
 	int remainingAirJumps;
+	
+	// Velocity of the body last stood on
+	cpVect groundVelocity;
 }
 
 - (void)addToSpace:(cpSpace *)space;
