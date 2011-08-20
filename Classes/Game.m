@@ -151,6 +151,24 @@
 	[self setEditingLayer:currentRoom.mainLayer];
 }
 
+-(void)updateStep {
+	// update physics and let objects update
+	for (GameObject *item in items) {
+		[item update];
+	}
+	
+	cpSpaceStep(space, FIXED_DT);
+}
+
+#import <mach/mach_time.h>
+double getDoubleTime(void)
+{
+	mach_timebase_info_data_t base;
+	mach_timebase_info(&base);
+	
+	return (double)mach_absolute_time()*((double)base.numer/(double)base.denom*1.0e-9);
+}
+
 - (void)updateGame {
 	directionMask directionInput = NOWHERE;
 	// get keyboard input
@@ -161,12 +179,17 @@
 	[player setInput:directionInput];
 	
 	drawCollision = tabKey;
-		
-	// update physics and let objects update
-	for (GameObject *item in items) {
-		[item update];
+	
+	double time = getDoubleTime();
+	double dt = time - lastTime;
+	lastTime = time;
+	
+	accumulator = MIN(accumulator + dt, FIXED_DT*MAX_FRAMESKIP);
+	while(accumulator > FIXED_DT){
+		[self updateStep];
+		accumulator -= FIXED_DT;
+		fixedTime += FIXED_DT;
 	}
-	cpSpaceStep(space, 1.0/60.0);
 }
 
 - (void)update {
