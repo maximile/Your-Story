@@ -151,7 +151,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)update {
 	int jumpState = (self->directionInput & UP);
-	
+		
 	// TODO gravity getting hack
 	cpVect gravity = cpSpaceGetGravity(body->CP_PRIVATE(space));
 	
@@ -167,8 +167,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	self->lastJumpState = jumpState;
 	
-	if (cpBodyGetVel(body).x < -1) { facing = LEFT; }
-	if (cpBodyGetVel(body).x > 1) { facing = RIGHT; }
+	// face in direction of motion
+	if (cpBodyGetVel(body).x < -1) facing = LEFT;
+	if (cpBodyGetVel(body).x > 1) facing = RIGHT;
+	// override this if the user is trying to move in a specific direction
+	if (directionInput & LEFT) facing = LEFT;
+	if (directionInput & RIGHT) facing = RIGHT;
 }
 
 - (void)finalize {
