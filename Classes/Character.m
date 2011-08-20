@@ -19,11 +19,13 @@
 @implementation Character
 
 static void
-SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, cpVect *groundNormal){
+SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, struct GroundingContext *grounding){
+	CP_ARBITER_GET_BODIES(arb, b1, b2);
 	cpVect n = cpvneg(cpArbiterGetNormal(arb, 0));
 	
-	if(n.y > groundNormal->y){
-		(*groundNormal) = n;
+	if(n.y > grounding->normal.y){
+		grounding->normal = n;
+		grounding->body = b2;
 	}
 }
 
@@ -32,25 +34,24 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 {
 	Character *self = cpBodyGetUserData(body);
 	
-	// Grab the grounding normal from last frame
-	cpVect groundNormal = cpvzero;
-	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)SelectPlayerGroundNormal, &groundNormal);
-	
-	self->grounded = (groundNormal.y > 0.0);
+	// Get the grounding information.
+	self->grounding.normal = cpvzero;
+	self->grounding.body = NULL;
+	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)SelectPlayerGroundNormal, &self->grounding);
 	
 	// Reset jump boosting if you hit your head.
-	if(groundNormal.y < 0.0f) self->remainingBoost = 0.0f;
-	
+	if(self->grounding.normal.y < 0.0f) self->remainingBoost = 0.0f;
+		
 	// Target horizontal velocity used by air/ground control
 	cpFloat target_vx = PLAYER_VELOCITY*((self->directionInput & RIGHT ? 1 : 0) - (self->directionInput & LEFT ? 1 : 0));
 	
 	// Update the surface velocity and friction
 	cpVect surface_v = cpv(target_vx, 0.0);
 	self->feetShape->surface_v = surface_v;
-	self->feetShape->u = (self->grounded ? -PLAYER_GROUND_ACCEL/gravity.y : 0.0);
+	self->feetShape->u = (self->grounding.body ? -PLAYER_GROUND_ACCEL/gravity.y : 0.0);
 	
 	// Apply air control if not grounded
-	if(!self->grounded){
+	if(!self->grounding.body){
 		// Smoothly accelerate the velocity
 		body->v.x = cpflerpconst(body->v.x, target_vx, PLAYER_AIR_ACCEL*dt);
 	}
@@ -82,7 +83,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpShapeSetFriction(headShape, 0.7);
 	
 	feetShape = cpCircleShapeNew(body, 6.0, cpv(0, -2));
-//	feetShape = cpBoxShapeNew(body, 16, 16);
+//	feetShape = cpBoxShapeNew(body, 12, 16);
 	
 	// drawing resources
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
@@ -110,7 +111,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpVect pos = cpBodyGetPos(body);
 	cpVect vel = cpBodyGetVel(body);
 	NSString *spriteKey = nil;
-	if (grounded) {  // touching the floor
+	if (grounding.body) {  // touching the floor
 		if (abs(vel.x) > 1) {  // walking
 			// take one step every 16px (unrealistic but it's the only way you can see anything)
 			int cycleIndex = (int)pos.x / 16 % walkCycle.count;
@@ -156,9 +157,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpVect gravity = cpSpaceGetGravity(body->CP_PRIVATE(space));
 	
 	// If the jump key was just pressed this frame, jump!
-	if(jumpState && !lastJumpState && grounded){
+	if(jumpState && !lastJumpState && grounding.body){
 		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*-gravity.y);
-		body->v = cpvadd(body->v, cpv(0.0, jump_v));
+		body->v.y = grounding.body->v.y + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
 	} else if(!jumpState){
