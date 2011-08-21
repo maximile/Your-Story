@@ -1,4 +1,5 @@
 #import "Character.h"
+#import "Jumper.h"
 #import "Texture.h"
 
 
@@ -16,6 +17,8 @@
 
 #define HEAD_FRICTION 0.7
 
+@implementation DamageArea
+@end
 
 @implementation Character
 
@@ -90,6 +93,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	feetShape = cpCircleShapeNew(body, 4.0, cpv(0, -4));
 	// feetShape = cpBoxShapeNew(body, 12, 16);
 	
+	cpShapeSetCollisionType(headShape, [self class]);
+	cpShapeSetCollisionType(feetShape, [self class]);
+	
 	// drawing resources
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	walkCycle = [NSArray arrayWithObjects:@"normal", @"walk1", @"normal", @"walk2", nil];
@@ -119,6 +125,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)draw {
+	if (hurt) {
+		if (hurt%9 > 3) {
+			return;
+		}
+	}
+	
 	cpVect pos = self.position;
 	cpVect vel = cpBodyGetVel(body);
 	
@@ -192,12 +204,48 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	// override this if the user is trying to move in a specific direction
 	if (directionInput & LEFT) facing = LEFT;
 	if (directionInput & RIGHT) facing = RIGHT;
+	
+	if (hurt > 0) hurt--; 
+}
+
+- (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb {
+	if (hurt) {
+		return 0;
+	}
+	cpVect normal = cpArbiterGetNormal(arb, 0);
+	cpVect response = cpvnormalize(cpv(1.0, 1.0));
+	if (normal.x > 0) response.x *= -1;
+	NSLog(@"%f %f", response.x, response.y);
+	cpBodySetVel(body, cpvmult(response, 280));
+	hurt = 100;
+	return 0;
 }
 
 - (void)finalize {
 	cpShapeFree(headShape);
 	cpShapeFree(feetShape);
 	cpBodyFree(body);
+}
+
+- (void)shoot:(cpSpace *)space {
+	cpVect verts[3];
+	// far end of damage area
+	float rangeEnd = SHOTGUN_RANGE;
+	if (facing & LEFT) {
+		verts[0] = cpvzero;
+		verts[1] = cpv(-rangeEnd, -20);
+		verts[2] = cpv(-rangeEnd, 20);
+	}
+	else {
+		verts[0] = cpvzero;
+		verts[1] = cpv(rangeEnd, 20);
+		verts[2] = cpv(rangeEnd, -20);
+	}
+	
+	cpShape *damageShape = cpPolyShapeNew(cpSpaceGetStaticBody(space), 3, verts, cpBodyGetPos(body));
+	cpShapeSetSensor(damageShape, cpTrue);
+	cpShapeSetCollisionType(damageShape, [DamageArea class]);
+	cpSpaceAddShape(space, damageShape);
 }
 
 @end

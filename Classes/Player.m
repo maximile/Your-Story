@@ -3,6 +3,10 @@
 
 @implementation Player
 
+- (void)shoot:(cpSpace *)space {
+	return;
+}
+
 - (id)init {
 	if ([super init]==nil) return nil;
 	

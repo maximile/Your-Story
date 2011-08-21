@@ -31,7 +31,7 @@ typedef enum {
 	BOOL drawCollision;
 	
 	// key pressed flags
-	BOOL upKey, downKey, leftKey, rightKey, tabKey;
+	BOOL upKey, downKey, leftKey, rightKey, tabKey, spaceKey;
 	
 	// physics variables
 	cpSpace *space;
@@ -45,6 +45,7 @@ typedef enum {
 @property (assign) Room *currentRoom;
 @property (assign) Layer *editingLayer;
 @property mapCoords cursorLoc;
+@property (readonly) Player *player;
 
 - (void)draw;
 - (void)update;
@@ -63,6 +64,8 @@ typedef enum {
 
 - (void)tabDown;
 - (void)tabUp;
+- (void)spaceDown;
+- (void)spaceUp;
 
 - (void)numberDown:(int)number;
 

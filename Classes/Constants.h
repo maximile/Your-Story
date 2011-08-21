@@ -9,3 +9,9 @@
 
 #define GRAVITY 1000.0
 #define COLLISION_SLOP 0.25
+
+typedef enum {
+	PLAYER,
+	ENEMY,
+	GUN_DAMAGE_AREA
+} collisionType;

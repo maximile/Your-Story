@@ -1,3 +1,5 @@
+#import <objc/objc.h>
+
 #ifdef __APPLE__
    #import "TargetConditionals.h"
 #endif
@@ -155,7 +157,7 @@ typedef unsigned int cpHashValue;
 	typedef CP_COLLISION_TYPE_TYPE cpCollisionType;
 #else
 /// Type used for cpSpace.collision_type.
-	typedef unsigned int cpCollisionType;
+	typedef id cpCollisionType;
 #endif
 
 #ifdef CP_GROUP_TYPE

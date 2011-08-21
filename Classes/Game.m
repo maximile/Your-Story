@@ -6,10 +6,26 @@
 #import "ItemLayer.h"
 #import "Item.h"
 #import "ChipmunkDebugDraw.h"
+#import "Jumper.h"
+
+static int characterHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
+	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
+	Character *character = characterBody->data;
+	Jumper *jumper = jumperBody->data;
+	return [character hitJumper:jumper arbiter:arb];
+}
+
+static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
+	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
+	Jumper *jumper = jumperBody->data;
+	Game *game = data;
+	[jumper shotFrom:game.player.position];
+	return 0;
+}
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer, cursorLoc;
+@synthesize mode, currentRoom, editingLayer, cursorLoc, player;
 
 - (id)init {
 	if ([super init] == nil) {
@@ -23,6 +39,10 @@
 	cpSpaceSetGravity(space, cpv(0, -GRAVITY));
 	cpSpaceSetCollisionSlop(space, COLLISION_SLOP);
 	cpSpaceSetEnableContactGraph(space, TRUE);
+	
+	// add collision handlers
+	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, characterHitJumper, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, damageAreaHitJumper, NULL, NULL, self);
 	
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 	// [player addToSpace:space];
@@ -199,6 +219,10 @@ double getDoubleTime(void)
 	if (rightKey) { directionInput |= RIGHT; }
 	[player setInput:directionInput];
 	
+	if (spaceKey) {
+		[player shoot:space];
+	}
+	
 	drawCollision = tabKey;
 	
 	double time = getDoubleTime();
@@ -270,6 +294,8 @@ double getDoubleTime(void)
 
 - (void)tabDown {tabKey=YES;}
 - (void)tabUp {tabKey=NO;}
+- (void)spaceDown {spaceKey=YES;}
+- (void)spaceUp {spaceKey=NO;}
 
 - (void)numberDown:(int)number {
 	if (mode == EDITOR_MODE) {

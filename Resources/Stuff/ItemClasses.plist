@@ -4,5 +4,7 @@
 <dict>
 	<key>0,0</key>
 	<string>Character</string>
+	<key>1,0</key>
+	<string>Jumper</string>
 </dict>
 </plist>

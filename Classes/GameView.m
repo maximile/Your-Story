@@ -144,6 +144,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 		case 123: [game leftUp]; break; // leftArrow
 		case 0: [game leftUp]; break; // a
 		case 48: [game tabUp]; break; // tab
+		case 49: [game spaceUp]; break; // space
 		default: break;
 	}
 }
@@ -159,6 +160,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 		case 123: [game leftDown]; break; // leftArrow
 		case 0: [game leftDown]; break; // a
 		case 48: [game tabDown]; break; // tab
+		case 49: [game spaceDown]; break; // space
 		default: break;
 	}
 	// test for number input

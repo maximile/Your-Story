@@ -68,6 +68,7 @@
 		66CBE08D13C25AED00D73D1F /* FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE08C13C25AED00D73D1F /* FBO.m */; };
 		66CBE0B713C26C8B00D73D1F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CBE0B613C26C8B00D73D1F /* Game.m */; };
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
+		66CD9891140098E40089AFED /* Jumper.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CD9890140098E40089AFED /* Jumper.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
@@ -185,6 +186,8 @@
 		66CBE0B513C26C8B00D73D1F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		66CBE0B613C26C8B00D73D1F /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
+		66CD988F140098E40089AFED /* Jumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jumper.h; sourceTree = "<group>"; };
+		66CD9890140098E40089AFED /* Jumper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jumper.m; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				660B803E13C0D88D001ECF63 /* Layer.m */,
 				66CA1F9713FDC697003DF8A2 /* ItemLayer.h */,
 				66CA1F9813FDC697003DF8A2 /* ItemLayer.m */,
+				66CD988F140098E40089AFED /* Jumper.h */,
+				66CD9890140098E40089AFED /* Jumper.m */,
 				66CAD5A113CA2C4500798383 /* Player.h */,
 				66CAD5A213CA2C4500798383 /* Player.m */,
 				D3BA93DB13FB91DD0005173B /* Character.h */,
@@ -585,6 +590,7 @@
 				D3BA93DD13FB91DD0005173B /* Character.m in Sources */,
 				66CA1F9913FDC697003DF8A2 /* ItemLayer.m in Sources */,
 				66CA1F9C13FDC765003DF8A2 /* Item.m in Sources */,
+				66CD9891140098E40089AFED /* Jumper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

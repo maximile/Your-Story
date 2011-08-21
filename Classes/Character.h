@@ -11,9 +11,11 @@
 #import "chipmunk.h"
 #import "Types.h"
 #import "Sprite.h"
-
+#import "Jumper.h"
 #import "Player.h"
 
+// furthest distance that damage will be taken
+#define SHOTGUN_RANGE 100
 
 struct CharacterGroundingContext {
 	cpVect normal;
@@ -21,6 +23,9 @@ struct CharacterGroundingContext {
 	
 	cpBody *body;
 };
+
+@interface DamageArea : NSObject {}
+@end
 
 @interface Character : Player {
 	cpShape *headShape, *feetShape;
@@ -31,6 +36,9 @@ struct CharacterGroundingContext {
 	NSDictionary *leftSprites;
 	NSDictionary *rightSprites;
 	directionMask facing;
+	
+	// number of frames of inlvulnerability (e.g. after hitting an enemy)
+	int hurt;
 	
 	bool lastJumpKeyState;
 	
@@ -54,5 +62,7 @@ struct CharacterGroundingContext {
 
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
+
+- (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb;
 
 @end
