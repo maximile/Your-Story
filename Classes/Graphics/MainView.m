@@ -1,6 +1,6 @@
 #import <OpenGL/gl.h>
 
-#import "GameView.h"
+#import "MainView.h"
 #import "Constants.h"
 #import "Room.h"
 #import "Types.h"

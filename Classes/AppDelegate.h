@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "GameView.h"
+#import "MainView.h"
 #import "Game.h"
 
 @interface AppDelegate : NSObject {
