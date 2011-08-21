@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Types.h"
 #import "chipmunk.h"
+#import "Game.h"
 
 @interface Item : NSObject {
 	pixelCoords startingPosition;
@@ -11,6 +12,6 @@
 
 - (id)initWithPosition:(pixelCoords)newPosition;
 - (void)draw;
-- (void)update;
+- (void)update:(Game *)game;
 
 @end

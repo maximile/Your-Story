@@ -1,6 +1,8 @@
 #import <Cocoa/Cocoa.h>
 #import "Game.h"
 
+@class Item;
+
 @interface Game (Items)
 
 // add or remove item to the game (when it's next safe to do so)

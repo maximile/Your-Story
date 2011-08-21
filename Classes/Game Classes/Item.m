@@ -13,7 +13,7 @@
 - (void)draw {
 	return;
 }
-- (void)update {
+- (void)update:(Game *)game {
 	return;
 }
 

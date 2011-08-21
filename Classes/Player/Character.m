@@ -174,7 +174,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpSpaceRemoveShape(space, feetShape);
 }
 
-- (void)update {
+- (void)update:(Game *)game {
 	int jumpState = (directionInput & UP);
 	
 	wellGrounded = (grounding.body && cpfabs(grounding.normal.x/grounding.normal.y) < feetShape->u);

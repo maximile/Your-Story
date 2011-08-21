@@ -225,7 +225,7 @@
 				66C745DF1401AE5A00C6FE04 /* Game */,
 				66C745E41401AE5A00C6FE04 /* Game Classes */,
 				66C745EB1401AE5A00C6FE04 /* Graphics */,
-				66C745F81401AE5A00C6FE04 /* Players */,
+				66C745F81401AE5A00C6FE04 /* Player */,
 				66C745FD1401AE5A00C6FE04 /* Structure */,
 				66C75B8A13BE801C002D8411 /* AppDelegate.h */,
 				66C75B8B13BE801C002D8411 /* AppDelegate.m */,
@@ -400,7 +400,7 @@
 			path = Graphics;
 			sourceTree = "<group>";
 		};
-		66C745F81401AE5A00C6FE04 /* Players */ = {
+		66C745F81401AE5A00C6FE04 /* Player */ = {
 			isa = PBXGroup;
 			children = (
 				66C745F91401AE5A00C6FE04 /* Character.h */,
@@ -408,7 +408,7 @@
 				66C745FB1401AE5A00C6FE04 /* Player.h */,
 				66C745FC1401AE5A00C6FE04 /* Player.m */,
 			);
-			path = Players;
+			path = Player;
 			sourceTree = "<group>";
 		};
 		66C745FD1401AE5A00C6FE04 /* Structure */ = {

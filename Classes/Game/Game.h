@@ -1,9 +1,10 @@
 #import <Cocoa/Cocoa.h>
 #import "Room.h"
-#import "Player.h"
 #import "Types.h"
 #import "TileMap.h"
 #import "chipmunk.h"
+
+@class Player;
 
 typedef enum {
 	GAME_MODE,

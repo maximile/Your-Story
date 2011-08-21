@@ -93,10 +93,6 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 	for (Item *item in roomItems) {
 		NSLog(@"%@", item);
 		[self addItem:item];
-		// [items addObject:item];
-		// if ([item respondsToSelector:@selector(addToSpace:)]) {
-		// 	[(PhysicsObject *)item addToSpace:space];
-		// }
 		if ([item isKindOfClass:[Player class]]) {
 			player = (Player *)item;
 		}
@@ -106,9 +102,11 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 }
 
 -(void)updateStep {
+	[self addAndRemoveItems];
+	
 	// update physics and let objects update
 	for (Item *item in items) {
-		[item update];
+		[item update:self];
 	}
 	
 	cpSpaceStep(space, FIXED_DT);
@@ -123,9 +121,7 @@ double getDoubleTime(void)
 	return (double)mach_absolute_time()*((double)base.numer/(double)base.denom*1.0e-9);
 }
 
-- (void)updateGame {
-	[self addAndRemoveItems];
-	
+- (void)updateGame {	
 	directionMask directionInput = NOWHERE;
 	// get keyboard input
 	if (upKey) { directionInput |= UP; }
