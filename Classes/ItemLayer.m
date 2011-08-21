@@ -3,11 +3,13 @@
 
 @implementation ItemLayer
 
-- (id)initWithDictionary:(NSDictionary *)info {
-	if ([super initWithDictionary:info] == nil) return nil;
-	
-	map = [TileMap mapNamed:@"ItemTiles"];
-	
+- (id)initWithDictionary:(NSDictionary *)info size:(mapSize)newSize {
+	if ([info valueForKey:@"Map"] == nil) {
+		info = [NSMutableDictionary dictionaryWithDictionary:info];
+		[info setValue:@"ItemTiles.psd" forKey:@"Map"];
+	}
+	if ([super initWithDictionary:info size:newSize] == nil) return nil;
+		
 	return self;
 }
 
@@ -21,7 +23,7 @@
 			int index = y*size.width + x;
 			mapCoords tileCoords = tiles[index];
 			if (tileCoords.x < 0 || tileCoords.y < 0) continue;
-			NSString *mapCoordsString = [NSString stringWithFormat:@"%i,%i"];
+			NSString *mapCoordsString = [NSString stringWithFormat:@"%i,%i", tileCoords.x, tileCoords.y];
 			
 			// check for tile with no class set
 			NSString *className = [itemClasses valueForKey:mapCoordsString];
@@ -38,7 +40,8 @@
 			}
 			
 			// got a valid class; instantiate it
-			Item *newItem = [[itemClass alloc] initWithPosition:mapCoordsMake(x, y)];
+			pixelCoords tileCentre = pixelCoordsMake(x * TILE_SIZE + TILE_SIZE/2, (size.height - y - 1) * TILE_SIZE + TILE_SIZE/2);
+			Item *newItem = [[itemClass alloc] initWithPosition:tileCentre];
 			[items addObject:newItem];
 		}
 	}

@@ -2,11 +2,11 @@
 
 @implementation Item
 
-- (id)initWithPosition:(mapCoords)newPosition {
+- (id)initWithPosition:(pixelCoords)newPosition {
 	if ([super init] == nil) return nil;
 	
-	position = newPosition;
-	NSLog(@"%i, %i", position.x, position.y);
+	startingPosition = newPosition;
+	NSLog(@"%i, %i", startingPosition.x, startingPosition.y);
 	
 	return self;
 }

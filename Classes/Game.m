@@ -4,7 +4,7 @@
 #import "Game+Editor.h"
 #import "Character.h"
 #import "ItemLayer.h"
-
+#import "Item.h"
 #import "ChipmunkDebugDraw.h"
 
 @implementation Game
@@ -16,8 +16,8 @@
 		return nil;
 	}
 	items = [[NSMutableArray alloc] initWithCapacity:0];
-	player = [[Character alloc] init];
-	[items addObject:player];
+	// player = [[Character alloc] init];
+	// [items addObject:player];
 	
 	space = cpSpaceNew();
 	cpSpaceSetGravity(space, cpv(0, -GRAVITY));
@@ -25,8 +25,8 @@
 	cpSpaceSetEnableContactGraph(space, TRUE);
 	
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
-	[player addToSpace:space];
-	player.position = cpv(235, 232);
+	// [player addToSpace:space];
+	// player.position = cpv(235, 232);
 	
 	uiMap = [TileMap mapNamed:@"UI"];
 	
@@ -77,8 +77,8 @@
 
 	// draw layers
 	for (Layer *layer in currentRoom.layers) {
-		glPushMatrix();
 		if ([layer isKindOfClass:[ItemLayer class]]) continue;
+		glPushMatrix();
 		
 		// parallax transformation
 		float parallax = layer.parallax;
@@ -150,8 +150,23 @@
 	if (currentRoom == newRoom) return;
 	[currentRoom.mainLayer removeFromSpace:space];
 	currentRoom = newRoom;
+	
+	// add room collision shapes
 	[currentRoom.mainLayer addToSpace:space];
-	[self setEditingLayer:currentRoom.mainLayer];
+	
+	// add items from room
+	NSArray *roomItems = [currentRoom.itemLayer items];
+	for (Item *item in roomItems) {
+		[items addObject:item];
+		if ([item respondsToSelector:@selector(addToSpace:)]) {
+			[(PhysicsObject *)item addToSpace:space];
+		}
+		if ([item isKindOfClass:[Player class]]) {
+			player = (Player *)item;
+		}
+	}
+	
+	[self setEditingLayer:currentRoom.mainLayer];	
 }
 
 -(void)updateStep {
@@ -255,11 +270,18 @@ double getDoubleTime(void)
 
 - (void)numberDown:(int)number {
 	if (mode == EDITOR_MODE) {
-		if (number - 1 >= currentRoom.layers.count) {
+		int newLayerIndex = number - 1;
+		int layerCount = currentRoom.layers.count;
+		if (newLayerIndex >= layerCount) {
 			NSBeep();
 			return;
 		}
-		[self setEditingLayer:[currentRoom.layers objectAtIndex:number - 1]];
+		if (number == 0) {
+			[self setEditingLayer:currentRoom.itemLayer];
+		}
+		else {
+			[self setEditingLayer:[currentRoom.layers objectAtIndex:number - 1]];
+		}
 	}
 }
 

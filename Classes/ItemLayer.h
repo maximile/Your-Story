@@ -5,4 +5,6 @@
 
 }
 
+- (NSArray *)items;
+
 @end

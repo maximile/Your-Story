@@ -18,19 +18,33 @@
 	maps = [[NSMutableDictionary alloc] initWithCapacity:0];
 	
 	NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:path];
+	
+	// get size
+	NSString *sizeString = [info valueForKey:@"Size"];
+	NSArray *components = [sizeString componentsSeparatedByString:@","];
+	size = mapSizeMake([[components objectAtIndex:0] intValue], [[components objectAtIndex:1] intValue]);
+	
 	// create layer objects
 	layers = [NSMutableArray arrayWithCapacity:0];
 	for (NSDictionary *layerInfo in [info valueForKey:@"Layers"]) {
 		if ([[layerInfo valueForKey:@"Items"] boolValue]) {
 			// special layer for locating items; don't add to array
-			itemLayer = [[ItemLayer alloc] initWithDictionary:layerInfo];
+			itemLayer = [[ItemLayer alloc] initWithDictionary:layerInfo size:size];
 			continue;
 		}
-		Layer *layer = [[Layer alloc] initWithDictionary:layerInfo];
+		Layer *layer = [[Layer alloc] initWithDictionary:layerInfo size:size];
 		[layers addObject:layer];
 		if ([[layerInfo valueForKey:@"Main"] boolValue]) {
 			mainLayer = layer;
 		}
+	}
+	
+	if (itemLayer == nil) {
+		itemLayer = [[ItemLayer alloc] initWithDictionary:nil size:size];
+	}  
+	
+	if (size.width < 1 || size.height < 1) {
+		size = mainLayer.size;
 	}
 	
 	return self;
@@ -54,6 +68,8 @@
 	}
 	
 	[info setValue:layerArray forKey:@"Layers"];
+	
+	[info setValue:[NSString stringWithFormat:@"%i,%i", size.width, size.height] forKey:@"Size"];
 	
 	[info writeToFile:path atomically:NO];
 }

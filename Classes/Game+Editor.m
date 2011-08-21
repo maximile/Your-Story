@@ -5,7 +5,9 @@
 - (void)drawEditor {
 	mapCoords focus = [self cameraTargetForFocus:editorFocus];
 	if (drawOtherLayers) {
-		for (Layer *layer in currentRoom.layers) {
+		NSMutableArray *layersToDraw = [NSMutableArray arrayWithArray:currentRoom.layers];
+		[layersToDraw addObject:currentRoom.itemLayer];
+		for (Layer *layer in layersToDraw) {
 			glPushMatrix();
 
 			// parallax transformation

@@ -3,9 +3,9 @@
 #import "Types.h"
 
 @interface Item : GameObject {
-	mapCoords position;
+	pixelCoords startingPosition;
 }
 
-- (id)initWithPosition:(mapCoords)newPosition;
+- (id)initWithPosition:(pixelCoords)newPosition;
 
 @end

@@ -7,14 +7,12 @@
 @public
 	mapSize size;
 	TileMap *map;
-
-@private
 	// an array of tiles for the layer, each tile represented by
 	// the coordinates of the corresponding tile on the map
 	mapCoords *tiles;
-	
+
+@private
 	float parallax;
-	
 	// collision data
 	NSArray *shapes;
 }
@@ -24,7 +22,7 @@
 
 // - (id)initWithString:(NSString *)string map:(TileMap *)newMap;
 // - (id)initWithString:(NSString *)string map:(TileMap *)newMap parallax:(float)newParallax;
-- (id)initWithDictionary:(NSDictionary *)infoDict;
+- (id)initWithDictionary:(NSDictionary *)infoDict size:(mapSize)size;
 - (void)drawRect:(mapRect)rect ignoreParallax:(BOOL)ignoreParallax;
 
 - (void)setTile:(mapCoords)tile at:(mapCoords)loc;

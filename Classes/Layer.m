@@ -27,8 +27,10 @@
 	return tiles[loc.y * size.width + loc.x];
 }
 
-- (id)initWithDictionary:(NSDictionary *)info {
+- (id)initWithDictionary:(NSDictionary *)info size:(mapSize)newSize {
 	if ([super init] == nil) return nil;
+	
+	size = newSize;
 	
 	// set map
 	id mapId = [info valueForKey:@"Map"];
@@ -101,7 +103,10 @@
 	if (rows.count < 1) {
 		NSLog(@"No rows in string.");
 	}
-	int rowLength = [[rows objectAtIndex:0] count];
+	int rowLength = -1;
+	if (rows.count) {
+		rowLength = [[rows objectAtIndex:0] count];
+	}
 	for (NSArray *row in rows) {
 		if (row.count != rowLength) {
 			NSLog(@"All rows must be the same length.");
@@ -109,23 +114,36 @@
 	}
 	
 	// now make the tile data
-	int width = rowLength;
-	int height = rows.count;
-	size = mapSizeMake(width, height);
-	tiles = calloc(width*height, sizeof(mapCoords));
+	int dataWidth = rowLength;
+	int dataHeight = rows.count;
 	
-	for (int y=0; y<height; y++) {
-		for (int x=0; x<width; x++) {
-			int index = y*width + x;
+	// overwrite size if the layer parallaxes (it needs to repeat)
+	if (parallax != 1.0) {
+		size = mapSizeMake(dataWidth, dataHeight);
+	}
+	
+	// no size set? Use data size
+	if (size.width < 1 || size.height < 1) {
+		size = mapSizeMake(dataWidth, dataHeight);
+	}
+
+	tiles = calloc(size.width * size.height, sizeof(mapCoords));
+	
+	for (int y=0; y < size.height; y++) {
+		for (int x=0; x < size.width; x++) {
+			int index = y * size.width + x;
+			if (y > dataHeight || x > dataWidth) {
+				tiles[index] = NO_TILE;
+				continue;
+			}
 			NSDictionary *tileInfo = [[rows objectAtIndex:y] objectAtIndex:x];
 			if (tileInfo.count == 0) {
 				tiles[index] = NO_TILE;
+				continue;
 			}
-			else {
-				int xCoord = [[tileInfo valueForKey:@"x"] intValue];
-				int yCoord = [[tileInfo valueForKey:@"y"] intValue];
-				tiles[index] = mapCoordsMake(xCoord, yCoord);
-			}
+			int xCoord = [[tileInfo valueForKey:@"x"] intValue];
+			int yCoord = [[tileInfo valueForKey:@"y"] intValue];
+			tiles[index] = mapCoordsMake(xCoord, yCoord);
 		}
 	}
 }
@@ -143,7 +161,7 @@
 	}
 	[info setValue:tilesString forKey:@"Tiles"];
 	
-	return [[Layer alloc] initWithDictionary:info];
+	return [[Layer alloc] initWithDictionary:info size:map.size];
 }
 
 - (mapCoords)tileCoordsForMapCoords:(mapCoords)coords ignoreParallax:(BOOL)ignoreParallax;

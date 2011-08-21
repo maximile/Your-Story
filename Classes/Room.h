@@ -1,11 +1,12 @@
 #import <Cocoa/Cocoa.h>
 #import "TileMap.h"
 #import "Layer.h"
+#import "ItemLayer.h"
 
 @interface Room : NSObject {	
 	NSMutableArray *layers;
 	Layer *mainLayer;
-	Layer *itemLayer;
+	ItemLayer *itemLayer;
 	mapSize size;
 	
 	// dictionary so that if more than one layer uses the same tile map we only load it once:
@@ -17,7 +18,7 @@
 // the layer that the player interacts with
 @property (readonly) Layer *mainLayer;
 // special layer to locate items
-@property (readonly) Layer *itemLayer;
+@property (readonly) ItemLayer *itemLayer;
 
 - (TileMap *)getMap:(NSString *)mapName;
 - (id)initWithName:(NSString *)roomName;
