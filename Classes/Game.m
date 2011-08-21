@@ -100,9 +100,12 @@
 			[layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
 			
 			if(drawCollision && layer == currentRoom.mainLayer){
-				glEnableClientState(GL_VERTEX_ARRAY);
+				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+				glDisable(GL_TEXTURE_2D);
 				ChipmunkDebugDrawShapes(space);
-				glDisableClientState(GL_VERTEX_ARRAY);
+				glEnable(GL_TEXTURE_2D);
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+				glColor3f(1,1,1);
 			}
 		}
 		

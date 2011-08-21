@@ -194,20 +194,43 @@
 	}
 }
 
-extern NSMutableArray *GenerateTilemapOutline(Layer *layer, cpSpace *space);
+extern struct BoundarySegment *GenerateTilemapOutline(Layer *layer, int *segmentCount);
 
 - (void)addToSpace:(cpSpace *)space {
-	shapes = [GenerateTilemapOutline(self, space) retain];
+	segments = GenerateTilemapOutline(self, &segmentCount);
+	shapes = calloc(segmentCount, sizeof(cpShape *));
+	
+	cpBody *staticBody = cpSpaceGetStaticBody(space);
+	
+	for(int i=0; i<segmentCount; i++){
+		struct BoundarySegment segment = segments[i];
+		
+		// Contract the ends slightly to avoid the "bumps" from hitting a protuding corner.
+		// Not an ideal solution but seems to work perfectly in practice.
+		cpFloat radius = 0.5;
+		cpVect tangent = cpvnormalize(cpvsub(segment.b, segment.a));
+		cpVect a = cpvadd(segment.a, cpvmult(tangent, radius));
+		cpVect b = cpvsub(segment.b, cpvmult(tangent, radius));
+		
+		cpShape *shape = cpSegmentShapeNew(staticBody, a, b, radius);
+		cpShapeSetFriction(shape, 1.0);
+		shapes[i] = shape;
+		
+		cpSpaceAddShape(space, shape);
+	}
 }
 
 - (void)removeFromSpace:(cpSpace *)space {
-	for(NSData *data in shapes){
-		cpSpaceRemoveShape(space, (cpShape *)[data bytes]);
+	for(int i=0; i<segmentCount; i++){
+		cpSpaceRemoveShape(space, shapes[i]);
 	}
 }
 
 - (void)finalize {
 	free(tiles);
+	free(segments);
+	free(shapes);
+	
 	[super finalize];
 }
 

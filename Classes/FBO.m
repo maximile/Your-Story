@@ -80,8 +80,9 @@
 }
 
 - (void)finalize {
-	glDeleteFramebuffersEXT(1, &name);
-	glDeleteTextures(1,&textureName);
+	// TODO crap finalizers run on a different thread.
+//	glDeleteFramebuffersEXT(1, &name);
+//	glDeleteTextures(1,&textureName);
 	[super finalize];
 }
 

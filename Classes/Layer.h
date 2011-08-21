@@ -3,6 +3,10 @@
 #import "Types.h"
 #import "chipmunk.h"
 
+struct BoundarySegment {
+	cpVect a, b;
+};
+
 @interface Layer : NSObject {
 @public
 	mapSize size;
@@ -14,7 +18,9 @@
 @private
 	float parallax;
 	// collision data
-	NSArray *shapes;
+	int segmentCount;
+	struct BoundarySegment *segments;
+	cpShape **shapes;
 }
 
 @property mapSize size;
