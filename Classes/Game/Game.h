@@ -53,9 +53,6 @@ typedef enum {
 - (void)draw;
 - (void)update;
 
-- (mapCoords)cameraTargetForFocus:(cpVect)focus;
-- (void)drawGame;
-
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;
 

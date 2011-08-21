@@ -6,7 +6,6 @@
 	if ([super init] == nil) return nil;
 	
 	startingPosition = newPosition;
-	NSLog(@"%i, %i", startingPosition.x, startingPosition.y);
 	
 	return self;
 }

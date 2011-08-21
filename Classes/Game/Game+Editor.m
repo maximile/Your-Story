@@ -1,4 +1,5 @@
 #import "Game+Editor.h"
+#import "Game+Drawing.h"
 
 @implementation Game (Editor)
 
