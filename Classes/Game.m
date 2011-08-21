@@ -20,7 +20,8 @@
 	[items addObject:player];
 	
 	space = cpSpaceNew();
-	cpSpaceSetGravity(space, cpv(0, -1000));
+	cpSpaceSetGravity(space, cpv(0, -GRAVITY));
+	cpSpaceSetCollisionSlop(space, COLLISION_SLOP);
 	cpSpaceSetEnableContactGraph(space, TRUE);
 	
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
