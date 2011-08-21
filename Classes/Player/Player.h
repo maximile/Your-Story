@@ -14,6 +14,6 @@
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
 - (void)setInput:(directionMask)direction;
-- (void)shoot:(cpSpace *)space;
+- (void)shoot:(Game *)game;
 
 @end

@@ -5,6 +5,7 @@
 #import "Game+Input.h"
 #import "Game+Drawing.h"
 #import "Character.h"
+#import "DamageArea.h"
 #import "ItemLayer.h"
 #import "Item.h"
 #import "Jumper.h"
@@ -26,7 +27,12 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer, cursorLoc, player;
+@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space;
+
+static Game *game = nil;
++ (Game *)game {
+	return game;
+}
 
 - (id)init {
 	if ([super init] == nil) {
@@ -49,6 +55,8 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 		
 	uiMap = [TileMap mapNamed:@"UI"];
+	
+	game = self;
 	
 	return self;
 }
@@ -131,7 +139,7 @@ double getDoubleTime(void)
 	[player setInput:directionInput];
 	
 	if (spaceKey) {
-		[player shoot:space];
+		[player shoot:self];
 	}
 	
 	drawCollision = tabKey;

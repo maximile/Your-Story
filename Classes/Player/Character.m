@@ -1,7 +1,8 @@
 #import "Character.h"
 #import "Jumper.h"
 #import "Texture.h"
-
+#import "DamageArea.h"
+#import "Game+Items.h"
 
 #define PLAYER_VELOCITY 100.0
 
@@ -16,9 +17,6 @@
 #define FALL_VELOCITY 250.0
 
 #define HEAD_FRICTION 0.7
-
-@implementation DamageArea
-@end
 
 @implementation Character
 
@@ -227,25 +225,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpBodyFree(body);
 }
 
-- (void)shoot:(cpSpace *)space {
-	cpVect verts[3];
-	// far end of damage area
-	float rangeEnd = SHOTGUN_RANGE;
-	if (facing & LEFT) {
-		verts[0] = cpvzero;
-		verts[1] = cpv(-rangeEnd, -20);
-		verts[2] = cpv(-rangeEnd, 20);
-	}
-	else {
-		verts[0] = cpvzero;
-		verts[1] = cpv(rangeEnd, 20);
-		verts[2] = cpv(rangeEnd, -20);
-	}
-	
-	cpShape *damageShape = cpPolyShapeNew(cpSpaceGetStaticBody(space), 3, verts, cpBodyGetPos(body));
-	cpShapeSetSensor(damageShape, cpTrue);
-	cpShapeSetCollisionType(damageShape, [DamageArea class]);
-	cpSpaceAddShape(space, damageShape);
+- (void)shoot:(Game *)game {
+	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
+	[game addItem:damage];
 }
 
 @end

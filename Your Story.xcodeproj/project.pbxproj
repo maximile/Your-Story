@@ -35,6 +35,7 @@
 		66C746241401AF2000C6FE04 /* Game+Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746231401AF2000C6FE04 /* Game+Items.m */; };
 		66C746291401B08F00C6FE04 /* Game+Input.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746281401B08F00C6FE04 /* Game+Input.m */; };
 		66C7467F1401B76B00C6FE04 /* Game+Drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7467E1401B76B00C6FE04 /* Game+Drawing.m */; };
+		66C746B61401C14E00C6FE04 /* DamageArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746B51401C14E00C6FE04 /* DamageArea.m */; };
 		66C75B8C13BE801C002D8411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75B8B13BE801C002D8411 /* AppDelegate.m */; };
 		66C75BF413BE83A0002D8411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75BF313BE83A0002D8411 /* main.m */; };
 		66C75C3913BE83F8002D8411 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C75C1813BE83F8002D8411 /* chipmunk.c */; };
@@ -132,6 +133,8 @@
 		66C746281401B08F00C6FE04 /* Game+Input.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Input.m"; sourceTree = "<group>"; };
 		66C7467D1401B76B00C6FE04 /* Game+Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Game+Drawing.h"; sourceTree = "<group>"; };
 		66C7467E1401B76B00C6FE04 /* Game+Drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Drawing.m"; sourceTree = "<group>"; };
+		66C746B41401C14E00C6FE04 /* DamageArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageArea.h; sourceTree = "<group>"; };
+		66C746B51401C14E00C6FE04 /* DamageArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageArea.m; sourceTree = "<group>"; };
 		66C75B8A13BE801C002D8411 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66C75B8B13BE801C002D8411 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		66C75B9213BE8060002D8411 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 				66C745FA1401AE5A00C6FE04 /* Character.m */,
 				66C745FB1401AE5A00C6FE04 /* Player.h */,
 				66C745FC1401AE5A00C6FE04 /* Player.m */,
+				66C746B41401C14E00C6FE04 /* DamageArea.h */,
+				66C746B51401C14E00C6FE04 /* DamageArea.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -653,6 +658,7 @@
 				66C746241401AF2000C6FE04 /* Game+Items.m in Sources */,
 				66C746291401B08F00C6FE04 /* Game+Input.m in Sources */,
 				66C7467F1401B76B00C6FE04 /* Game+Drawing.m in Sources */,
+				66C746B61401C14E00C6FE04 /* DamageArea.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

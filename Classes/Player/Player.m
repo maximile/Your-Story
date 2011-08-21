@@ -3,7 +3,7 @@
 
 @implementation Player
 
-- (void)shoot:(cpSpace *)space {
+- (void)shoot:(Game *)game {
 	return;
 }
 

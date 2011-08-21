@@ -50,6 +50,9 @@ typedef enum {
 @property (assign) Layer *editingLayer;
 @property mapCoords cursorLoc;
 @property (readonly) Player *player;
+@property (readonly) cpSpace *space;
+
++ (Game *)game;
 
 - (void)draw;
 - (void)update;
