@@ -1,13 +1,10 @@
 #import <Cocoa/Cocoa.h>
 #import "chipmunk.h"
-#import "GameObject.h"
+#import "Item.h"
 
-@interface PhysicsObject : GameObject {
+@interface PhysicsObject : Item {
 	cpBody *body;
 }
-
-- (void)addToSpace:(cpSpace *)space;
-- (void)removeFromSpace:(cpSpace *)space;
 
 @property cpVect position;
 

@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "FBO.h"
-#import "Game.h"
+#import "Game+Input.h"
 
 @interface GameView : NSOpenGLView {
 	int scaleFactor;

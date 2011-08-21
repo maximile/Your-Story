@@ -77,7 +77,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	body->v.y = cpfclamp(body->v.y, -FALL_VELOCITY, INFINITY);
 }
 
-- (id)initWithPosition:(mapCoords)position {
+- (id)initWithPosition:(pixelCoords)position {
 	if ([super init]==nil) return nil;
 	
 	body = cpBodyNew(5, INFINITY);

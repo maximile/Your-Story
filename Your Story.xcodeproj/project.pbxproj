@@ -19,7 +19,6 @@
 		66C746041401AE5A00C6FE04 /* Jumper.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745DE1401AE5A00C6FE04 /* Jumper.m */; };
 		66C746051401AE5A00C6FE04 /* Game+Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745E11401AE5A00C6FE04 /* Game+Editor.m */; };
 		66C746061401AE5A00C6FE04 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745E31401AE5A00C6FE04 /* Game.m */; };
-		66C746071401AE5A00C6FE04 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745E61401AE5A00C6FE04 /* GameObject.m */; };
 		66C746081401AE5A00C6FE04 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745E81401AE5A00C6FE04 /* Item.m */; };
 		66C746091401AE5A00C6FE04 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745EA1401AE5A00C6FE04 /* PhysicsObject.m */; };
 		66C7460A1401AE5A00C6FE04 /* Collision.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745ED1401AE5A00C6FE04 /* Collision.m */; };
@@ -33,6 +32,8 @@
 		66C746121401AE5A00C6FE04 /* ItemLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745FF1401AE5A00C6FE04 /* ItemLayer.m */; };
 		66C746131401AE5A00C6FE04 /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746011401AE5A00C6FE04 /* Layer.m */; };
 		66C746141401AE5A00C6FE04 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746031401AE5A00C6FE04 /* Room.m */; };
+		66C746241401AF2000C6FE04 /* Game+Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746231401AF2000C6FE04 /* Game+Items.m */; };
+		66C746291401B08F00C6FE04 /* Game+Input.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746281401B08F00C6FE04 /* Game+Input.m */; };
 		66C75B8C13BE801C002D8411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75B8B13BE801C002D8411 /* AppDelegate.m */; };
 		66C75BF413BE83A0002D8411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75BF313BE83A0002D8411 /* main.m */; };
 		66C75C3913BE83F8002D8411 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C75C1813BE83F8002D8411 /* chipmunk.c */; };
@@ -97,8 +98,6 @@
 		66C745E11401AE5A00C6FE04 /* Game+Editor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Editor.m"; sourceTree = "<group>"; };
 		66C745E21401AE5A00C6FE04 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		66C745E31401AE5A00C6FE04 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
-		66C745E51401AE5A00C6FE04 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
-		66C745E61401AE5A00C6FE04 /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		66C745E71401AE5A00C6FE04 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		66C745E81401AE5A00C6FE04 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		66C745E91401AE5A00C6FE04 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
@@ -126,6 +125,10 @@
 		66C746021401AE5A00C6FE04 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
 		66C746031401AE5A00C6FE04 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
 		66C746171401AE8400C6FE04 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		66C746221401AF2000C6FE04 /* Game+Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Game+Items.h"; sourceTree = "<group>"; };
+		66C746231401AF2000C6FE04 /* Game+Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Items.m"; sourceTree = "<group>"; };
+		66C746271401B08F00C6FE04 /* Game+Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Game+Input.h"; sourceTree = "<group>"; };
+		66C746281401B08F00C6FE04 /* Game+Input.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Input.m"; sourceTree = "<group>"; };
 		66C75B8A13BE801C002D8411 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66C75B8B13BE801C002D8411 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		66C75B9213BE8060002D8411 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -354,6 +357,10 @@
 				66C745E11401AE5A00C6FE04 /* Game+Editor.m */,
 				66C745E21401AE5A00C6FE04 /* Game.h */,
 				66C745E31401AE5A00C6FE04 /* Game.m */,
+				66C746221401AF2000C6FE04 /* Game+Items.h */,
+				66C746231401AF2000C6FE04 /* Game+Items.m */,
+				66C746271401B08F00C6FE04 /* Game+Input.h */,
+				66C746281401B08F00C6FE04 /* Game+Input.m */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -361,8 +368,6 @@
 		66C745E41401AE5A00C6FE04 /* Game Classes */ = {
 			isa = PBXGroup;
 			children = (
-				66C745E51401AE5A00C6FE04 /* GameObject.h */,
-				66C745E61401AE5A00C6FE04 /* GameObject.m */,
 				66C745E71401AE5A00C6FE04 /* Item.h */,
 				66C745E81401AE5A00C6FE04 /* Item.m */,
 				66C745E91401AE5A00C6FE04 /* PhysicsObject.h */,
@@ -627,7 +632,6 @@
 				66C746041401AE5A00C6FE04 /* Jumper.m in Sources */,
 				66C746051401AE5A00C6FE04 /* Game+Editor.m in Sources */,
 				66C746061401AE5A00C6FE04 /* Game.m in Sources */,
-				66C746071401AE5A00C6FE04 /* GameObject.m in Sources */,
 				66C746081401AE5A00C6FE04 /* Item.m in Sources */,
 				66C746091401AE5A00C6FE04 /* PhysicsObject.m in Sources */,
 				66C7460A1401AE5A00C6FE04 /* Collision.m in Sources */,
@@ -641,6 +645,8 @@
 				66C746121401AE5A00C6FE04 /* ItemLayer.m in Sources */,
 				66C746131401AE5A00C6FE04 /* Layer.m in Sources */,
 				66C746141401AE5A00C6FE04 /* Room.m in Sources */,
+				66C746241401AF2000C6FE04 /* Game+Items.m in Sources */,
+				66C746291401B08F00C6FE04 /* Game+Input.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

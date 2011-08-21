@@ -17,6 +17,9 @@ typedef enum {
 	
 	// game variables
 	NSMutableArray *items;
+	NSMutableArray *itemsToAdd;
+	NSMutableArray *itemsToRemove;
+	
 	Player *player;
 	
 	// editor variables
@@ -52,26 +55,6 @@ typedef enum {
 
 - (mapCoords)cameraTargetForFocus:(cpVect)focus;
 - (void)drawGame;
-
-- (void)upUp;
-- (void)leftUp;
-- (void)downUp;
-- (void)rightUp;
-- (void)upDown;
-- (void)downDown;
-- (void)leftDown;
-- (void)rightDown;
-
-- (void)tabDown;
-- (void)tabUp;
-- (void)spaceDown;
-- (void)spaceUp;
-
-- (void)numberDown:(int)number;
-
-- (void)mouseDown:(pixelCoords)coords;
-- (void)mouseDragged:(pixelCoords)coords;
-- (void)mouseMoved:(pixelCoords)coords;
 
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;

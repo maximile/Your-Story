@@ -11,4 +11,19 @@
 	return self;
 }
 
+- (void)draw {
+	return;
+}
+- (void)update {
+	return;
+}
+
+- (void)addToSpace:(cpSpace *)space {
+	return;
+}
+- (void)removeFromSpace:(cpSpace *)space {
+	return;
+}
+
+
 @end

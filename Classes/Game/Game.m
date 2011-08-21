@@ -1,7 +1,8 @@
 #import "Game.h"
-#import "GameObject.h"
 #import "Constants.h"
 #import "Game+Editor.h"
+#import "Game+Items.h"
+#import "Game+Input.h"
 #import "Character.h"
 #import "ItemLayer.h"
 #import "Item.h"
@@ -31,9 +32,10 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 	if ([super init] == nil) {
 		return nil;
 	}
-	items = [[NSMutableArray alloc] initWithCapacity:0];
-	// player = [[Character alloc] init];
-	// [items addObject:player];
+	
+	items = [NSMutableArray array];
+	itemsToRemove = [NSMutableArray array];
+	itemsToAdd = [NSMutableArray array];
 	
 	space = cpSpaceNew();
 	cpSpaceSetGravity(space, cpv(0, -GRAVITY));
@@ -130,7 +132,7 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 		}
 		
 		if (layer == currentRoom.mainLayer) {
-			for (GameObject *item in items) {
+			for (Item *item in items) {
 				[item draw];
 			}
 			NSArray *allTextures = [Texture textures];
@@ -194,7 +196,7 @@ static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
 
 -(void)updateStep {
 	// update physics and let objects update
-	for (GameObject *item in items) {
+	for (Item *item in items) {
 		[item update];
 	}
 	
@@ -247,70 +249,6 @@ double getDoubleTime(void)
 			break;
 		default:
 			break;
-	}
-}
-
-
-- (void)mouseDown:(pixelCoords)coords {
-	switch (mode) {
-		case EDITOR_MODE:
-			if (showPalette)
-				[self selectTileFromPaletteAt:coords];
-			else {
-				[self changeTileAt:[self mapCoordsForViewCoords:coords]];
-			}
-			break;
-		default:
-			break;
-	}
-}
-
-- (void)mouseDragged:(pixelCoords)coords {
-	if (mode == EDITOR_MODE) {
-		if (showPalette)
-			[self selectTileFromPaletteAt:coords];
-		else {
-			[self changeTileAt:[self mapCoordsForViewCoords:coords]];
-		}
-	}
-}
-
-- (void)mouseMoved:(pixelCoords)coords {
-	if (mode == EDITOR_MODE) {
-		if (!showPalette) {
-			self.cursorLoc = [self mapCoordsForViewCoords:coords];
-		}
-	}
-}
-
-- (void)upDown {upKey=YES;}
-- (void)downDown {downKey=YES;}
-- (void)leftDown {leftKey=YES;}
-- (void)rightDown {rightKey=YES;}
-- (void)upUp {upKey=NO;}
-- (void)downUp {downKey=NO;}
-- (void)leftUp {leftKey=NO;}
-- (void)rightUp {rightKey=NO;}
-
-- (void)tabDown {tabKey=YES;}
-- (void)tabUp {tabKey=NO;}
-- (void)spaceDown {spaceKey=YES;}
-- (void)spaceUp {spaceKey=NO;}
-
-- (void)numberDown:(int)number {
-	if (mode == EDITOR_MODE) {
-		int newLayerIndex = number - 1;
-		int layerCount = currentRoom.layers.count;
-		if (newLayerIndex >= layerCount) {
-			NSBeep();
-			return;
-		}
-		if (number == 0) {
-			[self setEditingLayer:currentRoom.itemLayer];
-		}
-		else {
-			[self setEditingLayer:[currentRoom.layers objectAtIndex:number - 1]];
-		}
 	}
 }
 
