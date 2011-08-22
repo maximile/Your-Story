@@ -6,6 +6,7 @@
 	cpBody *body;
 }
 
+@property(readonly) pixelCoords pixelPosition;
 @property cpVect position;
 
 @end

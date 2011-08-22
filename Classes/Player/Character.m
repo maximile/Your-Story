@@ -122,9 +122,15 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	return cpvadd(cpBodyGetPos(body), cpvmult(grounding.normal, grounding.penetration - COLLISION_SLOP));
 }
 
+-(pixelCoords)pixelPosition
+{
+	// Correct the drawn position for overlap with the grounding object.
+	cpVect pos = cpvadd(cpBodyGetPos(body), cpvmult(grounding.normal, grounding.penetration - COLLISION_SLOP));
+	return pixelCoordsMake(round(pos.x), round(pos.y));
+}
+
 - (void)draw {
-	cpVect pos = self.position;
-	pixelCoords pixelPos = pixelCoordsMake(round(pos.x), round(pos.y));
+	pixelCoords pixelPos = self.pixelPosition;
 	
 	if(!hurt || (hurt%9 >= 3)) {
 		cpVect vel = cpBodyGetVel(body);
@@ -133,7 +139,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		if (wellGrounded) {  // touching the floor
 			if (abs(vel.x) > 1) {  // walking
 				// walk frame based on x-position
-				int cycleIndex = ((int)pos.x / 6) % walkCycle.count;
+				int cycleIndex = (pixelPos.x / 6) % walkCycle.count;
 				if (cycleIndex < 0) cycleIndex += walkCycle.count;
 				spriteKey = [walkCycle objectAtIndex:cycleIndex];
 			}

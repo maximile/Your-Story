@@ -5,6 +5,11 @@
 - (void)addToSpace:(cpSpace *)space {}
 - (void)removeFromSpace:(cpSpace *)space {}
 
+-(pixelCoords) pixelPosition {
+	cpVect pos = cpBodyGetPos(body);
+	return pixelCoordsMake(pos.x, pos.y);
+}
+
 - (cpVect)position {
 	return cpBodyGetPos(body);
 }
