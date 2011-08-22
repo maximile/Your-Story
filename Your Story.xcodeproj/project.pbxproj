@@ -409,10 +409,10 @@
 		66C745F81401AE5A00C6FE04 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				66C745F91401AE5A00C6FE04 /* Character.h */,
-				66C745FA1401AE5A00C6FE04 /* Character.m */,
 				66C745FB1401AE5A00C6FE04 /* Player.h */,
 				66C745FC1401AE5A00C6FE04 /* Player.m */,
+				66C745F91401AE5A00C6FE04 /* Character.h */,
+				66C745FA1401AE5A00C6FE04 /* Character.m */,
 				66C746B41401C14E00C6FE04 /* DamageArea.h */,
 				66C746B51401C14E00C6FE04 /* DamageArea.m */,
 			);

@@ -15,13 +15,6 @@
 #import "Player.h"
 
 
-struct CharacterGroundingContext {
-	cpVect normal;
-	cpFloat penetration;
-	
-	cpBody *body;
-};
-
 @interface Character : Player {
 	cpShape *headShape, *feetShape;
 	
@@ -38,7 +31,7 @@ struct CharacterGroundingContext {
 	bool lastJumpKeyState;
 	
 	// Body you are standing on and it's normal.
-	struct CharacterGroundingContext grounding;
+	GroundingContext grounding;
 	
 	// Standing on ground that can be walked up.
 	bool wellGrounded;

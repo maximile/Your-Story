@@ -21,25 +21,12 @@
 @implementation Character
 
 static void
-SelectPlayerGroundNormal(cpBody *body, cpArbiter *arb, struct CharacterGroundingContext *grounding){
-	CP_ARBITER_GET_BODIES(arb, b1, b2);
-	cpVect n = cpvneg(cpArbiterGetNormal(arb, 0));
-	
-	if(n.y > grounding->normal.y){
-		grounding->normal = n;
-		grounding->penetration = -cpArbiterGetDepth(arb, 0);
-		grounding->body = b2;
-	}
-}
-
-static void
 playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 {
 	Character *self = cpBodyGetUserData(body);
 	
 	// Get the grounding information.
-	self->grounding = (struct CharacterGroundingContext){cpvzero, 0.0, NULL};
-	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)SelectPlayerGroundNormal, &self->grounding);
+	UpdateGroundingContext(body, &self->grounding);
 	
 	// Reset jump boosting if you hit your head.
 	if(self->grounding.normal.y < 0.0f) self->remainingBoost = 0.0f;
@@ -86,12 +73,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	// Make the head shape smaller so it doesn't cause friction with walls.
 	// Maybe should dynamically assign friction like with the feetShape?
 	headShape = cpCircleShapeNew(body, 4.0, cpv(0, 4));
-	cpShapeSetFriction(headShape, 0.7);
+	cpShapeSetCollisionType(headShape, [self class]);
 	
 	feetShape = cpCircleShapeNew(body, 4.0, cpv(0, -4));
-	// feetShape = cpBoxShapeNew(body, 12, 16);
-	
-	cpShapeSetCollisionType(headShape, [self class]);
 	cpShapeSetCollisionType(feetShape, [self class]);
 	
 	// drawing resources

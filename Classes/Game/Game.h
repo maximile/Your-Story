@@ -56,6 +56,7 @@ typedef enum {
 @property mapCoords cursorLoc;
 @property (readonly) Player *player;
 @property (readonly) cpSpace *space;
+@property (readonly) double fixedTime;
 
 + (Game *)game;
 

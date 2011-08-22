@@ -10,24 +10,23 @@
 #import "Item.h"
 #import "Jumper.h"
 
-static int characterHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
+static int characterHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
 	Character *character = characterBody->data;
 	Jumper *jumper = jumperBody->data;
 	return [character hitJumper:jumper arbiter:arb];
 }
 
-static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, void *data) {
+static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
 	Jumper *jumper = jumperBody->data;
-	Game *game = data;
 	[jumper shotFrom:game.player.position];
 	return 0;
 }
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space;
+@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime;
 
 static Game *game = nil;
 + (Game *)game {
@@ -49,8 +48,8 @@ static Game *game = nil;
 	cpSpaceSetEnableContactGraph(space, TRUE);
 	
 	// add collision handlers
-	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, characterHitJumper, NULL, NULL, self);
-	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, damageAreaHitJumper, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitJumper, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
 	
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 		

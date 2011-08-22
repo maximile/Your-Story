@@ -164,7 +164,7 @@ typedef unsigned int cpHashValue;
 	typedef CP_GROUP_TYPE cpGroup;
 #else
 /// Type used for cpShape.group.
-	typedef unsigned int cpGroup;
+	typedef id cpGroup;
 #endif
 
 #ifdef CP_LAYERS_TYPE

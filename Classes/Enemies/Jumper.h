@@ -5,6 +5,9 @@
 @interface Jumper : PhysicsObject {
 	Sprite *sprite;
 	cpShape *shape;
+	
+	GroundingContext grounding;
+	double lastJumpTime;
 }
 
 - (void)shotFrom:(cpVect)shotLocation;
