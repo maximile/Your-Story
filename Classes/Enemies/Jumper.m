@@ -9,7 +9,7 @@
 #import "Jumper.h"
 #import "Player.h"
 
-#define JUMP_HEIGHT (TILE_SIZE*2)
+#define JUMP_HEIGHT TILE_SIZE
 #define JUMP_INTERVAL 1.5
 
 @implementation Jumper
@@ -53,7 +53,7 @@ cpfsign(cpFloat f)
 		cpShape *hit = cpSpaceSegmentQueryFirst(game.space, pos, playerPos, CP_ALL_LAYERS, self, NULL);
 		if(hit->body == player.body){
 			cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*GRAVITY);
-			body->v = cpvadd(grounding.body->v, cpv(cpfsign(playerPos.x - pos.x)*jump_v/3.0, jump_v));
+			body->v = cpvadd(grounding.body->v, cpv(cpfsign(playerPos.x - pos.x)*jump_v/1.5, jump_v));
 			
 			lastJumpTime = game.fixedTime;
 		}
