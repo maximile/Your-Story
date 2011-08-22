@@ -18,6 +18,8 @@
 
 #define HEAD_FRICTION 0.7
 
+#define MAX_HEALTH 8
+
 @implementation Character
 
 static void
@@ -95,12 +97,22 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(80, 16, 16, 16)], @"walk2",
 	nil];
 	
+	fullHealth = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(3, 51, 11, 10)];
+	emptyHealth = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(19, 51, 11, 10)];
+	
 	facing = RIGHT;
+	health = MAX_HEALTH;
 	
 	return self;
 }
 
--(cpVect)position
+- (void)addHealth:(int)healthDiff {
+	health += healthDiff;
+	if (health < 0) health = 0;
+	if (health > MAX_HEALTH) health = MAX_HEALTH;
+}
+
+- (cpVect)position
 {
 	// Correct the drawn position for overlap with the grounding object.
 	return cpvadd(cpBodyGetPos(body), cpvmult(grounding.normal, grounding.penetration - COLLISION_SLOP));
@@ -193,7 +205,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (directionInput & LEFT) facing = LEFT;
 	if (directionInput & RIGHT) facing = RIGHT;
 	
-	if (hurt > 0) hurt--; 
+	if (hurt > 0) hurt--;
+	
+	if (health <= 0) {
+		game.player = nil;
+		[game removeItem:self];
+	}
 }
 
 - (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb {
@@ -206,6 +223,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	NSLog(@"%f %f", response.x, response.y);
 	cpBodySetVel(body, cpvmult(response, 280));
 	hurt = 100;
+	
+	[self addHealth:-2];
+	
 	return 0;
 }
 
@@ -218,6 +238,14 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 - (void)shoot:(Game *)game {
 	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
 	[game addItem:damage];
+}
+
+- (void)drawStatus {
+	for (int i = 0; i < MAX_HEALTH; i++) {
+		pixelCoords iconLoc = pixelCoordsMake(i*12 + 20, 20);
+		if (i < health) [fullHealth drawAt:iconLoc];
+		else [emptyHealth drawAt:iconLoc];
+	}
 }
 
 @end

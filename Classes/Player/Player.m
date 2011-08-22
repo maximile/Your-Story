@@ -73,4 +73,6 @@
 	directionInput = direction;
 }
 
+- (void)drawStatus {}
+
 @end

@@ -20,6 +20,8 @@
 	
 	Sprite *jumpSprite;
 	Sprite *normalSprite;
+	Sprite *fullHealth;
+	Sprite *emptyHealth;
 	NSArray *walkCycle;
 	NSDictionary *leftSprites;
 	NSDictionary *rightSprites;
@@ -27,6 +29,8 @@
 	
 	// number of frames of inlvulnerability (e.g. after hitting an enemy)
 	int hurt;
+	
+	int health;
 	
 	bool lastJumpKeyState;
 	
@@ -52,5 +56,6 @@
 - (void)removeFromSpace:(cpSpace *)space;
 
 - (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb;
+- (void)addHealth:(int)healthDiff;
 
 @end

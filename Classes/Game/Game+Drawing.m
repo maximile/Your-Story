@@ -95,6 +95,12 @@
 	}
 	
 	[self drawLightmap:focus over:canvas];
+	
+	// draw UI
+	[player drawStatus];
+	for (Texture *texture in [Texture textures]) {
+		[texture draw];
+	}
 }
 
 - (pixelCoords)cameraTargetForFocus:(pixelCoords)focus {

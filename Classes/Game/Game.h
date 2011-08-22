@@ -54,7 +54,7 @@ typedef enum {
 @property (assign) Room *currentRoom;
 @property (assign) Layer *editingLayer;
 @property mapCoords cursorLoc;
-@property (readonly) Player *player;
+@property (assign) Player *player;
 @property (readonly) cpSpace *space;
 @property (readonly) double fixedTime;
 
