@@ -9,6 +9,15 @@
 #import "ItemLayer.h"
 #import "Item.h"
 #import "Jumper.h"
+#import "Health.h"
+
+static int characterHitHealth(cpArbiter *arb, cpSpace *space, Game *game) {
+	CP_ARBITER_GET_BODIES(arb, characterBody, healthBody);
+	CP_ARBITER_GET_SHAPES(arb, characterShape, healthShape);
+	Character *character = characterBody->data;
+	Health *health = healthShape->data;
+	return [character hitHealth:health arbiter:arb];
+}
 
 static int characterHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
@@ -38,6 +47,8 @@ static Game *game = nil;
 		return nil;
 	}
 	
+	game = self;
+	
 	items = [NSMutableArray array];
 	itemsToRemove = [NSMutableArray array];
 	itemsToAdd = [NSMutableArray array];
@@ -49,14 +60,13 @@ static Game *game = nil;
 	
 	// add collision handlers
 	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitJumper, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [Character class], [Health class], NULL, (cpCollisionPreSolveFunc)characterHitHealth, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
 	
 	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 		
 	uiMap = [TileMap mapNamed:@"UI"];
-	
-	game = self;
-	
+		
 	lightmapCanvas = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];
 	
 	return self;
@@ -110,15 +120,13 @@ static Game *game = nil;
 	[self setEditingLayer:currentRoom.mainLayer];	
 }
 
--(void)updateStep {
-	[self addAndRemoveItems];
-	
+-(void)updateStep {	
 	// update physics and let objects update
 	for (Item *item in items) {
 		[item update:self];
 	}
-	
 	cpSpaceStep(space, FIXED_DT);
+	[self addAndRemoveItems];
 }
 
 #import <mach/mach_time.h>

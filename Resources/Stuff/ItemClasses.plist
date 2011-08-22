@@ -6,5 +6,7 @@
 	<string>Character</string>
 	<key>1,0</key>
 	<string>Jumper</string>
+	<key>2,0</key>
+	<string>Health</string>
 </dict>
 </plist>

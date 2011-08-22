@@ -65,7 +65,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (id)initWithPosition:(pixelCoords)position {
-	if ([super init]==nil) return nil;
+	if ([super initWithPosition:position]==nil) return nil;
 	
 	body = cpBodyNew(5, INFINITY);
 	cpBodySetPos(body, cpv(position.x, position.y));
@@ -229,10 +229,22 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	return 0;
 }
 
+- (int)hitHealth:(Health *)healthItem arbiter:(cpArbiter *)arb {
+	if (health == MAX_HEALTH || healthItem.used) return 0;
+	[self addHealth:1];
+	
+	// mark the health item as used so that it doesn't get applied twice
+	// if the head and feet both touch it
+	healthItem.used = YES;
+	[[Game game] removeItem:healthItem];
+	return 0;
+}
+
 - (void)finalize {
 	cpShapeFree(headShape);
 	cpShapeFree(feetShape);
 	cpBodyFree(body);
+	[super finalize];
 }
 
 - (void)shoot:(Game *)game {

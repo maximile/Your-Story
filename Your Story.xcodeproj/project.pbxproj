@@ -72,6 +72,7 @@
 		66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C75C8E13BE87EA002D8411 /* OpenGL.framework */; };
 		66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */; };
 		66CA29D913EA15440022E906 /* Messing.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CA29D813EA15440022E906 /* Messing.ysroom */; };
+		66CC26C01403024900252B96 /* Health.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC26BF1403024900252B96 /* Health.m */; };
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -200,6 +201,8 @@
 		66C75C8E13BE87EA002D8411 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ItemClasses.plist; sourceTree = "<group>"; };
 		66CA29D813EA15440022E906 /* Messing.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Messing.ysroom; sourceTree = "<group>"; };
+		66CC26BE1403024900252B96 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
+		66CC26BF1403024900252B96 /* Health.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Health.m; sourceTree = "<group>"; };
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +233,7 @@
 				66C745DF1401AE5A00C6FE04 /* Game */,
 				66C745E41401AE5A00C6FE04 /* Game Classes */,
 				66C745EB1401AE5A00C6FE04 /* Graphics */,
+				66CC26BD1403022300252B96 /* Pickups */,
 				66C745F81401AE5A00C6FE04 /* Player */,
 				66C745FD1401AE5A00C6FE04 /* Structure */,
 				66C75B8A13BE801C002D8411 /* AppDelegate.h */,
@@ -532,6 +536,15 @@
 			path = constraints;
 			sourceTree = "<group>";
 		};
+		66CC26BD1403022300252B96 /* Pickups */ = {
+			isa = PBXGroup;
+			children = (
+				66CC26BE1403024900252B96 /* Health.h */,
+				66CC26BF1403024900252B96 /* Health.m */,
+			);
+			path = Pickups;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -663,6 +676,7 @@
 				66C746291401B08F00C6FE04 /* Game+Input.m in Sources */,
 				66C7467F1401B76B00C6FE04 /* Game+Drawing.m in Sources */,
 				66C746B61401C14E00C6FE04 /* DamageArea.m in Sources */,
+				66CC26C01403024900252B96 /* Health.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 #import "Sprite.h"
 #import "Jumper.h"
 #import "Player.h"
+#import "Health.h"
 
 
 @interface Character : Player {
@@ -56,6 +57,8 @@
 - (void)removeFromSpace:(cpSpace *)space;
 
 - (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb;
+- (int)hitHealth:(Health *)health arbiter:(cpArbiter *)arb;
+
 - (void)addHealth:(int)healthDiff;
 
 @end

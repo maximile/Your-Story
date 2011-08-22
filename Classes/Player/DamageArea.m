@@ -42,4 +42,9 @@
 	[game removeItem:self];
 }
 
+- (void)finalize {
+	cpShapeFree(shape);
+	[super finalize];
+}
+
 @end
