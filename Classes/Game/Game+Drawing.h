@@ -3,7 +3,7 @@
 
 @interface Game (Drawing)
 
-- (mapCoords)cameraTargetForFocus:(cpVect)focus;
+- (pixelCoords)cameraTargetForFocus:(pixelCoords)focus;
 - (void)drawGameOnCanvas:(FBO *)canvas;
 
 @end

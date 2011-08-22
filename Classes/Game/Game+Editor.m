@@ -6,7 +6,7 @@
 - (void)drawEditorOnCanvas:(FBO *)canvas {
 	[FBO bindFramebuffer:canvas];
 	
-	mapCoords focus = [self cameraTargetForFocus:editorFocus];
+	pixelCoords focus = [self cameraTargetForFocus:editorFocus];
 	if (drawOtherLayers) {
 		NSMutableArray *layersToDraw = [NSMutableArray arrayWithArray:currentRoom.layers];
 		[layersToDraw addObject:currentRoom.itemLayer];
@@ -112,17 +112,17 @@
 
 - (mapCoords)mapCoordsForViewCoords:(pixelCoords)viewCoords {
 	// get the point in layer space
-	mapCoords focus = [self cameraTargetForFocus:editorFocus];
+	pixelCoords focus = [self cameraTargetForFocus:editorFocus];
 	pixelCoords translatedCoords = pixelCoordsMake(viewCoords.x + focus.x - CANVAS_SIZE.width / 2, viewCoords.y + focus.y - CANVAS_SIZE.height / 2);
 	// and get the tile coords from that
 	return mapCoordsMake(translatedCoords.x / TILE_SIZE, editingLayer.size.height - translatedCoords.y / TILE_SIZE - 1);
 }
 
 - (void)updateEditor {
-	if (upKey) editorFocus = cpv(editorFocus.x, editorFocus.y + 1);
-	if (downKey) editorFocus = cpv(editorFocus.x, editorFocus.y - 1);
-	if (leftKey) editorFocus = cpv(editorFocus.x - 1, editorFocus.y);
-	if (rightKey) editorFocus = cpv(editorFocus.x + 1, editorFocus.y);
+	if (upKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y + 1);
+	if (downKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y - 1);
+	if (leftKey) editorFocus = pixelCoordsMake(editorFocus.x - 1, editorFocus.y);
+	if (rightKey) editorFocus = pixelCoordsMake(editorFocus.x + 1, editorFocus.y);
 	
 	showPalette = tabKey;
 	

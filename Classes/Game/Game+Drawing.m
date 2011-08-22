@@ -4,7 +4,7 @@
 
 @implementation Game (Drawing)
 
--(void)drawLightmap:(mapCoords)focus over:(FBO *)canvas {
+-(void)drawLightmap:(pixelCoords)focus over:(FBO *)canvas {
 	[FBO bindFramebuffer:lightmapCanvas];
 	
 	GLfloat ambient = 0.2;
@@ -34,8 +34,7 @@
 	[FBO bindFramebuffer:canvas];
 	
 	// camera target
-	pixelCoords p = player.pixelPosition;
-	mapCoords focus = [self cameraTargetForFocus:cpv(p.x, p.y)];
+	pixelCoords focus = [self cameraTargetForFocus:player.pixelPosition];
 
 	// draw layers. first get screen bounds in map coords
 	int left = ((float)focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;
@@ -98,7 +97,7 @@
 	[self drawLightmap:focus over:canvas];
 }
 
-- (mapCoords)cameraTargetForFocus:(cpVect)focus {
+- (pixelCoords)cameraTargetForFocus:(pixelCoords)focus {
 	if (currentRoom.mainLayer.size.height * TILE_SIZE <= CANVAS_SIZE.height) {
 		// room is shorter than the screen, center it vertically
 		focus.y = (currentRoom.mainLayer.size.height * TILE_SIZE) / 2;
@@ -127,7 +126,7 @@
 		}
 	}
 	
-	return mapCoordsMake(focus.x, focus.y);
+	return pixelCoordsMake(focus.x, focus.y);
 }
 
 @end

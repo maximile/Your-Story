@@ -81,7 +81,7 @@ static Game *game = nil;
 	if (mode == newMode) return;
 	mode = newMode;
 	if (newMode == EDITOR_MODE) {
-		editorFocus = player.position;
+		editorFocus = player.pixelPosition;
 		[self setEditingLayer:currentRoom.mainLayer];
 	}
 	if (newMode == GAME_MODE) {

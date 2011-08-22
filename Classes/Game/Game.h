@@ -27,7 +27,7 @@ typedef enum {
 	Player *player;
 	
 	// editor variables
-	cpVect editorFocus;
+	pixelCoords editorFocus;
 	Layer *editingLayer;
 	Layer *palette;
 	BOOL showPalette;
