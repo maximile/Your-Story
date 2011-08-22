@@ -4,7 +4,35 @@
 
 @implementation Game (Drawing)
 
-- (void)drawGame {
+-(void)drawLightmap:(mapCoords)focus over:(FBO *)canvas {
+	[FBO bindFramebuffer:lightmapCanvas];
+	
+	GLfloat ambient = 0.2;
+	glClearColor(ambient, ambient, ambient, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	glPushMatrix();
+	glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
+	
+	[[Texture lightmapTexture] draw];
+	glPopMatrix();
+		
+	
+	// Now overlay it over the canvas
+	[FBO bindFramebuffer:canvas];
+	glBlendFunc(GL_DST_COLOR, GL_ZERO);
+	
+	[lightmapCanvas drawInRect:pixelRectMake(0, 0, CANVAS_SIZE.width, CANVAS_SIZE.height)];
+	
+	glDisable(GL_BLEND);
+}
+
+- (void)drawGameOnCanvas:(FBO *)canvas {
+	[FBO bindFramebuffer:canvas];
+	
 	// camera target
 	mapCoords focus = [self cameraTargetForFocus:cpv(player.position.x, round(player.position.y))];
 
@@ -19,6 +47,8 @@
 		if ([layer isKindOfClass:[ItemLayer class]]) continue;
 		glPushMatrix();
 		
+		glColor3f(1,1,1);
+		
 		// parallax transformation
 		float parallax = layer.parallax;
 		if (parallax != 1.0) {
@@ -29,13 +59,11 @@
 			int pBottom = (parallaxFocus.y - CANVAS_SIZE.height / 2) / TILE_SIZE - 1;
 			glTranslatef(-(parallaxFocus.x - CANVAS_SIZE.width / 2), -(parallaxFocus.y - CANVAS_SIZE.height / 2), 0.0);
 			
-			glColor4f(1,1,1,1);
 			[layer drawRect:mapRectMake(pLeft, pBottom, pRight-pLeft, pTop-pBottom) ignoreParallax:NO];
 		}
 		else {
 			glTranslatef(-(focus.x - CANVAS_SIZE.width / 2), -(focus.y - CANVAS_SIZE.height / 2), 0.0);
 			
-			glColor4f(1,1,1,1);
 			[layer drawRect:mapRectMake(left, bottom, right-left, top-bottom) ignoreParallax:NO];
 			
 			if(drawCollision && layer == currentRoom.mainLayer){
@@ -44,22 +72,29 @@
 				ChipmunkDebugDrawShapes(space);
 				glEnable(GL_TEXTURE_2D);
 				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-				glColor3f(1,1,1);
 			}
 		}
 		
+		glColor3f(1,1,1);
 		if (layer == currentRoom.mainLayer) {
 			for (Item *item in items) {
 				[item draw];
 			}
+			
 			NSArray *allTextures = [Texture textures];
+			Texture *lightmapTexture = [Texture lightmapTexture];
 			for (Texture *texture in allTextures) {
+				// sort of a hack...
+				if(texture == lightmapTexture) continue;
+				
 				[texture draw];
 			}
 		}
 
 		glPopMatrix();
 	}
+	
+	[self drawLightmap:focus over:canvas];
 }
 
 - (mapCoords)cameraTargetForFocus:(cpVect)focus {

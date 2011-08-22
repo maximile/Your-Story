@@ -4,6 +4,9 @@
 #import "TileMap.h"
 #import "chipmunk.h"
 
+#import "FBO.h"
+#import "Texture.h"
+
 @class Player;
 
 typedef enum {
@@ -43,6 +46,8 @@ typedef enum {
 	double fixedTime;
 	double lastTime;
 	double accumulator;
+	
+	FBO *lightmapCanvas;
 }
 
 @property gameMode mode;
@@ -54,7 +59,7 @@ typedef enum {
 
 + (Game *)game;
 
-- (void)draw;
+- (void)drawOnCanvas:(FBO *)canvas;
 - (void)update;
 
 - (void)setCurrentRoomFromPath:(NSString *)path;

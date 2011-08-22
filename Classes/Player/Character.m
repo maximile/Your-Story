@@ -123,41 +123,41 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)draw {
-	if (hurt) {
-		if (hurt%9 > 3) {
-			return;
-		}
-	}
-	
 	cpVect pos = self.position;
-	cpVect vel = cpBodyGetVel(body);
+	pixelCoords pixelPos = pixelCoordsMake(round(pos.x), round(pos.y));
 	
-	NSString *spriteKey = nil;
-	if (wellGrounded) {  // touching the floor
-		if (abs(vel.x) > 1) {  // walking
-			// walk frame based on x-position
-			int cycleIndex = ((int)pos.x / 6) % walkCycle.count;
-			if (cycleIndex < 0) cycleIndex += walkCycle.count;
-			spriteKey = [walkCycle objectAtIndex:cycleIndex];
+	if(!hurt || (hurt%9 >= 3)) {
+		cpVect vel = cpBodyGetVel(body);
+	
+		NSString *spriteKey = nil;
+		if (wellGrounded) {  // touching the floor
+			if (abs(vel.x) > 1) {  // walking
+				// walk frame based on x-position
+				int cycleIndex = ((int)pos.x / 6) % walkCycle.count;
+				if (cycleIndex < 0) cycleIndex += walkCycle.count;
+				spriteKey = [walkCycle objectAtIndex:cycleIndex];
+			}
+			else {  // standing still
+				spriteKey = @"normal";
+			}
 		}
-		else {  // standing still
-			spriteKey = @"normal";
+		
+		else {  // jumping or falling
+			if (cpBodyGetVel(body).y < -20.0) {  // falling
+				spriteKey = @"jump";
+			}
+			else {  // jumping
+				spriteKey = @"normal";
+			}
 		}
+		
+		Sprite *sprite = nil;
+		if (facing & LEFT) sprite = [leftSprites valueForKey:spriteKey];
+		else sprite = [rightSprites valueForKey:spriteKey];
+		[sprite drawAt:pixelPos];
 	}
 	
-	else {  // jumping or falling
-		if (cpBodyGetVel(body).y < -20.0) {  // falling
-			spriteKey = @"jump";
-		}
-		else {  // jumping
-			spriteKey = @"normal";
-		}
-	}
-	
-	Sprite *sprite = nil;
-	if (facing & LEFT) sprite = [leftSprites valueForKey:spriteKey];
-	else sprite = [rightSprites valueForKey:spriteKey];
-	[sprite drawAt:pixelCoordsMake(pos.x, round(pos.y))];
+	[[Texture lightmapTexture] addAt:pixelPos radius:96];
 }
 
 - (void)addToSpace:(cpSpace *)space {

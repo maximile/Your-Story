@@ -4,6 +4,6 @@
 @interface Game (Drawing)
 
 - (mapCoords)cameraTargetForFocus:(cpVect)focus;
-- (void)drawGame;
+- (void)drawGameOnCanvas:(FBO *)canvas;
 
 @end

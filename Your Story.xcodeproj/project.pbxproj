@@ -75,6 +75,7 @@
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D370023C14021319005C3A57 /* light-point.psd in Resources */ = {isa = PBXBuildFile; fileRef = D370023B14021319005C3A57 /* light-point.psd */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
 		D3BA942813FE61010005173B /* libTileVectorizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BA942713FE61010005173B /* libTileVectorizer.a */; };
 /* End PBXBuildFile section */
@@ -202,6 +203,7 @@
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D370023B14021319005C3A57 /* light-point.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-point.psd"; sourceTree = "<group>"; };
 		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
 		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
 		D3BA942713FE61010005173B /* libTileVectorizer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTileVectorizer.a; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		6677DDE513D2F51F00A43DF4 /* Stuff */ = {
 			isa = PBXGroup;
 			children = (
+				D370023B14021319005C3A57 /* light-point.psd */,
 				6677DDE613D2F51F00A43DF4 /* Collision Data.plist */,
 				66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */,
 				6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */,
@@ -597,6 +600,7 @@
 				66011CDF13F89AFA009B2CBC /* MainSprites.psd in Resources */,
 				66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */,
 				66CD97DB140060370089AFED /* ItemTiles.psd in Resources */,
+				D370023C14021319005C3A57 /* light-point.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

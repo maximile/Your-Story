@@ -12,6 +12,8 @@
 	int slots;
 }
 
++ (Texture *)lightmapTexture;
+
 + (Texture *)textureNamed:(NSString *)name;
 + (NSArray *)textures;
 
@@ -19,6 +21,7 @@
 
 - (void)addQuad:(pixelCoords *)quadCoords texCoords:(pixelCoords *)quadTexCoords;
 - (void)addRect:(pixelRect)rect texRect:(pixelRect)texRect;
+-(void)addAt:(pixelCoords)pos radius:(int)radius;
 - (void)draw;
 
 @end

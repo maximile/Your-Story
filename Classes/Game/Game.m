@@ -58,17 +58,19 @@ static Game *game = nil;
 	
 	game = self;
 	
+	lightmapCanvas = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];
+	
 	return self;
 }
 
 
-- (void)draw {
+- (void)drawOnCanvas:(FBO *)canvas {
 	switch (mode) {
 		case GAME_MODE:
-			[self drawGame];
+			[self drawGameOnCanvas:canvas];
 			break;
 		case EDITOR_MODE:
-			[self drawEditor];
+			[self drawEditorOnCanvas:canvas];
 			break;
 		default:
 			break;

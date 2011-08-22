@@ -21,12 +21,18 @@ static NSMutableDictionary * texturesForNames;
 	return texture;
 }
 
++ (Texture *)lightmapTexture;
+{
+	return [Texture textureNamed:@"light-point.psd"];
+}
+
 + (NSArray *)textures {
 	return texturesForNames.allValues;
 }
 
 - (void)finalize {
-	glDeleteTextures(1, &textureName);
+	// TODO finalize ran from a secondary thread
+//	glDeleteTextures(1, &textureName);
 	[super finalize];	
 }
 
@@ -146,6 +152,26 @@ static NSMutableDictionary * texturesForNames;
 	quadTexCoords[1] = pixelCoordsMake(texRect.origin.x + texRect.size.width, texRect.origin.y);
 	quadTexCoords[2] = pixelCoordsMake(texRect.origin.x, texRect.origin.y + texRect.size.height);
 	quadTexCoords[3] = pixelCoordsMake(texRect.origin.x + texRect.size.width, texRect.origin.y + texRect.size.height);
+	
+	[self addQuad:quadCoords texCoords:quadTexCoords];
+}
+
+-(void)addAt:(pixelCoords)pos radius:(int)radius;
+{
+	pixelCoords quadCoords[4];
+	pixelCoords quadTexCoords[4];
+	
+	quadCoords[0] = pixelCoordsMake(pos.x - radius, pos.y + radius);
+	quadCoords[1] = pixelCoordsMake(pos.x + radius, pos.y + radius);
+	quadCoords[2] = pixelCoordsMake(pos.x - radius, pos.y - radius);
+	quadCoords[3] = pixelCoordsMake(pos.x + radius, pos.y - radius);
+	
+	int w = size.width;
+	int h = size.height;
+	quadTexCoords[0] = pixelCoordsMake(0, 0);
+	quadTexCoords[1] = pixelCoordsMake(w, 0);
+	quadTexCoords[2] = pixelCoordsMake(0, h);
+	quadTexCoords[3] = pixelCoordsMake(w, h);
 	
 	[self addQuad:quadCoords texCoords:quadTexCoords];
 }

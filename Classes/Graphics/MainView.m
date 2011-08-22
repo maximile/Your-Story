@@ -57,11 +57,10 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	// draw game to main FBO
-	[FBO bindFramebuffer:canvasFBO];
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
-	[game draw];
+	[game drawOnCanvas:canvasFBO];
 	[FBO bindFramebuffer:nil];
 	
 	// get centred rect to draw FBO to

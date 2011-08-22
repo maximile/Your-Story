@@ -3,7 +3,7 @@
 
 @interface Game (Editor)
 
-- (void)drawEditor;
+- (void)drawEditorOnCanvas:(FBO *)canvas;
 - (void)updateEditor;
 - (void)changeTileAt:(mapCoords)coords;
 - (mapCoords)mapCoordsForViewCoords:(pixelCoords)viewCoords;

@@ -3,7 +3,9 @@
 
 @implementation Game (Editor)
 
-- (void)drawEditor {
+- (void)drawEditorOnCanvas:(FBO *)canvas {
+	[FBO bindFramebuffer:canvas];
+	
 	mapCoords focus = [self cameraTargetForFocus:editorFocus];
 	if (drawOtherLayers) {
 		NSMutableArray *layersToDraw = [NSMutableArray arrayWithArray:currentRoom.layers];
