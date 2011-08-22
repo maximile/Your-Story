@@ -20,6 +20,7 @@
 	
 	shape = cpCircleShapeNew(body, 8.0, cpvzero);
 	cpShapeSetCollisionType(shape, [self class]);
+	cpShapeSetFriction(shape, 0.7);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(0, 16, 16, 16)];
@@ -49,11 +50,11 @@
 - (void)shotFrom:(cpVect)shotLocation {
 	cpVect pos = cpBodyGetPos(body);
 	float strength = 100 - cpvdist(pos, shotLocation);
-	cpVect effect = cpvnormalize(cpv(1.0, 0.2));
+	cpVect effect = cpvnormalize(cpv(1.0, 0.6));
 	if (shotLocation.x > pos.x) {
 		effect.x *= -1;
 	}
-	effect = cpvmult(effect, strength);
+	effect = cpvmult(effect, strength * 5);
 	cpBodyApplyImpulse(body, effect, cpvzero);
 }
 
