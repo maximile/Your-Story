@@ -3,11 +3,15 @@
 #import "Sprite.h"
 
 @interface Jumper : PhysicsObject {
-	Sprite *sprite;
+	NSDictionary *bodySprites;
+	NSDictionary *eyesSprites;
 	cpShape *shape;
 	
 	GroundingContext grounding;
 	double lastJumpTime;
+	BOOL aboutToJump;	
+	BOOL justJumped;	
+	BOOL canSeePlayer;
 }
 
 - (void)shotFrom:(cpVect)shotLocation;
