@@ -63,11 +63,14 @@ static Game *game = nil;
 	cpSpaceAddCollisionHandler(space, [Character class], [Health class], NULL, (cpCollisionPreSolveFunc)characterHitHealth, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
 	
-	[self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
-		
 	uiMap = [TileMap mapNamed:@"UI"];
-		
 	lightmapCanvas = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];
+
+	// [self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
+	NSString *connectionsPath = [[NSBundle mainBundle] pathForResource:@"Connections" ofType:@"plist"];
+	connections = [NSArray arrayWithContentsOfFile:connectionsPath];
+	NSString *startingRoomName = [[connections objectAtIndex:0] valueForKey:0];
+	[self setCurrentRoom:[[Room alloc] initWithName:startingRoomName]];
 	
 	return self;
 }
@@ -100,8 +103,14 @@ static Game *game = nil;
 }
 
 - (void)setCurrentRoom:(Room *)newRoom {
-	if (currentRoom == newRoom) return;
+	// clear old room stuff
+	for (Item *item in items) {
+		[self removeItem:item];
+	}
+	player = nil;
+	[self addAndRemoveItems];
 	[currentRoom.mainLayer removeFromSpace:space];
+	
 	currentRoom = newRoom;
 	
 	// add room collision shapes
@@ -110,14 +119,21 @@ static Game *game = nil;
 	// add items from room
 	NSArray *roomItems = [currentRoom.itemLayer items];
 	for (Item *item in roomItems) {
-		NSLog(@"%@", item);
 		[self addItem:item];
+		NSLog(@"%@", item);
 		if ([item isKindOfClass:[Player class]]) {
 			player = (Player *)item;
 		}
 	}
-	
+	[self addAndRemoveItems];
 	[self setEditingLayer:currentRoom.mainLayer];	
+	
+	// set current connection dict to store neighbouring rooms
+	for (NSDictionary *testConnectionDict in connections) {
+		if ([[testConnectionDict valueForKey:@"Name"] isEqualToString:currentRoom.name]) {
+			connectionDict = testConnectionDict;
+		}
+	}
 }
 
 -(void)updateStep {	
@@ -163,6 +179,29 @@ double getDoubleTime(void)
 		accumulator -= FIXED_DT;
 		fixedTime += FIXED_DT;
 	}
+	
+	// dead? restart the room
+	if (player == nil) [self setCurrentRoom:currentRoom];
+	
+	// out of the room bounds? Go to another room or die
+	pixelCoords pos = player.pixelPosition;
+	directionMask outside = NOWHERE;
+	if (pos.x < 0) outside |= LEFT;
+	if (pos.x > (currentRoom.size.width + 1) * TILE_SIZE) outside |= RIGHT;
+	if (pos.y < 0) outside |= UP;
+	if (pos.y > (currentRoom.size.height + 1) * TILE_SIZE) outside |= DOWN;
+	if (outside) {
+		Room *nextRoom = [self roomInDirection:outside];
+		if (nextRoom != nil) {
+			[self setCurrentRoom:nextRoom];
+			// TODO: move player to the corresponding entrance
+		}
+		else {
+			[self removeItem:player];
+			[self addAndRemoveItems];
+			player = nil;
+		}
+	}
 }
 
 - (void)update {
@@ -186,5 +225,17 @@ double getDoubleTime(void)
 	[self.currentRoom writeToFile:path];
 }
 
+
+- (Room *)roomInDirection:(directionMask)direction {
+	NSString *directionKey = nil;
+	if (direction & LEFT) directionKey = @"Left";
+	if (direction & RIGHT) directionKey = @"Right";
+	if (direction & UP) directionKey = @"Up";
+	if (direction & DOWN) directionKey = @"Down";
+		
+	NSString *newRoomName = [connectionDict valueForKey:directionKey];
+	if (newRoomName == nil) return nil;
+	return [[Room alloc] initWithName:newRoomName];
+}
 
 @end

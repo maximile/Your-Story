@@ -47,6 +47,9 @@ typedef enum {
 	double lastTime;
 	double accumulator;
 	
+	NSDictionary *connectionDict;
+	NSArray *connections;
+	
 	FBO *lightmapCanvas;
 }
 
@@ -65,5 +68,6 @@ typedef enum {
 
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;
+- (Room *)roomInDirection:(directionMask)direction;
 
 @end

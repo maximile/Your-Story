@@ -3,7 +3,7 @@
 
 @implementation Room
 
-@synthesize layers, mainLayer, itemLayer;
+@synthesize layers, mainLayer, itemLayer, size, name;
 
 - (id)initWithName:(NSString *)roomName {
 	NSString *roomFilePath = [[NSBundle mainBundle] pathForResource:roomName ofType:@"ysroom"];
@@ -13,6 +13,8 @@
 
 - (id)initWithFile:(NSString *)path {
 	if ([super init]==nil) return nil;
+	
+	name = [[path lastPathComponent] stringByDeletingPathExtension];
 	
 	// dictionary to cache maps used
 	maps = [[NSMutableDictionary alloc] initWithCapacity:0];

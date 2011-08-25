@@ -70,6 +70,7 @@
 		66C75C5613BE83F8002D8411 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C75C3613BE83F8002D8411 /* cpVect.c */; };
 		66C75C5713BE83F8002D8411 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66C75C3713BE83F8002D8411 /* LICENSE.txt */; };
 		66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C75C8E13BE87EA002D8411 /* OpenGL.framework */; };
+		66C7B0D61405B2EC0079E164 /* Connections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66C7B0D51405B2EC0079E164 /* Connections.plist */; };
 		66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */; };
 		66CA29D913EA15440022E906 /* Messing.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CA29D813EA15440022E906 /* Messing.ysroom */; };
 		66CC26C01403024900252B96 /* Health.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC26BF1403024900252B96 /* Health.m */; };
@@ -199,6 +200,7 @@
 		66C75C3713BE83F8002D8411 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		66C75C3813BE83F8002D8411 /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prime.h; sourceTree = "<group>"; };
 		66C75C8E13BE87EA002D8411 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		66C7B0D51405B2EC0079E164 /* Connections.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Connections.plist; sourceTree = "<group>"; };
 		66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ItemClasses.plist; sourceTree = "<group>"; };
 		66CA29D813EA15440022E906 /* Messing.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Messing.ysroom; sourceTree = "<group>"; };
 		66CC26BE1403024900252B96 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				6677DDE613D2F51F00A43DF4 /* Collision Data.plist */,
 				66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */,
 				6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */,
+				66C7B0D51405B2EC0079E164 /* Connections.plist */,
 			);
 			path = Stuff;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */,
 				66CD97DB140060370089AFED /* ItemTiles.psd in Resources */,
 				D370023C14021319005C3A57 /* light-point.psd in Resources */,
+				66C7B0D61405B2EC0079E164 /* Connections.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
