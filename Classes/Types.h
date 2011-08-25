@@ -57,6 +57,13 @@ static inline pixelRect pixelRectMake(int originX, int originY, int width, int h
 	return (pixelRect){originX, originY, width, height};
 }
 
+static inline pixelRect pixelRectOffset(pixelRect rect, pixelSize offset) {
+	rect.origin.x += offset.width;
+	rect.origin.y += offset.height;
+	return rect;
+}
+
+
 
 // direction bitmask, e.g. for arrow key input
 

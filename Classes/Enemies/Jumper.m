@@ -1,13 +1,6 @@
-//
-//  Jumper.m
-//  Your Story
-//
-//  Created by Max Williams on 21/08/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import "Jumper.h"
 #import "Player.h"
+#import "Game+Items.h"
 
 #define JUMP_HEIGHT TILE_SIZE
 #define JUMP_INTERVAL 1.5
@@ -40,6 +33,7 @@
 	nil];
 	
 	lastJumpTime = -INFINITY;
+	health = 2;
 	
 	return self;
 }
@@ -51,6 +45,11 @@ cpfsign(cpFloat f)
 }
 
 - (void)update:(Game *)game {
+	if (health <= 0) {
+		[game removeItem:self];
+		return;
+	}
+	
 	UpdateGroundingContext(body, &grounding);
 	
 	Player *player = game.player;
@@ -153,8 +152,10 @@ cpfsign(cpFloat f)
 	if (shotLocation.x > pos.x) {
 		effect.x *= -1;
 	}
-	effect = cpvmult(effect, strength * 5);
+	effect = cpvmult(effect, strength * 25);
 	cpBodyApplyImpulse(body, effect, cpvzero);
+	
+	health--;
 }
 
 @end

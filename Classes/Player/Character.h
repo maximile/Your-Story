@@ -30,6 +30,7 @@
 	
 	// number of frames of inlvulnerability (e.g. after hitting an enemy)
 	int hurt;
+	int reload;
 	
 	int health;
 	

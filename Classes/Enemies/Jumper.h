@@ -12,6 +12,8 @@
 	BOOL aboutToJump;	
 	BOOL justJumped;	
 	BOOL canSeePlayer;
+	
+	int health;
 }
 
 - (void)shotFrom:(cpVect)shotLocation;

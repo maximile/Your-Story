@@ -206,6 +206,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (directionInput & RIGHT) facing = RIGHT;
 	
 	if (hurt > 0) hurt--;
+	if (reload > 0) reload--;
 	
 	if (health <= 0) {
 		game.player = nil;
@@ -248,8 +249,10 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)shoot:(Game *)game {
+	if (reload > 0) return;
 	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
 	[game addItem:damage];
+	reload = (1.0 / FIXED_DT);
 }
 
 - (void)drawStatus {
