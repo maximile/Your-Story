@@ -1,6 +1,8 @@
 #import "Jumper.h"
 #import "Player.h"
+#import "Particle.h"
 #import "Game+Items.h"
+#import "RandomTools.h"
 
 #define JUMP_HEIGHT TILE_SIZE
 #define JUMP_INTERVAL 1.5
@@ -32,6 +34,13 @@
 		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(20, 44, 8, 4)], @"br",
 	nil];
 	
+	gibSprites = [NSArray arrayWithObjects:
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(39, 46, 1, 1)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(33, 45, 2, 2)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(36, 45, 2, 2)],
+	nil];
+	
+	
 	lastJumpTime = -INFINITY;
 	health = 2;
 	
@@ -47,6 +56,17 @@ cpfsign(cpFloat f)
 - (void)update:(Game *)game {
 	if (health <= 0) {
 		[game removeItem:self];
+		for (int i = 0; i<50; i++) {
+			Sprite *particleSprite = [gibSprites objectAtIndex:i%gibSprites.count];
+			pixelCoords particlePos = self.pixelPosition;
+			particlePos.x += randomInt(-5,5);
+			particlePos.y += randomInt(-5,5);
+			Particle *p = [[Particle alloc] initAt:particlePos sprite:particleSprite physical:NO];
+			cpBodySetVel(p.body, cpv(randomFloat(-200, 200.0), randomFloat(50, 200)));
+			p.life = randomFloat(0.0, 0.3);
+			[game addItem:p];
+		}
+		
 		return;
 	}
 	
@@ -146,14 +166,35 @@ cpfsign(cpFloat f)
 }
 
 - (void)shotFrom:(cpVect)shotLocation {
+	directionMask shotDirection = LEFT;
+	if (shotLocation.x > self.position.x) shotDirection = RIGHT;
+		
 	cpVect pos = cpBodyGetPos(body);
 	float strength = 100 - cpvdist(pos, shotLocation);
 	cpVect effect = cpvnormalize(cpv(1.0, 0.6));
-	if (shotLocation.x > pos.x) {
+	if (shotDirection == RIGHT) {
 		effect.x *= -1;
 	}
 	effect = cpvmult(effect, strength * 25);
 	cpBodyApplyImpulse(body, effect, cpvzero);
+	
+	for (int i = 0; i<20; i++) {
+		Sprite *particleSprite = [gibSprites objectAtIndex:i%gibSprites.count];
+		
+		pixelCoords particlePos = self.pixelPosition;
+		int woundXOffset = randomInt(6, 8);
+		if (shotDirection == LEFT) woundXOffset *= -1;
+		particlePos.x += woundXOffset;
+		particlePos.y += randomInt(-3, 3);
+		
+		float particleXVel = randomFloat(100.0, 200.0);
+		if (shotDirection == LEFT) particleXVel *= -1;
+		Particle *p = [[Particle alloc] initAt:particlePos sprite:particleSprite physical:NO];
+		cpBodySetVel(p.body, cpv(particleXVel, randomFloat(-30, 30)));
+		p.life = randomFloat(0.0, 0.3);
+		[[Game game] addItem:p];
+	}
+	
 	
 	health--;
 }

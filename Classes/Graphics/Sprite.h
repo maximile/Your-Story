@@ -11,4 +11,6 @@
 - (void)drawAt:(pixelCoords)point;
 - (void)drawAt:(pixelCoords)point angle:(float)angle;
 
+- (pixelSize)size;
+
 @end

@@ -3,6 +3,8 @@
 #import "Texture.h"
 #import "DamageArea.h"
 #import "Game+Items.h"
+#import "Particle.h"
+#import "RandomTools.h"
 
 #define PLAYER_VELOCITY 100.0
 
@@ -99,6 +101,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	fullHealth = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(3, 51, 11, 10)];
 	emptyHealth = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(19, 51, 11, 10)];
+	
+	shotgunParticleSprites = [NSArray arrayWithObjects:
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(33, 33, 2, 2)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(36, 33, 3, 2)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(40, 33, 1, 1)],
+	nil];
+	// smokeParticle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(42, 33, 1, 1)];
 	
 	facing = RIGHT;
 	health = MAX_HEALTH;
@@ -252,6 +261,21 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (reload > 0) return;
 	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
 	[game addItem:damage];
+	
+	// add particles
+	pixelCoords muzzleLoc = self.pixelPosition;
+	muzzleLoc.x += (facing & LEFT) ? -5 : 5;
+	muzzleLoc.y -= 3;
+	for (int i = 0; i<50; i++) {
+		Sprite *particleSprite = [shotgunParticleSprites objectAtIndex:i%shotgunParticleSprites.count];
+		Particle *p = [[Particle alloc] initAt:muzzleLoc sprite:particleSprite physical:NO];
+		p.gravity = cpv(0, randomFloat(-300.0, 300.0));
+		cpBodySetVel(p.body, cpv(randomFloat(300.0, 600.0), randomFloat(-50.0, 50.0)));
+		if (facing & LEFT) p.body->v.x *= -1;
+		p.damping = randomFloat(0.9, 0.95);
+		p.life = randomFloat(0.0, 0.3);
+		[game addItem:p];
+	}
 	reload = (1.0 / FIXED_DT);
 }
 

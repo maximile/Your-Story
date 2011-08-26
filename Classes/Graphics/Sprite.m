@@ -20,6 +20,10 @@ pixelCoords pixelCoordsRotate(pixelCoords point, cpVect angle) {
 	return self;
 }
 
+- (pixelSize)size {
+	return texRect.size;
+}
+
 - (void)drawAt:(pixelCoords)point {			
 	int width = texRect.size.width;
 	int height = texRect.size.height;

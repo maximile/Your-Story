@@ -52,6 +52,8 @@
 	
 	// Velocity of the body last stood on
 	cpVect groundVelocity;
+	
+	NSArray *shotgunParticleSprites;
 }
 
 - (void)addToSpace:(cpSpace *)space;

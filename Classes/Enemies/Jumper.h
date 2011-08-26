@@ -5,6 +5,8 @@
 @interface Jumper : PhysicsObject {
 	NSDictionary *bodySprites;
 	NSDictionary *eyesSprites;
+	NSArray *gibSprites;
+
 	cpShape *shape;
 	
 	GroundingContext grounding;
