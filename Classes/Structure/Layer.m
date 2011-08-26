@@ -132,7 +132,7 @@
 	for (int y=0; y < size.height; y++) {
 		for (int x=0; x < size.width; x++) {
 			int index = y * size.width + x;
-			if (y > dataHeight || x > dataWidth) {
+			if (y >= dataHeight || x >= dataWidth) {
 				tiles[index] = NO_TILE;
 				continue;
 			}
