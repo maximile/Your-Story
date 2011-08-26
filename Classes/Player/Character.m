@@ -18,6 +18,8 @@
 #define JUMP_BOOST_HEIGHT 24.0
 #define FALL_VELOCITY 250.0
 
+#define JUMP_LENIENCY 0.05
+
 #define HEAD_FRICTION 0.7
 
 #define MAX_HEALTH 8
@@ -107,7 +109,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(36, 33, 3, 2)],
 		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(40, 33, 1, 1)],
 	nil];
-	// smokeParticle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(42, 33, 1, 1)];
+	smokeParticleSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(42, 33, 1, 1)];
 	
 	facing = RIGHT;
 	health = MAX_HEALTH;
@@ -185,22 +187,46 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)update:(Game *)game {
 	int jumpState = (directionInput & UP);
+	remainingJumpLeniency -= FIXED_DT;
 	
 	wellGrounded = (grounding.body && cpfabs(grounding.normal.x/grounding.normal.y) < feetShape->u);
 	if(wellGrounded){
 		groundVelocity = grounding.body->v;
 		remainingAirJumps = 1;
+		remainingJumpLeniency = JUMP_LENIENCY;
 	}
 	
 	// If the jump key was just pressed this frame, jump!
 	bool jump = (jumpState && !lastJumpKeyState);
 	
-	if(jump && (wellGrounded || remainingAirJumps)){
+	if(jump && (wellGrounded || remainingAirJumps || (remainingJumpLeniency > 0))){
 		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*GRAVITY);
 		body->v.y = groundVelocity.y + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
-		if(!wellGrounded) remainingAirJumps--;
+		if(!wellGrounded && (remainingJumpLeniency <= 0)) {  // was a double jump
+			remainingAirJumps--;
+			
+			// if the player is holding a direction while double jumping, jump in that direction
+			if (directionInput & LEFT) body->v.x = -PLAYER_VELOCITY;
+			if (directionInput & RIGHT) body->v.x = PLAYER_VELOCITY;
+			if (directionInput & LEFT & RIGHT) body->v.x = 0;  // unlikely
+			
+			int smokeParticleCount = randomInt(5,8);
+			for (int i=0; i<smokeParticleCount; i++) {
+				pixelCoords particlePos = self.pixelPosition;
+				particlePos.y -= 8;
+				particlePos.x += randomInt(-3,3);
+				Particle *p = [[Particle alloc] initAt:particlePos sprite:smokeParticleSprite physical:NO];
+				p.gravity = cpv(0,200);
+				p.damping = 0.8;
+				p.body->v.y = randomFloat(-20.0, -150.0);
+				p.body->v.x = randomFloat(-10.0, 10.0);
+				p.life = randomFloat(0.3, 0.5);
+				[game addItem:p];
+			}
+		}
+			
 	} else if(!jumpState){
 		remainingBoost = 0.0;
 	}
@@ -276,6 +302,17 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		p.life = randomFloat(0.0, 0.3);
 		[game addItem:p];
 	}
+	for (int i = 0; i<10; i++) {
+		Particle *p = [[Particle alloc] initAt:muzzleLoc sprite:smokeParticleSprite physical:NO];
+		p.gravity = cpv(0, 600);
+		p.damping = 0.8;
+		p.life = randomFloat(0.4, 0.7);
+		cpBodySetVel(p.body, cpv(randomFloat(300.0, 600.0), randomFloat(-100.0, 100.0)));
+		if (facing & LEFT) p.body->v.x *= -1;
+		[game addItem:p];
+	}
+	
+	
 	reload = (1.0 / FIXED_DT);
 }
 

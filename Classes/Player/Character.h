@@ -26,6 +26,8 @@
 	NSArray *walkCycle;
 	NSDictionary *leftSprites;
 	NSDictionary *rightSprites;
+	NSArray *shotgunParticleSprites;
+	Sprite *smokeParticleSprite;
 	directionMask facing;
 	
 	// number of frames of inlvulnerability (e.g. after hitting an enemy)
@@ -50,10 +52,12 @@
 	// Number of mid-air jumps remaining to be triggered.
 	int remainingAirJumps;
 	
+	// remaining time you're able to jump after walking off a ledge
+	float remainingJumpLeniency;
+	
 	// Velocity of the body last stood on
 	cpVect groundVelocity;
 	
-	NSArray *shotgunParticleSprites;
 }
 
 - (void)addToSpace:(cpSpace *)space;
