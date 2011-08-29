@@ -313,6 +313,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	[smoke setLife:floatRangeMake(0.4, 0.7)];
 	[game addItem:smoke];
 	
+	[[Texture lightmapTexture] addAt:self.pixelPosition radius:250];
 	
 	reload = (1.0 / FIXED_DT);
 }
