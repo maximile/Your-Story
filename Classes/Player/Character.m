@@ -244,8 +244,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	lastJumpKeyState = jumpState;
 	
 	// face in direction of motion
-	if (cpBodyGetVel(body).x < -1) facing = LEFT;
-	if (cpBodyGetVel(body).x > 1) facing = RIGHT;
+//	if (cpBodyGetVel(body).x < -1) facing = LEFT;
+//	if (cpBodyGetVel(body).x > 1) facing = RIGHT;
 	// override this if the user is trying to move in a specific direction
 	if (directionInput & LEFT) facing = LEFT;
 	if (directionInput & RIGHT) facing = RIGHT;
