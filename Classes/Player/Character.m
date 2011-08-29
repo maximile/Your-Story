@@ -5,6 +5,7 @@
 #import "Game+Items.h"
 #import "Particle.h"
 #import "RandomTools.h"
+#import "Sound.h"
 
 #define PLAYER_VELOCITY 100.0
 
@@ -204,10 +205,14 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		body->v.y = groundVelocity.y + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
+		
+		[Sound playSound:@"PlayerJump.ogg"];
+		
 		if(!wellGrounded && (remainingJumpLeniency <= 0)) {  // was a double jump
 			remainingAirJumps--;
 			
 			// if the player is holding a direction while double jumping, jump in that direction
+			// TODO, need to take grounding velocity into account?
 			if (directionInput & LEFT) body->v.x = -PLAYER_VELOCITY;
 			if (directionInput & RIGHT) body->v.x = PLAYER_VELOCITY;
 			if (directionInput & LEFT & RIGHT) body->v.x = 0;  // unlikely
