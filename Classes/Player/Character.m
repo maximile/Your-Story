@@ -5,6 +5,7 @@
 #import "Game+Items.h"
 #import "Particle.h"
 #import "RandomTools.h"
+#import "Sound.h"
 
 #define PLAYER_VELOCITY 100.0
 
@@ -31,8 +32,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 {
 	Character *self = cpBodyGetUserData(body);
 	
+	bool wasGrounded = (self->grounding.body != NULL);
+	
 	// Get the grounding information.
 	UpdateGroundingContext(body, &self->grounding);
+	
+	// Play a sound if we landed
+	if(self->grounding.body && !wasGrounded) [Sound playSound:@"PlayerLand.ogg" volume:0.5 pitch:1.0];
 	
 	// Reset jump boosting if you hit your head.
 	if(self->grounding.normal.y < 0.0f) self->remainingBoost = 0.0f;
@@ -204,10 +210,14 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		body->v.y = groundVelocity.y + jump_v;
 		
 		remainingBoost = JUMP_BOOST_HEIGHT/jump_v;
+		
+		[Sound playSound:@"PlayerJump.ogg"];
+		
 		if(!wellGrounded && (remainingJumpLeniency <= 0)) {  // was a double jump
 			remainingAirJumps--;
 			
 			// if the player is holding a direction while double jumping, jump in that direction
+			// TODO, need to take grounding velocity into account?
 			if (directionInput & LEFT) body->v.x = -PLAYER_VELOCITY;
 			if (directionInput & RIGHT) body->v.x = PLAYER_VELOCITY;
 			if (directionInput & LEFT & RIGHT) body->v.x = 0;  // unlikely
@@ -248,6 +258,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (hurt) {
 		return 0;
 	}
+	
+	[Sound playSound:@"PlayerHit.ogg"];
+	
 	cpVect normal = cpArbiterGetNormal(arb, 0);
 	cpVect response = cpvnormalize(cpv(1.0, 1.0));
 	if (normal.x > 0) response.x *= -1;
@@ -263,6 +276,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 - (int)hitHealth:(Health *)healthItem arbiter:(cpArbiter *)arb {
 	if (health == MAX_HEALTH || healthItem.used) return 0;
 	[self addHealth:1];
+	
+	[Sound playSound:@"Heart.ogg"];
 	
 	// mark the health item as used so that it doesn't get applied twice
 	// if the head and feet both touch it
@@ -282,6 +297,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (reload > 0) return;
 	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
 	[game addItem:damage];
+	
+	[Sound playSound:@"PlayerShotgun.ogg"];
 	
 	// add particles
 	pixelCoords muzzleLoc = self.pixelPosition;

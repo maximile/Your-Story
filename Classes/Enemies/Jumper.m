@@ -3,6 +3,7 @@
 #import "Particle.h"
 #import "Game+Items.h"
 #import "RandomTools.h"
+#import "Sound.h"
 
 #define JUMP_HEIGHT TILE_SIZE
 #define JUMP_INTERVAL 1.5
@@ -69,7 +70,14 @@ cpfsign(cpFloat f)
 		return;
 	}
 	
+	
+	bool wasGrounded = (grounding.body != NULL);
+	
+	// Get the grounding information.
 	UpdateGroundingContext(body, &grounding);
+	
+	// Play a sound if we landed
+	if(grounding.body && !wasGrounded) [Sound playSound:@"PlayerLand.ogg" volume:0.5 pitch:1.0];
 	
 	Player *player = game.player;
 	cpVect playerPos = player.position;
@@ -101,6 +109,8 @@ cpfsign(cpFloat f)
 	if(grounding.body && elapsed > JUMP_INTERVAL && canSeePlayer){
 		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*GRAVITY);
 		body->v = cpvadd(grounding.body->v, cpv(cpfsign(playerPos.x - pos.x)*jump_v/1.5, jump_v));
+		
+		[Sound playSound:@"JumperJump.ogg"];
 		
 		lastJumpTime = game.fixedTime;
 		justJumped = YES;

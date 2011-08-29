@@ -11,6 +11,7 @@
 #import "Jumper.h"
 #import "Health.h"
 #import "Spawn.h"
+#import "Sound.h"
 
 static int characterHitHealth(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, healthBody);
@@ -154,6 +155,8 @@ static Game *game = nil;
 			connectionDict = testConnectionDict;
 		}
 	}
+	
+	[Sound playSound:@"Creepy.ogg" volume:0.25 pitch:0.5];
 }
 
 -(void)updateStep {	
