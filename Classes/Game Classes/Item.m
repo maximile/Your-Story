@@ -2,6 +2,8 @@
 
 @implementation Item
 
+@synthesize startingPosition;
+
 - (id)initWithPosition:(pixelCoords)newPosition {
 	if ([super init] == nil) return nil;
 	

@@ -10,6 +10,7 @@
 #import "Item.h"
 #import "Jumper.h"
 #import "Health.h"
+#import "Spawn.h"
 
 static int characterHitHealth(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, healthBody);
@@ -103,6 +104,15 @@ static Game *game = nil;
 }
 
 - (void)setCurrentRoom:(Room *)newRoom {
+	[self setCurrentRoom:newRoom fromEdge:NOWHERE];
+}
+
+- (void)setCurrentRoom:(Room *)newRoom fromEdge:(directionMask)edge {
+	// record player velocity
+	cpVect oldVelocity = cpvzero;
+	if (player != nil)
+		oldVelocity = player.body->v;
+	
 	// clear old room stuff
 	for (Item *item in items) {
 		[self removeItem:item];
@@ -118,14 +128,24 @@ static Game *game = nil;
 	
 	// add items from room
 	NSArray *roomItems = [currentRoom.itemLayer items];
+	NSMutableArray *spawns = [NSMutableArray array];
 	for (Item *item in roomItems) {
 		[self addItem:item];
 		NSLog(@"%@", item);
-		if ([item isKindOfClass:[Player class]]) {
-			player = (Player *)item;
+		if ([item isKindOfClass:[Spawn class]]) {
+			[spawns addObject:item];
 		}
 	}
+	
+	// find the most appropriate spawn point and start the player there
+	Spawn *theSpawn = [Spawn getSpawnForEdge:edge spawns:spawns];
+	player = [[Character alloc] initWithPosition:theSpawn.startingPosition];
+	[self addItem:player];
 	[self addAndRemoveItems];
+	
+	// restore old player velocity
+	player.body->v = oldVelocity;
+	
 	[self setEditingLayer:currentRoom.mainLayer];	
 	
 	// set current connection dict to store neighbouring rooms
@@ -193,13 +213,21 @@ double getDoubleTime(void)
 	if (outside) {
 		Room *nextRoom = [self roomInDirection:outside];
 		if (nextRoom != nil) {
-			[self setCurrentRoom:nextRoom];
+			directionMask startingEdge = NOWHERE;
+			if (outside & RIGHT) startingEdge |= LEFT;
+			if (outside & LEFT) startingEdge |= RIGHT;
+			if (outside & UP) startingEdge |= DOWN;
+			if (outside & DOWN) startingEdge |= UP;
+			[self setCurrentRoom:nextRoom fromEdge:startingEdge];
 			// TODO: move player to the corresponding entrance
 		}
 		else {
-			[self removeItem:player];
-			[self addAndRemoveItems];
-			player = nil;
+			// fell off the bottom and no downwards room? die
+			if (outside & DOWN) {
+				[self removeItem:player];
+				[self addAndRemoveItems];
+				player = nil;
+			}
 		}
 	}
 }

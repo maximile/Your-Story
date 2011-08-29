@@ -66,6 +66,7 @@ typedef enum {
 - (void)drawOnCanvas:(FBO *)canvas;
 - (void)update;
 
+- (void)setCurrentRoom:(Room *)newRoom fromEdge:(directionMask)edge;
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;
 - (Room *)roomInDirection:(directionMask)direction;
