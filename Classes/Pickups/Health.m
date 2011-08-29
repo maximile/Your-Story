@@ -37,6 +37,7 @@
 
 - (void)draw {
 	[sprite drawAt:startingPosition];
+	[[Texture lightmapTexture] addAt:startingPosition radius:12];
 }
 
 @end
