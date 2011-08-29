@@ -45,7 +45,9 @@ static ALuint channels[NUM_CHANNELS];
 - (id)initWithFilename:(NSString *)filename
 {
 	if((self = [super init])){
-		FILE *file = fopen([filename UTF8String], "rb");
+		NSURL *url = [[NSBundle mainBundle] URLForResource:filename withExtension:nil];
+		
+		FILE *file = fopen([[url path] UTF8String], "rb");
 		if(!file) [NSException raise:@"FileNotFound" format:@"Could not load ogg file %@.", filename];
 		
 		OggVorbis_File vorbis;
@@ -112,7 +114,7 @@ GetOpenChannel()
 	return 0;
 }
 
-+(void)playSound:(NSString *)filename;
++(void)playSound:(NSString *)filename volume:(float)volume pitch:(float)pitch;
 {
 	Sound *sound = [sounds objectForKey:filename];
 	
@@ -123,15 +125,19 @@ GetOpenChannel()
 	
 	ALuint source = GetOpenChannel();
 	
-	float volume = 1;
-	float pitch = 1;
-	
-	alSourcei(source, AL_BUFFER, sound->_buffer);
-	alSourcef(source, AL_GAIN, volume);
-	alSourcef(source, AL_PITCH, pitch);
-	alSourcePlay(source);
+	if(source){
+		alSourcei(source, AL_BUFFER, sound->_buffer);
+		alSourcef(source, AL_GAIN, volume);
+		alSourcef(source, AL_PITCH, pitch);
+		alSourcePlay(source);
+	}
 	
 	CheckALErrors();
+}
+
++(void)playSound:(NSString *)filename;
+{
+	[self playSound:filename volume:1.0 pitch:1.0];
 }
 
 @end

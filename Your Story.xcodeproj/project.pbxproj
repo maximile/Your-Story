@@ -87,6 +87,10 @@
 		D34FF3B8140B134500BF9C33 /* PlayerLand.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D34FF3B5140B134500BF9C33 /* PlayerLand.ogg */; };
 		D34FF3BA140B138900BF9C33 /* Ogg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D34FF3A7140AC6F000BF9C33 /* Ogg.framework */; };
 		D34FF3BB140B138900BF9C33 /* Vorbis.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D34FF3A8140AC6F000BF9C33 /* Vorbis.framework */; };
+		D34FF3C0140B1D5F00BF9C33 /* Heart.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D34FF3BC140B1D5F00BF9C33 /* Heart.ogg */; };
+		D34FF3C1140B1D5F00BF9C33 /* JumperJump.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D34FF3BD140B1D5F00BF9C33 /* JumperJump.ogg */; };
+		D34FF3C2140B1D5F00BF9C33 /* PlayerHit.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D34FF3BE140B1D5F00BF9C33 /* PlayerHit.ogg */; };
+		D34FF3C3140B1D5F00BF9C33 /* PlayerShotgun.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D34FF3BF140B1D5F00BF9C33 /* PlayerShotgun.ogg */; };
 		D370023C14021319005C3A57 /* light-point.psd in Resources */ = {isa = PBXBuildFile; fileRef = D370023B14021319005C3A57 /* light-point.psd */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
 		D3BA942813FE61010005173B /* libTileVectorizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BA942713FE61010005173B /* libTileVectorizer.a */; };
@@ -243,6 +247,10 @@
 		D34FF3B3140B134500BF9C33 /* Creepy.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Creepy.ogg; sourceTree = "<group>"; };
 		D34FF3B4140B134500BF9C33 /* PlayerJump.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayerJump.ogg; sourceTree = "<group>"; };
 		D34FF3B5140B134500BF9C33 /* PlayerLand.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayerLand.ogg; sourceTree = "<group>"; };
+		D34FF3BC140B1D5F00BF9C33 /* Heart.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Heart.ogg; sourceTree = "<group>"; };
+		D34FF3BD140B1D5F00BF9C33 /* JumperJump.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = JumperJump.ogg; sourceTree = "<group>"; };
+		D34FF3BE140B1D5F00BF9C33 /* PlayerHit.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayerHit.ogg; sourceTree = "<group>"; };
+		D34FF3BF140B1D5F00BF9C33 /* PlayerShotgun.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayerShotgun.ogg; sourceTree = "<group>"; };
 		D370023B14021319005C3A57 /* light-point.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-point.psd"; sourceTree = "<group>"; };
 		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
 		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
@@ -606,6 +614,10 @@
 		D34FF3B2140B134500BF9C33 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D34FF3BC140B1D5F00BF9C33 /* Heart.ogg */,
+				D34FF3BD140B1D5F00BF9C33 /* JumperJump.ogg */,
+				D34FF3BE140B1D5F00BF9C33 /* PlayerHit.ogg */,
+				D34FF3BF140B1D5F00BF9C33 /* PlayerShotgun.ogg */,
 				D34FF3B3140B134500BF9C33 /* Creepy.ogg */,
 				D34FF3B4140B134500BF9C33 /* PlayerJump.ogg */,
 				D34FF3B5140B134500BF9C33 /* PlayerLand.ogg */,
@@ -687,6 +699,10 @@
 				D34FF3B6140B134500BF9C33 /* Creepy.ogg in Resources */,
 				D34FF3B7140B134500BF9C33 /* PlayerJump.ogg in Resources */,
 				D34FF3B8140B134500BF9C33 /* PlayerLand.ogg in Resources */,
+				D34FF3C0140B1D5F00BF9C33 /* Heart.ogg in Resources */,
+				D34FF3C1140B1D5F00BF9C33 /* JumperJump.ogg in Resources */,
+				D34FF3C2140B1D5F00BF9C33 /* PlayerHit.ogg in Resources */,
+				D34FF3C3140B1D5F00BF9C33 /* PlayerShotgun.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

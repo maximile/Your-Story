@@ -18,6 +18,7 @@
 	float _duration;
 }
 
++(void)playSound:(NSString *)filename volume:(float)volume pitch:(float)pitch;
 +(void)playSound:(NSString *)filename;
 
 @end
