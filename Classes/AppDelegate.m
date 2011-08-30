@@ -24,6 +24,7 @@
 	
 	if (!fullScreen) {
 		[mainView enterFullScreenMode:[NSScreen mainScreen] withOptions:fullScreenOptions];
+		[gameView.window makeFirstResponder:gameView];
 	}
 	else {
 		[mainView exitFullScreenModeWithOptions:fullScreenOptions];

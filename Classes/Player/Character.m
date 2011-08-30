@@ -222,19 +222,14 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 			if (directionInput & RIGHT) body->v.x = PLAYER_VELOCITY;
 			if (directionInput & LEFT & RIGHT) body->v.x = 0;  // unlikely
 			
-			int smokeParticleCount = randomInt(5,8);
-			for (int i=0; i<smokeParticleCount; i++) {
-				pixelCoords particlePos = self.pixelPosition;
-				particlePos.y -= 8;
-				particlePos.x += randomInt(-3,3);
-				Particle *p = [[Particle alloc] initAt:particlePos sprite:smokeParticleSprite physical:NO];
-				p.gravity = cpv(0,200);
-				p.damping = 0.8;
-				p.body->v.y = randomFloat(-20.0, -150.0);
-				p.body->v.x = randomFloat(-10.0, 10.0);
-				p.life = randomFloat(0.3, 0.5);
-				[game addItem:p];
-			}
+			// smoke particles for double jump
+			ParticleCollection *smoke = [[ParticleCollection alloc] initWithCount:8 sprite:smokeParticleSprite physical:NO];
+			[smoke setVelocityX:floatRangeMake(-10.0, 10.0) Y:floatRangeMake(-20.0, -150.0)];
+			[smoke setPositionX:floatRangeMake(self.pixelPosition.x - 3, self.pixelPosition.x + 3) Y:floatRangeMake(self.pixelPosition.y - 8, self.pixelPosition.y - 8)];
+			[smoke setGravityX:floatRangeMake(0.0, 0.0) Y:floatRangeMake(180.0, 220.0)];
+			[smoke setDamping:floatRangeMake(0.8, 0.8)];
+			[smoke setLife:floatRangeMake(0.3, 0.5)];
+			[game addItem:smoke];
 		}
 			
 	} else if(!jumpState){
@@ -309,26 +304,33 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	pixelCoords muzzleLoc = self.pixelPosition;
 	muzzleLoc.x += (facing & LEFT) ? -5 : 5;
 	muzzleLoc.y -= 3;
-	for (int i = 0; i<50; i++) {
-		Sprite *particleSprite = [shotgunParticleSprites objectAtIndex:i%shotgunParticleSprites.count];
-		Particle *p = [[Particle alloc] initAt:muzzleLoc sprite:particleSprite physical:NO];
-		p.gravity = cpv(0, randomFloat(-300.0, 300.0));
-		cpBodySetVel(p.body, cpv(randomFloat(300.0, 600.0), randomFloat(-50.0, 50.0)));
-		if (facing & LEFT) p.body->v.x *= -1;
-		p.damping = randomFloat(0.9, 0.95);
-		p.life = randomFloat(0.0, 0.3);
-		[game addItem:p];
-	}
-	for (int i = 0; i<10; i++) {
-		Particle *p = [[Particle alloc] initAt:muzzleLoc sprite:smokeParticleSprite physical:NO];
-		p.gravity = cpv(0, 600);
-		p.damping = 0.8;
-		p.life = randomFloat(0.4, 0.7);
-		cpBodySetVel(p.body, cpv(randomFloat(300.0, 600.0), randomFloat(-100.0, 100.0)));
-		if (facing & LEFT) p.body->v.x *= -1;
+	
+	for (Sprite *particleSprite in shotgunParticleSprites) {
+		ParticleCollection *p = [[ParticleCollection alloc] initWithCount:10 sprite:particleSprite physical:NO];
+		[p setPositionX:floatRangeMake(muzzleLoc.x, muzzleLoc.x) Y:floatRangeMake(muzzleLoc.y-1, muzzleLoc.y+1)];
+		if (facing & LEFT)
+			[p setVelocityX:floatRangeMake(-600.0, -300.0) Y:floatRangeMake(-50.0, 50.0)];
+		else
+			[p setVelocityX:floatRangeMake(300.0, 600.0) Y:floatRangeMake(-50.0, 50.0)];
+		[p setGravityX:floatRangeMake(0.0, 0.0) Y:floatRangeMake(-300.0, 300.0)];
+		[p setDamping:floatRangeMake(0.9, 0.95)];
+		[p setLife:floatRangeMake(0.0, 0.3)];
 		[game addItem:p];
 	}
 	
+	ParticleCollection *smoke = [[ParticleCollection alloc] initWithCount:10 sprite:smokeParticleSprite physical:NO];
+	if (facing & LEFT)
+		[smoke setVelocityX:floatRangeMake(-600.0, -300.0) Y:floatRangeMake(-100.0, 100.0)];
+	else
+		[smoke setVelocityX:floatRangeMake(300.0, 600.0) Y:floatRangeMake(-100.0, 100.0)];
+	
+	[smoke setPositionX:floatRangeMake(muzzleLoc.x, muzzleLoc.x) Y:floatRangeMake(muzzleLoc.y, muzzleLoc.y)];
+	[smoke setGravityX:floatRangeMake(0.0, 0.0) Y:floatRangeMake(500.0, 700.0)];
+	[smoke setDamping:floatRangeMake(0.8, 0.8)];
+	[smoke setLife:floatRangeMake(0.4, 0.7)];
+	[game addItem:smoke];
+	
+	[[Texture lightmapTexture] addAt:self.pixelPosition radius:250];
 	
 	reload = (1.0 / FIXED_DT);
 }

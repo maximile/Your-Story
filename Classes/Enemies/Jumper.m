@@ -57,17 +57,16 @@ cpfsign(cpFloat f)
 - (void)update:(Game *)game {
 	if (health <= 0) {
 		[game removeItem:self];
-		for (int i = 0; i<50; i++) {
-			Sprite *particleSprite = [gibSprites objectAtIndex:i%gibSprites.count];
-			pixelCoords particlePos = self.pixelPosition;
-			particlePos.x += randomInt(-5,5);
-			particlePos.y += randomInt(-5,5);
-			Particle *p = [[Particle alloc] initAt:particlePos sprite:particleSprite physical:NO];
-			cpBodySetVel(p.body, cpv(randomFloat(-200, 200.0), randomFloat(50, 200)));
-			p.life = randomFloat(0.0, 0.3);
-			[game addItem:p];
-		}
 		
+		// death explosion
+		for (Sprite *gibSprite in gibSprites) {
+			ParticleCollection *gibs = [[ParticleCollection alloc] initWithCount:20 sprite:gibSprite physical:NO];
+			[gibs setVelocityX:floatRangeMake(-200.0, 200.0) Y:floatRangeMake(50.0, 200.0)];
+			[gibs setPositionX:floatRangeMake(self.pixelPosition.x - 5, self.pixelPosition.x + 5) Y:floatRangeMake(self.pixelPosition.y - 5, self.pixelPosition.y - 5)];
+			[gibs setLife:floatRangeMake(0.0, 0.3)];
+			[game addItem:gibs];
+		}
+				
 		return;
 	}
 	
@@ -188,23 +187,20 @@ cpfsign(cpFloat f)
 	effect = cpvmult(effect, strength * 25);
 	cpBodyApplyImpulse(body, effect, cpvzero);
 	
-	for (int i = 0; i<20; i++) {
-		Sprite *particleSprite = [gibSprites objectAtIndex:i%gibSprites.count];
-		
-		pixelCoords particlePos = self.pixelPosition;
-		int woundXOffset = randomInt(6, 8);
-		if (shotDirection == LEFT) woundXOffset *= -1;
-		particlePos.x += woundXOffset;
-		particlePos.y += randomInt(-3, 3);
-		
-		float particleXVel = randomFloat(100.0, 200.0);
-		if (shotDirection == LEFT) particleXVel *= -1;
-		Particle *p = [[Particle alloc] initAt:particlePos sprite:particleSprite physical:NO];
-		cpBodySetVel(p.body, cpv(particleXVel, randomFloat(-30, 30)));
-		p.life = randomFloat(0.0, 0.3);
-		[[Game game] addItem:p];
+	// 'blood'
+	for (Sprite *gibSprite in gibSprites) {
+		ParticleCollection *gibs = [[ParticleCollection alloc] initWithCount:15 sprite:gibSprite physical:NO];
+		if (shotDirection == LEFT) {
+			[gibs setPositionX:floatRangeMake(self.pixelPosition.x - 8, self.pixelPosition.x - 6) Y:floatRangeMake(self.pixelPosition.y - 3, self.pixelPosition.y + 3)];
+			[gibs setVelocityX:floatRangeMake(-200.0, -100.0) Y:floatRangeMake(-30, 30)];
+		}
+		else {
+			[gibs setPositionX:floatRangeMake(self.pixelPosition.x +6, self.pixelPosition.x + 8) Y:floatRangeMake(self.pixelPosition.y - 3, self.pixelPosition.y + 3)];
+			[gibs setVelocityX:floatRangeMake(100.0, 200.0) Y:floatRangeMake(-30, 30)];
+		}
+		[gibs setLife:floatRangeMake(0.0, 0.3)];
+		[[Game game] addItem:gibs];
 	}
-	
 	
 	health--;
 }

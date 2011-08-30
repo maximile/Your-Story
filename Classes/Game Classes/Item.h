@@ -7,6 +7,8 @@
 	pixelCoords startingPosition;
 }
 
+@property (readonly) pixelCoords startingPosition;
+
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
 

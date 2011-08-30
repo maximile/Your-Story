@@ -7,7 +7,7 @@
 		<string>Another</string>
 		<key>Title</key>
 		<string>First</string>
-		<key>Right</key>
+		<key>Left</key>
 		<string>Messing</string>
 	</dict>
 	<dict>
@@ -15,7 +15,7 @@
 		<string>Messing</string>
 		<key>Title</key>
 		<string>Second</string>
-		<key>Left</key>
+		<key>Right</key>
 		<string>Another</string>
 	</dict>
 </array>
