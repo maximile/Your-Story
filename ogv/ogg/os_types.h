@@ -140,6 +140,7 @@
 
 #else
 
+#error should not be here
 #  include <ogg/config_types.h>
 
 #endif

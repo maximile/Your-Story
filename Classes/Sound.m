@@ -11,14 +11,15 @@
 #import <OpenAL/alc.h>
 
 #define OV_EXCLUDE_STATIC_CALLBACKS
-#import <Ogg/ogg.h>
-#import <Vorbis/vorbisfile.h>
+#import "ogg/ogg.h"
+#import "vorbis/vorbisfile.h"
 
 
 static void
 CheckALErrors()
 {
 	for(ALenum err; (err = alGetError());){
+		NSLog(@"OpenAL error: 0x%x", err);
 		[NSException raise:@"OpenALError" format:@"OpenAL error: 0x%x", err];
 	}
 }
@@ -30,21 +31,10 @@ CheckALErrors()
 static NSMutableDictionary *sounds;
 static ALuint channels[NUM_CHANNELS];
 
-+(void)initialize
-{
-	sounds = [[NSMutableDictionary alloc] init];
-	
-	ALCdevice *device = alcOpenDevice(NULL);
-	ALCcontext *context = alcCreateContext(device, NULL);
-	alcMakeContextCurrent(context);
-	
-	alGenSources(NUM_CHANNELS, channels);
-	CheckALErrors();
-}
-
 - (id)initWithFilename:(NSString *)filename
 {
 	if((self = [super init])){
+		NSLog(@"Loading ogg file %@", filename);
 		NSURL *url = [[NSBundle mainBundle] URLForResource:filename withExtension:nil];
 		
 		FILE *file = fopen([[url path] UTF8String], "rb");
@@ -97,6 +87,18 @@ static ALuint channels[NUM_CHANNELS];
 	alDeleteBuffers(1, &_buffer);
 	
 	[super finalize];
+}
+
++(void)initialize
+{
+	sounds = [[NSMutableDictionary alloc] init];
+	
+	ALCdevice *device = alcOpenDevice(NULL);
+	ALCcontext *context = alcCreateContext(device, NULL);
+	alcMakeContextCurrent(context);
+	
+	alGenSources(NUM_CHANNELS, channels);
+	CheckALErrors();
 }
 
 static ALuint
