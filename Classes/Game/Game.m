@@ -211,8 +211,8 @@ double getDoubleTime(void)
 	directionMask outside = NOWHERE;
 	if (pos.x < 0) outside |= LEFT;
 	if (pos.x > (currentRoom.size.width) * TILE_SIZE) outside |= RIGHT;
-	if (pos.y < 0) outside |= UP;
-	if (pos.y > (currentRoom.size.height) * TILE_SIZE) outside |= DOWN;
+	if (pos.y < 0) outside |= DOWN;
+	if (pos.y > (currentRoom.size.height) * TILE_SIZE) outside |= UP;
 	if (outside) {
 		Room *nextRoom = [self roomInDirection:outside];
 		if (nextRoom != nil) {
