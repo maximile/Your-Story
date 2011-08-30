@@ -130,7 +130,7 @@ static void particleUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping
 	}
 }
 
-- (void)draw {
+- (void)draw:(Game *)game {
 	for (int i=0; i<particleCount; i++) {
 		particle p = particles[i];
 		if (p.inSpace == NO) continue;

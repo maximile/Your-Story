@@ -78,7 +78,7 @@
 		glColor3f(1,1,1);
 		if (layer == currentRoom.mainLayer) {
 			for (Item *item in items) {
-				[item draw];
+				[item draw:self];
 			}
 			
 			NSArray *allTextures = [Texture textures];

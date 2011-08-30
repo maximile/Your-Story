@@ -35,9 +35,12 @@
 	[super finalize];
 }
 
-- (void)draw {
+- (void)draw:(Game *)game {
 	[sprite drawAt:startingPosition];
-	[[Texture lightmapTexture] addAt:startingPosition radius:12];
+	
+	float phase = 2.0*M_PI*self.objectPhase;
+	float radius = cpflerp(8, 16, cpfsin(6.0*game.fixedTime + phase)*0.5 + 0.5);
+	[[Texture lightmapTexture] addAt:startingPosition radius:radius];
 }
 
 @end

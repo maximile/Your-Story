@@ -82,8 +82,6 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpBodySetUserData(body, self);
 	body->velocity_func = playerUpdateVelocity;
 	
-	// Make the head shape smaller so it doesn't cause friction with walls.
-	// Maybe should dynamically assign friction like with the feetShape?
 	headShape = cpCircleShapeNew(body, 4.0, cpv(0, 4));
 	cpShapeSetCollisionType(headShape, [self class]);
 	
@@ -142,7 +140,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	return pixelCoordsMake(round(pos.x), round(pos.y));
 }
 
-- (void)draw {
+- (void)draw:(Game *)game {
 	pixelCoords pixelPos = self.pixelPosition;
 	
 	if(!hurt || (hurt%9 >= 3)) {
@@ -176,7 +174,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[sprite drawAt:pixelPos];
 	}
 	
-	[[Texture lightmapTexture] addAt:pixelPos radius:96];
+	float radius = cpflerp(90, 100, cpfsin(3.0*game.fixedTime)*0.5 + 0.5);
+	[[Texture lightmapTexture] addAt:pixelPos radius:radius];
 }
 
 - (void)addToSpace:(cpSpace *)space {

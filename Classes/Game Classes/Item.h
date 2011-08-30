@@ -9,11 +9,14 @@
 
 @property (readonly) pixelCoords startingPosition;
 
+// Value from 0-1 that is unique to each item usable for animation effects.
+@property (readonly) float objectPhase;
+
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
 
 - (id)initWithPosition:(pixelCoords)newPosition;
-- (void)draw;
+- (void)draw:(Game *)game;
 - (void)update:(Game *)game;
 
 @end

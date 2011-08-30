@@ -87,7 +87,7 @@ cpfsign(cpFloat f)
 	
 	// can the jumper see the player?
 	canSeePlayer = NO;
-	BOOL nearPlayer = cpvnear(playerPos, pos, 96);
+	nearPlayer = cpvnear(playerPos, pos, 96);
 	if (nearPlayer) {
 		cpShape *hit = cpSpaceSegmentQueryFirst(game.space, pos, playerPos, CP_ALL_LAYERS, self, NULL);
 		if (hit && hit->body == player.body) {
@@ -127,24 +127,25 @@ cpfsign(cpFloat f)
 	return pixelCoordsMake(round(pos.x), round(pos.y));
 }
 
-- (void)draw {	
-	pixelCoords eyePos = self.pixelPosition;
+- (void)draw:(Game *)game {	
+	pixelCoords pixelPos = self.pixelPosition;
+	pixelCoords eyePos = pixelPos;
 	
 	NSString *bodyKey = @"idle";
-	eyePos.y = self.pixelPosition.y - 1;
+	eyePos.y = pixelPos.y - 1;
 	
 	if (aboutToJump) {
 		bodyKey = @"crouched";
-		eyePos.y = self.pixelPosition.y - 3;
+		eyePos.y = pixelPos.y - 3;
 	}
 	if (justJumped) {
 		bodyKey = @"airborne";
-		eyePos.y = self.pixelPosition.y + 3;
+		eyePos.y = pixelPos.y + 3;
 	}
 	Sprite *bodySprite = [bodySprites valueForKey:bodyKey];
 	
 	NSString *eyesKey = nil;
-	if (canSeePlayer) {
+	if (nearPlayer && fmod(game.fixedTime + self.objectPhase*5.0, 5.0) > 0.1) {
 		Player *player = [Game game].player;
 		cpVect playerPos = player.position;
 		cpVect pos = cpBodyGetPos(body);
@@ -152,10 +153,12 @@ cpfsign(cpFloat f)
 		if (pos.x > playerPos.x && pos.y < playerPos.y - 4) eyesKey = @"tl";
 		if (pos.x < playerPos.x && pos.y > playerPos.y - 4) eyesKey = @"br";
 		if (pos.x > playerPos.x && pos.y > playerPos.y - 4) eyesKey = @"bl";
+		
+//		[[Texture lightmapTexture] addAt:pixelPos radius:16];
 	}
 	Sprite *eyesSprite = [eyesSprites valueForKey:eyesKey];
 	
-	[bodySprite drawAt:self.pixelPosition];
+	[bodySprite drawAt:pixelPos];
 	[eyesSprite drawAt:eyePos];
 }
 

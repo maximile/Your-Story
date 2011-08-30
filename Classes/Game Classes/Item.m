@@ -12,7 +12,7 @@
 	return self;
 }
 
-- (void)draw {
+- (void)draw:(Game *)game {
 	return;
 }
 - (void)update:(Game *)game {
@@ -26,5 +26,8 @@
 	return;
 }
 
+-(float)objectPhase {
+	return (float)((int)self&255)/255.0;
+}
 
 @end

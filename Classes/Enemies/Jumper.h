@@ -12,7 +12,9 @@
 	GroundingContext grounding;
 	double lastJumpTime;
 	BOOL aboutToJump;	
-	BOOL justJumped;	
+	BOOL justJumped;
+	
+	BOOL nearPlayer;
 	BOOL canSeePlayer;
 	
 	int health;
