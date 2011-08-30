@@ -184,9 +184,9 @@ double getDoubleTime(void)
 	if (downKey) { directionInput |= DOWN; }
 	if (leftKey) { directionInput |= LEFT; }
 	if (rightKey) { directionInput |= RIGHT; }
-	[player setInput:directionInput];
+	[player setInput:directionInput jump:zKey shoot:xKey];
 	
-	if (spaceKey) {
+	if (xKey) {
 		[player shoot:self];
 	}
 	

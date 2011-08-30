@@ -6,9 +6,10 @@
 
 @interface Player : PhysicsObject {
 	directionMask directionInput;
+	bool jumpInput, shootInput;
 }
 
-- (void)setInput:(directionMask)direction;
+- (void)setInput:(directionMask)direction jump:(bool)jump shoot:(bool)shoot;
 - (void)shoot:(Game *)game;
 - (void)drawStatus;
 

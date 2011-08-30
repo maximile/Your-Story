@@ -63,7 +63,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	}
 	
 	// Perform a normal-ish update
-	int jumpState = (self->directionInput & UP);
+	int jumpState = self->jumpInput;
 	cpBool boost = (jumpState && self->remainingBoost > 0.0f);
 	cpBodyUpdateVelocity(body, (boost ? cpvzero : gravity), damping, dt);
 	
@@ -191,7 +191,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)update:(Game *)game {
-	int jumpState = (directionInput & UP);
+	int jumpState = jumpInput;
 	remainingJumpLeniency -= FIXED_DT;
 	
 	wellGrounded = (grounding.body && cpfabs(grounding.normal.x/grounding.normal.y) < feetShape->u);

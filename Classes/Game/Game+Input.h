@@ -14,8 +14,10 @@
 
 - (void)tabDown;
 - (void)tabUp;
-- (void)spaceDown;
-- (void)spaceUp;
+- (void)zDown;
+- (void)zUp;
+- (void)xDown;
+- (void)xUp;
 
 - (void)numberDown:(int)number;
 

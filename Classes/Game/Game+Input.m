@@ -18,8 +18,11 @@
 
 - (void)tabDown {tabKey=YES;}
 - (void)tabUp {tabKey=NO;}
-- (void)spaceDown {spaceKey=YES;}
-- (void)spaceUp {spaceKey=NO;}
+
+- (void)zDown {zKey=YES;}
+- (void)zUp {zKey=NO;}
+- (void)xDown {xKey=YES;}
+- (void)xUp {xKey=NO;}
 
 - (void)numberDown:(int)number {
 	if (mode == EDITOR_MODE) {

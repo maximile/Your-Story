@@ -7,8 +7,11 @@
 	return;
 }
 
-- (void)setInput:(directionMask)direction {
+- (void)setInput:(directionMask)direction jump:(bool)jump shoot:(bool)shoot;
+{
 	directionInput = direction;
+	jumpInput = jump;
+	shootInput = shoot;
 }
 
 - (void)drawStatus {}

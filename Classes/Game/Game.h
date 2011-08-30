@@ -38,7 +38,7 @@ typedef enum {
 	BOOL drawCollision;
 	
 	// key pressed flags
-	BOOL upKey, downKey, leftKey, rightKey, tabKey, spaceKey;
+	BOOL upKey, downKey, leftKey, rightKey, tabKey, zKey, xKey;
 	
 	// physics variables
 	cpSpace *space;

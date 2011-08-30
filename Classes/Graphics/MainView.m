@@ -133,6 +133,7 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 }
 
 - (void)keyUp:(NSEvent *)event {
+	NSLog(@"keycode:%d", event.keyCode);
 	switch (event.keyCode) {
 		case 126: [game upUp]; break; // upArrow
 		case 13: [game upUp]; break; // w
@@ -143,7 +144,8 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 		case 123: [game leftUp]; break; // leftArrow
 		case 0: [game leftUp]; break; // a
 		case 48: [game tabUp]; break; // tab
-		case 49: [game spaceUp]; break; // space
+		case 6: [game zUp]; break; // z
+		case 7: [game xUp]; break; // z
 		default: break;
 	}
 }
@@ -159,7 +161,8 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 		case 123: [game leftDown]; break; // leftArrow
 		case 0: [game leftDown]; break; // a
 		case 48: [game tabDown]; break; // tab
-		case 49: [game spaceDown]; break; // space
+		case 6: [game zDown]; break; // z
+		case 7: [game xDown]; break; // z
 		default: break;
 	}
 	// test for number input
