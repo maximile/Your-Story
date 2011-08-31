@@ -1,11 +1,18 @@
 #import "AppDelegate.h"
 #import "MainView.h"
 
+#import <OpenAL/alc.h>
+
 @implementation AppDelegate
 
 @synthesize window, gameView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+	ALCdevice *device = alcOpenDevice(NULL);
+	ALCcontext *context = alcCreateContext(device, NULL);
+	alcMakeContextCurrent(context);
+	NSLog(@"OpenAL context created.");
+	
 	// Insert code here to initialize your application 
 	game = [[Game alloc] init];
 	

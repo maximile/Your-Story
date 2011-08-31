@@ -7,6 +7,8 @@
 #import "FBO.h"
 #import "Texture.h"
 
+#import "Music.h"
+
 @class Player;
 
 typedef enum {
@@ -51,6 +53,8 @@ typedef enum {
 	NSArray *connections;
 	
 	FBO *lightmapCanvas;
+	
+	Music *music;
 }
 
 @property gameMode mode;

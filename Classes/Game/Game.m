@@ -156,7 +156,9 @@ static Game *game = nil;
 		}
 	}
 	
-	[Sound playSound:@"Creepy.ogg" volume:0.25 pitch:0.5];
+	[music stop];
+	music = [[Music alloc] initWithFilename:@"test_music.ogg"];
+	[music play];
 }
 
 -(void)updateStep {	

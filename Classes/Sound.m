@@ -93,10 +93,6 @@ static ALuint channels[NUM_CHANNELS];
 {
 	sounds = [[NSMutableDictionary alloc] init];
 	
-	ALCdevice *device = alcOpenDevice(NULL);
-	ALCcontext *context = alcCreateContext(device, NULL);
-	alcMakeContextCurrent(context);
-	
 	alGenSources(NUM_CHANNELS, channels);
 	CheckALErrors();
 }

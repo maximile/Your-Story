@@ -79,6 +79,7 @@
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D33DF40D140DF7ED003FA5EB /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = D33DF40C140DF7ED003FA5EB /* Music.m */; };
 		D34FF3AF140AC77C00BF9C33 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = D34FF3AE140AC77C00BF9C33 /* Sound.m */; };
 		D34FF3B1140AC83400BF9C33 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34FF3B0140AC83400BF9C33 /* OpenAL.framework */; };
 		D34FF3B6140B134500BF9C33 /* Creepy.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D34FF3B3140B134500BF9C33 /* Creepy.ogg */; };
@@ -94,6 +95,7 @@
 		D3915D9F140C6404003F072D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3915D9A140C6404003F072D /* libvorbis.a */; };
 		D3915DA0140C6404003F072D /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3915D9B140C6404003F072D /* libvorbisfile.a */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
+		D3DE5417140E03E800A40532 /* test_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D3DE5415140E03E800A40532 /* test_music.ogg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -239,6 +241,8 @@
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D33DF40B140DF7ED003FA5EB /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
+		D33DF40C140DF7ED003FA5EB /* Music.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Music.m; sourceTree = "<group>"; };
 		D34FF3AD140AC77C00BF9C33 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		D34FF3AE140AC77C00BF9C33 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
 		D34FF3B0140AC83400BF9C33 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = ../../../../System/Library/Frameworks/OpenAL.framework; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
 		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
 		D3BA942713FE61010005173B /* libTileVectorizer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTileVectorizer.a; sourceTree = "<group>"; };
+		D3DE5415140E03E800A40532 /* test_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_music.ogg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +378,7 @@
 		660B7FA213BFBC31001ECF63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3DE5413140E03E800A40532 /* Music */,
 				D34FF3B2140B134500BF9C33 /* Sounds */,
 				66011CDD13F89AFA009B2CBC /* Sprites */,
 				6677DDE513D2F51F00A43DF4 /* Stuff */,
@@ -615,6 +621,8 @@
 			children = (
 				D34FF3AD140AC77C00BF9C33 /* Sound.h */,
 				D34FF3AE140AC77C00BF9C33 /* Sound.m */,
+				D33DF40B140DF7ED003FA5EB /* Music.h */,
+				D33DF40C140DF7ED003FA5EB /* Music.m */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -662,6 +670,14 @@
 				D3915D9D140C6404003F072D /* vorbisfile.h */,
 			);
 			path = vorbis;
+			sourceTree = "<group>";
+		};
+		D3DE5413140E03E800A40532 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				D3DE5415140E03E800A40532 /* test_music.ogg */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -742,6 +758,7 @@
 				D34FF3C1140B1D5F00BF9C33 /* JumperJump.ogg in Resources */,
 				D34FF3C2140B1D5F00BF9C33 /* PlayerHit.ogg in Resources */,
 				D34FF3C3140B1D5F00BF9C33 /* PlayerShotgun.ogg in Resources */,
+				D3DE5417140E03E800A40532 /* test_music.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,6 +825,7 @@
 				66CB1479140706840089FDDC /* Particle.m in Sources */,
 				66CB16D8140BE4DF0089FDDC /* Spawn.m in Sources */,
 				D34FF3AF140AC77C00BF9C33 /* Sound.m in Sources */,
+				D33DF40D140DF7ED003FA5EB /* Music.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
