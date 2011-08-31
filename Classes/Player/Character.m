@@ -82,7 +82,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpBodySetUserData(body, self);
 	body->velocity_func = playerUpdateVelocity;
 	
-	headShape = cpCircleShapeNew(body, 4.0, cpv(0, 4));
+	headShape = cpCircleShapeNew(body, 3.0, cpv(0, 4));
 	cpShapeSetCollisionType(headShape, [self class]);
 	
 	feetShape = cpCircleShapeNew(body, 4.0, cpv(0, -4));

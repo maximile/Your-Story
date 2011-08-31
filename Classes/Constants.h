@@ -8,7 +8,7 @@
 #define MAX_FRAMESKIP 10
 
 #define GRAVITY 1000.0
-#define COLLISION_SLOP 0.25
+#define COLLISION_SLOP 0.1
 
 typedef enum {
 	PLAYER,
