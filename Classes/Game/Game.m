@@ -68,10 +68,10 @@ static Game *game = nil;
 	uiMap = [TileMap mapNamed:@"UI"];
 	lightmapCanvas = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];
 
-	// [self setCurrentRoom:[[Room alloc] initWithName:@"Another"]];
 	NSString *connectionsPath = [[NSBundle mainBundle] pathForResource:@"Connections" ofType:@"plist"];
 	connections = [NSArray arrayWithContentsOfFile:connectionsPath];
-	NSString *startingRoomName = [[connections objectAtIndex:0] valueForKey:0];
+	NSString *startingRoomName = [[connections objectAtIndex:0] valueForKey:@"Name"];
+	NSLog(@"%@", startingRoomName);
 	[self setCurrentRoom:[[Room alloc] initWithName:startingRoomName]];
 	
 	return self;
@@ -97,10 +97,12 @@ static Game *game = nil;
 	if (newMode == EDITOR_MODE) {
 		editorFocus = player.pixelPosition;
 		[self setEditingLayer:currentRoom.mainLayer];
+		[music stop];
 	}
 	if (newMode == GAME_MODE) {
 		[currentRoom.mainLayer removeFromSpace:space];
 		[currentRoom.mainLayer addToSpace:space];
+		[music play];
 	}
 }
 
@@ -158,7 +160,8 @@ static Game *game = nil;
 	
 	[music stop];
 	music = [[Music alloc] initWithFilename:@"test_music.ogg"];
-	[music play];
+	if (mode == GAME_MODE)
+		[music play];
 }
 
 -(void)updateStep {	

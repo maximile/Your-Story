@@ -24,6 +24,10 @@
 - (void)xDown {xKey=YES;}
 - (void)xUp {xKey=NO;}
 
+- (void)shiftDown:(BOOL)upDown {
+	shiftKey = upDown;
+}
+
 - (void)numberDown:(int)number {
 	if (mode == EDITOR_MODE) {
 		int newLayerIndex = number - 1;

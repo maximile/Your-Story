@@ -25,6 +25,7 @@
 	NSString *sizeString = [info valueForKey:@"Size"];
 	NSArray *components = [sizeString componentsSeparatedByString:@","];
 	size = mapSizeMake([[components objectAtIndex:0] intValue], [[components objectAtIndex:1] intValue]);
+	NSLog(@"%i, %i", size.width, size.height);
 	
 	// create layer objects
 	layers = [NSMutableArray arrayWithCapacity:0];

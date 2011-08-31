@@ -21,6 +21,8 @@
 
 - (void)numberDown:(int)number;
 
+- (void)shiftDown:(BOOL)upDown;
+
 - (void)mouseDown:(pixelCoords)coords;
 - (void)mouseDragged:(pixelCoords)coords;
 - (void)mouseMoved:(pixelCoords)coords;

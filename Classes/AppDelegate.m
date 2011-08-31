@@ -41,6 +41,7 @@
 - (IBAction)toggleEditor:(id)sender {
 	if (game.mode == GAME_MODE) {
 		game.mode = EDITOR_MODE;
+		[self openMap:self];
 	}
 		
 	else if (game.mode == EDITOR_MODE) {

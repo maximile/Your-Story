@@ -132,6 +132,20 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	[self.window setAcceptsMouseMovedEvents:YES];
 }
 
+- (void)flagsChanged:(NSEvent *)theEvent {
+	int flags = [theEvent modifierFlags];
+	
+	if (flags & NSShiftKeyMask)
+		[game shiftDown:YES];
+	else
+		[game shiftDown:NO];
+	// opt = (flags & NSAlternateKeyMask) ? YES : NO;
+	// ctrl = (flags & NSControlKeyMask) ? YES : NO;
+	// command = (flags & NSCommandKeyMask) ? YES : NO;
+	// shift = ( flags & NSShiftKeyMask ) ? YES : NO;
+}
+
+
 - (void)keyUp:(NSEvent *)event {
 	switch (event.keyCode) {
 		case 126: [game upUp]; break; // upArrow

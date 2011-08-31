@@ -129,6 +129,8 @@
 
 	tiles = calloc(size.width * size.height, sizeof(mapCoords));
 	
+	NSLog(@"LAYER: %i,%i", size.width, size.height);
+	
 	for (int y=0; y < size.height; y++) {
 		for (int x=0; x < size.width; x++) {
 			int index = y * size.width + x;
@@ -183,7 +185,7 @@
 
 - (void)drawRect:(mapRect)rect ignoreParallax:(BOOL)ignoreParallax {
 	// draw the tiles specified by the given rect
-	for (int y = rect.origin.y; y < rect.origin.y + rect.size.width; y++) {
+	for (int y = rect.origin.y; y < rect.origin.y + rect.size.height; y++) {
 		for (int x = rect.origin.x; x < rect.origin.x + rect.size.width; x++) {
 			mapCoords coords = [self tileCoordsForMapCoords:mapCoordsMake(x, y) ignoreParallax:ignoreParallax];
 			if (coords.x < 0 || coords.y < 0) {

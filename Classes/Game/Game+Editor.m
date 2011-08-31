@@ -119,10 +119,13 @@
 }
 
 - (void)updateEditor {
-	if (upKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y + 1);
-	if (downKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y - 1);
-	if (leftKey) editorFocus = pixelCoordsMake(editorFocus.x - 1, editorFocus.y);
-	if (rightKey) editorFocus = pixelCoordsMake(editorFocus.x + 1, editorFocus.y);
+	int scrollSpeed = 1;
+	if (shiftKey) scrollSpeed *= 3;
+	
+	if (upKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y + scrollSpeed);
+	if (downKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y - scrollSpeed);
+	if (leftKey) editorFocus = pixelCoordsMake(editorFocus.x - scrollSpeed, editorFocus.y);
+	if (rightKey) editorFocus = pixelCoordsMake(editorFocus.x + scrollSpeed, editorFocus.y);
 	
 	showPalette = tabKey;
 	
