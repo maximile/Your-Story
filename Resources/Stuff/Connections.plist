@@ -8,13 +8,13 @@
 		<key>Title</key>
 		<string>The Fall</string>
 		<key>Down</key>
-		<string>Another</string>
+		<string>Climb</string>
 	</dict>
 	<dict>
 		<key>Name</key>
-		<string>Another</string>
+		<string>Climb</string>
 		<key>Title</key>
-		<string>Second</string>
+		<string>The Climb</string>
 	</dict>
 </array>
 </plist>

@@ -5,6 +5,8 @@
 
 - (void)drawEditorOnCanvas:(FBO *)canvas {
 	[FBO bindFramebuffer:canvas];
+	glClearColor(0,0,0,1);
+	glClear(GL_COLOR_BUFFER_BIT);
 	
 	pixelCoords focus = [self cameraTargetForFocus:editorFocus];
 	if (drawOtherLayers) {
