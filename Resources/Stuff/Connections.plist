@@ -15,6 +15,18 @@
 		<string>Climb</string>
 		<key>Title</key>
 		<string>The Climb</string>
+		<key>Up</key>
+		<string>TheFall</string>
+		<key>Right</key>
+		<string>VillagePeople</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>VillagePeople</string>
+		<key>Title</key>
+		<string>The Village People</string>
+		<key>Left</key>
+		<string>Climb</string>
 	</dict>
 </array>
 </plist>
