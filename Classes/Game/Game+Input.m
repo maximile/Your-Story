@@ -81,5 +81,30 @@
 	}
 }
 
+- (void)rightMouseDown:(pixelCoords)coords {
+	switch (mode) {
+		case EDITOR_MODE:
+			if (showPalette)
+				NSBeep();
+			else {
+				[self deleteTileAt:[self mapCoordsForViewCoords:coords]];
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+
+- (void)rightMouseDragged:(pixelCoords)coords {
+	if (mode == EDITOR_MODE) {
+		if (showPalette)
+			NSBeep();
+		else {
+			[self deleteTileAt:[self mapCoordsForViewCoords:coords]];
+		}
+	}
+}
+
 
 @end

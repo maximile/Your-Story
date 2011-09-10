@@ -7,7 +7,7 @@
 -(void)drawLightmap:(pixelCoords)focus over:(FBO *)canvas {
 	[FBO bindFramebuffer:lightmapCanvas];
 	
-	GLfloat ambient = 1.0;
+	GLfloat ambient = 0.2;
 	glClearColor(ambient, ambient, ambient, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	

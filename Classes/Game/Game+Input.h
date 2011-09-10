@@ -25,6 +25,8 @@
 
 - (void)mouseDown:(pixelCoords)coords;
 - (void)mouseDragged:(pixelCoords)coords;
+- (void)rightMouseDown:(pixelCoords)coords;
+- (void)rightMouseDragged:(pixelCoords)coords;
 - (void)mouseMoved:(pixelCoords)coords;
 
 @end

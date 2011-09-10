@@ -6,6 +6,7 @@
 - (void)drawEditorOnCanvas:(FBO *)canvas;
 - (void)updateEditor;
 - (void)changeTileAt:(mapCoords)coords;
+- (void)deleteTileAt:(mapCoords)coords;
 - (mapCoords)mapCoordsForViewCoords:(pixelCoords)viewCoords;
 - (void)setEditingLayer:(Layer *)newLayer;
 - (void)selectTileFromPaletteAt:(pixelCoords)coords;

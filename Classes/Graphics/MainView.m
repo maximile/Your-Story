@@ -213,6 +213,22 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	[game mouseDown:scaledCoords];
 }
 
+- (void)rightMouseDown:(NSEvent *)event
+{
+	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
+	
+	// compensate for offset
+	int stretchedCanvasWidth = CANVAS_SIZE.width * scaleFactor;
+	int stretchedCanvasHeight = CANVAS_SIZE.height * scaleFactor;
+	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
+	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
+	viewCoords = NSMakePoint(viewCoords.x - leftEdge, viewCoords.y - topEdge);
+	
+	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
+	[game rightMouseDown:scaledCoords];
+}
+
+
 - (void)mouseDragged:(NSEvent *)event {
 	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
 	
@@ -225,6 +241,20 @@ static NSOpenGLPixelFormatAttribute Attributes[] = {
 	
 	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
 	[game mouseDragged:scaledCoords];
+}
+
+- (void)rightMouseDragged:(NSEvent *)event {
+	NSPoint viewCoords = [self convertPoint:event.locationInWindow fromView:nil];
+	
+	// compensate for offset
+	int stretchedCanvasWidth = CANVAS_SIZE.width * scaleFactor;
+	int stretchedCanvasHeight = CANVAS_SIZE.height * scaleFactor;
+	int leftEdge = self.frame.size.width / 2 - stretchedCanvasWidth / 2;
+	int topEdge = self.frame.size.height / 2 - stretchedCanvasHeight / 2;
+	viewCoords = NSMakePoint(viewCoords.x - leftEdge, viewCoords.y - topEdge);
+	
+	pixelCoords scaledCoords = pixelCoordsMake(viewCoords.x / scaleFactor, viewCoords.y / scaleFactor);
+	[game rightMouseDragged:scaledCoords];
 }
 
 - (BOOL)acceptsFirstResponder {

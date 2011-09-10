@@ -121,7 +121,7 @@
 }
 
 - (void)updateEditor {
-	int scrollSpeed = 1;
+	int scrollSpeed = 3;
 	if (shiftKey) scrollSpeed *= 3;
 	
 	if (upKey) editorFocus = pixelCoordsMake(editorFocus.x, editorFocus.y + scrollSpeed);
@@ -154,6 +154,10 @@
 
 - (void)changeTileAt:(mapCoords)coords {
 	[editingLayer setTile:paletteTile at:coords];
+}
+
+- (void)deleteTileAt:(mapCoords)coords {
+	[editingLayer setTile:NO_TILE at:coords];
 }
 
 
