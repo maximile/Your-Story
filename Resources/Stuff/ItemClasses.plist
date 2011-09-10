@@ -8,5 +8,7 @@
 	<string>Jumper</string>
 	<key>2,0</key>
 	<string>Health</string>
+	<key>3,0</key>
+	<string>Battery</string>
 </dict>
 </plist>

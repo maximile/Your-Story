@@ -1,14 +1,6 @@
-#import <Cocoa/Cocoa.h>
-#import "Item.h"
-#import "chipmunk.h"
-#import "Sprite.h"
+#import "Pickup.h"
 
-@interface Health : Item {
-	cpShape *shape;
-	Sprite *sprite;
-	BOOL used;
+@interface Health : Pickup {
 }
-
-@property BOOL used;
 
 @end

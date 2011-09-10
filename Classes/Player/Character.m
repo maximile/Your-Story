@@ -6,6 +6,9 @@
 #import "Particle.h"
 #import "RandomTools.h"
 #import "Sound.h"
+#import "Health.h"
+#import "Battery.h"
+
 
 #define PLAYER_VELOCITY 100.0
 
@@ -272,16 +275,24 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	return 0;
 }
 
-- (int)hitHealth:(Health *)healthItem arbiter:(cpArbiter *)arb {
-	if (health == MAX_HEALTH || healthItem.used) return 0;
-	[self addHealth:1];
+- (int)hitPickup:(Pickup *)pickup arbiter:(cpArbiter *)arb {
+	if (pickup.used) return 0;
 	
-	[Sound playSound:@"Heart.ogg"];
+	if ([pickup isKindOfClass:[Health class]]) {
+		if (health == MAX_HEALTH) return 0;
+		[self addHealth:1];
+		[Sound playSound:@"Heart.ogg"];
+	}
+	
+	if ([pickup isKindOfClass:[Battery class]]) {
+		battery = 1.0;
+		[Sound playSound:@"Heart.ogg"];
+	}
 	
 	// mark the health item as used so that it doesn't get applied twice
 	// if the head and feet both touch it
-	healthItem.used = YES;
-	[[Game game] removeItem:healthItem];
+	[[Game game] removeItem:pickup];
+	pickup.used = YES;
 	return 0;
 }
 

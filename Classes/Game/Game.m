@@ -9,16 +9,16 @@
 #import "ItemLayer.h"
 #import "Item.h"
 #import "Jumper.h"
-#import "Health.h"
+#import "Pickup.h"
 #import "Spawn.h"
 #import "Sound.h"
 
-static int characterHitHealth(cpArbiter *arb, cpSpace *space, Game *game) {
-	CP_ARBITER_GET_BODIES(arb, characterBody, healthBody);
-	CP_ARBITER_GET_SHAPES(arb, characterShape, healthShape);
+static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
+	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
+	CP_ARBITER_GET_SHAPES(arb, characterShape, pickupShape);
 	Character *character = characterBody->data;
-	Health *health = healthShape->data;
-	return [character hitHealth:health arbiter:arb];
+	Item *pickup = pickupShape->data;
+	return [character hitPickup:pickup arbiter:arb];
 }
 
 static int characterHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
@@ -62,7 +62,7 @@ static Game *game = nil;
 	
 	// add collision handlers
 	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitJumper, NULL, NULL, self);
-	cpSpaceAddCollisionHandler(space, [Character class], [Health class], NULL, (cpCollisionPreSolveFunc)characterHitHealth, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [Character class], [Pickup class], NULL, (cpCollisionPreSolveFunc)characterHitPickup, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
 	
 	uiMap = [TileMap mapNamed:@"UI"];
