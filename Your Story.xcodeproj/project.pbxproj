@@ -11,6 +11,8 @@
 		66011CDF13F89AFA009B2CBC /* MainSprites.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66011CDE13F89AFA009B2CBC /* MainSprites.psd */; };
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
 		660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.ysroom */; };
+		6645D051141963D9001E7633 /* Moodier.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6645D050141963D9001E7633 /* Moodier.psd */; };
+		6645D06114196D44001E7633 /* AloneInTheDark.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 6645D06014196D44001E7633 /* AloneInTheDark.ysroom */; };
 		6658F23413F08C40007588D1 /* UI.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6658F23313F08C40007588D1 /* UI.psd */; };
 		6677DDE813D2F51F00A43DF4 /* Collision Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE613D2F51F00A43DF4 /* Collision Data.plist */; };
 		6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */; };
@@ -18,6 +20,7 @@
 		66BF4C62140ED7BB007DC2AC /* TheFall.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66BF4C61140ED7BB007DC2AC /* TheFall.ysroom */; };
 		66C3D93213EE0809007CBD54 /* Another.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66C3D93113EE0809007CBD54 /* Another.ysroom */; };
 		66C3D93413EE0811007CBD54 /* WhoKnows.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66C3D93313EE0811007CBD54 /* WhoKnows.psd */; };
+		66C40C941416D2BC000043DD /* Warehouse.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66C40C931416D2BC000043DD /* Warehouse.ysroom */; };
 		66C66775141036E10049EC90 /* Climb.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66C66774141036E10049EC90 /* Climb.ysroom */; };
 		66C746041401AE5A00C6FE04 /* Jumper.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745DE1401AE5A00C6FE04 /* Jumper.m */; };
 		66C746051401AE5A00C6FE04 /* Game+Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C745E11401AE5A00C6FE04 /* Game+Editor.m */; };
@@ -125,6 +128,8 @@
 		66011CDE13F89AFA009B2CBC /* MainSprites.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = MainSprites.psd; sourceTree = "<group>"; };
 		660B7FA413BFBC31001ECF63 /* Test.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.psd; sourceTree = "<group>"; };
 		660B803913BFD4C0001ECF63 /* Test.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.ysroom; sourceTree = "<group>"; };
+		6645D050141963D9001E7633 /* Moodier.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Moodier.psd; sourceTree = "<group>"; };
+		6645D06014196D44001E7633 /* AloneInTheDark.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AloneInTheDark.ysroom; sourceTree = "<group>"; };
 		6658F23313F08C40007588D1 /* UI.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = UI.psd; sourceTree = "<group>"; };
 		6677DDE613D2F51F00A43DF4 /* Collision Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Collision Data.plist"; sourceTree = "<group>"; };
 		6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collision Shapes.psd"; sourceTree = "<group>"; };
@@ -132,6 +137,7 @@
 		66BF4C61140ED7BB007DC2AC /* TheFall.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TheFall.ysroom; sourceTree = "<group>"; };
 		66C3D93113EE0809007CBD54 /* Another.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Another.ysroom; sourceTree = "<group>"; };
 		66C3D93313EE0811007CBD54 /* WhoKnows.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = WhoKnows.psd; sourceTree = "<group>"; };
+		66C40C931416D2BC000043DD /* Warehouse.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Warehouse.ysroom; sourceTree = "<group>"; };
 		66C66774141036E10049EC90 /* Climb.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Climb.ysroom; sourceTree = "<group>"; };
 		66C745DD1401AE5A00C6FE04 /* Jumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jumper.h; sourceTree = "<group>"; };
 		66C745DE1401AE5A00C6FE04 /* Jumper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jumper.m; sourceTree = "<group>"; };
@@ -348,6 +354,7 @@
 		660B7FA313BFBC31001ECF63 /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				6645D050141963D9001E7633 /* Moodier.psd */,
 				66CD97DA140060370089AFED /* ItemTiles.psd */,
 				66BF4C5F140ED7B4007DC2AC /* FallTiles.psd */,
 				66C3D93313EE0811007CBD54 /* WhoKnows.psd */,
@@ -365,6 +372,8 @@
 				66BF4C61140ED7BB007DC2AC /* TheFall.ysroom */,
 				66C66774141036E10049EC90 /* Climb.ysroom */,
 				66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */,
+				6645D06014196D44001E7633 /* AloneInTheDark.ysroom */,
+				66C40C931416D2BC000043DD /* Warehouse.ysroom */,
 				660B803913BFD4C0001ECF63 /* Test.ysroom */,
 			);
 			path = Rooms;
@@ -682,6 +691,9 @@
 				66BF4C62140ED7BB007DC2AC /* TheFall.ysroom in Resources */,
 				66C66775141036E10049EC90 /* Climb.ysroom in Resources */,
 				66CF2BF414141EA500B79F26 /* VillagePeople.ysroom in Resources */,
+				66C40C941416D2BC000043DD /* Warehouse.ysroom in Resources */,
+				6645D051141963D9001E7633 /* Moodier.psd in Resources */,
+				6645D06114196D44001E7633 /* AloneInTheDark.ysroom in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

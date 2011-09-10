@@ -28,5 +28,23 @@
 		<key>Left</key>
 		<string>Climb</string>
 	</dict>
+	<dict>
+		<key>Name</key>
+		<string>VillagePeople</string>
+		<key>Title</key>
+		<string>The Village People</string>
+		<key>Left</key>
+		<string>Climb</string>
+		<key>Right</key>
+		<string>Warehouse</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Warehouse</string>
+		<key>Title</key>
+		<string>Storage Facility</string>
+		<key>Left</key>
+		<string>VillagePeople</string>
+	</dict>
 </array>
 </plist>
