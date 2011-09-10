@@ -10,6 +10,8 @@
 	mapSize size;
 	NSString *name;
 	
+	float ambientLight;
+	
 	// dictionary so that if more than one layer uses the same tile map we only load it once:
 	NSMutableDictionary *maps;
 }
@@ -23,6 +25,7 @@
 
 @property (readonly) mapSize size;
 @property (readonly) NSString *name;
+@property (readonly) float ambientLight;
 
 - (TileMap *)getMap:(NSString *)mapName;
 - (id)initWithName:(NSString *)roomName;

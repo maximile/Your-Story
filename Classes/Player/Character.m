@@ -120,6 +120,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	facing = RIGHT;
 	health = MAX_HEALTH;
+	battery = 0.3;
 	
 	return self;
 }
@@ -177,8 +178,18 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[sprite drawAt:pixelPos];
 	}
 	
-	float radius = cpflerp(90, 100, cpfsin(3.0*game.fixedTime)*0.5 + 0.5);
-	[[Texture lightmapTexture] addAt:pixelPos radius:radius];
+	float lightPower = battery * 120.0;
+	// flicker when running out
+	BOOL drawLight = YES;
+	if (battery < 0.3) {
+		if ((cpfsin(18.0*game.fixedTime) + 1) / 2 > (battery / 0.3)) {
+			drawLight = NO;
+		}
+	}
+	if (drawLight) {
+		float radius = cpflerp(lightPower * 0.95, lightPower * 1.05, cpfsin(3.0*game.fixedTime)*0.5 + 0.5);
+		[[Texture lightmapTexture] addAt:pixelPos radius:radius];
+	}
 }
 
 - (void)addToSpace:(cpSpace *)space {
@@ -254,6 +265,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		game.player = nil;
 		[game removeItem:self];
 	}
+	
+	battery -= 0.0003;
+	if (battery < 0.0) {
+		game.player = nil;
+		[game removeItem:self];
+	}
 }
 
 - (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb {
@@ -276,6 +293,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (int)hitPickup:(Pickup *)pickup arbiter:(cpArbiter *)arb {
+	NSLog(@"here");
 	if (pickup.used) return 0;
 	
 	if ([pickup isKindOfClass:[Health class]]) {

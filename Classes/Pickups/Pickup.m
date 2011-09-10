@@ -13,7 +13,7 @@
 	cpBody *staticBody = cpSpaceGetStaticBody(space);
 	shape = cpCircleShapeNew(staticBody, 6.0, cpv(position.x, position.y));
 	shape -> data = self;
-	cpShapeSetCollisionType(shape, [self class]);
+	cpShapeSetCollisionType(shape, [Pickup class]);
 	cpShapeSetSensor(shape, cpTrue);
 	
 	return self;
