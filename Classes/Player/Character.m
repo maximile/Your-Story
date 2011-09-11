@@ -8,6 +8,8 @@
 #import "Sound.h"
 #import "Health.h"
 #import "Battery.h"
+#import "DoubleJump.h"
+#import "Shotgun.h"
 
 
 #define PLAYER_VELOCITY 100.0
@@ -120,7 +122,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	facing = RIGHT;
 	health = MAX_HEALTH;
-	battery = 0.3;
+	battery = 1.0;
 	
 	return self;
 }
@@ -182,7 +184,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	// flicker when running out
 	BOOL drawLight = YES;
 	if (battery < 0.3) {
-		if ((cpfsin(18.0*game.fixedTime) + 1) / 2 > (battery / 0.3)) {
+		if ((cpfsin(18.0 * game.fixedTime) + 1.0) / 2.0 > (battery / 0.3)) {
 			drawLight = NO;
 		}
 	}
@@ -211,7 +213,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	wellGrounded = (grounding.body && cpfabs(grounding.normal.x/grounding.normal.y) < feetShape->u);
 	if(wellGrounded){
 		groundVelocity = grounding.body->v;
-		remainingAirJumps = 1;
+		remainingAirJumps = (canDoubleJump ? 1 : 0);
 		remainingJumpLeniency = JUMP_LENIENCY;
 	}
 	
@@ -266,10 +268,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[game removeItem:self];
 	}
 	
-	battery -= 0.0003;
-	if (battery < 0.0) {
-		game.player = nil;
-		[game removeItem:self];
+	if (game.currentRoom.ambientLight < 0.5) {
+		// dark room? use torch
+		battery -= 0.0003;
+		if (battery < 0.0) {
+			game.player = nil;
+			[game removeItem:self];
+		}
 	}
 }
 
@@ -304,6 +309,11 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	if ([pickup isKindOfClass:[Battery class]]) {
 		battery = 1.0;
+		[Sound playSound:@"Heart.ogg"];
+	}
+
+	if ([pickup isKindOfClass:[DoubleJump class]]) {
+		canDoubleJump = YES;
 		[Sound playSound:@"Heart.ogg"];
 	}
 	

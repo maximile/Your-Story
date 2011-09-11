@@ -1,11 +1,3 @@
-//
-//  Player.h
-//  Your Story
-//
-//  Created by Scott Lembcke on 10/17/2011.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 #import "PhysicsObject.h"
 #import "chipmunk.h"
@@ -34,6 +26,7 @@
 	
 	int health;
 	float battery;
+	BOOL canDoubleJump;
 	
 	bool lastJumpKeyState;
 	
