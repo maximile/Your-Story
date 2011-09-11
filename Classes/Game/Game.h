@@ -10,6 +10,7 @@
 #import "Music.h"
 
 @class Player;
+@class Door;
 
 typedef enum {
 	GAME_MODE,
@@ -27,6 +28,7 @@ typedef enum {
 	NSMutableArray *itemsToRemove;
 	
 	Player *player;
+	Door *door;
 	
 	// editor variables
 	pixelCoords editorFocus;

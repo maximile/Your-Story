@@ -37,6 +37,26 @@
 		<string>Climb</string>
 		<key>Right</key>
 		<string>Warehouse</string>
+		<key>Door</key>
+		<string>Access</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Access</string>
+		<key>Title</key>
+		<string>Access</string>
+		<key>Door</key>
+		<string>VillagePeople</string>
+		<key>Down</key>
+		<string>AloneInTheDark</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>AloneInTheDark</string>
+		<key>Title</key>
+		<string>Alone in the Dark</string>
+		<key>Up</key>
+		<string>Access</string>
 	</dict>
 	<dict>
 		<key>Name</key>

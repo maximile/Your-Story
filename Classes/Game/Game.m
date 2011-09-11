@@ -12,6 +12,7 @@
 #import "Pickup.h"
 #import "Spawn.h"
 #import "Sound.h"
+#import "Door.h"
 
 static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
@@ -121,6 +122,7 @@ static Game *game = nil;
 		[self removeItem:item];
 	}
 	player = nil;
+	door = nil;
 	[self addAndRemoveItems];
 	[currentRoom.mainLayer removeFromSpace:space];
 	
@@ -134,9 +136,11 @@ static Game *game = nil;
 	NSMutableArray *spawns = [NSMutableArray array];
 	for (Item *item in roomItems) {
 		[self addItem:item];
-		NSLog(@"%@", item);
 		if ([item isKindOfClass:[Spawn class]]) {
 			[spawns addObject:item];
+		}
+		if ([item isKindOfClass:[Door class]]) {
+			door = (Door *)item;
 		}
 	}
 	
@@ -238,6 +242,16 @@ double getDoubleTime(void)
 			}
 		}
 	}
+	
+	if (door && (downKey || upKey)) {
+		// pressing down or up and there is a door in the room
+		float distanceToDoor = cpvdist(player.position, cpv(door.startingPosition.x, door.startingPosition.y));
+		if (distanceToDoor < 10.0) {
+			// in front of the door
+			Room *nextRoom = [self roomInDirection:NOWHERE];
+			[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
+		}
+	}
 }
 
 - (void)update {
@@ -268,6 +282,7 @@ double getDoubleTime(void)
 	if (direction & RIGHT) directionKey = @"Right";
 	if (direction & UP) directionKey = @"Up";
 	if (direction & DOWN) directionKey = @"Down";
+	if (direction == NOWHERE) directionKey = @"Door";
 		
 	NSString *newRoomName = [connectionDict valueForKey:directionKey];
 	if (newRoomName == nil) return nil;
