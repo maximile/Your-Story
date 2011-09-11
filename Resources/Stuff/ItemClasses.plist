@@ -13,5 +13,9 @@
 	
 	<key>0,1</key>
 	<string>Door</string>
+	<key>1,1</key>
+	<string>DoubleJump</string>
+	<key>2,1</key>
+	<string>Shotgun</string>
 </dict>
 </plist>

@@ -16,6 +16,10 @@
 		6658F23413F08C40007588D1 /* UI.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6658F23313F08C40007588D1 /* UI.psd */; };
 		6675EFC9141C17A6003251AE /* Battery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675EFC8141C17A6003251AE /* Battery.m */; };
 		6675EFCC141C190D003251AE /* Pickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675EFCB141C190D003251AE /* Pickup.m */; };
+		6675F007141C286E003251AE /* Shotgun.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675F006141C286E003251AE /* Shotgun.m */; };
+		6675F00A141C2875003251AE /* DoubleJump.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675F009141C2875003251AE /* DoubleJump.m */; };
+		6675F024141D2C7D003251AE /* Access.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 6675F023141D2C7D003251AE /* Access.ysroom */; };
+		6675F039141D3448003251AE /* Door.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675F038141D3448003251AE /* Door.m */; };
 		6677DDE813D2F51F00A43DF4 /* Collision Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE613D2F51F00A43DF4 /* Collision Data.plist */; };
 		6677DDE913D2F51F00A43DF4 /* Collision Shapes.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */; };
 		66BF4C60140ED7B4007DC2AC /* FallTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66BF4C5F140ED7B4007DC2AC /* FallTiles.psd */; };
@@ -137,6 +141,13 @@
 		6675EFC8141C17A6003251AE /* Battery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Battery.m; sourceTree = "<group>"; };
 		6675EFCA141C190D003251AE /* Pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pickup.h; sourceTree = "<group>"; };
 		6675EFCB141C190D003251AE /* Pickup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pickup.m; sourceTree = "<group>"; };
+		6675F005141C286E003251AE /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shotgun.h; sourceTree = "<group>"; };
+		6675F006141C286E003251AE /* Shotgun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shotgun.m; sourceTree = "<group>"; };
+		6675F008141C2875003251AE /* DoubleJump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleJump.h; sourceTree = "<group>"; };
+		6675F009141C2875003251AE /* DoubleJump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleJump.m; sourceTree = "<group>"; };
+		6675F023141D2C7D003251AE /* Access.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Access.ysroom; sourceTree = "<group>"; };
+		6675F037141D3448003251AE /* Door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Door.h; sourceTree = "<group>"; };
+		6675F038141D3448003251AE /* Door.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Door.m; sourceTree = "<group>"; };
 		6677DDE613D2F51F00A43DF4 /* Collision Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Collision Data.plist"; sourceTree = "<group>"; };
 		6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collision Shapes.psd"; sourceTree = "<group>"; };
 		66BF4C5F140ED7B4007DC2AC /* FallTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = FallTiles.psd; sourceTree = "<group>"; };
@@ -373,6 +384,7 @@
 		660B803813BFD4AF001ECF63 /* Rooms */ = {
 			isa = PBXGroup;
 			children = (
+				6675F023141D2C7D003251AE /* Access.ysroom */,
 				66C3D93113EE0809007CBD54 /* Another.ysroom */,
 				66CA29D813EA15440022E906 /* Messing.ysroom */,
 				66BF4C61140ED7BB007DC2AC /* TheFall.ysroom */,
@@ -430,6 +442,8 @@
 				66C745E81401AE5A00C6FE04 /* Item.m */,
 				66C745E91401AE5A00C6FE04 /* PhysicsObject.h */,
 				66C745EA1401AE5A00C6FE04 /* PhysicsObject.m */,
+				6675F037141D3448003251AE /* Door.h */,
+				6675F038141D3448003251AE /* Door.m */,
 			);
 			path = "Game Classes";
 			sourceTree = "<group>";
@@ -497,12 +511,16 @@
 		66CC26BD1403022300252B96 /* Pickups */ = {
 			isa = PBXGroup;
 			children = (
+				6675F008141C2875003251AE /* DoubleJump.h */,
+				6675F009141C2875003251AE /* DoubleJump.m */,
 				6675EFCA141C190D003251AE /* Pickup.h */,
 				6675EFCB141C190D003251AE /* Pickup.m */,
 				66CC26BE1403024900252B96 /* Health.h */,
 				66CC26BF1403024900252B96 /* Health.m */,
 				6675EFC7141C17A6003251AE /* Battery.h */,
 				6675EFC8141C17A6003251AE /* Battery.m */,
+				6675F005141C286E003251AE /* Shotgun.h */,
+				6675F006141C286E003251AE /* Shotgun.m */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -704,6 +722,7 @@
 				66C40C941416D2BC000043DD /* Warehouse.ysroom in Resources */,
 				6645D051141963D9001E7633 /* Moodier.psd in Resources */,
 				6645D06114196D44001E7633 /* AloneInTheDark.ysroom in Resources */,
+				6675F024141D2C7D003251AE /* Access.ysroom in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,6 +763,9 @@
 				D33DF40D140DF7ED003FA5EB /* Music.m in Sources */,
 				6675EFC9141C17A6003251AE /* Battery.m in Sources */,
 				6675EFCC141C190D003251AE /* Pickup.m in Sources */,
+				6675F007141C286E003251AE /* Shotgun.m in Sources */,
+				6675F00A141C2875003251AE /* DoubleJump.m in Sources */,
+				6675F039141D3448003251AE /* Door.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
