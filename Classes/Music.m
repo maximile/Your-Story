@@ -1,11 +1,3 @@
-//
-//  Music.m
-//  Your Story
-//
-//  Created by Scott Lembcke on 8/31/11.
-//  Copyright 2011 Max Williams. All rights reserved.
-//
-
 #import "Music.h"
 
 #include <stdlib.h>

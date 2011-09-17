@@ -164,8 +164,8 @@ static Game *game = nil;
 	
 	[music stop];
 	music = [[Music alloc] initWithFilename:@"test_music.ogg"];
-	if (mode == GAME_MODE)
-		[music play];
+	// if (mode == GAME_MODE)
+	// 		[music play];
 }
 
 -(void)updateStep {	
