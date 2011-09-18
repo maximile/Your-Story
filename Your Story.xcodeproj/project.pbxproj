@@ -52,6 +52,7 @@
 		66C75BF413BE83A0002D8411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75BF313BE83A0002D8411 /* main.m */; };
 		66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C75C8E13BE87EA002D8411 /* OpenGL.framework */; };
 		66C7B0D61405B2EC0079E164 /* Connections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66C7B0D51405B2EC0079E164 /* Connections.plist */; };
+		66C7D40E1426913A004D9A36 /* Parasprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7D40D1426913A004D9A36 /* Parasprite.m */; };
 		66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */; };
 		66CA29D913EA15440022E906 /* Messing.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CA29D813EA15440022E906 /* Messing.ysroom */; };
 		66CB1479140706840089FDDC /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB1478140706840089FDDC /* Particle.m */; };
@@ -205,6 +206,8 @@
 		66C75BF313BE83A0002D8411 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66C75C8E13BE87EA002D8411 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		66C7B0D51405B2EC0079E164 /* Connections.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Connections.plist; sourceTree = "<group>"; };
+		66C7D40C1426913A004D9A36 /* Parasprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parasprite.h; sourceTree = "<group>"; };
+		66C7D40D1426913A004D9A36 /* Parasprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parasprite.m; sourceTree = "<group>"; };
 		66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ItemClasses.plist; sourceTree = "<group>"; };
 		66CA29D813EA15440022E906 /* Messing.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Messing.ysroom; sourceTree = "<group>"; };
 		66CB1477140706840089FDDC /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 			children = (
 				66C745DD1401AE5A00C6FE04 /* Jumper.h */,
 				66C745DE1401AE5A00C6FE04 /* Jumper.m */,
+				66C7D40C1426913A004D9A36 /* Parasprite.h */,
+				66C7D40D1426913A004D9A36 /* Parasprite.m */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -774,6 +779,7 @@
 				6675F007141C286E003251AE /* Shotgun.m in Sources */,
 				6675F00A141C2875003251AE /* DoubleJump.m in Sources */,
 				6675F039141D3448003251AE /* Door.m in Sources */,
+				66C7D40E1426913A004D9A36 /* Parasprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

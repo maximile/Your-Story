@@ -17,5 +17,7 @@
 	<string>DoubleJump</string>
 	<key>2,1</key>
 	<string>Shotgun</string>
+	<key>3,1</key>
+	<string>Parasprite</string>
 </dict>
 </plist>
