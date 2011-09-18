@@ -50,8 +50,15 @@
 	[feetSprite drawAt:pixelCoordsMake(pixelPos.x, pixelPos.y -4)];
 }
 
-- (void)update:(Game *)game {
-	tick++;
+- (void)addToSpace:(cpSpace *)space {
+	cpSpaceAddBody(space, body);
+	cpSpaceAddShape(space, shape);
+	cpBodySetForce(body, cpv(0, 2000));
+}
+
+- (void)removeFromSpace:(cpSpace *)space {
+	cpSpaceRemoveBody(space, body);
+	cpSpaceRemoveShape(space, shape);
 }
 
 - (void)finalize {
