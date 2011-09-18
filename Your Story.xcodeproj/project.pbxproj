@@ -57,6 +57,8 @@
 		66CB1479140706840089FDDC /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB1478140706840089FDDC /* Particle.m */; };
 		66CB16D8140BE4DF0089FDDC /* Spawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB16D7140BE4DF0089FDDC /* Spawn.m */; };
 		66CC26C01403024900252B96 /* Health.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC26BF1403024900252B96 /* Health.m */; };
+		66CD4CF9142575D600D540D6 /* Fight.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CF8142575D500D540D6 /* Fight.ysroom */; };
+		66CD4CFD142582E500D540D6 /* Interior.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CFC142582E500D540D6 /* Interior.psd */; };
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
 		66CF2BF414141EA500B79F26 /* VillagePeople.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -212,6 +214,8 @@
 		66CB16D7140BE4DF0089FDDC /* Spawn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spawn.m; sourceTree = "<group>"; };
 		66CC26BE1403024900252B96 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
 		66CC26BF1403024900252B96 /* Health.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Health.m; sourceTree = "<group>"; };
+		66CD4CF8142575D500D540D6 /* Fight.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Fight.ysroom; sourceTree = "<group>"; };
+		66CD4CFC142582E500D540D6 /* Interior.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Interior.psd; sourceTree = "<group>"; };
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VillagePeople.ysroom; sourceTree = "<group>"; };
@@ -374,6 +378,7 @@
 				6645D050141963D9001E7633 /* Moodier.psd */,
 				66CD97DA140060370089AFED /* ItemTiles.psd */,
 				66BF4C5F140ED7B4007DC2AC /* FallTiles.psd */,
+				66CD4CFC142582E500D540D6 /* Interior.psd */,
 				66C3D93313EE0811007CBD54 /* WhoKnows.psd */,
 				660B7FA413BFBC31001ECF63 /* Test.psd */,
 				6658F23313F08C40007588D1 /* UI.psd */,
@@ -389,6 +394,7 @@
 				66CA29D813EA15440022E906 /* Messing.ysroom */,
 				66BF4C61140ED7BB007DC2AC /* TheFall.ysroom */,
 				66C66774141036E10049EC90 /* Climb.ysroom */,
+				66CD4CF8142575D500D540D6 /* Fight.ysroom */,
 				66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */,
 				6645D06014196D44001E7633 /* AloneInTheDark.ysroom */,
 				66C40C931416D2BC000043DD /* Warehouse.ysroom */,
@@ -723,6 +729,8 @@
 				6645D051141963D9001E7633 /* Moodier.psd in Resources */,
 				6645D06114196D44001E7633 /* AloneInTheDark.ysroom in Resources */,
 				6675F024141D2C7D003251AE /* Access.ysroom in Resources */,
+				66CD4CF9142575D600D540D6 /* Fight.ysroom in Resources */,
+				66CD4CFD142582E500D540D6 /* Interior.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
