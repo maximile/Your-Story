@@ -19,5 +19,8 @@
 	<string>Shotgun</string>
 	<key>3,1</key>
 	<string>Parasprite</string>
+
+	<key>0,2</key>
+	<string>StripLight</string>
 </dict>
 </plist>

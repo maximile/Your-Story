@@ -17,7 +17,10 @@
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
 	
-	[[Texture lightmapTexture] draw];
+	for (Texture *texture in [Texture lightmapTextures]) {
+		[texture draw];
+	}
+
 	glPopMatrix();
 		
 	
@@ -82,10 +85,11 @@
 			}
 			
 			NSArray *allTextures = [Texture textures];
-			Texture *lightmapTexture = [Texture lightmapTexture];
+//			Texture *lightmapTexture = [Texture lightmapTexture];
+			NSArray *lightmapTextures = [Texture lightmapTextures];
 			for (Texture *texture in allTextures) {
 				// sort of a hack...
-				if(texture == lightmapTexture) continue;
+				if ([lightmapTextures containsObject:texture]) continue;
 				
 				[texture draw];
 			}

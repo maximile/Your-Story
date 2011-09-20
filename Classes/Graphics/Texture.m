@@ -21,9 +21,20 @@ static NSMutableDictionary * texturesForNames;
 	return texture;
 }
 
-+ (Texture *)lightmapTexture;
-{
++ (Texture *)lightmapTexture {
 	return [Texture textureNamed:@"light-point.psd"];
+}
+
++ (NSArray *)lightmapTextures;
+{
+	static NSArray *lmTextures = nil;
+	if (lmTextures == nil) {
+		lmTextures = [NSArray arrayWithObjects:
+			[Texture textureNamed:@"light-point.psd"],
+			[Texture textureNamed:@"light-spread.psd"],
+		 nil];
+	}
+	return lmTextures;
 }
 
 + (NSArray *)textures {

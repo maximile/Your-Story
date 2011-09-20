@@ -188,7 +188,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 			drawLight = NO;
 		}
 	}
-	if (drawLight) {
+	if (drawLight && game.currentRoom.ambientLight < 0.5) {
 		float radius = cpflerp(lightPower * 0.95, lightPower * 1.05, cpfsin(3.0*game.fixedTime)*0.5 + 0.5);
 		[[Texture lightmapTexture] addAt:pixelPos radius:radius];
 	}

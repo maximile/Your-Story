@@ -62,6 +62,8 @@
 		66CD4CFD142582E500D540D6 /* Interior.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CFC142582E500D540D6 /* Interior.psd */; };
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
 		66CF2BF414141EA500B79F26 /* VillagePeople.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */; };
+		66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DFE4ED14280EE800B07AF0 /* light-spread.psd */; };
+		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D33DF40D140DF7ED003FA5EB /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = D33DF40C140DF7ED003FA5EB /* Music.m */; };
@@ -222,6 +224,9 @@
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VillagePeople.ysroom; sourceTree = "<group>"; };
+		66DFE4ED14280EE800B07AF0 /* light-spread.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-spread.psd"; sourceTree = "<group>"; };
+		66DFE4F91428105900B07AF0 /* StripLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripLight.h; sourceTree = "<group>"; };
+		66DFE4FA1428105900B07AF0 /* StripLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripLight.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33DF40B140DF7ED003FA5EB /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
 		D33DF40C140DF7ED003FA5EB /* Music.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Music.m; sourceTree = "<group>"; };
@@ -409,6 +414,7 @@
 		6677DDE513D2F51F00A43DF4 /* Stuff */ = {
 			isa = PBXGroup;
 			children = (
+				66DFE4ED14280EE800B07AF0 /* light-spread.psd */,
 				D370023B14021319005C3A57 /* light-point.psd */,
 				6677DDE613D2F51F00A43DF4 /* Collision Data.plist */,
 				66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */,
@@ -455,6 +461,8 @@
 				66C745EA1401AE5A00C6FE04 /* PhysicsObject.m */,
 				6675F037141D3448003251AE /* Door.h */,
 				6675F038141D3448003251AE /* Door.m */,
+				66DFE4F91428105900B07AF0 /* StripLight.h */,
+				66DFE4FA1428105900B07AF0 /* StripLight.m */,
 			);
 			path = "Game Classes";
 			sourceTree = "<group>";
@@ -736,6 +744,7 @@
 				6675F024141D2C7D003251AE /* Access.ysroom in Resources */,
 				66CD4CF9142575D600D540D6 /* Fight.ysroom in Resources */,
 				66CD4CFD142582E500D540D6 /* Interior.psd in Resources */,
+				66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,6 +789,7 @@
 				6675F00A141C2875003251AE /* DoubleJump.m in Sources */,
 				6675F039141D3448003251AE /* Door.m in Sources */,
 				66C7D40E1426913A004D9A36 /* Parasprite.m in Sources */,
+				66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
