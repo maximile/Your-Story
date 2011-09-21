@@ -8,10 +8,12 @@
 	Sprite *wingsTwoSprite;
 	Sprite *feetSprite;
 	Sprite *eyesSprite;
+	Sprite *loveSprite;
 	
 	cpShape *shape;
 	
 	int tick;
+	BOOL seenPlayer;
 }
 
 @end
