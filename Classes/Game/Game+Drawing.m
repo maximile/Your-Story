@@ -1,6 +1,7 @@
 #import "Game+Drawing.h"
 #import "ChipmunkDebugDraw.h"
 #import "Player.h"
+#import "Font.h"
 
 @implementation Game (Drawing)
 
@@ -99,6 +100,9 @@
 	}
 	
 	[self drawLightmap:focus over:canvas];
+	
+	Font *testFont = [Font fontNamed:@"Chicago12"];
+	[testFont drawString:@"Alone in the Dark" at:pixelCoordsMake(CANVAS_SIZE.width / 2, 50) alignment:NSCenterTextAlignment];
 	
 	// draw UI
 	[player drawStatus];

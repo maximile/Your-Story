@@ -39,6 +39,20 @@ static inline pixelCoords pixelCoordsMake(int x, int y) {
 	return (pixelCoords){x, y};
 }
 
+static inline pixelCoords pixelCoordsFromString(NSString *string) {
+	NSScanner *scanner = [[NSScanner alloc] initWithString:string];
+	float x=NAN, y=NAN;
+	[scanner scanFloat:&x];
+	[scanner scanFloat:&y];
+		
+	if (isnan(x) || isnan(y)) {
+		NSLog(@"pixelCoordsFromString: invalid string");
+		return pixelCoordsMake(0, 0);
+	}
+	
+	return pixelCoordsMake(x, y);
+}
+
 typedef struct {
 	int width;
 	int height;
@@ -47,6 +61,12 @@ typedef struct {
 static inline pixelSize pixelSizeMake(int width, int height) {
 	return (pixelSize){width, height};
 }
+
+static inline pixelSize pixelSizeFromString(NSString *string) {
+	pixelCoords tempCoords = pixelCoordsFromString(string);
+	return pixelSizeMake(tempCoords.x, tempCoords.y);
+}
+
 
 typedef struct {
 	pixelCoords origin;
@@ -62,6 +82,25 @@ static inline pixelRect pixelRectOffset(pixelRect rect, pixelSize offset) {
 	rect.origin.y += offset.height;
 	return rect;
 }
+
+static inline pixelRect pixelRectFromString(NSString *string) {
+	NSScanner *scanner = [[NSScanner alloc] initWithString:string];
+	float x=NAN, y=NAN, width=NAN, height=NAN;
+	[scanner scanFloat:&x];
+	[scanner scanFloat:&y];
+	[scanner scanFloat:&width];
+	[scanner scanFloat:&height];
+	
+	[scanner release];
+	
+	if (isnan(x) || isnan(y) || isnan(width) || isnan(height)) {
+		NSLog(@"pixelRectFromString: invalid string");
+		return pixelRectMake(0, 0, 0, 0);
+	}
+	
+	return pixelRectMake(x, y, width, height);
+}
+
 
 
 

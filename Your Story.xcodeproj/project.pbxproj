@@ -53,6 +53,7 @@
 		66C75C8F13BE87EB002D8411 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C75C8E13BE87EA002D8411 /* OpenGL.framework */; };
 		66C7B0D61405B2EC0079E164 /* Connections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66C7B0D51405B2EC0079E164 /* Connections.plist */; };
 		66C7D40E1426913A004D9A36 /* Parasprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7D40D1426913A004D9A36 /* Parasprite.m */; };
+		66C95252142BF9A50059EFAA /* Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C95251142BF9A50059EFAA /* Font.m */; };
 		66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */; };
 		66CA29D913EA15440022E906 /* Messing.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CA29D813EA15440022E906 /* Messing.ysroom */; };
 		66CB1479140706840089FDDC /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB1478140706840089FDDC /* Particle.m */; };
@@ -61,6 +62,9 @@
 		66CD4CF9142575D600D540D6 /* Fight.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CF8142575D500D540D6 /* Fight.ysroom */; };
 		66CD4CFD142582E500D540D6 /* Interior.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CFC142582E500D540D6 /* Interior.psd */; };
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
+		66CDA229142E490D0043B2E3 /* Geneva9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CDA228142E490D0043B2E3 /* Geneva9.plist */; };
+		66CDA22B142E4A000043B2E3 /* Fonts.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CDA22A142E4A000043B2E3 /* Fonts.psd */; };
+		66CDA233142E4D790043B2E3 /* Chicago12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CDA232142E4D790043B2E3 /* Chicago12.plist */; };
 		66CF2BF414141EA500B79F26 /* VillagePeople.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */; };
 		66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DFE4ED14280EE800B07AF0 /* light-spread.psd */; };
 		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
@@ -210,6 +214,8 @@
 		66C7B0D51405B2EC0079E164 /* Connections.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Connections.plist; sourceTree = "<group>"; };
 		66C7D40C1426913A004D9A36 /* Parasprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parasprite.h; sourceTree = "<group>"; };
 		66C7D40D1426913A004D9A36 /* Parasprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parasprite.m; sourceTree = "<group>"; };
+		66C95250142BF9A50059EFAA /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
+		66C95251142BF9A50059EFAA /* Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Font.m; sourceTree = "<group>"; };
 		66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ItemClasses.plist; sourceTree = "<group>"; };
 		66CA29D813EA15440022E906 /* Messing.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Messing.ysroom; sourceTree = "<group>"; };
 		66CB1477140706840089FDDC /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -222,6 +228,9 @@
 		66CD4CF8142575D500D540D6 /* Fight.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Fight.ysroom; sourceTree = "<group>"; };
 		66CD4CFC142582E500D540D6 /* Interior.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Interior.psd; sourceTree = "<group>"; };
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
+		66CDA228142E490D0043B2E3 /* Geneva9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Geneva9.plist; sourceTree = "<group>"; };
+		66CDA22A142E4A000043B2E3 /* Fonts.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fonts.psd; sourceTree = "<group>"; };
+		66CDA232142E4D790043B2E3 /* Chicago12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Chicago12.plist; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VillagePeople.ysroom; sourceTree = "<group>"; };
 		66DFE4ED14280EE800B07AF0 /* light-spread.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-spread.psd"; sourceTree = "<group>"; };
@@ -370,6 +379,7 @@
 		660B7FA213BFBC31001ECF63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				66CDA212142E43B50043B2E3 /* Fonts */,
 				D3DE5413140E03E800A40532 /* Music */,
 				D34FF3B2140B134500BF9C33 /* Sounds */,
 				66011CDD13F89AFA009B2CBC /* Sprites */,
@@ -474,6 +484,8 @@
 				66C745ED1401AE5A00C6FE04 /* Collision.m */,
 				66C745EE1401AE5A00C6FE04 /* FBO.h */,
 				66C745EF1401AE5A00C6FE04 /* FBO.m */,
+				66C95250142BF9A50059EFAA /* Font.h */,
+				66C95251142BF9A50059EFAA /* Font.m */,
 				66C745F01401AE5A00C6FE04 /* MainView.h */,
 				66C745F11401AE5A00C6FE04 /* MainView.m */,
 				66CB1477140706840089FDDC /* Particle.h */,
@@ -542,6 +554,16 @@
 				6675F006141C286E003251AE /* Shotgun.m */,
 			);
 			path = Pickups;
+			sourceTree = "<group>";
+		};
+		66CDA212142E43B50043B2E3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				66CDA232142E4D790043B2E3 /* Chicago12.plist */,
+				66CDA22A142E4A000043B2E3 /* Fonts.psd */,
+				66CDA228142E490D0043B2E3 /* Geneva9.plist */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D34FF3AC140AC76800BF9C33 /* Audio */ = {
@@ -745,6 +767,9 @@
 				66CD4CF9142575D600D540D6 /* Fight.ysroom in Resources */,
 				66CD4CFD142582E500D540D6 /* Interior.psd in Resources */,
 				66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */,
+				66CDA229142E490D0043B2E3 /* Geneva9.plist in Resources */,
+				66CDA22B142E4A000043B2E3 /* Fonts.psd in Resources */,
+				66CDA233142E4D790043B2E3 /* Chicago12.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +815,7 @@
 				6675F039141D3448003251AE /* Door.m in Sources */,
 				66C7D40E1426913A004D9A36 /* Parasprite.m in Sources */,
 				66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */,
+				66C95252142BF9A50059EFAA /* Font.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

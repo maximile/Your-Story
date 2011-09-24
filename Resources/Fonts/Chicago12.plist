@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   Chicago12.plist
+   Coins!
+
+   Created by Max Williams on 07/01/2010.
+   Copyright 2010 __MyCompanyName__. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+    	<key>Name</key>
+		<string>Chicago12</string>
+		<key>Texture</key>
+		<string>Fonts</string>
+		<key>Characters</key>
+		<string>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?.,()&amp;0123456789</string>
+		<key>Coordinates</key>
+		<array>
+	    	<string>0 20 8 14 A</string>
+			<string>8 20 8 14 </string>
+			<string>16 20 8 14</string>
+			<string>24 20 8 14</string>
+			<string>32 20 7 14</string>
+			<string>39 20 7 14 F</string>
+			<string>46 20 8 14</string>
+			<string>54 20 8 14</string>
+			<string>62 20 4 14</string>
+			<string>66 20 8 14</string>
+			<string>74 20 9 14 K</string>
+			<string>83 20 7 14</string>
+			<string>90 20 12 14</string>
+			<string>102 20 9 14</string>
+			<string>111 20 8 14</string>
+			<string>119 20 8 14 P</string>
+			<string>127 20 8 14</string>
+			<string>135 20 8 14</string>
+			<string>143 20 7 14</string>
+			<string>150 20 8 14</string>
+			<string>158 20 8 14 U</string>
+			<string>166 20 8 14</string>
+			<string>174 20 12 14</string>
+			<string>186 20 8 14</string>
+			<string>194 20 8 14</string>
+			<string>202 20 8 14 Z</string>
+			<string>210 20 8 14 a</string>
+			<string>218 20 8 14</string>
+			<string>226 20 7 14</string>
+			<string>233 20 8 14</string>
+			<string>241 20 8 14</string>
+			<string>249 20 7 14 f</string>
+			
+			<string>0 34 8 14 g</string>
+			<string>8 34 8 14</string>
+			<string>16 34 4 14</string>
+			<string>20 34 7 14</string>
+			<string>27 34 8 14 k</string>
+			<string>35 34 4 14</string>
+			<string>39 34 12 14</string>
+			<string>51 34 8 14</string>
+			<string>59 34 8 14</string>
+			<string>67 34 8 14 p</string>
+			<string>75 34 8 14</string>
+			<string>83 34 7 14</string>
+			<string>90 34 7 14</string>
+			<string>97 34 6 14</string>
+			<string>103 34 8 14 u</string>
+			<string>111 34 8 14</string>
+			<string>119 34 12 14</string>
+			<string>131 34 8 14</string>
+			<string>139 34 8 14</string>
+			<string>147 34 8 14 z</string>
+			<string>155 34 4 14 !</string>
+			<string>159 34 8 14 ?</string>
+			<string>167 34 4 14 .</string>
+			<string>171 34 4 14 ,</string>
+			<string>175 34 5 14 (</string>
+			<string>180 34 5 14 )</string>
+			<string>185 34 10 14 &amp;</string>
+			<string>195 34 8 14 zero</string>
+			<string>203 34 5 14</string>
+			<string>208 34 8 14</string>
+			<string>216 34 8 14</string>
+			<string>224 34 8 14</string>
+			<string>233 34 8 14</string>
+			<string>241 34 8 14</string>
+			<string>249 34 8 14 seven</string>
+			
+			<string>0 48 8 14 eight</string>
+			<string>8 48 8 14 nine</string>
+			<!-- <string>273 34 10 14</string>
+			<string>283 34 9 14</string>
+			<string>292 34 9 14</string>
+			<string>301 34 4 14</string>
+			<string>305 34 9 14 seven</string>
+			
+			<string>0 48 9 14 eight</string>
+			<string>9 48 9 14</string> -->
+		</array>
+		<key>Default Spacing</key>
+		<real>-1</real>
+		<key>Space Width</key>
+		<real>4</real>
+		<key>Widths</key>
+		<string>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i 7 k l m n o p q 7 s t u v w x y z ! ? . , ( ) &amp; 9 9 9 9 9 9 9 9 9 9</string>
+		<key>Offsets</key>
+		<array>
+			<string>A</string>
+			<string>B</string>
+			<string>C</string>
+			<string>D</string>
+			<string>E</string>
+			<string>F</string>
+			<string>G</string>
+			<string>H</string>
+			<string>I</string>
+			<string>J</string>
+			<string>K</string>
+			<string>L</string>
+			<string>M</string>
+			<string>N</string>
+			<string>O</string>
+			<string>P</string>
+			<string>Q</string>
+			<string>R</string>
+			<string>S</string>
+			<string>T</string>
+			<string>U</string>
+			<string>V</string>
+			<string>W</string>
+			<string>X</string>
+			<string>Y</string>
+			<string>Z</string>
+			<string>a</string>
+			<string>b</string>
+			<string>c</string>
+			<string>d</string>
+			<string>e</string>
+			<string>f</string>
+			<string>g</string>
+			<string>h</string>
+			<string>i</string>
+			<string>-1 0</string>
+			<string>k</string>
+			<string>l</string>
+			<string>m</string>
+			<string>n</string>
+			<string>o</string>
+			<string>p</string>
+			<string>q</string>
+			<string>r</string>
+			<string>s</string>
+			<string>t</string>
+			<string>u</string>
+			<string>v</string>
+			<string>w</string>
+			<string>x</string>
+			<string>y</string>
+			<string>z</string>
+			<string>!</string>
+			<string>?</string>
+			<string>.</string>
+			<string>,</string>
+			<string>(</string>
+			<string>)</string>
+			<string>&amp;</string>
+			<string>zero</string>
+			<string>2 0</string>
+			<string>two</string>
+			<string>three</string>
+			<string>four</string>
+			<string>-1 0</string>
+			<string>six</string>
+			<string>seven</string>
+			<string>eight</string>
+			<string>nine</string>
+		</array>
+    </dict>
+</plist>

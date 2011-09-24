@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+    	<key>Name</key>
+		<string>Geneva9</string>
+		<key>Texture</key>
+		<string>Fonts</string>
+		<key>Characters</key>
+		<string>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?.,:;+-•'‘’“”</string>
+		<key>Coordinates</key>
+    	<array>
+    		<string>0 0 5 10 A</string>
+			<string>6 0 5 10</string>
+			<string>12 0 5 10</string>
+			<string>18 0 5 10</string>
+			<string>24 0 4 10</string>
+			<string>29 0 4 10 F</string>
+			<string>34 0 5 10</string>
+			<string>40 0 5 10</string>
+			<string>46 0 1 10</string>
+			<string>48 0 5 10</string>
+			<string>54 0 5 10</string>
+			<string>60 0 4 10 L</string>
+			<string>65 0 7 10</string>
+			<string>73 0 5 10</string>
+			<string>79 0 5 10</string>
+			<string>85 0 5 10</string>
+			<string>91 0 5 10</string>
+			<string>97 0 5 10 R</string>
+			<string>103 0 5 10</string>
+			<string>109 0 5 10</string>
+			<string>115 0 5 10</string>
+			<string>121 0 5 10</string>
+			<string>127 0 7 10</string>
+			<string>135 0 5 10 X</string>
+			<string>141 0 5 10</string>
+			<string>147 0 4 10 Z</string>
+			<string>152 0 4 10 a</string>
+			<string>157 0 4 10</string>
+			<string>162 0 4 10</string>
+			<string>167 0 4 10</string>
+			<string>172 0 4 10</string>
+			<string>177 0 4 10</string>
+			<string>182 0 4 10 g</string>
+			<string>187 0 4 10</string>
+			<string>192 0 2 10</string>
+			<string>195 0 3 10</string>
+			<string>199 0 4 10</string>
+			<string>204 0 2 10</string>
+			<string>207 0 7 10 m</string>
+			<string>215 0 4 10</string>
+			<string>220 0 4 10</string>
+			<string>225 0 4 10</string>
+			<string>230 0 4 10</string>
+			<string>235 0 4 10</string>
+			<string>240 0 4 10 s</string>
+			<string>245 0 3 10 t</string>
+			
+			<string>0 0 4 10 u</string>
+			<string>5 10 5 10 v</string>
+			<string>11 10 7 10</string>
+			<string>19 10 5 10</string>
+			<string>25 10 4 10 y</string>
+			<string>30 10 4 10 z</string>
+			<string>35 10 2 10</string>
+			<string>38 10 5 10</string>
+			<string>44 10 5 10</string>
+			<string>50 10 5 10</string>
+			<string>56 10 5 10</string>
+			<string>62 10 5 10</string>
+			<string>68 10 5 10</string>
+			<string>74 10 5 10</string>
+			<string>80 10 5 10</string>
+			<string>86 10 5 10</string>
+			<string>92 10 1 10</string>
+			<string>94 10 4 10</string>
+			<string>99 10 1 10</string>
+			<string>101 10 2 10</string>
+			<string>104 10 1 10</string>
+			<string>106 10 2 10</string>
+			<string>109 10 5 10</string>
+			<string>115 10 4 10</string>
+			<string>120 10 5 10</string>
+			<string>126 10 1 10</string>
+			<string>128 10 2 10</string>
+			<string>131 10 2 10</string>
+			<string>134 10 5 10</string>
+			<string>140 10 5 10</string>
+    	</array>
+		<key>Default Spacing</key>
+		<real>0</real>
+		<key>Space Width</key>
+		<real>3</real>
+		<key>Padding Above</key>
+		<real>1</real>
+		<key>Line Height</key>
+		<real>11</real>
+		<key>Widths</key>
+		<string>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e 4 g h i j k l m n o p q r s t u v w x y z 6 6 6 6 6 6 6 6 6 6 3 ? fullstop , : ; plus hyphenminus •</string>
+		<key>Offsets</key>
+		<array>
+			<string>A</string>
+			<string>B</string>
+			<string>C</string>
+			<string>D</string>
+			<string>E</string>
+			<string>F</string>
+			<string>G</string>
+			<string>H</string>
+			<string>I</string>
+			<string>J</string>
+			<string>K</string>
+			<string>L</string>
+			<string>M</string>
+			<string>N</string>
+			<string>O</string>
+			<string>P</string>
+			<string>Q</string>
+			<string>R</string>
+			<string>S</string>
+			<string>T</string>
+			<string>U</string>
+			<string>V</string>
+			<string>W</string>
+			<string>X</string>
+			<string>Y</string>
+			<string>Z</string>
+			<string>a</string>
+			<string>b</string>
+			<string>c</string>
+			<string>d</string>
+			<string>e</string>
+			<string>4</string>
+			<string>g</string>
+			<string>h</string>
+			<string>i</string>
+			<string>j</string>
+			<string>k</string>
+			<string>l</string>
+			<string>m</string>
+			<string>n</string>
+			<string>o</string>
+			<string>p</string>
+			<string>q</string>
+			<string>r</string>
+			<string>s</string>
+			<string>t</string>
+			<string>u</string>
+			<string>v</string>
+			<string>w</string>
+			<string>x</string>
+			<string>y</string>
+			<string>z</string>
+			<string>1 0</string>
+			<string>two</string>
+			<string>three</string>
+			<string>four</string>
+			<string>five</string>
+			<string>six</string>
+			<string>seven</string>
+			<string>eight</string>
+			<string>nine</string>
+			<string>zero</string>
+			<string>1 0</string>
+			<string>?</string>
+			<string>fullstop</string>
+			<string>plus</string>
+			<string>,</string>
+			<string>:</string>
+			<string>;</string>
+			<string>hyphenminus</string>
+			<string>•</string>
+			<!-- <string>0 0</string>
+			<string>0 2</string>
+			<string>0 2</string>
+			<string>0 2</string>
+			<string>0 2</string> -->
+		</array>
+    </dict>
+</plist>
