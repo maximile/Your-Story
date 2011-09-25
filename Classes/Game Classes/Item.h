@@ -17,6 +17,7 @@
 
 - (id)initWithPosition:(pixelCoords)newPosition;
 - (void)draw:(Game *)game;
+- (void)drawInScreenCoords:(Game *)game;
 - (void)update:(Game *)game;
 
 @end

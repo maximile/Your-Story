@@ -13,6 +13,7 @@
 #import "Spawn.h"
 #import "Sound.h"
 #import "Door.h"
+#import "Message.h"
 
 static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
@@ -161,6 +162,15 @@ static Game *game = nil;
 			connectionDict = testConnectionDict;
 		}
 	}
+	
+	// add room title message
+	NSString *title = [connectionDict valueForKey:@"Title"];
+	pixelCoords titleLoc = pixelCoordsMake(CANVAS_SIZE.width / 2, 30);
+	Font *titleFont = [Font fontNamed:@"Chicago12"];
+	Message *titleLabel = [[Message alloc] initWithPosition:titleLoc font:titleFont string:title];
+	titleLabel.life = 4.0;
+	titleLabel.alignment = NSCenterTextAlignment;
+	[self addItem:titleLabel];
 	
 	[music stop];
 	music = [[Music alloc] initWithFilename:@"test_music.ogg"];

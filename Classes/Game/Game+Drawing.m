@@ -101,10 +101,11 @@
 	
 	[self drawLightmap:focus over:canvas];
 	
-	Font *testFont = [Font fontNamed:@"Chicago12"];
-	[testFont drawString:@"Alone in the Dark" at:pixelCoordsMake(CANVAS_SIZE.width / 2, 50) alignment:NSCenterTextAlignment];
-	
+		
 	// draw UI
+	for (Item *item in items) {
+		[item drawInScreenCoords:self];
+	}	
 	[player drawStatus];
 	for (Texture *texture in [Texture textures]) {
 		[texture draw];
