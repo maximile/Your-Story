@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		66011CDF13F89AFA009B2CBC /* MainSprites.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66011CDE13F89AFA009B2CBC /* MainSprites.psd */; };
+		6601B024143126E80053B835 /* Torch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6601B023143126E80053B835 /* Torch.m */; };
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
 		660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.ysroom */; };
 		661D5FE2142EA3320083F1FC /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 661D5FE1142EA3320083F1FC /* Message.m */; };
@@ -144,6 +145,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		66011CDE13F89AFA009B2CBC /* MainSprites.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = MainSprites.psd; sourceTree = "<group>"; };
+		6601B022143126E80053B835 /* Torch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
+		6601B023143126E80053B835 /* Torch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Torch.m; sourceTree = "<group>"; };
 		660B7FA413BFBC31001ECF63 /* Test.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.psd; sourceTree = "<group>"; };
 		660B803913BFD4C0001ECF63 /* Test.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.ysroom; sourceTree = "<group>"; };
 		661D5FE0142EA3320083F1FC /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
@@ -575,6 +578,8 @@
 				6675EFC8141C17A6003251AE /* Battery.m */,
 				6675F005141C286E003251AE /* Shotgun.h */,
 				6675F006141C286E003251AE /* Shotgun.m */,
+				6601B022143126E80053B835 /* Torch.h */,
+				6601B023143126E80053B835 /* Torch.m */,
 			);
 			path = Pickups;
 			sourceTree = "<group>";
@@ -842,6 +847,7 @@
 				661D5FE2142EA3320083F1FC /* Message.m in Sources */,
 				66C756A7142FDD830001707C /* Friend.m in Sources */,
 				66C756B01430056A0001707C /* Purple.m in Sources */,
+				6601B024143126E80053B835 /* Torch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,8 @@
 
 	<key>0,2</key>
 	<string>StripLight</string>
+	<key>1,2</key>
+	<string>Torch</string>
 
 	<key>0,3</key>
 	<string>Purple</string>
