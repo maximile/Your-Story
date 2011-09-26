@@ -10,6 +10,7 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		66011CDF13F89AFA009B2CBC /* MainSprites.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66011CDE13F89AFA009B2CBC /* MainSprites.psd */; };
 		6601B024143126E80053B835 /* Torch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6601B023143126E80053B835 /* Torch.m */; };
+		6601B0571431385C0053B835 /* WBFS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6601B0561431385C0053B835 /* WBFS.m */; };
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
 		660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.ysroom */; };
 		661D5FE2142EA3320083F1FC /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 661D5FE1142EA3320083F1FC /* Message.m */; };
@@ -147,6 +148,8 @@
 		66011CDE13F89AFA009B2CBC /* MainSprites.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = MainSprites.psd; sourceTree = "<group>"; };
 		6601B022143126E80053B835 /* Torch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
 		6601B023143126E80053B835 /* Torch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Torch.m; sourceTree = "<group>"; };
+		6601B0551431385C0053B835 /* WBFS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBFS.h; sourceTree = "<group>"; };
+		6601B0561431385C0053B835 /* WBFS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBFS.m; sourceTree = "<group>"; };
 		660B7FA413BFBC31001ECF63 /* Test.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.psd; sourceTree = "<group>"; };
 		660B803913BFD4C0001ECF63 /* Test.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.ysroom; sourceTree = "<group>"; };
 		661D5FE0142EA3320083F1FC /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
@@ -550,6 +553,8 @@
 				66C756A6142FDD830001707C /* Friend.m */,
 				66C756AE1430056A0001707C /* Purple.h */,
 				66C756AF1430056A0001707C /* Purple.m */,
+				6601B0551431385C0053B835 /* WBFS.h */,
+				6601B0561431385C0053B835 /* WBFS.m */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -848,6 +853,7 @@
 				66C756A7142FDD830001707C /* Friend.m in Sources */,
 				66C756B01430056A0001707C /* Purple.m in Sources */,
 				6601B024143126E80053B835 /* Torch.m in Sources */,
+				6601B0571431385C0053B835 /* WBFS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
