@@ -10,6 +10,8 @@
 #import "Battery.h"
 #import "DoubleJump.h"
 #import "Shotgun.h"
+#import "Font.h"
+#import "Message.h"
 
 
 #define PLAYER_VELOCITY 100.0
@@ -321,6 +323,18 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	// if the head and feet both touch it
 	[[Game game] removeItem:pickup];
 	pickup.used = YES;
+	
+	// add pickup message
+	NSString *messageString = pickup.title;
+	if (messageString.length > 0) {
+		pixelCoords messagePos = pixelCoordsMake(pickup.startingPosition.x, pickup.startingPosition.y + 18);
+		Font *messageFont = [Font fontNamed:@"Geneva9"];
+		Message *newMessage = [[Message alloc] initWithPosition:messagePos font:messageFont string:messageString];
+		newMessage.alignment = NSCenterTextAlignment;
+		newMessage.life = 4.0;
+		[[Game game] addItem:newMessage];
+	}
+	
 	return 0;
 }
 

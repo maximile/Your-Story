@@ -3,7 +3,7 @@
 
 @implementation Pickup
 
-@synthesize used;
+@synthesize used, title;
 
 - (id)initWithPosition:(pixelCoords)position {
 	if ([super initWithPosition:position] == nil) return nil;

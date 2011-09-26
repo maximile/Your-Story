@@ -1,13 +1,13 @@
-#import "Shotgun.h"
+#import "Torch.h"
 
-@implementation Shotgun
+@implementation Torch
 
 - (id)initWithPosition:(pixelCoords)position {
 	if ([super initWithPosition:position] == nil) return nil;
 
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(64, 32, 16, 16)];
-	title = @"Shotgun";
+	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(112, 48, 16, 16)];
+	title = @"Torch";
 	
 	return self;
 }

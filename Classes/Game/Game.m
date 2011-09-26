@@ -21,6 +21,7 @@ static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_SHAPES(arb, characterShape, pickupShape);
 	Character *character = characterBody->data;
 	Item *pickup = pickupShape->data;
+	
 	return [character hitPickup:pickup arbiter:arb];
 }
 

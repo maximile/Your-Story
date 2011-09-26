@@ -7,8 +7,10 @@
 	cpShape *shape;
 	Sprite *sprite;
 	BOOL used;
+	NSString *title;
 }
 
 @property BOOL used;
+@property (assign) NSString *title;
 
 @end
