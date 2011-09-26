@@ -5,12 +5,13 @@
 
 @interface Item : NSObject {
 	pixelCoords startingPosition;
+	cpFloat objectPhase;
 }
 
 @property (readonly) pixelCoords startingPosition;
 
 // Value from 0-1 that is unique to each item usable for animation effects.
-@property (readonly) float objectPhase;
+@property (readonly) cpFloat objectPhase;
 
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;

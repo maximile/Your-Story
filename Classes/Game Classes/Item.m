@@ -2,12 +2,13 @@
 
 @implementation Item
 
-@synthesize startingPosition;
+@synthesize startingPosition, objectPhase;
 
 - (id)initWithPosition:(pixelCoords)newPosition {
 	if ([super init] == nil) return nil;
 	
 	startingPosition = newPosition;
+	objectPhase = (cpFloat)rand()/(cpFloat)RAND_MAX;
 	
 	return self;
 }
@@ -18,9 +19,5 @@
 
 - (void)addToSpace:(cpSpace *)space {}
 - (void)removeFromSpace:(cpSpace *)space {}
-
--(float)objectPhase {
-	return (float)((int)self&255)/255.0;
-}
 
 @end
