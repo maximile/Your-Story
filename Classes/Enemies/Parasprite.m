@@ -17,7 +17,7 @@
 	shape = cpCircleShapeNew(body, 4, cpvzero);
 	cpShapeSetCollisionType(shape, [self class]);
 	cpShapeSetFriction(shape, 0.2);
-	cpShapeSetGroup(shape, self);
+	cpShapeSetGroup(shape, [self class]);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	pixelRect bodyCoords;
@@ -37,6 +37,8 @@
 	wingsTwoSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(97, 30, 23, 10)];
 	
 	loveSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(119, 24, 7, 6)];
+	
+	NSLog(@"phase: %f", self.objectPhase);
 	
 	return self;
 }
@@ -155,7 +157,7 @@ WaverForce(double seconds)
 	double phase = self.objectPhase;
 	
 	cpVect target_force = cpvnormalize_safe(cpvsub(target, self.position));
-	cpVect waver_force = WaverForce(seconds + phase*WAVER_PERIOD);
+	cpVect waver_force = WaverForce(seconds + phase*10.0);
 	
 	cpFloat pulse = cpfsin(seconds*8.0 + phase*2.0*M_PI)*0.5 + 0.5;
 	cpVect motive_force = cpvmult(cpvadd(cpvmult(target_force, 800.0), cpvmult(waver_force, 1000.0)), pulse);
