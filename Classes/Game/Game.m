@@ -291,6 +291,11 @@ double getDoubleTime(void)
 	if (action && nearFriend) {
 		[theFriend displayMessage:self];
 	}
+	if (!nearFriend) {
+		for (Friend *friend in friends) {
+			[friend removeMessage:self];
+		}
+	}
 	
 	// draw indicator to say that you can press action
 	if (nearDoor || nearFriend) {
