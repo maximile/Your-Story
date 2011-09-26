@@ -97,6 +97,20 @@ static const cpVect WAVER[] = {
 	{-0.882, -0.471}, {-0.976, -0.219}, { 0.707, -0.707}, {-0.074, -0.997}, {-0.493,  0.870}, {-0.576, -0.818}, {-0.788, -0.615}, { 0.831, -0.556}, 
 };
 
+const float WAVER_PERIOD = 0.33;
+
+static inline cpVect
+WaverForce(double seconds)
+{
+	double normalized = seconds/WAVER_PERIOD;
+	
+	double f = floor(normalized);
+	unsigned long i = f;
+	double t = normalized - f;
+	
+	return cpvlerp(WAVER[i&255], WAVER[(i+1)&255], t);
+}
+
 - (void)update:(Game *)game {
 	Player *player = game.player;
 	BOOL canSeePlayer = NO;
@@ -137,9 +151,19 @@ static const cpVect WAVER[] = {
 //	targetForce = cpvmult(targetForce, enthusiasm * 500);
 //	cpBodySetForce(body, cpvadd(targetForce, gravityForce));
 	
-	cpVect targetForce = cpvmult(cpvnormalize_safe(cpvsub(target, self.position)), 500.0);
-	cpVect gravityForce = cpvmult(cpSpaceGetGravity(game.space), -cpBodyGetMass(body));
-	cpBodySetForce(body, cpvadd(targetForce, gravityForce));
+	double seconds = game.fixedTime;
+	double phase = self.objectPhase;
+	
+	cpVect target_force = cpvnormalize_safe(cpvsub(target, self.position));
+	cpVect waver_force = WaverForce(seconds + phase*WAVER_PERIOD);
+	
+	cpFloat pulse = cpfsin(seconds*8.0 + phase*2.0*M_PI)*0.5 + 0.5;
+	cpVect motive_force = cpvmult(cpvadd(cpvmult(target_force, 800.0), cpvmult(waver_force, 1000.0)), pulse);
+	
+	cpVect gravity_force = cpvmult(cpSpaceGetGravity(game.space), -cpBodyGetMass(body));
+	cpBodySetForce(body, cpvadd(gravity_force, motive_force));
+	
+	cpBodySetVel(body, cpvmult(cpBodyGetVel(body), cpfpow(0.1, FIXED_DT)));
 }
 
 - (void)addToSpace:(cpSpace *)space {
