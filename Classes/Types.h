@@ -46,7 +46,6 @@ static inline pixelCoords pixelCoordsFromString(NSString *string) {
 	[scanner scanFloat:&y];
 		
 	if (isnan(x) || isnan(y)) {
-		NSLog(@"pixelCoordsFromString: invalid string");
 		return pixelCoordsMake(0, 0);
 	}
 	

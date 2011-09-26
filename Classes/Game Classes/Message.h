@@ -9,10 +9,12 @@
 	
 	float life;
 	BOOL ticker;
+	BOOL screenSpace;
 	float age;
 }
 
 @property float life;
+@property BOOL screenSpace;
 @property BOOL ticker;
 @property NSTextAlignment alignment;
 

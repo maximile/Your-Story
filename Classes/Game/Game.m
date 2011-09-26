@@ -14,6 +14,7 @@
 #import "Sound.h"
 #import "Door.h"
 #import "Message.h"
+#import "Friend.h"
 
 static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
@@ -76,6 +77,10 @@ static Game *game = nil;
 	NSLog(@"%@", startingRoomName);
 	[self setCurrentRoom:[[Room alloc] initWithName:startingRoomName]];
 	
+	Texture *uiTexture = [Texture textureNamed:@"UI"];
+	actionPrompt1Sprite = [[Sprite alloc] initWithTexture:uiTexture texRect:pixelRectMake(0, 16, 16, 16)];
+	actionPrompt2Sprite = [[Sprite alloc] initWithTexture:uiTexture texRect:pixelRectMake(0, 32, 16, 16)];
+	
 	return self;
 }
 
@@ -135,10 +140,14 @@ static Game *game = nil;
 	// add items from room
 	NSArray *roomItems = [currentRoom.itemLayer items];
 	NSMutableArray *spawns = [NSMutableArray array];
+	friends = [NSMutableArray array];
 	for (Item *item in roomItems) {
 		[self addItem:item];
 		if ([item isKindOfClass:[Spawn class]]) {
 			[spawns addObject:item];
+		}
+		if ([item isKindOfClass:[Friend class]]) {
+			[(NSMutableArray *)friends addObject:item];
 		}
 		if ([item isKindOfClass:[Door class]]) {
 			door = (Door *)item;
@@ -170,6 +179,7 @@ static Game *game = nil;
 	Message *titleLabel = [[Message alloc] initWithPosition:titleLoc font:titleFont string:title];
 	titleLabel.life = 4.0;
 	titleLabel.alignment = NSCenterTextAlignment;
+	titleLabel.screenSpace = YES;
 	[self addItem:titleLabel];
 	
 	[music stop];
@@ -253,14 +263,41 @@ double getDoubleTime(void)
 		}
 	}
 	
-	if (door && (downKey || upKey)) {
+	// interact with items
+	BOOL action = (downKey || upKey);
+	if (wasPressingAction) action = NO;
+	wasPressingAction = (downKey || upKey);
+	
+	
+	BOOL nearDoor = NO;
+	if (door && cpvdist(player.position, cpv(door.startingPosition.x, door.startingPosition.y)) < 10.0)
+		nearDoor = YES;
+	if (nearDoor && action) {
 		// pressing down or up and there is a door in the room
-		float distanceToDoor = cpvdist(player.position, cpv(door.startingPosition.x, door.startingPosition.y));
-		if (distanceToDoor < 10.0) {
-			// in front of the door
-			Room *nextRoom = [self roomInDirection:NOWHERE];
-			[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
+		Room *nextRoom = [self roomInDirection:NOWHERE];
+		[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
+	}
+	
+	BOOL nearFriend = NO;
+	Friend *theFriend = nil;
+	for (Friend *friend in friends) {
+		float testDist = cpvdist(player.position, cpv(friend.startingPosition.x, friend.startingPosition.y));
+		if (testDist < 24.0) {
+			// near a friend
+			nearFriend = YES;
+			theFriend = friend;
 		}
+	}
+	if (action && nearFriend) {
+		[theFriend displayMessage:self];
+	}
+	
+	// draw indicator to say that you can press action
+	if (nearDoor || nearFriend) {
+		if (cpfsin(fixedTime * 8) > 0)
+			[actionPrompt1Sprite drawAt:pixelCoordsMake(player.position.x, player.position.y - 18)];
+		else
+			[actionPrompt2Sprite drawAt:pixelCoordsMake(player.position.x, player.position.y - 18)];
 	}
 }
 

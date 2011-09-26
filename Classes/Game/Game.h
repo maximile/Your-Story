@@ -11,6 +11,7 @@
 
 @class Player;
 @class Door;
+@class Sprite;
 
 typedef enum {
 	GAME_MODE,
@@ -29,6 +30,7 @@ typedef enum {
 	
 	Player *player;
 	Door *door;
+	NSArray *friends;
 	
 	// editor variables
 	pixelCoords editorFocus;
@@ -43,6 +45,7 @@ typedef enum {
 	
 	// key pressed flags
 	BOOL upKey, downKey, leftKey, rightKey, tabKey, zKey, xKey, shiftKey;
+	BOOL wasPressingAction;
 	
 	// physics variables
 	cpSpace *space;
@@ -53,6 +56,9 @@ typedef enum {
 	
 	NSDictionary *connectionDict;
 	NSArray *connections;
+	
+	Sprite *actionPrompt1Sprite;
+	Sprite *actionPrompt2Sprite;
 	
 	FBO *lightmapCanvas;
 	

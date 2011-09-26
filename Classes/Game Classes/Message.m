@@ -3,7 +3,7 @@
 
 @implementation Message
 
-@synthesize alignment, ticker, life;
+@synthesize alignment, ticker, life, screenSpace;
 
 - (id)initWithPosition:(pixelCoords)position font:(Font *)newFont string:(NSString *)newString {
 	if ([super initWithPosition:position] == nil) return nil;
@@ -14,8 +14,14 @@
 	return self;
 }
 
+- (void)draw:(Game *)game {
+	if (!screenSpace)
+		[font drawString:string at:startingPosition alignment:alignment];
+}
+
 - (void)drawInScreenCoords:(Game *)game {
-	[font drawString:string at:startingPosition alignment:alignment];
+	if (screenSpace)
+		[font drawString:string at:startingPosition alignment:alignment];
 }
 
 - (void)update:(Game *)game {
