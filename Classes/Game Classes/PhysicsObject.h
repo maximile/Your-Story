@@ -4,6 +4,7 @@
 
 typedef struct GroundingContext {
 	cpVect normal;
+	cpVect impulse;
 	cpFloat penetration;
 	
 	cpBody *body;

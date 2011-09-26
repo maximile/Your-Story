@@ -10,12 +10,14 @@ GroundingContextCallback(cpBody *body, cpArbiter *arb, GroundingContext *groundi
 		grounding->penetration = -cpArbiterGetDepth(arb, 0);
 		grounding->body = b2;
 	}
+	
+	grounding->impulse = cpvadd(grounding->impulse, cpArbiterTotalImpulseWithFriction(arb));
 }
 
 void
 UpdateGroundingContext(cpBody *body, GroundingContext *context)
 {
-	(*context) = (GroundingContext){cpvzero, 0.0, NULL};
+	(*context) = (GroundingContext){cpvzero, cpvzero, 0.0, NULL};
 	cpBodyEachArbiter(body, (cpBodyArbiterIteratorFunc)GroundingContextCallback, context);
 }
 

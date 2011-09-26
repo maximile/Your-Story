@@ -71,13 +71,11 @@ cpfsign(cpFloat f)
 	}
 	
 	
-	bool wasGrounded = (grounding.body != NULL);
-	
 	// Get the grounding information.
 	UpdateGroundingContext(body, &grounding);
 	
 	// Play a sound if we landed
-	if(grounding.body && !wasGrounded) [Sound playSound:@"PlayerLand.ogg" volume:0.5 pitch:1.0];
+	if(cpfabs(self->grounding.impulse.y)*body->m_inv > 200.0) [Sound playSound:@"PlayerLand.ogg" volume:0.5 pitch:1.0];
 	
 	Player *player = game.player;
 	cpVect playerPos = player.position;

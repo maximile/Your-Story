@@ -37,13 +37,11 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 {
 	Character *self = cpBodyGetUserData(body);
 	
-	bool wasGrounded = (self->grounding.body != NULL);
-	
 	// Get the grounding information.
 	UpdateGroundingContext(body, &self->grounding);
 	
 	// Play a sound if we landed
-	if(self->grounding.body && !wasGrounded) [Sound playSound:@"PlayerLand.ogg" volume:0.5 pitch:1.0];
+	if(cpfabs(self->grounding.impulse.y)*body->m_inv > 200.0) [Sound playSound:@"PlayerLand.ogg" volume:0.5 pitch:1.0];
 	
 	// Reset jump boosting if you hit your head.
 	if(self->grounding.normal.y < 0.0f) self->remainingBoost = 0.0f;
