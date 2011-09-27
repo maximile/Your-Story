@@ -18,6 +18,7 @@
 	cpShapeSetCollisionType(shape, [self class]);
 	cpShapeSetFriction(shape, 0.2);
 	cpShapeSetGroup(shape, [self class]);
+	cpShapeSetUserData(shape, self);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	pixelRect bodyCoords;

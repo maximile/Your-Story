@@ -32,12 +32,12 @@ static int characterHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
 	return [character hitJumper:jumper arbiter:arb];
 }
 
-static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
-	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
-	Jumper *jumper = jumperBody->data;
-	[jumper shotFrom:game.player.position];
-	return 0;
-}
+//static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
+//	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
+//	Jumper *jumper = jumperBody->data;
+//	[jumper shotFrom:game.player.position];
+//	return 0;
+//}
 
 @implementation Game
 
@@ -67,7 +67,7 @@ static Game *game = nil;
 	// add collision handlers
 	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitJumper, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [Character class], [Pickup class], NULL, (cpCollisionPreSolveFunc)characterHitPickup, NULL, NULL, self);
-	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
+//	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
 	
 	uiMap = [TileMap mapNamed:@"UI"];
 	lightmapCanvas = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];

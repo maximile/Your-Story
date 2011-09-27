@@ -21,6 +21,7 @@
 	cpShapeSetCollisionType(shape, [self class]);
 	cpShapeSetFriction(shape, 0.7);
 	cpShapeSetGroup(shape, self);
+	cpShapeSetUserData(shape, self);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	bodySprites = [NSDictionary dictionaryWithObjectsAndKeys:

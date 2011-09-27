@@ -345,8 +345,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)shoot:(Game *)game {
 	if (reload > 0) return;
-	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
-	[game addItem:damage];
+	
+	cpFloat direction = (facing & RIGHT ? 1.0 : -1.0);
+	DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:cpv(100*direction, 0) distance:100];
+	[game addItem:ray];
+//	DamageArea *damage = [[DamageArea alloc] initWithPosition:self.position direction:facing];
+//	[game addItem:damage];
 	
 	[Sound playSound:@"PlayerShotgun.ogg"];
 	

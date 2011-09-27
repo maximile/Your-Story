@@ -20,6 +20,4 @@
 	int health;
 }
 
-- (void)shotFrom:(cpVect)shotLocation;
-
 @end
