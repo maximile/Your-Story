@@ -14,6 +14,8 @@
 	
 	int tick;
 	BOOL seenPlayer;
+	
+	float health;
 }
 
 @end

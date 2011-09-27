@@ -7,7 +7,7 @@
 
 @synthesize layers, group;
 
--(id)initWithPosition:(cpVect)newPos velocity:(cpVect)newVel distance:(cpFloat)newDistance;
+-(id)initWithPosition:(cpVect)newPos velocity:(cpVect)newVel distance:(cpFloat)newDistance damage:(float)newDamage;
 {
 	if([super init] == nil) return nil;
 	
@@ -21,6 +21,8 @@
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(3, 51, 11, 10)];
+	
+	damage = newDamage;
 	
 	return self;
 }
@@ -39,7 +41,7 @@
 		cpShape *shape = cpSpaceSegmentQueryFirst(game.space, a, b, layers, group, NULL);
 		if(shape){
 			if([(id)shape->data isKindOfClass:[PhysicsObject class]])
-				[(PhysicsObject *)shape->data shotFrom:a];
+				[(PhysicsObject *)shape->data shotFrom:a damage:damage];
 			
 			[game removeItem:self];
 		}

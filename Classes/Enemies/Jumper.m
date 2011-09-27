@@ -176,7 +176,8 @@ cpfsign(cpFloat f)
 	cpBodyFree(body);
 }
 
-- (void)shotFrom:(cpVect)shotLocation {
+- (void)shotFrom:(cpVect)shotLocation damage:(float)damage;
+{
 	directionMask shotDirection = LEFT;
 	if (shotLocation.x > self.position.x) shotDirection = RIGHT;
 		
@@ -186,7 +187,7 @@ cpfsign(cpFloat f)
 	if (shotDirection == RIGHT) {
 		effect.x *= -1;
 	}
-	effect = cpvmult(effect, strength * 25);
+	effect = cpvmult(effect, strength * 25*damage);
 	cpBodyApplyImpulse(body, effect, cpvzero);
 	
 	// 'blood'
@@ -204,7 +205,7 @@ cpfsign(cpFloat f)
 		[[Game game] addItem:gibs];
 	}
 	
-	health--;
+	health -= damage;
 }
 
 @end

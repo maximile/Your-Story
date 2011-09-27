@@ -21,6 +21,6 @@ void UpdateGroundingContext(cpBody *body, GroundingContext *context);
 @property(readonly) pixelCoords pixelPosition;
 @property cpVect position;
 
-- (void)shotFrom:(cpVect)shotLocation;
+- (void)shotFrom:(cpVect)shotLocation damage:(float)damage;
 
 @end

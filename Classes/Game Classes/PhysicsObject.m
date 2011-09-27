@@ -41,6 +41,7 @@ UpdateGroundingContext(cpBody *body, GroundingContext *context)
 	cpBodySetPos(body, newPosition);
 }
 
-- (void)shotFrom:(cpVect)shotLocation;{}
+- (void)shotFrom:(cpVect)shotLocation damage:(float)damage;
+{}
 
 @end

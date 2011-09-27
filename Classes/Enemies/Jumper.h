@@ -17,7 +17,7 @@
 	BOOL nearPlayer;
 	BOOL canSeePlayer;
 	
-	int health;
+	float health;
 }
 
 @end

@@ -14,9 +14,10 @@
 	cpBodySetUserData(body, self);
 	cpBodySetVelLimit(body, 50);
 	
-	shape = cpCircleShapeNew(body, 4, cpvzero);
+	shape = cpCircleShapeNew(body, 6, cpvzero);
 	cpShapeSetCollisionType(shape, [self class]);
 	cpShapeSetFriction(shape, 0.2);
+	cpShapeSetElasticity(shape, 1.0);
 	cpShapeSetGroup(shape, [self class]);
 	cpShapeSetUserData(shape, self);
 	
@@ -39,7 +40,7 @@
 	
 	loveSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(119, 24, 7, 6)];
 	
-	NSLog(@"phase: %f", self.objectPhase);
+	health = 1.0;
 	
 	return self;
 }
@@ -115,6 +116,11 @@ WaverForce(double seconds)
 }
 
 - (void)update:(Game *)game {
+	if(health <= 0.0){
+		[game removeItem:self];
+		return;
+	}
+	
 	Player *player = game.player;
 	BOOL canSeePlayer = NO;
 	if (player && cpvnear(player.position, self.position, 100)) {
@@ -182,6 +188,11 @@ WaverForce(double seconds)
 - (void)finalize {
 	cpShapeFree(shape);
 	cpBodyFree(body);
+}
+
+- (void)shotFrom:(cpVect)shotLocation damage:(float)damage;
+{
+	health = 0.0;
 }
 
 @end

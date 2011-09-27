@@ -346,12 +346,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 - (void)shoot:(Game *)game {
 	if (reload > 0) return;
 	
+	// hard coded shotgun blast
 	cpFloat baseAngle = (facing & RIGHT ? 0.0 : M_PI);
 	for(int i=0; i<5; i++){
 		cpFloat jitter = (cpFloat)rand()/(cpFloat)RAND_MAX;
 		cpVect velocity = cpvmult(cpvforangle(baseAngle + (jitter*2.0 - 1.0)*0.2), 1000);
 		
-		DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:velocity distance:100];
+		DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:velocity distance:100 damage:0.2];
 		[game addItem:ray];
 	}
 	
