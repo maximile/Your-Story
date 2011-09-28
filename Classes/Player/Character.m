@@ -89,9 +89,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	headShape = cpCircleShapeNew(body, 3.0, cpv(0, 4));
 	cpShapeSetCollisionType(headShape, [self class]);
+	cpShapeSetGroup(headShape, self);
+	cpShapeSetUserData(headShape, self);
 	
 	feetShape = cpCircleShapeNew(body, 4.0, cpv(0, -4));
 	cpShapeSetCollisionType(feetShape, [self class]);
+	cpShapeSetGroup(feetShape, self);
+	cpShapeSetUserData(feetShape, self);
 	
 	// drawing resources
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
@@ -350,9 +354,11 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpFloat baseAngle = (facing & RIGHT ? 0.0 : M_PI);
 	for(int i=0; i<5; i++){
 		cpFloat jitter = (cpFloat)rand()/(cpFloat)RAND_MAX;
-		cpVect velocity = cpvmult(cpvforangle(baseAngle + (jitter*2.0 - 1.0)*0.2), 1000);
+		cpVect velocity = cpvmult(cpvforangle(baseAngle + (jitter*2.0 - 1.0)*0.2), 600);
 		
 		DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:velocity distance:100 damage:0.2];
+		ray.group = self;
+		ray.startTime = game.fixedTime - FIXED_DT*2.0*((double)rand()/(double)RAND_MAX);
 		[game addItem:ray];
 	}
 	

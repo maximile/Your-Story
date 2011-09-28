@@ -40,7 +40,7 @@
 	
 	loveSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(119, 24, 7, 6)];
 	
-	health = 1.0;
+	health = 0.5;
 	
 	return self;
 }
@@ -172,7 +172,7 @@ WaverForce(double seconds)
 	cpVect gravity_force = cpvmult(cpSpaceGetGravity(game.space), -cpBodyGetMass(body));
 	cpBodySetForce(body, cpvadd(gravity_force, motive_force));
 	
-	cpBodySetVel(body, cpvmult(cpBodyGetVel(body), cpfpow(0.1, FIXED_DT)));
+//	cpBodySetVel(body, cpvmult(cpBodyGetVel(body), cpfpow(0.1, FIXED_DT)));
 }
 
 - (void)addToSpace:(cpSpace *)space {
@@ -192,7 +192,7 @@ WaverForce(double seconds)
 
 - (void)shotFrom:(cpVect)shotLocation damage:(float)damage;
 {
-	health = 0.0;
+	health -= damage;
 }
 
 @end

@@ -2,10 +2,11 @@
 #import "DamageArea.h"
 #import "PhysicsObject.h"
 #import "Sprite.h"
+#import "Particle.h"
 
 @implementation DamageRay
 
-@synthesize layers, group;
+@synthesize layers, group, startTime;
 
 -(id)initWithPosition:(cpVect)newPos velocity:(cpVect)newVel distance:(cpFloat)newDistance damage:(float)newDamage;
 {
@@ -20,7 +21,7 @@
 	clampTime = newDistance/cpvlength(newVel);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(3, 51, 11, 10)];
+	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(10, 4, 4, 2)];
 	
 	damage = newDamage;
 	
@@ -38,10 +39,26 @@
 		cpVect a = cpvadd(startPos, cpvmult(velocity, delta));
 		cpVect b = cpvadd(startPos, cpvmult(velocity, delta + FIXED_DT*2.0));
 		
-		cpShape *shape = cpSpaceSegmentQueryFirst(game.space, a, b, layers, group, NULL);
+		cpSegmentQueryInfo info = {};
+		cpShape *shape = cpSpaceSegmentQueryFirst(game.space, a, b, layers, group, &info);
 		if(shape){
 			if([(id)shape->data isKindOfClass:[PhysicsObject class]])
 				[(PhysicsObject *)shape->data shotFrom:a damage:damage];
+			
+			cpVect point = cpSegmentQueryHitPoint(a, b, info);
+			
+			Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
+			Sprite *particle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(10, 4, 1, 1)];
+			
+			ParticleCollection *ricochet = [[ParticleCollection alloc] initWithCount:5 sprite:particle physical:NO];
+			[ricochet setPositionX:floatRangeMake(point.x, point.x) Y:floatRangeMake(point.y, point.y)];
+			if(info.n.x < 0.0){
+				[ricochet setVelocityX:floatRangeMake(-200.0, -100.0) Y:floatRangeMake(-30, 30)];
+			} else {
+				[ricochet setVelocityX:floatRangeMake(100.0, 200.0) Y:floatRangeMake(-30, 30)];
+			}
+			[ricochet setLife:floatRangeMake(0.1, 0.2)];
+			[game addItem:ricochet];
 			
 			[game removeItem:self];
 		}

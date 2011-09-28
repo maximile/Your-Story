@@ -20,6 +20,7 @@
 
 @property(assign) cpLayers layers;
 @property(assign) cpGroup group;
+@property(assign) double startTime;
 
 -(id)initWithPosition:(cpVect)newPos velocity:(cpVect)newVel distance:(cpFloat)newDistance damage:(float)damage;
 
