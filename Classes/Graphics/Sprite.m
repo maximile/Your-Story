@@ -11,6 +11,8 @@ pixelCoords pixelCoordsRotate(pixelCoords point, cpVect angle) {
 
 @implementation Sprite
 
+@synthesize texRect, texture;
+
 - (id)initWithTexture:(Texture *)newTexture texRect:(pixelRect)newTexRect {
 	if ([super init]==nil) return nil;
 	

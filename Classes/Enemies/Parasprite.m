@@ -117,6 +117,19 @@ WaverForce(double seconds)
 
 - (void)update:(Game *)game {
 	if(health <= 0.0){
+		pixelRect spriteRect = bodySprite.texRect;
+		
+		for(int i=0; i<3; i++){
+			pixelRect rect = pixelRectMake(spriteRect.origin.x + rand()%(spriteRect.size.width - 2), spriteRect.origin.y + rand()%(spriteRect.size.height - 2), 2, 2);
+			Sprite *gibSprite = [[Sprite alloc] initWithTexture:bodySprite.texture texRect:rect];
+			
+			ParticleCollection *gibs = [[ParticleCollection alloc] initWithCount:20 sprite:gibSprite physical:NO];
+			[gibs setVelocityX:floatRangeMake(-200.0, 200.0) Y:floatRangeMake(50.0, 200.0)];
+			[gibs setPositionX:floatRangeMake(self.pixelPosition.x - 5, self.pixelPosition.x + 5) Y:floatRangeMake(self.pixelPosition.y - 5, self.pixelPosition.y - 5)];
+			[gibs setLife:floatRangeMake(0.0, 0.3)];
+			[game addItem:gibs];
+		}
+		
 		[game removeItem:self];
 		return;
 	}
@@ -185,6 +198,28 @@ WaverForce(double seconds)
 	cpVect effect = cpvnormalize(cpvsub(cpBodyGetPos(body), shotLocation));
 	effect = cpvmult(effect, 1000.0*damage);
 	cpBodyApplyImpulse(body, effect, cpvzero);
+	
+	directionMask shotDirection = LEFT;
+	if (shotLocation.x > self.position.x) shotDirection = RIGHT;
+	
+	pixelRect spriteRect = bodySprite.texRect;
+	
+	for(int i=0; i<3; i++){
+		pixelRect rect = pixelRectMake(spriteRect.origin.x + rand()%(spriteRect.size.width - 2), spriteRect.origin.y + rand()%(spriteRect.size.height - 2), 2, 2);
+		Sprite *gibSprite = [[Sprite alloc] initWithTexture:bodySprite.texture texRect:rect];
+		
+		ParticleCollection *gibs = [[ParticleCollection alloc] initWithCount:15 sprite:gibSprite physical:NO];
+		if (shotDirection == LEFT) {
+			[gibs setPositionX:floatRangeMake(self.pixelPosition.x - 8, self.pixelPosition.x - 6) Y:floatRangeMake(self.pixelPosition.y - 3, self.pixelPosition.y + 3)];
+			[gibs setVelocityX:floatRangeMake(-200.0, -100.0) Y:floatRangeMake(-30, 30)];
+		}
+		else {
+			[gibs setPositionX:floatRangeMake(self.pixelPosition.x +6, self.pixelPosition.x + 8) Y:floatRangeMake(self.pixelPosition.y - 3, self.pixelPosition.y + 3)];
+			[gibs setVelocityX:floatRangeMake(100.0, 200.0) Y:floatRangeMake(-30, 30)];
+		}
+		[gibs setLife:floatRangeMake(0.0, 0.3)];
+		[[Game game] addItem:gibs];
+	}
 	
 	health -= damage;
 }

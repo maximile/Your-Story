@@ -12,5 +12,7 @@
 - (void)drawAt:(pixelCoords)point angle:(float)angle;
 
 - (pixelSize)size;
+@property(readonly) pixelRect texRect;
+@property(readonly) Texture *texture;
 
 @end
