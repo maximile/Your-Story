@@ -21,8 +21,8 @@
 	directionMask facing;
 	
 	// number of frames of inlvulnerability (e.g. after hitting an enemy)
-	int hurt;
-	int reload;
+	double invulnerable;
+	double reloadTime;
 	
 	int health;
 	float battery;
@@ -55,7 +55,7 @@
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
 
-- (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb;
+- (int)hitEnemy:(PhysicsObject *)enemy arbiter:(cpArbiter *)arb;
 - (int)hitPickup:(Item *)pickup arbiter:(cpArbiter *)arb;
 
 - (void)addHealth:(int)healthDiff;

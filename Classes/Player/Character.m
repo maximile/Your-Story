@@ -153,7 +153,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 - (void)draw:(Game *)game {
 	pixelCoords pixelPos = self.pixelPosition;
 	
-	if(!hurt || (hurt%9 >= 3)) {
+	if(invulnerable == 0.0 || (fmod(invulnerable, 0.05) >= 0.02)) {
 		cpVect vel = cpBodyGetVel(body);
 	
 		NSString *spriteKey = nil;
@@ -264,8 +264,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (directionInput & LEFT) facing = LEFT;
 	if (directionInput & RIGHT) facing = RIGHT;
 	
-	if (hurt > 0) hurt--;
-	if (reload > 0) reload--;
+	if (invulnerable > 0) invulnerable = cpfmax(0.0, invulnerable - FIXED_DT);
+	if (reloadTime > 0) reloadTime = cpfmax(0.0, reloadTime - FIXED_DT);
 	
 	if (health <= 0) {
 		game.player = nil;
@@ -282,8 +282,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	}
 }
 
-- (int)hitJumper:(Jumper *)jumper arbiter:(cpArbiter *)arb {
-	if (hurt) {
+- (int)hitEnemy:(PhysicsObject *)enemy arbiter:(cpArbiter *)arb;
+{
+	if (invulnerable > 0.0) {
 		return 0;
 	}
 	
@@ -294,7 +295,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (normal.x > 0) response.x *= -1;
 	NSLog(@"%f %f", response.x, response.y);
 	cpBodySetVel(body, cpvmult(response, 280));
-	hurt = 100;
+	invulnerable = 2.0;
 	
 	[self addHealth:-2];
 	
@@ -349,7 +350,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)fireShotgun:(Game *)game
 {
-	if (reload > 0) return;
+	if (reloadTime > 0) return;
 	
 	// hard coded shotgun blast
 	cpFloat baseAngle = (facing & RIGHT ? 0.0 : M_PI);
@@ -397,13 +398,11 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	
 	[[Texture lightmapTexture] addAt:self.pixelPosition radius:250];
 	
-	reload = (1.0 / FIXED_DT);
+	reloadTime = 1.0;
 }
 
 - (void)firePistol:(Game *)game
 {
-	if (reload > 0) return;
-	
 	cpVect velocity = (facing & RIGHT ? cpv(600.0, 0.0) : cpv(-600.0, 0.0));
 	Bullet *ray = [[PistolBullet alloc] initWithPosition:self.position velocity:velocity distance:150 damage:0.2];
 	ray.group = self;
@@ -412,8 +411,6 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	[Sound playSound:@"PlayerPistol.ogg"];
 	
 	[[Texture lightmapTexture] addAt:self.pixelPosition radius:100];
-	
-	reload = 0.0;
 }
 
 - (void)shoot:(Game *)game {

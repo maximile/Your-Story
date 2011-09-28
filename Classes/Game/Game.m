@@ -15,6 +15,7 @@
 #import "Door.h"
 #import "Message.h"
 #import "Friend.h"
+#import "Parasprite.h"
 
 static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
@@ -25,11 +26,12 @@ static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	return [character hitPickup:pickup arbiter:arb];
 }
 
-static int characterHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
+static int characterHitEnemy(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
 	Character *character = characterBody->data;
-	Jumper *jumper = jumperBody->data;
-	return [character hitJumper:jumper arbiter:arb];
+	[character hitEnemy:jumperBody->data arbiter:arb];
+	
+	return FALSE;
 }
 
 @implementation Game
@@ -58,7 +60,8 @@ static Game *game = nil;
 	cpSpaceSetEnableContactGraph(space, TRUE);
 	
 	// add collision handlers
-	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitJumper, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitEnemy, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [Character class], [Parasprite class], NULL, (cpCollisionPreSolveFunc)characterHitEnemy, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [Character class], [Pickup class], NULL, (cpCollisionPreSolveFunc)characterHitPickup, NULL, NULL, self);
 //	cpSpaceAddCollisionHandler(space, [DamageArea class], [Jumper class], NULL, (cpCollisionPreSolveFunc)damageAreaHitJumper, NULL, NULL, self);
 	
