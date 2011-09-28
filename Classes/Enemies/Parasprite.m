@@ -157,7 +157,7 @@ WaverForce(double seconds)
 	cpVect waver_force = WaverForce(seconds + phase*10.0);
 	
 	cpFloat pulse = cpfsin(seconds*8.0 + phase*2.0*M_PI)*0.5 + 0.5;
-	cpVect motive_force = cpvmult(cpvadd(cpvmult(target_force, 100.0), cpvmult(waver_force, 150.0)), pulse);
+	cpVect motive_force = cpvmult(cpvadd(cpvmult(target_force, 50.0), cpvmult(waver_force, 70.0)), pulse);
 	
 	cpVect gravity_force = cpvmult(cpSpaceGetGravity(game.space), -cpBodyGetMass(body));
 	cpBodySetForce(body, cpvadd(gravity_force, motive_force));
@@ -182,6 +182,10 @@ WaverForce(double seconds)
 
 - (void)shotFrom:(cpVect)shotLocation damage:(float)damage;
 {
+	cpVect effect = cpvnormalize(cpvsub(cpBodyGetPos(body), shotLocation));
+	effect = cpvmult(effect, 1000.0*damage);
+	cpBodyApplyImpulse(body, effect, cpvzero);
+	
 	health -= damage;
 }
 

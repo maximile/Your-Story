@@ -189,13 +189,11 @@ cpfsign(cpFloat f)
 	directionMask shotDirection = LEFT;
 	if (shotLocation.x > self.position.x) shotDirection = RIGHT;
 	
-	cpVect pos = cpBodyGetPos(body);
-	float strength = 100 - cpvdist(pos, shotLocation);
 	cpVect effect = cpvnormalize(cpv(1.0, 0.6));
 	if (shotDirection == RIGHT) {
 		effect.x *= -1;
 	}
-	effect = cpvmult(effect, strength * 25*damage);
+	effect = cpvmult(effect, 2500.0*damage);
 	cpBodyApplyImpulse(body, effect, cpvzero);
 	
 	[self jumpTowardsIfReady:shotLocation];
