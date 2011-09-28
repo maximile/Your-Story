@@ -4,7 +4,7 @@
 // furthest distance that damage will be taken
 #define SHOTGUN_RANGE 100
 
-@interface DamageRay : Item {
+@interface Bullet : Item {
 	cpVect startPos;
 	cpVect velocity;
 	
@@ -24,11 +24,9 @@
 
 -(id)initWithPosition:(cpVect)newPos velocity:(cpVect)newVel distance:(cpFloat)newDistance damage:(float)damage;
 
-//@interface DamageArea : Item {
-//	cpVect pos;
-//	cpShape *shape;
-//}
-//
-//- (id)initWithPosition:(cpVect)newPos direction:(directionMask)direction;
-//
+@end
+
+
+
+@interface PistolBullet : Bullet
 @end

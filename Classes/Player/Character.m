@@ -1,7 +1,7 @@
 #import "Character.h"
 #import "Jumper.h"
 #import "Texture.h"
-#import "DamageArea.h"
+#import "Bullet.h"
 #import "Game+Items.h"
 #import "Particle.h"
 #import "RandomTools.h"
@@ -357,7 +357,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		cpFloat jitter = (cpFloat)rand()/(cpFloat)RAND_MAX;
 		cpVect velocity = cpvmult(cpvforangle(baseAngle + (jitter*2.0 - 1.0)*0.2), 600);
 		
-		DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:velocity distance:100 damage:0.2];
+		Bullet *ray = [[Bullet alloc] initWithPosition:self.position velocity:velocity distance:100 damage:0.2];
 		ray.group = self;
 		ray.startTime = game.fixedTime - FIXED_DT*2.0*((double)rand()/(double)RAND_MAX);
 		[game addItem:ray];
@@ -405,11 +405,11 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (reload > 0) return;
 	
 	cpVect velocity = (facing & RIGHT ? cpv(600.0, 0.0) : cpv(-600.0, 0.0));
-	DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:velocity distance:300 damage:0.5];
+	Bullet *ray = [[PistolBullet alloc] initWithPosition:self.position velocity:velocity distance:150 damage:0.5];
 	ray.group = self;
 	[game addItem:ray];
 	
-//	[Sound playSound:@"PlayerShotgun.ogg"];
+	[Sound playSound:@"PlayerPistol.ogg"];
 	
 	[[Texture lightmapTexture] addAt:self.pixelPosition radius:100];
 	

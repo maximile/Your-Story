@@ -5,7 +5,7 @@
 #import "Game+Input.h"
 #import "Game+Drawing.h"
 #import "Character.h"
-#import "DamageArea.h"
+#import "Bullet.h"
 #import "ItemLayer.h"
 #import "Item.h"
 #import "Jumper.h"
@@ -31,13 +31,6 @@ static int characterHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
 	Jumper *jumper = jumperBody->data;
 	return [character hitJumper:jumper arbiter:arb];
 }
-
-//static int damageAreaHitJumper(cpArbiter *arb, cpSpace *space, Game *game) {
-//	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
-//	Jumper *jumper = jumperBody->data;
-//	[jumper shotFrom:game.player.position];
-//	return 0;
-//}
 
 @implementation Game
 
