@@ -9,7 +9,7 @@
 - (id)initWithPosition:(pixelCoords)position {
 	if ([super initWithPosition:position]==nil) return nil;
 	
-	body = cpBodyNew(2, INFINITY);
+	body = cpBodyNew(1.0, INFINITY);
 	cpBodySetPos(body, cpv(position.x, position.y));
 	cpBodySetUserData(body, self);
 	cpBodySetVelLimit(body, 50);
@@ -150,16 +150,6 @@ WaverForce(double seconds)
 		target = player.position;
 	}
 	
-	// apply force towards target, with strenth varying periodically
-//	float phase = 2.0*M_PI*self.objectPhase;
-//	float enthusiasm = cpfsin(2.0*game.fixedTime + phase) * 0.5 + 0.5;
-//	cpVect gravityForce = cpv(0, 2000);
-//	cpVect targetForce = cpvsub(target, self.position);
-//	if (targetForce.x == 0 && targetForce.y == 0) targetForce = cpv(0,1);
-//	targetForce = cpvnormalize(targetForce);
-//	targetForce = cpvmult(targetForce, enthusiasm * 500);
-//	cpBodySetForce(body, cpvadd(targetForce, gravityForce));
-	
 	double seconds = game.fixedTime;
 	double phase = self.objectPhase;
 	
@@ -167,7 +157,7 @@ WaverForce(double seconds)
 	cpVect waver_force = WaverForce(seconds + phase*10.0);
 	
 	cpFloat pulse = cpfsin(seconds*8.0 + phase*2.0*M_PI)*0.5 + 0.5;
-	cpVect motive_force = cpvmult(cpvadd(cpvmult(target_force, 800.0), cpvmult(waver_force, 1000.0)), pulse);
+	cpVect motive_force = cpvmult(cpvadd(cpvmult(target_force, 100.0), cpvmult(waver_force, 150.0)), pulse);
 	
 	cpVect gravity_force = cpvmult(cpSpaceGetGravity(game.space), -cpBodyGetMass(body));
 	cpBodySetForce(body, cpvadd(gravity_force, motive_force));

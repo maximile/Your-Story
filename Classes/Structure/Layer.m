@@ -216,6 +216,7 @@ extern struct BoundarySegment *GenerateTilemapOutline(Layer *layer, int *segment
 		
 		cpShape *shape = cpSegmentShapeNew(staticBody, a, b, radius);
 		cpShapeSetFriction(shape, 1.0);
+		cpShapeSetElasticity(shape, 1.0);
 		shapes[i] = shape;
 		
 		cpSpaceAddShape(space, shape);

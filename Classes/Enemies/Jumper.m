@@ -55,6 +55,23 @@ cpfsign(cpFloat f)
 	return (f > 0) - (f < 0);
 }
 
+-(void)jumpTowardsIfReady:(cpVect)target
+{
+	Game *game = [Game game];
+	cpFloat elapsed = game.fixedTime - lastJumpTime;
+	
+	if(grounding.body && elapsed > JUMP_INTERVAL){
+		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*GRAVITY);
+		body->v = cpvadd(grounding.body->v, cpv(cpfsign(target.x - cpBodyGetPos(body).x)*jump_v/1.5, jump_v));
+		
+		[Sound playSound:@"JumperJump.ogg"];
+		
+		lastJumpTime = game.fixedTime;
+		justJumped = YES;
+		aboutToJump = NO;
+	}
+}
+
 - (void)update:(Game *)game {
 	if (health <= 0) {
 		[game removeItem:self];
@@ -105,16 +122,7 @@ cpfsign(cpFloat f)
 	}
 	
 	// should jump?
-	if(grounding.body && elapsed > JUMP_INTERVAL && canSeePlayer){
-		cpFloat jump_v = cpfsqrt(2.0*JUMP_HEIGHT*GRAVITY);
-		body->v = cpvadd(grounding.body->v, cpv(cpfsign(playerPos.x - pos.x)*jump_v/1.5, jump_v));
-		
-		[Sound playSound:@"JumperJump.ogg"];
-		
-		lastJumpTime = game.fixedTime;
-		justJumped = YES;
-		aboutToJump = NO;
-	}
+	if(canSeePlayer) [self jumpTowardsIfReady:playerPos];
 }
 
 
@@ -144,7 +152,7 @@ cpfsign(cpFloat f)
 	Sprite *bodySprite = [bodySprites valueForKey:bodyKey];
 	
 	NSString *eyesKey = nil;
-	if (nearPlayer && fmod(game.fixedTime + self.objectPhase*5.0, 5.0) > 0.1) {
+	if (grounding.body == NULL || (nearPlayer && fmod(game.fixedTime + self.objectPhase*5.0, 5.0) > 0.1)) {
 		Player *player = [Game game].player;
 		cpVect playerPos = player.position;
 		cpVect pos = cpBodyGetPos(body);
@@ -180,7 +188,7 @@ cpfsign(cpFloat f)
 {
 	directionMask shotDirection = LEFT;
 	if (shotLocation.x > self.position.x) shotDirection = RIGHT;
-		
+	
 	cpVect pos = cpBodyGetPos(body);
 	float strength = 100 - cpvdist(pos, shotLocation);
 	cpVect effect = cpvnormalize(cpv(1.0, 0.6));
@@ -189,6 +197,8 @@ cpfsign(cpFloat f)
 	}
 	effect = cpvmult(effect, strength * 25*damage);
 	cpBodyApplyImpulse(body, effect, cpvzero);
+	
+	[self jumpTowardsIfReady:shotLocation];
 	
 	// 'blood'
 	for (Sprite *gibSprite in gibSprites) {

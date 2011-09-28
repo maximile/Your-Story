@@ -405,7 +405,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	if (reload > 0) return;
 	
 	cpVect velocity = (facing & RIGHT ? cpv(600.0, 0.0) : cpv(-600.0, 0.0));
-	Bullet *ray = [[PistolBullet alloc] initWithPosition:self.position velocity:velocity distance:150 damage:0.5];
+	Bullet *ray = [[PistolBullet alloc] initWithPosition:self.position velocity:velocity distance:150 damage:0.2];
 	ray.group = self;
 	[game addItem:ray];
 	
