@@ -216,9 +216,8 @@ double getDoubleTime(void)
 	if (rightKey) { directionInput |= RIGHT; }
 	[player setInput:directionInput jump:zKey shoot:xKey];
 	
-	if (xKey) {
-		[player shoot:self];
-	}
+	if(xKey && !wasPressingX) [player shoot:self];
+	wasPressingX = xKey;
 	
 	drawCollision = tabKey;
 	

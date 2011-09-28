@@ -1,5 +1,5 @@
 #import "Game+Items.h"
-#import "DamageArea.h"
+#import "Bullet.h"
 #import "PhysicsObject.h"
 #import "Sprite.h"
 #import "Particle.h"

@@ -45,7 +45,7 @@ typedef enum {
 	
 	// key pressed flags
 	BOOL upKey, downKey, leftKey, rightKey, tabKey, zKey, xKey, shiftKey;
-	BOOL wasPressingAction;
+	BOOL wasPressingAction, wasPressingX;
 	
 	// physics variables
 	cpSpace *space;

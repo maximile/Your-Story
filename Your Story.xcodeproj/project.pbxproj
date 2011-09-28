@@ -50,7 +50,7 @@
 		66C746241401AF2000C6FE04 /* Game+Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746231401AF2000C6FE04 /* Game+Items.m */; };
 		66C746291401B08F00C6FE04 /* Game+Input.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746281401B08F00C6FE04 /* Game+Input.m */; };
 		66C7467F1401B76B00C6FE04 /* Game+Drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7467E1401B76B00C6FE04 /* Game+Drawing.m */; };
-		66C746B61401C14E00C6FE04 /* DamageArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746B51401C14E00C6FE04 /* DamageArea.m */; };
+		66C746B61401C14E00C6FE04 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C746B51401C14E00C6FE04 /* Bullet.m */; };
 		66C756A7142FDD830001707C /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C756A6142FDD830001707C /* Friend.m */; };
 		66C756B01430056A0001707C /* Purple.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C756AF1430056A0001707C /* Purple.m */; };
 		66C75B8C13BE801C002D8411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C75B8B13BE801C002D8411 /* AppDelegate.m */; };
@@ -215,8 +215,8 @@
 		66C746281401B08F00C6FE04 /* Game+Input.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Input.m"; sourceTree = "<group>"; };
 		66C7467D1401B76B00C6FE04 /* Game+Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Game+Drawing.h"; sourceTree = "<group>"; };
 		66C7467E1401B76B00C6FE04 /* Game+Drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Game+Drawing.m"; sourceTree = "<group>"; };
-		66C746B41401C14E00C6FE04 /* DamageArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageArea.h; sourceTree = "<group>"; };
-		66C746B51401C14E00C6FE04 /* DamageArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageArea.m; sourceTree = "<group>"; };
+		66C746B41401C14E00C6FE04 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Bullet.h; sourceTree = "<group>"; };
+		66C746B51401C14E00C6FE04 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		66C756A5142FDD820001707C /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
 		66C756A6142FDD830001707C /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		66C756AE1430056A0001707C /* Purple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Purple.h; sourceTree = "<group>"; };
@@ -525,8 +525,8 @@
 				66C745FC1401AE5A00C6FE04 /* Player.m */,
 				66C745F91401AE5A00C6FE04 /* Character.h */,
 				66C745FA1401AE5A00C6FE04 /* Character.m */,
-				66C746B41401C14E00C6FE04 /* DamageArea.h */,
-				66C746B51401C14E00C6FE04 /* DamageArea.m */,
+				66C746B41401C14E00C6FE04 /* Bullet.h */,
+				66C746B51401C14E00C6FE04 /* Bullet.m */,
 				66CB16D6140BE4DF0089FDDC /* Spawn.h */,
 				66CB16D7140BE4DF0089FDDC /* Spawn.m */,
 			);
@@ -835,7 +835,7 @@
 				66C746241401AF2000C6FE04 /* Game+Items.m in Sources */,
 				66C746291401B08F00C6FE04 /* Game+Input.m in Sources */,
 				66C7467F1401B76B00C6FE04 /* Game+Drawing.m in Sources */,
-				66C746B61401C14E00C6FE04 /* DamageArea.m in Sources */,
+				66C746B61401C14E00C6FE04 /* Bullet.m in Sources */,
 				66CC26C01403024900252B96 /* Health.m in Sources */,
 				66CB1479140706840089FDDC /* Particle.m in Sources */,
 				66CB16D8140BE4DF0089FDDC /* Spawn.m in Sources */,

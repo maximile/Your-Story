@@ -347,7 +347,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	[super finalize];
 }
 
-- (void)shoot:(Game *)game {
+- (void)fireShotgun:(Game *)game
+{
 	if (reload > 0) return;
 	
 	// hard coded shotgun blast
@@ -397,6 +398,26 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	[[Texture lightmapTexture] addAt:self.pixelPosition radius:250];
 	
 	reload = (1.0 / FIXED_DT);
+}
+
+- (void)firePistol:(Game *)game
+{
+	if (reload > 0) return;
+	
+	cpVect velocity = (facing & RIGHT ? cpv(600.0, 0.0) : cpv(-600.0, 0.0));
+	DamageRay *ray = [[DamageRay alloc] initWithPosition:self.position velocity:velocity distance:300 damage:0.5];
+	ray.group = self;
+	[game addItem:ray];
+	
+//	[Sound playSound:@"PlayerShotgun.ogg"];
+	
+	[[Texture lightmapTexture] addAt:self.pixelPosition radius:100];
+	
+	reload = 0.0;
+}
+
+- (void)shoot:(Game *)game {
+	[self firePistol:game];
 }
 
 - (void)drawStatus {
