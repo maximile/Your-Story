@@ -2,6 +2,7 @@
 #import "MainView.h"
 
 #import <OpenAL/alc.h>
+#import "Music.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,9 @@
 	
 	[gameView setGame:game];
 	[gameView play];
+	
+	music = [[Music alloc] initWithFilename:@"test_music.ogg"];
+	[music play];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
@@ -35,6 +39,15 @@
 	}
 	else {
 		[mainView exitFullScreenModeWithOptions:fullScreenOptions];
+	}
+}
+
+- (IBAction)toggleMusic:(id)sender;
+{
+	if([music isPlaying]){
+		[music stop];
+	} else {
+		[music play];
 	}
 }
 

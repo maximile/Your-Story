@@ -79,7 +79,7 @@
 
 -(void)draw:(Game *)game;
 {
-	cpVect pos = cpvadd(startPos, cpvmult(velocity, game.fixedTime - startTime));
+	cpVect pos = cpvadd(startPos, cpvmult(velocity, cpfmin(clampTime, game.fixedTime - startTime)));
 	[sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:0.0];
 }
 
@@ -100,6 +100,7 @@
 	[poof setLife:floatRangeMake(0.05, 0.1)];
 	[game addItem:poof];
 	
+	[Sound playSound:@"BulletHit.ogg" volume:0.5 pitch:0.5];
 	[super fizzleOut:game point:point];
 }
 

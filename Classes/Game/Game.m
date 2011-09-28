@@ -98,12 +98,10 @@ static Game *game = nil;
 	if (newMode == EDITOR_MODE) {
 		editorFocus = player.pixelPosition;
 		[self setEditingLayer:currentRoom.mainLayer];
-		[music stop];
 	}
 	if (newMode == GAME_MODE) {
 		[currentRoom.mainLayer removeFromSpace:space];
 		[currentRoom.mainLayer addToSpace:space];
-		[music play];
 	}
 }
 
@@ -175,11 +173,6 @@ static Game *game = nil;
 	titleLabel.alignment = NSCenterTextAlignment;
 	titleLabel.screenSpace = YES;
 	[self addItem:titleLabel];
-	
-	[music stop];
-	music = [[Music alloc] initWithFilename:@"test_music.ogg"];
-	// if (mode == GAME_MODE)
-	// 		[music play];
 }
 
 -(void)updateStep {	

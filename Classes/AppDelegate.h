@@ -10,14 +10,19 @@
 #import "MainView.h"
 #import "Game.h"
 
+@class Music;
+
 @interface AppDelegate : NSObject {
     NSWindow *window;
 	GameView *gameView;
 	Game *game;
 	NSString *roomPath;
+	
+	Music *music;
 }
 
 - (IBAction)toggleFullScreen:(id)sender;
+- (IBAction)toggleMusic:(id)sender;
 - (IBAction)toggleEditor:(id)sender;
 - (IBAction)saveMap:(id)sender;
 - (IBAction)openMap:(id)sender;

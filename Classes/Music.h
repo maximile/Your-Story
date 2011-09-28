@@ -32,5 +32,6 @@
 -(void)stop;
 -(void)pause;
 -(void)resume;
+-(bool)isPlaying;
 
 @end

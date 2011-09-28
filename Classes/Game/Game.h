@@ -61,8 +61,6 @@ typedef enum {
 	Sprite *actionPrompt2Sprite;
 	
 	FBO *lightmapCanvas;
-	
-	Music *music;
 }
 
 @property gameMode mode;
