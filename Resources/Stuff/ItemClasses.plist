@@ -24,6 +24,8 @@
 	<string>StripLight</string>
 	<key>1,2</key>
 	<string>Torch</string>
+	<key>2,2</key>
+	<string>Rocket</string>
 
 	<key>0,3</key>
 	<string>Purple</string>

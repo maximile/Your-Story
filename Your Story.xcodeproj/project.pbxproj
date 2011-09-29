@@ -64,6 +64,7 @@
 		66CB1479140706840089FDDC /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB1478140706840089FDDC /* Particle.m */; };
 		66CB16D8140BE4DF0089FDDC /* Spawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB16D7140BE4DF0089FDDC /* Spawn.m */; };
 		66CC26C01403024900252B96 /* Health.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC26BF1403024900252B96 /* Health.m */; };
+		66CCA8261433C4EA00E7CBBB /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CCA8251433C4EA00E7CBBB /* Rocket.m */; };
 		66CD4CF9142575D600D540D6 /* Fight.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CF8142575D500D540D6 /* Fight.ysroom */; };
 		66CD4CFD142582E500D540D6 /* Interior.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD4CFC142582E500D540D6 /* Interior.psd */; };
 		66CD97DB140060370089AFED /* ItemTiles.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CD97DA140060370089AFED /* ItemTiles.psd */; };
@@ -242,6 +243,8 @@
 		66CB16D7140BE4DF0089FDDC /* Spawn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spawn.m; sourceTree = "<group>"; };
 		66CC26BE1403024900252B96 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
 		66CC26BF1403024900252B96 /* Health.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Health.m; sourceTree = "<group>"; };
+		66CCA8241433C4EA00E7CBBB /* Rocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rocket.h; sourceTree = "<group>"; };
+		66CCA8251433C4EA00E7CBBB /* Rocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rocket.m; sourceTree = "<group>"; };
 		66CD4CF8142575D500D540D6 /* Fight.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Fight.ysroom; sourceTree = "<group>"; };
 		66CD4CFC142582E500D540D6 /* Interior.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Interior.psd; sourceTree = "<group>"; };
 		66CD97DA140060370089AFED /* ItemTiles.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ItemTiles.psd; sourceTree = "<group>"; };
@@ -533,6 +536,8 @@
 				66C746B51401C14E00C6FE04 /* Bullet.m */,
 				66CB16D6140BE4DF0089FDDC /* Spawn.h */,
 				66CB16D7140BE4DF0089FDDC /* Spawn.m */,
+				66CCA8241433C4EA00E7CBBB /* Rocket.h */,
+				66CCA8251433C4EA00E7CBBB /* Rocket.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -862,6 +867,7 @@
 				66C756B01430056A0001707C /* Purple.m in Sources */,
 				6601B024143126E80053B835 /* Torch.m in Sources */,
 				6601B0571431385C0053B835 /* WBFS.m in Sources */,
+				66CCA8261433C4EA00E7CBBB /* Rocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
