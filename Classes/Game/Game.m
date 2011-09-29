@@ -292,6 +292,13 @@ double getDoubleTime(void)
 		// pressing down or up and there is a door in the room
 //		Room *nextRoom = [self roomInDirection:NOWHERE];
 //		[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
+		NSString *nextRoomName = [self roomNameInDirection:NOWHERE];
+		[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
+		[stateDict setValue:[NSNumber numberWithInt:NOWHERE] forKey:@"spawn"];
+		[stateDict setValue:nextRoomName forKey:@"room"];
+		[player updateStateDict:stateDict];
+		
+		[self setState:stateDict];
 	}
 	
 	BOOL nearFriend = NO;
