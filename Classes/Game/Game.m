@@ -16,6 +16,7 @@
 #import "Message.h"
 #import "Friend.h"
 #import "Parasprite.h"
+#import "Rocket.h"
 
 static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
@@ -151,7 +152,7 @@ static Game *game = nil;
 	
 	// find the most appropriate spawn point and start the player there
 	Spawn *theSpawn = [Spawn getSpawnForEdge:edge spawns:spawns];
-	player = [[Character alloc] initWithPosition:theSpawn.startingPosition];
+	player = [[Rocket alloc] initWithPosition:theSpawn.startingPosition];
 	[self addItem:player];
 	[self addAndRemoveItems];
 	

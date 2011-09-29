@@ -1,6 +1,15 @@
 #import "Rocket.h"
+#import "Game+Items.h"
+#import "Particle.h"
+#import "RandomTools.h"
 
 @implementation Rocket
+
+static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt) {
+//	Rocket *r = cpBodyGetUserData(body);
+	
+	cpBodyUpdateVelocity(body, cpvmult(gravity, 0.5), 0.985, dt);
+}
 
 - (id)initWithPosition:(pixelCoords)position {
 	if ([super initWithPosition:position] == nil) return nil;
@@ -29,6 +38,7 @@
 	body = cpBodyNew(mass, moment);
 	cpBodySetPos(body, cpv(position.x, position.y));
 	cpBodySetUserData(body, self);
+	body->velocity_func = rocketUpdateVelocity;
 
 	mainShape = cpPolyShapeNew(body, 6, mainVerts, cpvzero);
 	coneShape = cpPolyShapeNew(body, 4, coneVerts, cpvzero);
@@ -37,6 +47,13 @@
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites"];
 	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(80, 64, 48, 64)];
+	
+	exhaustSprites = [NSArray arrayWithObjects:
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(64, 96, 7, 6)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(72, 96, 5, 6)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(65, 104, 5, 4)],
+		[[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(72, 104, 5, 5)],
+	nil];
 	
 	return self;
 }
@@ -54,15 +71,31 @@
 }
 
 - (void)update:(Game *)game {
+	cpBodyResetForces(body);
 	if (directionInput & UP) {
-		cpBodyApplyForce(body, cpvrotate(cpv(0.0, 1000.0), cpBodyGetRot(body)), cpvzero);
+		cpVect thrust = cpvrotate(cpv(0.0, 1.0), cpBodyGetRot(body));
+		cpBodyApplyForce(body, cpvmult(thrust, 100000.0), cpvzero);
+		
+		// add exhaust particles
+		for (Sprite *pSprite in exhaustSprites) {
+			ParticleCollection *p = [[ParticleCollection alloc] initWithCount:randomInt(1,2) sprite:pSprite physical:NO];
+			[p setPositionX:floatRangeMake(self.position.x - 12, self.position.x + 12) Y:floatRangeMake(self.position.y - 37, self.position.y -35)];
+				// [p setVelocityX:floatRangeMake(0,0) Y:floatRangeMake(0,0)];
+			[p setGravityX:floatRangeMake(0.0, 0.0) Y:floatRangeMake(0,0)];
+			[p setVelocityX:floatRangeMake(thrust.x * -300, thrust.x * -300) Y:floatRangeMake(thrust.y * -300, thrust.y * -300)];
+			[p setDamping:floatRangeMake(0.97, 0.99)];
+			[p setLife:floatRangeMake(0.02, 0.3)];
+			[game addItem:p];
+		}
 	}
 	float totalTorque = 0;
 	if (directionInput & LEFT)
-		totalTorque += 500.0;
+		totalTorque += 100000.0;
 	if (directionInput & RIGHT)
-		totalTorque -= 500.0;
+		totalTorque -= 100000.0;
 	cpBodySetTorque(body, totalTorque);
+	
+	
 }
 
 - (void)draw:(Game *)game {

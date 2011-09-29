@@ -23,7 +23,6 @@
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
 	pixelRect bodyCoords;
-	NSLog(@"%i", randomInt(0,3));
 	switch (randomInt(0,5)) {
 		case 0: bodyCoords = pixelRectMake(97, 1, 9, 9); break;
 		case 1: bodyCoords = pixelRectMake(108, 1, 9, 9); break;
