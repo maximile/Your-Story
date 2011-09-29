@@ -12,6 +12,7 @@
 @class Player;
 @class Door;
 @class Sprite;
+@class Rocket;
 
 typedef enum {
 	GAME_MODE,
@@ -20,6 +21,7 @@ typedef enum {
 
 @interface Game : NSObject {
 	gameMode mode;
+	NSMutableDictionary *stateDict;
 
 	Room *currentRoom;
 	
@@ -30,6 +32,7 @@ typedef enum {
 	
 	Player *player;
 	Door *door;
+	Rocket *rocket;
 	NSArray *friends;
 	
 	// editor variables
@@ -76,9 +79,10 @@ typedef enum {
 - (void)drawOnCanvas:(FBO *)canvas;
 - (void)update;
 
+- (void)setState:(NSDictionary *)state;
 - (void)setCurrentRoom:(Room *)newRoom fromEdge:(directionMask)edge;
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;
-- (Room *)roomInDirection:(directionMask)direction;
+- (NSString *)roomNameInDirection:(directionMask)direction;
 
 @end

@@ -79,8 +79,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	body->v.y = cpfclamp(body->v.y, -FALL_VELOCITY, INFINITY);
 }
 
-- (id)initWithPosition:(pixelCoords)position {
-	if ([super initWithPosition:position]==nil) return nil;
+- (void)updateStateDict:(NSMutableDictionary *)stateDict {
+	[stateDict setValue:[NSNumber numberWithInt:health] forKey:@"health"];
+	[stateDict setValue:[NSNumber numberWithBool:canDoubleJump] forKey:@"doubleJump"];
+}
+
+- (id)initWithPosition:(pixelCoords)position state:(NSDictionary *)state {
+	if ([super initWithPosition:position state:state]==nil) return nil;
 	
 	body = cpBodyNew(5, INFINITY);
 	cpBodySetPos(body, cpv(position.x, position.y));
@@ -127,6 +132,9 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	facing = RIGHT;
 	health = MAX_HEALTH;
 	battery = 1.0;
+	
+	health = [[state valueForKey:@"health"] intValue];
+	canDoubleJump = [[state valueForKey:@"doubleJump"] boolValue];
 	
 	return self;
 }

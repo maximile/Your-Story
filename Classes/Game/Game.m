@@ -71,16 +71,26 @@ static Game *game = nil;
 	NSString *connectionsPath = [[NSBundle mainBundle] pathForResource:@"Connections" ofType:@"plist"];
 	connections = [NSArray arrayWithContentsOfFile:connectionsPath];
 	NSString *startingRoomName = [[connections objectAtIndex:0] valueForKey:@"Name"];
-	NSLog(@"%@", startingRoomName);
-	[self setCurrentRoom:[[Room alloc] initWithName:startingRoomName]];
+	// [self setCurrentRoom:[[Room alloc] initWithName:startingRoomName]];
+	
+	stateDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+		[NSNumber numberWithBool:NO], @"doubleJump",
+		[NSNumber numberWithBool:NO], @"shotgun",
+		[NSNumber numberWithInt:8], @"health",
+		startingRoomName, @"room",
+		[NSNumber numberWithInt:NOWHERE], @"spawn",
+		@"Character", @"playerClass",
+	nil];
+	
 	
 	Texture *uiTexture = [Texture textureNamed:@"UI"];
 	actionPrompt1Sprite = [[Sprite alloc] initWithTexture:uiTexture texRect:pixelRectMake(0, 16, 16, 16)];
 	actionPrompt2Sprite = [[Sprite alloc] initWithTexture:uiTexture texRect:pixelRectMake(0, 32, 16, 16)];
 	
+	[self setState:stateDict];
+	
 	return self;
 }
-
 
 - (void)drawOnCanvas:(FBO *)canvas {
 	switch (mode) {
@@ -110,6 +120,12 @@ static Game *game = nil;
 
 - (void)setCurrentRoom:(Room *)newRoom {
 	[self setCurrentRoom:newRoom fromEdge:NOWHERE];
+}
+
+- (void)setState:(NSDictionary *)state {
+	Room *room = [[Room alloc] initWithName:[state valueForKey:@"room"]];
+	directionMask edge = [[state valueForKey:@"spawn"] intValue];
+	[self setCurrentRoom:room fromEdge:edge];
 }
 
 - (void)setCurrentRoom:(Room *)newRoom fromEdge:(directionMask)edge {
@@ -147,11 +163,15 @@ static Game *game = nil;
 		if ([item isKindOfClass:[Door class]]) {
 			door = (Door *)item;
 		}
+		if ([item isKindOfClass:[Rocket class]]) {
+			rocket = (Rocket *)item;
+		}
 	}
 	
 	// find the most appropriate spawn point and start the player there
 	Spawn *theSpawn = [Spawn getSpawnForEdge:edge spawns:spawns];
-	player = [[Rocket alloc] initWithPosition:theSpawn.startingPosition];
+	Class playerClass = NSClassFromString([stateDict valueForKey:@"playerClass"]);
+	player = [[playerClass alloc] initWithPosition:theSpawn.startingPosition state:stateDict];
 	[self addItem:player];
 	[self addAndRemoveItems];
 	
@@ -222,7 +242,7 @@ double getDoubleTime(void)
 	}
 	
 	// dead? restart the room
-	if (player == nil) [self setCurrentRoom:currentRoom];
+	if (player == nil) [self setState:stateDict];
 	
 	// out of the room bounds? Go to another room or die
 	pixelCoords pos = player.pixelPosition;
@@ -232,15 +252,22 @@ double getDoubleTime(void)
 	if (pos.y < 0) outside |= DOWN;
 	if (pos.y > (currentRoom.size.height) * TILE_SIZE) outside |= UP;
 	if (outside) {
-		Room *nextRoom = [self roomInDirection:outside];
-		if (nextRoom != nil) {
+		NSString *nextRoomName = [self roomNameInDirection:outside];
+		if (nextRoomName != nil) {
 			directionMask startingEdge = NOWHERE;
 			if (outside & RIGHT) startingEdge |= LEFT;
 			if (outside & LEFT) startingEdge |= RIGHT;
 			if (outside & UP) startingEdge |= DOWN;
 			if (outside & DOWN) startingEdge |= UP;
-			[self setCurrentRoom:nextRoom fromEdge:startingEdge];
-			// TODO: move player to the corresponding entrance
+			
+			[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
+			[stateDict setValue:[NSNumber numberWithInt:startingEdge] forKey:@"spawn"];
+			[stateDict setValue:nextRoomName forKey:@"room"];
+			[player updateStateDict:stateDict];
+			
+			[self setState:stateDict];
+			
+			// [self setCurrentRoom:nextRoom fromEdge:startingEdge];
 		}
 		else {
 			// fell off the bottom and no downwards room? die
@@ -254,17 +281,17 @@ double getDoubleTime(void)
 	
 	// interact with items
 	BOOL action = (downKey || upKey);
+	if (![player isKindOfClass:[Character class]]) action = NO;
 	if (wasPressingAction) action = NO;
 	wasPressingAction = (downKey || upKey);
-	
 	
 	BOOL nearDoor = NO;
 	if (door && cpvdist(player.position, cpv(door.startingPosition.x, door.startingPosition.y)) < 10.0)
 		nearDoor = YES;
 	if (nearDoor && action) {
 		// pressing down or up and there is a door in the room
-		Room *nextRoom = [self roomInDirection:NOWHERE];
-		[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
+//		Room *nextRoom = [self roomInDirection:NOWHERE];
+//		[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
 	}
 	
 	BOOL nearFriend = NO;
@@ -286,8 +313,21 @@ double getDoubleTime(void)
 		}
 	}
 	
+	BOOL nearRocket = NO;
+	if (rocket != nil) {
+		float rocketDist = cpvdist(player.position, cpv(rocket.position.x, rocket.position.y - 24.0));
+		if (rocketDist < 28.0) {
+			nearRocket = YES;
+		}
+	}
+	if (action && nearRocket) {
+		[player updateStateDict:stateDict];
+		[self removeItem:player];
+		player = rocket;
+	}
+	
 	// draw indicator to say that you can press action
-	if (nearDoor || nearFriend) {
+	if (nearDoor || nearFriend || nearRocket) {
 		if (cpfsin(fixedTime * 8) > 0)
 			[actionPrompt1Sprite drawAt:pixelCoordsMake(player.position.x, player.position.y - 18)];
 		else
@@ -316,8 +356,7 @@ double getDoubleTime(void)
 	[self.currentRoom writeToFile:path];
 }
 
-
-- (Room *)roomInDirection:(directionMask)direction {
+- (NSString *)roomNameInDirection:(directionMask)direction {
 	NSString *directionKey = nil;
 	if (direction & LEFT) directionKey = @"Left";
 	if (direction & RIGHT) directionKey = @"Right";
@@ -325,9 +364,7 @@ double getDoubleTime(void)
 	if (direction & DOWN) directionKey = @"Down";
 	if (direction == NOWHERE) directionKey = @"Door";
 		
-	NSString *newRoomName = [connectionDict valueForKey:directionKey];
-	if (newRoomName == nil) return nil;
-	return [[Room alloc] initWithName:newRoomName];
+	return [connectionDict valueForKey:directionKey];
 }
 
 @end

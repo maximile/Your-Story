@@ -11,6 +11,12 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 	cpBodyUpdateVelocity(body, cpvmult(gravity, 0.5), 0.985, dt);
 }
 
+- (id)initWithPosition:(pixelCoords)position state:(NSDictionary *)state {
+	if ([self initWithPosition:position] == nil) return nil;
+	
+	return self;
+}
+
 - (id)initWithPosition:(pixelCoords)position {
 	if ([super initWithPosition:position] == nil) return nil;
 	

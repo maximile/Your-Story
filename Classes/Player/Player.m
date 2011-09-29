@@ -3,7 +3,17 @@
 
 @implementation Player
 
+- (id)initWithPosition:(pixelCoords)newPosition state:(NSDictionary *)state {
+	if ([super initWithPosition:newPosition] == nil) return nil;
+	
+	return self;
+}
+
 - (void)shoot:(Game *)game {
+	return;
+}
+
+- (void)updateStateDict:(NSMutableDictionary *)stateDict {
 	return;
 }
 
