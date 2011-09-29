@@ -98,9 +98,11 @@ static void particleUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping
 	
 
 - (void)update:(Game *)game {
+	int particlesLeft = 0;
 	for (int i=0; i<particleCount; i++) {
 		particle p = particles[i];
 		if (p.inSpace == NO) continue;
+		particlesLeft++;
 		p.life -= FIXED_DT;
 		if (p.life <= 0) {
 			p.inSpace = NO;
@@ -108,6 +110,9 @@ static void particleUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping
 			if (physical) cpSpaceRemoveShape(game.space, p.shape);
 		}
 		particles[i] = p;
+	}
+	if (particlesLeft == 0) {
+		[game removeItem:self];
 	}
 }
 
