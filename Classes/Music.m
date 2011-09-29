@@ -180,11 +180,14 @@ cb_tell(Music *self)
 -(bool)updateStream
 {
 	int processed;
-	int active = 1;
+	bool active = TRUE;
+	bool needsRestart = FALSE;
 
 	alGetSourcei(self->source, AL_BUFFERS_PROCESSED, &processed);
-	if(processed==MUSIC_BUFFERS)
+	if(processed==MUSIC_BUFFERS){
 		printf("All music buffers used up\n");
+		needsRestart = TRUE;
+	}
 	
 	
 	while(processed--)
@@ -193,12 +196,15 @@ cb_tell(Music *self)
 		
 		alSourceUnqueueBuffers(self->source, 1, &buffer);
 		[self al_error:__LINE__];
-
-		active = [self readInto:buffer];
+		
+		active = active && [self readInto:buffer];
 		if(active)
 			alSourceQueueBuffers(self->source, 1, &buffer);
 	}
-
+	
+	[self al_error:__LINE__];
+	
+	if(needsRestart) alSourcePlay(source);
 	[self al_error:__LINE__];
 
 	return active;
