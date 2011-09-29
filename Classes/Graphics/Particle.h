@@ -29,6 +29,8 @@ static inline floatRange floatRangeMake(float newMin, float newMax) {
 	BOOL physical;
 	int particleCount;
 	particle *particles;
+	
+	cpBody *relativeBody;
 }
 
 - (id)initWithCount:(int)newCount sprite:(Sprite *)newSprite physical:(BOOL)newPhysical;
@@ -38,5 +40,6 @@ static inline floatRange floatRangeMake(float newMin, float newMax) {
 - (void)setPositionX:(floatRange)x Y:(floatRange)y;
 - (void)setGravityX:(floatRange)x Y:(floatRange)y;
 - (void)setDamping:(floatRange)newDamping;
+-(void)setRelativeToBody:(cpBody *)body;
 
 @end

@@ -8,6 +8,9 @@
 	
 	cpShape *mainShape;
 	cpShape *coneShape;
+	
+	cpBody *staticBody;
+	cpConstraint *rotaryLimit;
 }
 
 @end

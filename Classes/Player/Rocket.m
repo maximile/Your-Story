@@ -45,6 +45,9 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 	cpShapeSetFriction(mainShape, 0.7);
 	cpShapeSetFriction(coneShape, 0.7);
 	
+	staticBody = cpBodyNewStatic();
+	rotaryLimit = cpRotaryLimitJointNew(body, staticBody, -0.5, 0.5);
+	
 	Texture *texture = [Texture textureNamed:@"MainSprites"];
 	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(80, 64, 48, 64)];
 	
@@ -62,12 +65,14 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 	cpSpaceAddBody(space, body);
 	cpSpaceAddShape(space, mainShape);
 	cpSpaceAddShape(space, coneShape);
+	cpSpaceAddConstraint(space, rotaryLimit);
 }
 
 - (void)removeFromSpace:(cpSpace *)space {
 	cpSpaceRemoveBody(space, body);
 	cpSpaceRemoveShape(space, mainShape);
 	cpSpaceRemoveShape(space, coneShape);
+	cpSpaceRemoveConstraint(space, rotaryLimit);
 }
 
 - (void)update:(Game *)game {
@@ -79,7 +84,8 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 		// add exhaust particles
 		for (Sprite *pSprite in exhaustSprites) {
 			ParticleCollection *p = [[ParticleCollection alloc] initWithCount:randomInt(1,2) sprite:pSprite physical:NO];
-			[p setPositionX:floatRangeMake(self.position.x - 12, self.position.x + 12) Y:floatRangeMake(self.position.y - 37, self.position.y -35)];
+			[p setRelativeToBody:body];
+			[p setPositionX:floatRangeMake(-12, 12) Y:floatRangeMake(-37, -35)];
 				// [p setVelocityX:floatRangeMake(0,0) Y:floatRangeMake(0,0)];
 			[p setGravityX:floatRangeMake(0.0, 0.0) Y:floatRangeMake(0,0)];
 			[p setVelocityX:floatRangeMake(thrust.x * -300, thrust.x * -300) Y:floatRangeMake(thrust.y * -300, thrust.y * -300)];

@@ -67,7 +67,7 @@ static void particleUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping
 		cpVect newPos = cpvzero;
 		newPos.x = randomFloat(x.min, x.max);
 		newPos.y = randomFloat(y.min, y.max);
-		p.body->p = newPos;
+		p.body->p = (relativeBody ? cpBodyLocal2World(relativeBody, newPos) : newPos);
 		particles[i] = p;
 	}
 }
@@ -78,7 +78,7 @@ static void particleUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping
 		cpVect newVel = cpvzero;
 		newVel.x = randomFloat(x.min, x.max);
 		newVel.y = randomFloat(y.min, y.max);
-		p.body->v = newVel;
+		p.body->v = (relativeBody ? cpvrotate(p.body->rot, newVel) : newVel);
 		particles[i] = p;
 	}
 }
@@ -89,6 +89,11 @@ static void particleUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping
 		p.life = randomFloat(newLife.min, newLife.max);
 		particles[i] = p;
 	}
+}
+
+-(void)setRelativeToBody:(cpBody *)theBody;
+{
+	relativeBody = theBody;
 }
 	
 
