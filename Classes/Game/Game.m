@@ -308,7 +308,7 @@ double getDoubleTime(void)
 	
 	// interact with items
 	BOOL action = (downKey || upKey);
-	if (![player isKindOfClass:[Character class]]) action = NO;
+	// if (![player isKindOfClass:[Character class]]) action = NO;
 	if (wasPressingAction) action = NO;
 	wasPressingAction = (downKey || upKey);
 	
@@ -349,17 +349,42 @@ double getDoubleTime(void)
 	}
 	
 	BOOL nearRocket = NO;
-	if (rocket != nil) {
+	if (rocket != nil && [player isKindOfClass:[Character class]]) {
 		float rocketDist = cpvdist(player.position, cpv(rocket.position.x, rocket.position.y - 24.0));
 		if (rocketDist < 28.0) {
 			nearRocket = YES;
 		}
 	}
-	if (action && nearRocket) {
-		[player updateStateDict:stateDict];
-		[self removeItem:player];
-		player = rocket;
+	
+	if ([player isKindOfClass:[Character class]]) {
+		if (action && nearRocket) {
+			[player updateStateDict:stateDict];
+			[self removeItem:player];
+			player = rocket;
+		}
 	}
+	else {
+		if (action && downKey) {
+			pixelCoords exitPos = pixelCoordsMake(player.pixelPosition.x - 19, player.pixelPosition.y - 24);
+			Player *newPlayer = [[Character alloc] initWithPosition:exitPos state:stateDict];
+			newPlayer.body->v = player.body->v;
+			[self addItem:newPlayer];
+			player = newPlayer;
+		}
+	}
+	
+	// if (action && nearRocket && [player isKindOfClass:[Character class]]) {
+	// 	[player updateStateDict:stateDict];
+	// 	[self removeItem:player];
+	// 	player = rocket;
+	// }
+	// if (action && downKey && [player isKindOfClass:[Rocket class]]) {
+	// 	NSLog(@"HERE YO");
+	// 	Player *newPlayer = [[Character alloc] initWithPosition:player.pixelPosition state:stateDict];
+	// 	newPlayer.body->v = player.body->v;
+	// 	[self addItem:newPlayer];
+	// 	player = newPlayer;
+	// }
 	
 	// draw indicator to say that you can press action
 	if (nearDoor || nearFriend || nearRocket) {
@@ -368,6 +393,7 @@ double getDoubleTime(void)
 		else
 			[actionPrompt2Sprite drawAt:pixelCoordsMake(player.position.x, player.position.y - 18)];
 	}
+	
 }
 
 - (void)update {
