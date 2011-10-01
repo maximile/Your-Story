@@ -122,6 +122,11 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 	angle *= (M_PI*2);
 	
 	[sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:angle];
+	
+	if (directionInput & UP) {
+		pixelCoords glowLoc = pixelCoordsMake(pos.x + 8 + cpfcos(angle - 90) * 32, pos.y + cpfsin(angle - 90) * 32);
+		[[Texture lightmapTexture] addAt:glowLoc radius:120];
+	}
 }
 
 @end

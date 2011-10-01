@@ -324,6 +324,7 @@ double getDoubleTime(void)
 		[self removeItem:player];
 		[self addAndRemoveItems];
 		player = nil;
+		door.open = YES;
 		
 		// [self setState:stateDict];
 	}
