@@ -26,10 +26,14 @@
 	<string>Torch</string>
 	<key>2,2</key>
 	<string>Rocket</string>
+	<key>3,2</key>
+	<string>Phone</string>
 
 	<key>0,3</key>
 	<string>Purple</string>
 	<key>1,3</key>
 	<string>WBFS</string>
+	<key>2,3</key>
+	<string>Operator</string>
 </dict>
 </plist>

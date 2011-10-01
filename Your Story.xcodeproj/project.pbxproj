@@ -72,6 +72,10 @@
 		66CDA22B142E4A000043B2E3 /* Fonts.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66CDA22A142E4A000043B2E3 /* Fonts.psd */; };
 		66CDA233142E4D790043B2E3 /* Chicago12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66CDA232142E4D790043B2E3 /* Chicago12.plist */; };
 		66CF2BF414141EA500B79F26 /* VillagePeople.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */; };
+		66DA062814376D1C007A235E /* Office.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DA062714376D1C007A235E /* Office.psd */; };
+		66DA065314377857007A235E /* Office.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66DA062914376D31007A235E /* Office.ysroom */; };
+		66DA066F1437825C007A235E /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA066E1437825C007A235E /* Operator.m */; };
+		66DA067C14378986007A235E /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA067B14378986007A235E /* Phone.m */; };
 		66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DFE4ED14280EE800B07AF0 /* light-spread.psd */; };
 		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -253,6 +257,12 @@
 		66CDA232142E4D790043B2E3 /* Chicago12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Chicago12.plist; sourceTree = "<group>"; };
 		66CDF22313CB8EC80097FBF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VillagePeople.ysroom; sourceTree = "<group>"; };
+		66DA062714376D1C007A235E /* Office.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Office.psd; sourceTree = "<group>"; };
+		66DA062914376D31007A235E /* Office.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Office.ysroom; sourceTree = "<group>"; };
+		66DA066D1437825C007A235E /* Operator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operator.h; sourceTree = "<group>"; };
+		66DA066E1437825C007A235E /* Operator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operator.m; sourceTree = "<group>"; };
+		66DA067A14378986007A235E /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
+		66DA067B14378986007A235E /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 		66DFE4ED14280EE800B07AF0 /* light-spread.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-spread.psd"; sourceTree = "<group>"; };
 		66DFE4F91428105900B07AF0 /* StripLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripLight.h; sourceTree = "<group>"; };
 		66DFE4FA1428105900B07AF0 /* StripLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripLight.m; sourceTree = "<group>"; };
@@ -420,6 +430,7 @@
 				66CD97DA140060370089AFED /* ItemTiles.psd */,
 				66BF4C5F140ED7B4007DC2AC /* FallTiles.psd */,
 				66CD4CFC142582E500D540D6 /* Interior.psd */,
+				66DA062714376D1C007A235E /* Office.psd */,
 				66C3D93313EE0811007CBD54 /* WhoKnows.psd */,
 				660B7FA413BFBC31001ECF63 /* Test.psd */,
 				6658F23313F08C40007588D1 /* UI.psd */,
@@ -438,6 +449,7 @@
 				66CD4CF8142575D500D540D6 /* Fight.ysroom */,
 				66CF2BF314141EA500B79F26 /* VillagePeople.ysroom */,
 				6645D06014196D44001E7633 /* AloneInTheDark.ysroom */,
+				66DA062914376D31007A235E /* Office.ysroom */,
 				66C40C931416D2BC000043DD /* Warehouse.ysroom */,
 				660B803913BFD4C0001ECF63 /* Test.ysroom */,
 			);
@@ -562,6 +574,10 @@
 				66C756A6142FDD830001707C /* Friend.m */,
 				66C756AE1430056A0001707C /* Purple.h */,
 				66C756AF1430056A0001707C /* Purple.m */,
+				66DA066D1437825C007A235E /* Operator.h */,
+				66DA066E1437825C007A235E /* Operator.m */,
+				66DA067A14378986007A235E /* Phone.h */,
+				66DA067B14378986007A235E /* Phone.m */,
 				6601B0551431385C0053B835 /* WBFS.h */,
 				6601B0561431385C0053B835 /* WBFS.m */,
 			);
@@ -787,6 +803,7 @@
 				66C3D93213EE0809007CBD54 /* Another.ysroom in Resources */,
 				66C3D93413EE0811007CBD54 /* WhoKnows.psd in Resources */,
 				6658F23413F08C40007588D1 /* UI.psd in Resources */,
+				66DA065314377857007A235E /* Office.ysroom in Resources */,
 				66011CDF13F89AFA009B2CBC /* MainSprites.psd in Resources */,
 				66CA1F9613FDC07D003DF8A2 /* ItemClasses.plist in Resources */,
 				66CD97DB140060370089AFED /* ItemTiles.psd in Resources */,
@@ -816,6 +833,7 @@
 				66CDA233142E4D790043B2E3 /* Chicago12.plist in Resources */,
 				D3357BE7143383A00057448C /* BulletHit.ogg in Resources */,
 				D3357BE8143383A00057448C /* PlayerPistol.ogg in Resources */,
+				66DA062814376D1C007A235E /* Office.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +886,8 @@
 				6601B024143126E80053B835 /* Torch.m in Sources */,
 				6601B0571431385C0053B835 /* WBFS.m in Sources */,
 				66CCA8261433C4EA00E7CBBB /* Rocket.m in Sources */,
+				66DA066F1437825C007A235E /* Operator.m in Sources */,
+				66DA067C14378986007A235E /* Phone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

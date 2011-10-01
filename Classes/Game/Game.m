@@ -364,7 +364,7 @@ double getDoubleTime(void)
 		}
 	}
 	else {
-		if (action && downKey) {
+		if (action && downKey && [player isKindOfClass:[Rocket class]]) {
 			pixelCoords exitPos = pixelCoordsMake(player.pixelPosition.x - 19, player.pixelPosition.y - 24);
 			Player *newPlayer = [[Character alloc] initWithPosition:exitPos state:stateDict];
 			newPlayer.body->v = player.body->v;
