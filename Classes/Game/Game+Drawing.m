@@ -38,7 +38,9 @@
 	[FBO bindFramebuffer:canvas];
 	
 	// camera target
-	pixelCoords focus = [self cameraTargetForFocus:player.pixelPosition];
+	if (player != nil)
+		cameraFocus = [self cameraTargetForFocus:player.pixelPosition];
+	pixelCoords focus = cameraFocus;
 
 	// draw layers. first get screen bounds in map coords
 	int left = ((float)focus.x - CANVAS_SIZE.width / 2) / TILE_SIZE;

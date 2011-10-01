@@ -30,6 +30,8 @@ typedef enum {
 	NSMutableArray *itemsToAdd;
 	NSMutableArray *itemsToRemove;
 	
+	pixelCoords cameraFocus;
+	
 	Player *player;
 	Door *door;
 	Rocket *rocket;

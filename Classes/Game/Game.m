@@ -257,7 +257,16 @@ double getDoubleTime(void)
 	}
 	
 	// dead? restart the room
-	if (player == nil) [self setState:stateDict];
+	if (player == nil) transition += 0.02;
+	else transition -= 0.02;
+	if (transition >= 1.0) {
+		[self setState:stateDict];
+	}
+	if (transition <= 0.0) {
+		transition = 0.0;
+	}
+	
+	if (player == nil) return;
 	
 	// out of the room bounds? Go to another room or die
 	pixelCoords pos = player.pixelPosition;
@@ -279,8 +288,11 @@ double getDoubleTime(void)
 			[stateDict setValue:[NSNumber numberWithInt:startingEdge] forKey:@"spawn"];
 			[stateDict setValue:nextRoomName forKey:@"room"];
 			[player updateStateDict:stateDict];
+			[self removeItem:player];
+			[self addAndRemoveItems];
+			player = nil;
 			
-			[self setState:stateDict];
+			// [self setState:stateDict];
 			
 			// [self setCurrentRoom:nextRoom fromEdge:startingEdge];
 		}
@@ -304,16 +316,16 @@ double getDoubleTime(void)
 	if (door && cpvdist(player.position, cpv(door.startingPosition.x, door.startingPosition.y)) < 10.0)
 		nearDoor = YES;
 	if (nearDoor && action) {
-		// pressing down or up and there is a door in the room
-//		Room *nextRoom = [self roomInDirection:NOWHERE];
-//		[self setCurrentRoom:nextRoom fromEdge:NOWHERE];
 		NSString *nextRoomName = [self roomNameInDirection:NOWHERE];
 		[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
 		[stateDict setValue:[NSNumber numberWithInt:NOWHERE] forKey:@"spawn"];
 		[stateDict setValue:nextRoomName forKey:@"room"];
 		[player updateStateDict:stateDict];
+		[self removeItem:player];
+		[self addAndRemoveItems];
+		player = nil;
 		
-		[self setState:stateDict];
+		// [self setState:stateDict];
 	}
 	
 	BOOL nearFriend = NO;
