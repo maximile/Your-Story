@@ -24,4 +24,8 @@
 	return self;
 }
 
+//- (void)displayMessage:(Game *)game {
+//	[game.stateDict setValue:[NSNumber numberWithBool:YES] forKey:@"SpokenToOperator"];
+//}
+
 @end

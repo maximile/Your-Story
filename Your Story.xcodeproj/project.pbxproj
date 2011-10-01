@@ -76,6 +76,7 @@
 		66DA065314377857007A235E /* Office.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66DA062914376D31007A235E /* Office.ysroom */; };
 		66DA066F1437825C007A235E /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA066E1437825C007A235E /* Operator.m */; };
 		66DA067C14378986007A235E /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA067B14378986007A235E /* Phone.m */; };
+		66DA06971437BEF5007A235E /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06961437BEF5007A235E /* Icon.icns */; };
 		66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DFE4ED14280EE800B07AF0 /* light-spread.psd */; };
 		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -263,6 +264,7 @@
 		66DA066E1437825C007A235E /* Operator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operator.m; sourceTree = "<group>"; };
 		66DA067A14378986007A235E /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
 		66DA067B14378986007A235E /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
+		66DA06961437BEF5007A235E /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		66DFE4ED14280EE800B07AF0 /* light-spread.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-spread.psd"; sourceTree = "<group>"; };
 		66DFE4F91428105900B07AF0 /* StripLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripLight.h; sourceTree = "<group>"; };
 		66DFE4FA1428105900B07AF0 /* StripLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripLight.m; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				D370023B14021319005C3A57 /* light-point.psd */,
 				6677DDE613D2F51F00A43DF4 /* Collision Data.plist */,
 				66CA1F9513FDC07D003DF8A2 /* ItemClasses.plist */,
+				66DA06961437BEF5007A235E /* Icon.icns */,
 				6677DDE713D2F51F00A43DF4 /* Collision Shapes.psd */,
 				66C7B0D51405B2EC0079E164 /* Connections.plist */,
 			);
@@ -834,6 +837,7 @@
 				D3357BE7143383A00057448C /* BulletHit.ogg in Resources */,
 				D3357BE8143383A00057448C /* PlayerPistol.ogg in Resources */,
 				66DA062814376D1C007A235E /* Office.psd in Resources */,
+				66DA06971437BEF5007A235E /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
