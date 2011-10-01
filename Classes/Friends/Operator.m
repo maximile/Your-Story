@@ -19,6 +19,8 @@
 		@"Your phone is ringing.",
 		@"Why are we the last ones left?",
 		@"Everyone else has been promoted.",
+		@"Maybe it's because of your gun.",
+		@"You keep shooting it by pressing ‘x’",
 	nil];
 	
 	return self;

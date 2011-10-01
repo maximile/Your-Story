@@ -15,5 +15,4 @@
 - (id)initWithPosition:(pixelCoords)newPosition state:(NSDictionary *)state;
 - (void)updateStateDict:(NSMutableDictionary *)stateDict;
 
-
 @end

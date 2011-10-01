@@ -37,7 +37,7 @@ static int characterHitEnemy(cpArbiter *arb, cpSpace *space, Game *game) {
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime;
+@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime, stateDict;
 
 static Game *game = nil;
 + (Game *)game {
@@ -77,6 +77,7 @@ static Game *game = nil;
 		[NSNumber numberWithBool:NO], @"doubleJump",
 		[NSNumber numberWithBool:NO], @"shotgun",
 		[NSNumber numberWithInt:8], @"health",
+		[NSNumber numberWithInt:0], @"coins",
 		startingRoomName, @"room",
 		[NSNumber numberWithInt:NOWHERE], @"spawn",
 		@"Character", @"playerClass",
@@ -90,6 +91,7 @@ static Game *game = nil;
 	[self setState:stateDict];
 	
 	// transition stuff
+	transition = 1.0;
 	transitionTilesCount = 6;
 	transitionTiles = calloc(transitionTilesCount, sizeof(mapCoords));
 	transitionTiles[0] = mapCoordsMake(-1, -1);

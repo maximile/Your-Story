@@ -35,5 +35,7 @@
 	<string>WBFS</string>
 	<key>2,3</key>
 	<string>Operator</string>
+	<key>3,3</key>
+	<string>Coin</string>
 </dict>
 </plist>

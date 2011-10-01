@@ -12,6 +12,7 @@
 #import "Shotgun.h"
 #import "Font.h"
 #import "Message.h"
+#import "Coin.h"
 
 
 #define PLAYER_VELOCITY 100.0
@@ -330,6 +331,12 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[Sound playSound:@"Heart.ogg"];
 	}
 	
+	if ([pickup isKindOfClass:[Coin class]]) {
+		int coinCount = [[[Game game].stateDict valueForKey:@"coins"] intValue];
+		coinCount ++;
+		[[Game game].stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
+	}
+	
 	// mark the health item as used so that it doesn't get applied twice
 	// if the head and feet both touch it
 	[[Game game] removeItem:pickup];
@@ -427,10 +434,13 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)drawStatus {
 	for (int i = 0; i < MAX_HEALTH; i++) {
-		pixelCoords iconLoc = pixelCoordsMake(i*12 + 20, 20);
+		pixelCoords iconLoc = pixelCoordsMake(i*12 + 12, 12);
 		if (i < health) [fullHealth drawAt:iconLoc];
 		else [emptyHealth drawAt:iconLoc];
 	}
+	int coinCount = [[[Game game].stateDict valueForKey:@"coins"] intValue];
+	NSString *coinsString = [NSString stringWithFormat:@"%i out of %i coins", coinCount, 8];
+	[[Font fontNamed:@"Chicago12"] drawString:coinsString at:pixelCoordsMake(CANVAS_SIZE.width - 8, 6) alignment:NSRightTextAlignment];
 }
 
 @end

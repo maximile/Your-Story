@@ -81,6 +81,7 @@ typedef enum {
 @property (assign) Player *player;
 @property (readonly) cpSpace *space;
 @property (readonly) double fixedTime;
+@property (readonly) NSMutableDictionary *stateDict;
 
 + (Game *)game;
 

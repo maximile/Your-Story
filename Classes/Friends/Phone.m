@@ -18,7 +18,9 @@
 	dialogue = [NSArray arrayWithObjects:
 		@"Hello peasant!",
 		@"You have been selected for promotion!",
-		@"Please step into the promotion elevator.",
+		@"Please step through the promotion door.",
+		@"But remember who's in charge here.",
+		@"When I say ‘jump’, you press ‘z’.",
 	nil];
 	
 	return self;

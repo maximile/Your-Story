@@ -22,9 +22,8 @@
 	dialogue = [NSArray arrayWithObjects:
 		@"Work! Beat! Fierce! Sound!",
 		@"Oh hi, do you want to go in there?",
-		@"You'll want to find a torch first.",
-		@"I think there's one left...",
-		@"...in that warehouse to the West.",
+		@"You'll need a torch.",
+		@"Here, take this one!",
 		@"Work! Beat!",
 		@"Fierce! Sound!",
 	nil];
