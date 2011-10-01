@@ -89,6 +89,21 @@ static Game *game = nil;
 	
 	[self setState:stateDict];
 	
+	// transition stuff
+	transitionTilesCount = 6;
+	transitionTiles = calloc(transitionTilesCount, sizeof(mapCoords));
+	transitionTiles[0] = mapCoordsMake(-1, -1);
+	transitionTiles[1] = mapCoordsMake(1, 0);
+	transitionTiles[2] = mapCoordsMake(2, 0);
+	transitionTiles[3] = mapCoordsMake(3, 0);
+	transitionTiles[4] = mapCoordsMake(1, 1);
+	transitionTiles[5] = mapCoordsMake(2, 1);
+	NSDictionary *transitionLayerDict = [NSDictionary dictionaryWithObjectsAndKeys:
+		@"UI", @"Map",
+	nil];
+	mapSize transitionLayerSize = mapSizeMake(CANVAS_SIZE.width / TILE_SIZE + 1, CANVAS_SIZE.height / TILE_SIZE + 1);
+	transitionLayer = [[Layer alloc] initWithDictionary:transitionLayerDict size:transitionLayerSize];
+	
 	return self;
 }
 

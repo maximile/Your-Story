@@ -110,6 +110,26 @@
 	for (Texture *texture in [Texture textures]) {
 		[texture draw];
 	}
+	
+	// draw transition
+	if (transition > 0.0) {
+		for (int y = 0; y < transitionLayer.size.height; y++) {
+			for (int x = 0; x < transitionLayer.size.width; x++) {
+				float xRatio = (float)x / (float)transitionLayer.size.width;
+				float yRatio = (float)y / (float)transitionLayer.size.height;
+				float start = (xRatio * 0.75 + yRatio * 0.25) * 0.25;
+				float localTransition = transition * 2 - start;
+				int transitionIndex = localTransition * transitionTilesCount;
+				if (transitionIndex >= transitionTilesCount)
+					transitionIndex = transitionTilesCount - 1;
+				if (transitionIndex < 0)
+					transitionIndex = 0;
+				
+				[transitionLayer setTile:transitionTiles[transitionIndex] at:mapCoordsMake(x, y)];
+			}
+		}
+		[transitionLayer drawRect:mapRectMake(0, 0, transitionLayer.size.width, transitionLayer.size.height) ignoreParallax:NO];
+	}
 }
 
 - (pixelCoords)cameraTargetForFocus:(pixelCoords)focus {

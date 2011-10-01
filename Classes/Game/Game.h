@@ -6,7 +6,7 @@
 
 #import "FBO.h"
 #import "Texture.h"
-
+#import "Types.h"
 #import "Music.h"
 
 @class Player;
@@ -34,6 +34,12 @@ typedef enum {
 	Door *door;
 	Rocket *rocket;
 	NSArray *friends;
+	
+	// transition variables
+	float transition;
+	Layer *transitionLayer;
+	mapCoords *transitionTiles;
+	int transitionTilesCount;
 	
 	// editor variables
 	pixelCoords editorFocus;
