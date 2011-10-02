@@ -217,6 +217,8 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpSpaceRemoveBody(space, body);
 	cpSpaceRemoveShape(space, headShape);
 	cpSpaceRemoveShape(space, feetShape);
+	
+	// sort of a hack, but need to stop the loop when changing rooms
 }
 
 - (void)update:(Game *)game {
@@ -371,7 +373,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 
 - (void)fireShotgun:(Game *)game
 {
-	if (reloadTime > 0) return;
+	if (shellsFired%2==0 && reloadTime > 0) return;
 	
 	// hard coded shotgun blast
 	cpFloat baseAngle = (facing & RIGHT ? 0.0 : M_PI);
@@ -381,7 +383,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		
 		Bullet *ray = [[Bullet alloc] initWithPosition:self.position velocity:velocity distance:100 damage:0.2];
 		ray.group = self;
-		ray.startTime = game.fixedTime - FIXED_DT*2.0*((double)rand()/(double)RAND_MAX);
+		ray.startTime = game.fixedTime + FIXED_DT*(2.0 - ((double)rand()/(double)RAND_MAX));
 		[game addItem:ray];
 	}
 	
@@ -420,6 +422,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	[[Texture lightmapTexture] addAt:self.pixelPosition radius:250];
 	
 	reloadTime = 1.0;
+	shellsFired++;
 }
 
 - (void)firePistol:(Game *)game

@@ -112,7 +112,8 @@ GetOpenChannel()
 	return 0;
 }
 
-+(void)playSound:(NSString *)filename volume:(float)volume pitch:(float)pitch;
+static Sound *
+GetSound(NSString *filename)
 {
 	Sound *sound = [sounds objectForKey:filename];
 	
@@ -121,12 +122,19 @@ GetOpenChannel()
 		[sounds setObject:sound forKey:filename];
 	}
 	
+	return sound;
+}
+
++(void)playSound:(NSString *)filename volume:(float)volume pitch:(float)pitch;
+{
+	Sound *sound = GetSound(filename);
 	ALuint source = GetOpenChannel();
 	
 	if(source){
 		alSourcei(source, AL_BUFFER, sound->_buffer);
 		alSourcef(source, AL_GAIN, volume);
 		alSourcef(source, AL_PITCH, pitch);
+		alSourcei(source, AL_LOOPING, AL_FALSE);
 		alSourcePlay(source);
 	}
 	
@@ -136,6 +144,28 @@ GetOpenChannel()
 +(void)playSound:(NSString *)filename;
 {
 	[self playSound:filename volume:1.0 pitch:1.0];
+}
+
++(ALuint)playLoop:(NSString *)filename volume:(float)volume pitch:(float)pitch;
+{
+	Sound *sound = GetSound(filename);
+	ALuint source = GetOpenChannel();
+	
+	if(source){
+		alSourcei(source, AL_BUFFER, sound->_buffer);
+		alSourcef(source, AL_GAIN, volume);
+		alSourcef(source, AL_PITCH, pitch);
+		alSourcei(source, AL_LOOPING, AL_TRUE);
+		alSourcePlay(source);
+	}
+	
+	CheckALErrors();
+	return source;
+}
+
++(void)stopLoop:(ALuint)loopSource;
+{
+	alSourceStop(loopSource);
 }
 
 @end

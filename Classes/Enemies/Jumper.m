@@ -17,9 +17,9 @@
 	cpBodySetPos(body, cpv(position.x, position.y));
 	cpBodySetUserData(body, self);
 	
-	shape = cpCircleShapeNew(body, 8.0, cpvzero);
+	shape = cpCircleShapeNew(body, 7.0, cpv(0, -1));
 	cpShapeSetCollisionType(shape, [self class]);
-	cpShapeSetFriction(shape, 0.7);
+	cpShapeSetFriction(shape, 0.4);
 	cpShapeSetGroup(shape, self);
 	cpShapeSetUserData(shape, self);
 	
@@ -97,6 +97,10 @@ cpfsign(cpFloat f)
 	
 	Player *player = game.player;
 	cpVect playerPos = player.position;
+	
+	// Player is made of two circles, move the point inside of one of them.
+	playerPos.y += 1.0;
+	
 	cpVect pos = cpBodyGetPos(body);
 	
 	double elapsed = game.fixedTime - lastJumpTime;

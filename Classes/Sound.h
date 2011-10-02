@@ -21,4 +21,7 @@
 +(void)playSound:(NSString *)filename volume:(float)volume pitch:(float)pitch;
 +(void)playSound:(NSString *)filename;
 
++(ALuint)playLoop:(NSString *)filename volume:(float)volume pitch:(float)pitch;
++(void)stopLoop:(ALuint)loopSource;
+
 @end

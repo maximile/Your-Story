@@ -23,6 +23,7 @@
 	// number of frames of inlvulnerability (e.g. after hitting an enemy)
 	double invulnerable;
 	double reloadTime;
+	int shellsFired;
 	
 	int health;
 	float battery;

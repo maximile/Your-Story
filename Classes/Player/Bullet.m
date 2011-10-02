@@ -79,7 +79,9 @@
 
 -(void)draw:(Game *)game;
 {
-	cpVect pos = cpvadd(startPos, cpvmult(velocity, cpfmin(clampTime, game.fixedTime - startTime)));
+	cpFloat t = (startTime == 0.0 ? 0.0 : cpfmin(clampTime, game.fixedTime - startTime));
+	
+	cpVect pos = cpvadd(startPos, cpvmult(velocity, t));
 	[sprite drawAt:pixelCoordsMake(pos.x, pos.y) angle:0.0];
 }
 

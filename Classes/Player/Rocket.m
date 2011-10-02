@@ -2,6 +2,7 @@
 #import "Game+Items.h"
 #import "Particle.h"
 #import "RandomTools.h"
+#import "Sound.h"
 
 @implementation Rocket
 
@@ -48,7 +49,7 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 
 	mainShape = cpPolyShapeNew(body, 6, mainVerts, cpvzero);
 	coneShape = cpPolyShapeNew(body, 4, coneVerts, cpvzero);
-	cpShapeSetFriction(mainShape, 0.7);
+	cpShapeSetFriction(mainShape, 0.0);
 	cpShapeSetFriction(coneShape, 0.7);
 	
 	staticBody = cpBodyNewStatic();
@@ -79,6 +80,12 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 	cpSpaceRemoveShape(space, mainShape);
 	cpSpaceRemoveShape(space, coneShape);
 	cpSpaceRemoveConstraint(space, rotaryLimit);
+	
+	// sort of a hack, but need to remove the sound loop when changing rooms
+	if(rocketLoop){
+		[Sound stopLoop:rocketLoop];
+		rocketLoop = 0;
+	}
 }
 
 - (void)update:(Game *)game {
@@ -99,7 +106,17 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 			[p setLife:floatRangeMake(0.02, 0.3)];
 			[game addItem:p];
 		}
+		
+		if(!rocketLoop){
+			rocketLoop = [Sound playLoop:@"Rocket.ogg" volume:1.0 pitch:1.0];
+		}
+	} else {
+		if(rocketLoop){
+			[Sound stopLoop:rocketLoop];
+			rocketLoop = 0;
+		}
 	}
+	
 	float totalTorque = 0;
 	if (directionInput & LEFT)
 		totalTorque += 100000.0;
