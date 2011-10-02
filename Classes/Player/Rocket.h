@@ -11,6 +11,8 @@
 	
 	cpBody *staticBody;
 	cpConstraint *rotaryLimit;
+	
+	unsigned int rocketLoop;
 }
 
 @end

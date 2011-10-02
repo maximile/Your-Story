@@ -87,6 +87,7 @@
 		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D321A41A14390222004FF956 /* Rocket.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D321A41914390222004FF956 /* Rocket.ogg */; };
 		D3357BE7143383A00057448C /* BulletHit.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D3357BE5143383A00057448C /* BulletHit.ogg */; };
 		D3357BE8143383A00057448C /* PlayerPistol.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D3357BE6143383A00057448C /* PlayerPistol.ogg */; };
 		D33DF40D140DF7ED003FA5EB /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = D33DF40C140DF7ED003FA5EB /* Music.m */; };
@@ -281,6 +282,7 @@
 		66DFE4F91428105900B07AF0 /* StripLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripLight.h; sourceTree = "<group>"; };
 		66DFE4FA1428105900B07AF0 /* StripLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripLight.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Your Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Your Story.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D321A41914390222004FF956 /* Rocket.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rocket.ogg; sourceTree = "<group>"; };
 		D3357BE5143383A00057448C /* BulletHit.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = BulletHit.ogg; sourceTree = "<group>"; };
 		D3357BE6143383A00057448C /* PlayerPistol.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlayerPistol.ogg; sourceTree = "<group>"; };
 		D33DF40B140DF7ED003FA5EB /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 		D34FF3B2140B134500BF9C33 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D321A41914390222004FF956 /* Rocket.ogg */,
 				D3357BE5143383A00057448C /* BulletHit.ogg */,
 				D3357BE6143383A00057448C /* PlayerPistol.ogg */,
 				D34FF3BC140B1D5F00BF9C33 /* Heart.ogg */,
@@ -859,6 +862,7 @@
 				66DA06FD1437E5F0007A235E /* Believe.ogg in Resources */,
 				66DA06FE1437E5F0007A235E /* Dreamland.ogg in Resources */,
 				66DA06FF1437E5F0007A235E /* Roll.ogg in Resources */,
+				D321A41A14390222004FF956 /* Rocket.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

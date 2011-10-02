@@ -19,7 +19,7 @@
 	
 	shape = cpCircleShapeNew(body, 7.0, cpv(0, -1));
 	cpShapeSetCollisionType(shape, [self class]);
-	cpShapeSetFriction(shape, 0.3);
+	cpShapeSetFriction(shape, 0.4);
 	cpShapeSetGroup(shape, self);
 	cpShapeSetUserData(shape, self);
 	
