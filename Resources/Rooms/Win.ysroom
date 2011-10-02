@@ -12,15 +12,6 @@
 			<key>Parallax</key>
 			<real>0.64999997615814209</real>
 			<key>Tiles</key>
-			<string>13,0 
-</string>
-		</dict>
-		<dict>
-			<key>Map</key>
-			<string>WhoKnows</string>
-			<key>Parallax</key>
-			<real>0.64999997615814209</real>
-			<key>Tiles</key>
 			<string>0,6 1,6 
 0,7 1,7 
 </string>

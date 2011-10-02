@@ -22,7 +22,7 @@
 	clampTime = newDistance/cpvlength(newVel);
 	
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(10, 4, 4, 2)];
+	sprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(102, 86, 4, 2)];
 	
 	damage = newDamage;
 	
@@ -37,7 +37,7 @@
 -(void)hitSomething:(Game *)game point:(cpVect)point normal:(cpVect)normal
 {
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	Sprite *particle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(10, 4, 1, 1)];
+	Sprite *particle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(116, 86, 1, 1)];
 	
 	ParticleCollection *ricochet = [[ParticleCollection alloc] initWithCount:5 sprite:particle physical:NO];
 	[ricochet setPositionX:floatRangeMake(point.x, point.x) Y:floatRangeMake(point.y, point.y)];
@@ -94,7 +94,7 @@
 -(void)fizzleOut:(Game *)game point:(cpVect)point
 {
 	Texture *texture = [Texture textureNamed:@"MainSprites.psd"];
-	Sprite *particle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(10, 4, 1, 1)];
+	Sprite *particle = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(116, 86, 1, 1)];
 	
 	ParticleCollection *poof = [[ParticleCollection alloc] initWithCount:15 sprite:particle physical:NO];
 	[poof setPositionX:floatRangeMake(point.x, point.x) Y:floatRangeMake(point.y, point.y)];

@@ -209,9 +209,9 @@
 </string>
 		</dict>
 	</array>
-	<key>Size</key>
-	<string>40,40</string>
 	<key>Music</key>
 	<string>Believe.ogg</string>
+	<key>Size</key>
+	<string>40,40</string>
 </dict>
 </plist>

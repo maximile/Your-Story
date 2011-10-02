@@ -294,6 +294,7 @@ double getDoubleTime(void)
 	if (pos.y > (currentRoom.size.height) * TILE_SIZE) outside |= UP;
 	if (outside) {
 		NSString *nextRoomName = [self roomNameInDirection:outside];
+		if ([nextRoomName isEqualToString:@"Win"] && coinCount == 8) nextRoomName = @"SuperWin";
 		if (nextRoomName != nil) {
 			directionMask startingEdge = NOWHERE;
 			if (outside & RIGHT) startingEdge |= LEFT;
@@ -338,6 +339,8 @@ double getDoubleTime(void)
 		[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
 		[stateDict setValue:[NSNumber numberWithInt:NOWHERE] forKey:@"spawn"];
 		[stateDict setValue:nextRoomName forKey:@"room"];
+		[stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
+		
 		[player updateStateDict:stateDict];
 		[self removeItem:player];
 		[self addAndRemoveItems];

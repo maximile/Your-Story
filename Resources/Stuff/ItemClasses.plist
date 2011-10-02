@@ -10,6 +10,8 @@
 	<string>Health</string>
 	<key>3,0</key>
 	<string>Battery</string>
+	<key>4,0</key>
+	<string>Balloon</string>
 	
 	<key>0,1</key>
 	<string>Door</string>
