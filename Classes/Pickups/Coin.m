@@ -12,4 +12,9 @@
 	return self;
 }
 
+- (void)draw:(Game *)game {
+	[sprite drawAt:startingPosition];
+}
+
+
 @end

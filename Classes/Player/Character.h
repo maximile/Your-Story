@@ -50,6 +50,7 @@
 	// Velocity of the body last stood on
 	cpVect groundVelocity;
 	
+	bool useShotgun;
 }
 
 - (void)addToSpace:(cpSpace *)space;

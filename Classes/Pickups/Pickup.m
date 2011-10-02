@@ -33,11 +33,15 @@
 }
 
 - (void)draw:(Game *)game {
-	[sprite drawAt:startingPosition];
-	
 	float phase = 2.0*M_PI*self.objectPhase;
-	float radius = cpflerp(8, 16, cpfsin(6.0*game.fixedTime + phase)*0.5 + 0.5);
-	[[Texture lightmapTexture] addAt:startingPosition radius:radius];
+	float bob = cpfsin(6.0*game.fixedTime + phase)*0.5 + 0.5;
+	float radius = cpflerp(8, 16, bob);
+	
+	pixelCoords pos = startingPosition;
+	pos.y += bob*3.0;
+	
+	[sprite drawAt:pos];
+	[[Texture lightmapTexture] addAt:pos radius:radius];
 }
 
 @end

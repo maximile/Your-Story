@@ -338,6 +338,10 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		[Sound playSound:@"Heart.ogg"];
 	}
 	
+	if([pickup isKindOfClass:[Shotgun class]]){
+		useShotgun = TRUE;
+	}
+	
 	// mark the health item as used so that it doesn't get applied twice
 	// if the head and feet both touch it
 	[[Game game] removeItem:pickup];
@@ -430,7 +434,11 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (void)shoot:(Game *)game {
-	[self firePistol:game];
+	if(useShotgun){
+		[self fireShotgun:game];
+	} else {
+		[self firePistol:game];
+	}
 }
 
 - (void)drawStatus {
