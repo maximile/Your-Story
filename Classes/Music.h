@@ -6,7 +6,7 @@
 #import "ogg/ogg.h"
 #import "vorbis/vorbisfile.h"
 
-#define MUSIC_BUFFERS 4
+#define MUSIC_BUFFERS 8
 #define MUSIC_BUFFER_SIZE (128*1024)
 #define MUSIC_BUFFER_TIME 0.1
 

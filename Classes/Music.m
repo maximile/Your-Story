@@ -367,7 +367,7 @@ cb_tell(Music *self)
 	return self;
 }
 
-- (void)dealloc
+- (void)finalize
 {
 	if(alcGetCurrentContext()!=NULL){
 		[self stop];
@@ -381,7 +381,7 @@ cb_tell(Music *self)
 
 	ov_clear(&self->oggStream);
 	
-	[super dealloc];
+	[super finalize];
 }
 
 @end

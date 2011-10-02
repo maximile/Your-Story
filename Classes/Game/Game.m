@@ -38,7 +38,7 @@ static int characterHitEnemy(cpArbiter *arb, cpSpace *space, Game *game) {
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime, stateDict;
+@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime, stateDict, coinCount;
 
 static Game *game = nil;
 + (Game *)game {
@@ -143,6 +143,7 @@ static Game *game = nil;
 - (void)setState:(NSDictionary *)state {
 	Room *room = [[Room alloc] initWithName:[state valueForKey:@"room"]];
 	directionMask edge = [[state valueForKey:@"spawn"] intValue];
+	coinCount = [[state valueForKey:@"coins"] intValue];
 	[self setCurrentRoom:room fromEdge:edge];
 }
 
@@ -192,6 +193,10 @@ static Game *game = nil;
 	player = [[playerClass alloc] initWithPosition:theSpawn.startingPosition state:stateDict];
 	[self addItem:player];
 	[self addAndRemoveItems];
+	
+	if ([player isKindOfClass:[Rocket class]]) {
+		rocket = (Rocket *)player;
+	}
 	
 	// restore old player velocity
 	player.body->v = oldVelocity;
@@ -298,6 +303,7 @@ double getDoubleTime(void)
 			
 			[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
 			[stateDict setValue:[NSNumber numberWithInt:startingEdge] forKey:@"spawn"];
+			[stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
 			[stateDict setValue:nextRoomName forKey:@"room"];
 			[player updateStateDict:stateDict];
 			[self removeItem:player];

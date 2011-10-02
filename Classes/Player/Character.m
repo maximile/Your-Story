@@ -306,7 +306,10 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	cpBodySetVel(body, cpvmult(response, 280));
 	invulnerable = 2.0;
 	
-	[self addHealth:-2];
+	if ([enemy isKindOfClass:[Jumper class]])
+		[self addHealth:-2];
+	else
+		[self addHealth:-1];
 	
 	return 0;
 }
@@ -332,9 +335,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 	}
 	
 	if ([pickup isKindOfClass:[Coin class]]) {
-		int coinCount = [[[Game game].stateDict valueForKey:@"coins"] intValue];
-		coinCount ++;
-		[[Game game].stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
+		[Game game].coinCount = [Game game].coinCount + 1;
 		[Sound playSound:@"Heart.ogg"];
 	}
 	
@@ -447,7 +448,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		if (i < health) [fullHealth drawAt:iconLoc];
 		else [emptyHealth drawAt:iconLoc];
 	}
-	int coinCount = [[[Game game].stateDict valueForKey:@"coins"] intValue];
+	int coinCount = [Game game].coinCount;
 	NSString *coinsString = [NSString stringWithFormat:@"%i out of %i coins", coinCount, 8];
 	[[Font fontNamed:@"Chicago12"] drawString:coinsString at:pixelCoordsMake(CANVAS_SIZE.width - 8, 6) alignment:NSRightTextAlignment];
 }

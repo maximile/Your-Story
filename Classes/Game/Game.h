@@ -36,6 +36,7 @@ typedef enum {
 	Door *door;
 	Rocket *rocket;
 	NSArray *friends;
+	int coinCount;
 	
 	// transition variables
 	float transition;
@@ -85,6 +86,7 @@ typedef enum {
 @property (readonly) cpSpace *space;
 @property (readonly) double fixedTime;
 @property (readonly) NSMutableDictionary *stateDict;
+@property int coinCount;
 
 + (Game *)game;
 
