@@ -75,6 +75,14 @@
 		<string>Fight!</string>
 		<key>Left</key>
 		<string>AloneInTheDark</string>
+		<key>Up</key>
+		<string>Win</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Win</string>
+		<key>Title</key>
+		<string>You Win!</string>
 	</dict>
 	<dict>
 		<key>Name</key>

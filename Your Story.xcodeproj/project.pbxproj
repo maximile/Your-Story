@@ -78,6 +78,8 @@
 		66DA067C14378986007A235E /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA067B14378986007A235E /* Phone.m */; };
 		66DA06971437BEF5007A235E /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06961437BEF5007A235E /* Icon.icns */; };
 		66DA06CD1437D4D6007A235E /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA06CC1437D4D6007A235E /* Coin.m */; };
+		66DA06ED1437E0D9007A235E /* Win.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06EC1437E0D9007A235E /* Win.ysroom */; };
+		66DA06EF1437E0DF007A235E /* SuperWin.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06EE1437E0DF007A235E /* SuperWin.ysroom */; };
 		66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DFE4ED14280EE800B07AF0 /* light-spread.psd */; };
 		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -268,6 +270,8 @@
 		66DA06961437BEF5007A235E /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		66DA06CB1437D4D6007A235E /* Coin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coin.h; sourceTree = "<group>"; };
 		66DA06CC1437D4D6007A235E /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
+		66DA06EC1437E0D9007A235E /* Win.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Win.ysroom; sourceTree = "<group>"; };
+		66DA06EE1437E0DF007A235E /* SuperWin.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SuperWin.ysroom; sourceTree = "<group>"; };
 		66DFE4ED14280EE800B07AF0 /* light-spread.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-spread.psd"; sourceTree = "<group>"; };
 		66DFE4F91428105900B07AF0 /* StripLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripLight.h; sourceTree = "<group>"; };
 		66DFE4FA1428105900B07AF0 /* StripLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripLight.m; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				66DA062914376D31007A235E /* Office.ysroom */,
 				66C40C931416D2BC000043DD /* Warehouse.ysroom */,
 				660B803913BFD4C0001ECF63 /* Test.ysroom */,
+				66DA06EC1437E0D9007A235E /* Win.ysroom */,
+				66DA06EE1437E0DF007A235E /* SuperWin.ysroom */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -843,6 +849,8 @@
 				D3357BE8143383A00057448C /* PlayerPistol.ogg in Resources */,
 				66DA062814376D1C007A235E /* Office.psd in Resources */,
 				66DA06971437BEF5007A235E /* Icon.icns in Resources */,
+				66DA06ED1437E0D9007A235E /* Win.ysroom in Resources */,
+				66DA06EF1437E0DF007A235E /* SuperWin.ysroom in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
