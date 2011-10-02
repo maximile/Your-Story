@@ -48,7 +48,7 @@ static void rocketUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, 
 
 	mainShape = cpPolyShapeNew(body, 6, mainVerts, cpvzero);
 	coneShape = cpPolyShapeNew(body, 4, coneVerts, cpvzero);
-	cpShapeSetFriction(mainShape, 0.7);
+	cpShapeSetFriction(mainShape, 0.0);
 	cpShapeSetFriction(coneShape, 0.7);
 	
 	staticBody = cpBodyNewStatic();
