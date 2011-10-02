@@ -335,6 +335,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		int coinCount = [[[Game game].stateDict valueForKey:@"coins"] intValue];
 		coinCount ++;
 		[[Game game].stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
+		[Sound playSound:@"Heart.ogg"];
 	}
 	
 	// mark the health item as used so that it doesn't get applied twice

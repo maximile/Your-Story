@@ -138,5 +138,7 @@
 	</array>
 	<key>Size</key>
 	<string>30,30</string>
+	<key>Music</key>
+	<string>Roll.ogg</string>
 </dict>
 </plist>

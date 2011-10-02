@@ -17,6 +17,7 @@
 #import "Friend.h"
 #import "Parasprite.h"
 #import "Rocket.h"
+#import "Music.h"
 
 static int characterHitPickup(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);
@@ -213,6 +214,15 @@ static Game *game = nil;
 	titleLabel.alignment = NSCenterTextAlignment;
 	titleLabel.screenSpace = YES;
 	[self addItem:titleLabel];
+	
+	// set music
+	NSString *newMusicName = currentRoom.musicName;
+	if (![newMusicName isEqualToString:musicName]) {
+		[music stop];
+		musicName = newMusicName;
+		music = [[Music alloc] initWithFilename:musicName];
+		[music play];
+	}
 }
 
 -(void)updateStep {	

@@ -322,6 +322,7 @@ cb_tell(Music *self)
 -(id)initWithFilename:(NSString *)filename;
 {
 	if((self = [super init])){
+		if (filename.length == 0) return nil;
 		NSLog(@"Loading streamed ogg file %@", filename);
 		NSURL *url = [[NSBundle mainBundle] URLForResource:filename withExtension:nil];
 		

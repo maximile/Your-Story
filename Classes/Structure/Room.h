@@ -9,6 +9,7 @@
 	ItemLayer *itemLayer;
 	mapSize size;
 	NSString *name;
+	NSString *musicName;
 	
 	float ambientLight;
 	
@@ -26,6 +27,7 @@
 @property (readonly) mapSize size;
 @property (readonly) NSString *name;
 @property (readonly) float ambientLight;
+@property (readonly) NSString *musicName;
 
 - (TileMap *)getMap:(NSString *)mapName;
 - (id)initWithName:(NSString *)roomName;

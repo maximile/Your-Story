@@ -80,6 +80,9 @@
 		66DA06CD1437D4D6007A235E /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DA06CC1437D4D6007A235E /* Coin.m */; };
 		66DA06ED1437E0D9007A235E /* Win.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06EC1437E0D9007A235E /* Win.ysroom */; };
 		66DA06EF1437E0DF007A235E /* SuperWin.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06EE1437E0DF007A235E /* SuperWin.ysroom */; };
+		66DA06FD1437E5F0007A235E /* Believe.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06FA1437E5F0007A235E /* Believe.ogg */; };
+		66DA06FE1437E5F0007A235E /* Dreamland.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06FB1437E5F0007A235E /* Dreamland.ogg */; };
+		66DA06FF1437E5F0007A235E /* Roll.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 66DA06FC1437E5F0007A235E /* Roll.ogg */; };
 		66DFE4EE14280EE800B07AF0 /* light-spread.psd in Resources */ = {isa = PBXBuildFile; fileRef = 66DFE4ED14280EE800B07AF0 /* light-spread.psd */; };
 		66DFE4FB1428105900B07AF0 /* StripLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFE4FA1428105900B07AF0 /* StripLight.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -102,7 +105,6 @@
 		D3915D9F140C6404003F072D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3915D9A140C6404003F072D /* libvorbis.a */; };
 		D3915DA0140C6404003F072D /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3915D9B140C6404003F072D /* libvorbisfile.a */; };
 		D3BA93CD13FB11360005173B /* ChipmunkDebugDraw.c in Sources */ = {isa = PBXBuildFile; fileRef = D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */; };
-		D3DE5417140E03E800A40532 /* test_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = D3DE5415140E03E800A40532 /* test_music.ogg */; };
 		D3DE5716140E153800A40532 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE5715140E153800A40532 /* libChipmunk.a */; };
 /* End PBXBuildFile section */
 
@@ -272,6 +274,9 @@
 		66DA06CC1437D4D6007A235E /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
 		66DA06EC1437E0D9007A235E /* Win.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Win.ysroom; sourceTree = "<group>"; };
 		66DA06EE1437E0DF007A235E /* SuperWin.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SuperWin.ysroom; sourceTree = "<group>"; };
+		66DA06FA1437E5F0007A235E /* Believe.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Believe.ogg; sourceTree = "<group>"; };
+		66DA06FB1437E5F0007A235E /* Dreamland.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dreamland.ogg; sourceTree = "<group>"; };
+		66DA06FC1437E5F0007A235E /* Roll.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roll.ogg; sourceTree = "<group>"; };
 		66DFE4ED14280EE800B07AF0 /* light-spread.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-spread.psd"; sourceTree = "<group>"; };
 		66DFE4F91428105900B07AF0 /* StripLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripLight.h; sourceTree = "<group>"; };
 		66DFE4FA1428105900B07AF0 /* StripLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripLight.m; sourceTree = "<group>"; };
@@ -302,7 +307,6 @@
 		D3BA93CB13FB11360005173B /* ChipmunkDebugDraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChipmunkDebugDraw.c; sourceTree = "<group>"; };
 		D3BA93CC13FB11360005173B /* ChipmunkDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipmunkDebugDraw.h; sourceTree = "<group>"; };
 		D3BA942713FE61010005173B /* libTileVectorizer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTileVectorizer.a; sourceTree = "<group>"; };
-		D3DE5415140E03E800A40532 /* test_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_music.ogg; sourceTree = "<group>"; };
 		D3DE5703140E152E00A40532 /* Chipmunk6.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Chipmunk6.xcodeproj; path = submodules/Chipmunk/macosx/Chipmunk6.xcodeproj; sourceTree = "<group>"; };
 		D3DE5715140E153800A40532 /* libChipmunk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; name = libChipmunk.a; path = "/Users/slembcke/Development/Your-Story/submodules/Chipmunk/macosx/build/Debug/libChipmunk.a"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -699,7 +703,9 @@
 		D3DE5413140E03E800A40532 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				D3DE5415140E03E800A40532 /* test_music.ogg */,
+				66DA06FA1437E5F0007A235E /* Believe.ogg */,
+				66DA06FB1437E5F0007A235E /* Dreamland.ogg */,
+				66DA06FC1437E5F0007A235E /* Roll.ogg */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -830,7 +836,6 @@
 				D34FF3C1140B1D5F00BF9C33 /* JumperJump.ogg in Resources */,
 				D34FF3C2140B1D5F00BF9C33 /* PlayerHit.ogg in Resources */,
 				D34FF3C3140B1D5F00BF9C33 /* PlayerShotgun.ogg in Resources */,
-				D3DE5417140E03E800A40532 /* test_music.ogg in Resources */,
 				66BF4C60140ED7B4007DC2AC /* FallTiles.psd in Resources */,
 				66BF4C62140ED7BB007DC2AC /* TheFall.ysroom in Resources */,
 				66C66775141036E10049EC90 /* Climb.ysroom in Resources */,
@@ -851,6 +856,9 @@
 				66DA06971437BEF5007A235E /* Icon.icns in Resources */,
 				66DA06ED1437E0D9007A235E /* Win.ysroom in Resources */,
 				66DA06EF1437E0DF007A235E /* SuperWin.ysroom in Resources */,
+				66DA06FD1437E5F0007A235E /* Believe.ogg in Resources */,
+				66DA06FE1437E5F0007A235E /* Dreamland.ogg in Resources */,
+				66DA06FF1437E5F0007A235E /* Roll.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

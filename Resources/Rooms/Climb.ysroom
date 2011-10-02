@@ -245,5 +245,7 @@
 	</array>
 	<key>Size</key>
 	<string>75,50</string>
+	<key>Music</key>
+	<string>Dreamland.ogg</string>
 </dict>
 </plist>

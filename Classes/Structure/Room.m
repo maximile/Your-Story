@@ -3,7 +3,7 @@
 
 @implementation Room
 
-@synthesize layers, mainLayer, itemLayer, size, name, ambientLight;
+@synthesize layers, mainLayer, itemLayer, size, name, ambientLight, musicName;
 
 - (id)initWithName:(NSString *)roomName {
 	NSString *roomFilePath = [[NSBundle mainBundle] pathForResource:roomName ofType:@"ysroom"];
@@ -53,6 +53,8 @@
 	ambientLight = 1.0;
 	NSNumber *ambientLightNumber = [info valueForKey:@"AmbientLight"];
 	if (ambientLightNumber) ambientLight = [ambientLightNumber floatValue];
+
+	musicName = [info valueForKey:@"Music"];
 	
 	return self;
 }
@@ -79,6 +81,7 @@
 	[info setValue:[NSString stringWithFormat:@"%i,%i", size.width, size.height] forKey:@"Size"];
 
 	[info setValue:[NSNumber numberWithFloat:ambientLight] forKey:@"AmbientLight"];
+	[info setValue:musicName forKey:@"Music"];
 	
 	[info writeToFile:path atomically:NO];
 }

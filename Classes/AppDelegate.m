@@ -19,9 +19,9 @@
 	
 	[gameView setGame:game];
 	[gameView play];
-	
-	music = [[Music alloc] initWithFilename:@"test_music.ogg"];
-	[music play];
+	// 
+	// music = [[Music alloc] initWithFilename:@"test_music.ogg"];
+	// [music play];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

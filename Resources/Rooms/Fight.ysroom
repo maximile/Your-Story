@@ -448,5 +448,7 @@
 	</array>
 	<key>Size</key>
 	<string>150,100</string>
+	<key>Music</key>
+	<string>Believe.ogg</string>
 </dict>
 </plist>

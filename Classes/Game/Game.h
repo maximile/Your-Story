@@ -68,6 +68,9 @@ typedef enum {
 	NSDictionary *connectionDict;
 	NSArray *connections;
 	
+	Music *music;
+	NSString *musicName;
+	
 	Sprite *actionPrompt1Sprite;
 	Sprite *actionPrompt2Sprite;
 	
