@@ -21,6 +21,8 @@
 	<string>Shotgun</string>
 	<key>3,1</key>
 	<string>Parasprite</string>
+	<key>4,1</key>
+	<string>StreetLight</string>
 
 	<key>0,2</key>
 	<string>StripLight</string>

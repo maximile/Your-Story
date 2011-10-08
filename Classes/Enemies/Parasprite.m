@@ -34,7 +34,7 @@
 	bodySprite = [[Sprite alloc] initWithTexture:texture texRect:bodyCoords];
 	eyesSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(97, 23, 9, 5)];
 	feetSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(110, 25, 5, 2)];
-	wingsOneSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(97, 42, 11, 10)];
+	wingsOneSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(97, 41, 11, 10)];
 	wingsTwoSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(97, 30, 23, 10)];
 	
 	loveSprite = [[Sprite alloc] initWithTexture:texture texRect:pixelRectMake(119, 24, 7, 6)];

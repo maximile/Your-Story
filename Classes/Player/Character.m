@@ -35,6 +35,8 @@
 
 @implementation Character
 
+@synthesize battery;
+
 static void
 playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 {

@@ -16,6 +16,7 @@
 #import "Message.h"
 #import "Friend.h"
 #import "Parasprite.h"
+#import "StreetLight.h"
 #import "Rocket.h"
 #import "Music.h"
 
@@ -32,6 +33,14 @@ static int characterHitEnemy(cpArbiter *arb, cpSpace *space, Game *game) {
 	CP_ARBITER_GET_BODIES(arb, characterBody, jumperBody);
 	Character *character = characterBody->data;
 	[character hitEnemy:jumperBody->data arbiter:arb];
+	
+	return FALSE;
+}
+
+static int characterHitStreetLight(cpArbiter *arb, cpSpace *space, Game *game) {
+	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);	
+	Character *character = characterBody->data;
+	character.battery = 1.0;
 	
 	return FALSE;
 }
@@ -65,6 +74,7 @@ static Game *game = nil;
 	cpSpaceAddCollisionHandler(space, [Character class], [Jumper class], NULL, (cpCollisionPreSolveFunc)characterHitEnemy, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [Character class], [Parasprite class], NULL, (cpCollisionPreSolveFunc)characterHitEnemy, NULL, NULL, self);
 	cpSpaceAddCollisionHandler(space, [Character class], [Pickup class], NULL, (cpCollisionPreSolveFunc)characterHitPickup, NULL, NULL, self);
+	cpSpaceAddCollisionHandler(space, [Character class], [StreetLight class], NULL, (cpCollisionPreSolveFunc)characterHitStreetLight, NULL, NULL, self);
 	
 	uiMap = [TileMap mapNamed:@"UI"];
 	lightmapCanvas = [(FBO *)[FBO alloc] initWithSize:CANVAS_SIZE];

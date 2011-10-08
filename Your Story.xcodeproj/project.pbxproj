@@ -14,6 +14,7 @@
 		660B7FA513BFBC31001ECF63 /* Test.psd in Resources */ = {isa = PBXBuildFile; fileRef = 660B7FA413BFBC31001ECF63 /* Test.psd */; };
 		660B803A13BFD4C0001ECF63 /* Test.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 660B803913BFD4C0001ECF63 /* Test.ysroom */; };
 		661D5FE2142EA3320083F1FC /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 661D5FE1142EA3320083F1FC /* Message.m */; };
+		662F0F0A143D0A750037CCED /* StreetLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 662F0F09143D0A750037CCED /* StreetLight.m */; };
 		6645D051141963D9001E7633 /* Moodier.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6645D050141963D9001E7633 /* Moodier.psd */; };
 		6645D06114196D44001E7633 /* AloneInTheDark.ysroom in Resources */ = {isa = PBXBuildFile; fileRef = 6645D06014196D44001E7633 /* AloneInTheDark.ysroom */; };
 		6658F23413F08C40007588D1 /* UI.psd in Resources */ = {isa = PBXBuildFile; fileRef = 6658F23313F08C40007588D1 /* UI.psd */; };
@@ -169,6 +170,8 @@
 		660B803913BFD4C0001ECF63 /* Test.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.ysroom; sourceTree = "<group>"; };
 		661D5FE0142EA3320083F1FC /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		661D5FE1142EA3320083F1FC /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		662F0F08143D0A750037CCED /* StreetLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetLight.h; sourceTree = "<group>"; };
+		662F0F09143D0A750037CCED /* StreetLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetLight.m; sourceTree = "<group>"; };
 		6645D050141963D9001E7633 /* Moodier.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Moodier.psd; sourceTree = "<group>"; };
 		6645D06014196D44001E7633 /* AloneInTheDark.ysroom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AloneInTheDark.ysroom; sourceTree = "<group>"; };
 		6658F23313F08C40007588D1 /* UI.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = UI.psd; sourceTree = "<group>"; };
@@ -531,6 +534,8 @@
 				6675F038141D3448003251AE /* Door.m */,
 				66DFE4F91428105900B07AF0 /* StripLight.h */,
 				66DFE4FA1428105900B07AF0 /* StripLight.m */,
+				662F0F08143D0A750037CCED /* StreetLight.h */,
+				662F0F09143D0A750037CCED /* StreetLight.m */,
 				661D5FE0142EA3320083F1FC /* Message.h */,
 				661D5FE1142EA3320083F1FC /* Message.m */,
 			);
@@ -924,6 +929,7 @@
 				66DA067C14378986007A235E /* Phone.m in Sources */,
 				66DA06CD1437D4D6007A235E /* Coin.m in Sources */,
 				6694A7D11439192C00A9CF2E /* Balloon.m in Sources */,
+				662F0F0A143D0A750037CCED /* StreetLight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

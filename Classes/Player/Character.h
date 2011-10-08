@@ -54,6 +54,8 @@
 	bool useShotgun;
 }
 
+@property float battery;
+
 - (void)addToSpace:(cpSpace *)space;
 - (void)removeFromSpace:(cpSpace *)space;
 
