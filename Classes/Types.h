@@ -100,9 +100,6 @@ static inline pixelRect pixelRectFromString(NSString *string) {
 	return pixelRectMake(x, y, width, height);
 }
 
-
-
-
 // direction bitmask, e.g. for arrow key input
 
 typedef enum {

@@ -319,7 +319,6 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 }
 
 - (int)hitPickup:(Pickup *)pickup arbiter:(cpArbiter *)arb {
-	NSLog(@"here");
 	if (pickup.used) return 0;
 	
 	if ([pickup isKindOfClass:[Health class]]) {

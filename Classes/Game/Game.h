@@ -69,6 +69,8 @@ typedef enum {
 	NSDictionary *connectionDict;
 	NSArray *connections;
 	
+	NSMutableArray *streetLights;
+	
 	Music *music;
 	NSString *musicName;
 	
@@ -86,6 +88,8 @@ typedef enum {
 @property (readonly) cpSpace *space;
 @property (readonly) double fixedTime;
 @property (readonly) NSMutableDictionary *stateDict;
+@property (readonly) NSMutableArray *streetLights;
+
 @property int coinCount;
 
 + (Game *)game;
@@ -93,7 +97,8 @@ typedef enum {
 - (void)drawOnCanvas:(FBO *)canvas;
 - (void)update;
 
-- (void)setState:(NSDictionary *)state;
+- (void)saveState;
+- (void)restoreState;
 - (void)setCurrentRoom:(Room *)newRoom fromEdge:(directionMask)edge;
 - (void)setCurrentRoomFromPath:(NSString *)path;
 - (void)writeCurrentRoomToPath:(NSString *)path;

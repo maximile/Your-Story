@@ -15,6 +15,7 @@
 	verts[2] = cpv(-40, -80);
 	cpVect lightPos = cpv(startingPosition.x + 14, startingPosition.y);
 	lightArea = cpPolyShapeNew(cpSpaceGetStaticBody([Game game].space), 3, verts, lightPos);
+	lightArea->data = self;
 	cpShapeSetSensor(lightArea, cpTrue);
 	cpShapeSetCollisionType(lightArea, [self class]);
 	

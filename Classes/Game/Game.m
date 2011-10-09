@@ -38,16 +38,22 @@ static int characterHitEnemy(cpArbiter *arb, cpSpace *space, Game *game) {
 }
 
 static int characterHitStreetLight(cpArbiter *arb, cpSpace *space, Game *game) {
-	CP_ARBITER_GET_BODIES(arb, characterBody, pickupBody);	
+	CP_ARBITER_GET_BODIES(arb, characterBody, streetLightBody);	
+	CP_ARBITER_GET_SHAPES(arb, characterShape, streetLightShape);	
 	Character *character = characterBody->data;
+	StreetLight *streetLight = streetLightShape->data;
+	int streetLightIndex = [game.streetLights indexOfObject:streetLight];
 	character.battery = 1.0;
+	
+	[game saveState];
+	[game.stateDict setValue:[NSNumber numberWithInt:streetLightIndex] forKey:@"checkpoint"];
 	
 	return FALSE;
 }
 
 @implementation Game
 
-@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime, stateDict, coinCount;
+@synthesize mode, currentRoom, editingLayer, cursorLoc, player, space, fixedTime, stateDict, coinCount, streetLights;
 
 static Game *game = nil;
 + (Game *)game {
@@ -89,6 +95,7 @@ static Game *game = nil;
 		[NSNumber numberWithBool:NO], @"shotgun",
 		[NSNumber numberWithInt:8], @"health",
 		[NSNumber numberWithInt:0], @"coins",
+		[NSNumber numberWithInt:-1], @"checkpoint",
 		startingRoomName, @"room",
 		[NSNumber numberWithInt:NOWHERE], @"spawn",
 		@"Character", @"playerClass",
@@ -99,7 +106,7 @@ static Game *game = nil;
 	actionPrompt1Sprite = [[Sprite alloc] initWithTexture:uiTexture texRect:pixelRectMake(0, 16, 16, 16)];
 	actionPrompt2Sprite = [[Sprite alloc] initWithTexture:uiTexture texRect:pixelRectMake(0, 32, 16, 16)];
 	
-	[self setState:stateDict];
+	[self restoreState];
 	
 	// transition stuff
 	transition = 1.0;
@@ -150,11 +157,27 @@ static Game *game = nil;
 	[self setCurrentRoom:newRoom fromEdge:NOWHERE];
 }
 
-- (void)setState:(NSDictionary *)state {
-	Room *room = [[Room alloc] initWithName:[state valueForKey:@"room"]];
-	directionMask edge = [[state valueForKey:@"spawn"] intValue];
-	coinCount = [[state valueForKey:@"coins"] intValue];
+- (void)saveState {
+	[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
+	[stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
+	[stateDict setValue:currentRoom.name forKey:@"room"];
+	[stateDict setValue:[NSNumber numberWithInt:-1] forKey:@"checkpoint"];
+	
+	// save player health, abilities etc.
+	[player updateStateDict:stateDict];
+}
+
+- (void)restoreState {
+	Room *room = [[Room alloc] initWithName:[stateDict valueForKey:@"room"]];
+	directionMask edge = [[stateDict valueForKey:@"spawn"] intValue];
+	coinCount = [[stateDict valueForKey:@"coins"] intValue];
 	[self setCurrentRoom:room fromEdge:edge];
+	
+	int checkpointIndex = [[stateDict valueForKey:@"checkpoint"] intValue];
+	if (checkpointIndex > -1) {
+		StreetLight *light = [streetLights objectAtIndex:checkpointIndex];
+		cpBodySetPos(player.body, cpv(light.startingPosition.x, light.startingPosition.y));
+	} 
 }
 
 - (void)setCurrentRoom:(Room *)newRoom fromEdge:(directionMask)edge {
@@ -169,6 +192,7 @@ static Game *game = nil;
 	}
 	player = nil;
 	door = nil;
+	streetLights = [NSMutableArray array];
 	[self addAndRemoveItems];
 	[currentRoom.mainLayer removeFromSpace:space];
 	
@@ -188,6 +212,10 @@ static Game *game = nil;
 		}
 		if ([item isKindOfClass:[Friend class]]) {
 			[(NSMutableArray *)friends addObject:item];
+		}
+		if ([item isKindOfClass:[StreetLight class]]) {
+			NSLog(@"YO");
+			[streetLights addObject:item];
 		}
 		if ([item isKindOfClass:[Door class]]) {
 			door = (Door *)item;
@@ -287,7 +315,7 @@ double getDoubleTime(void)
 	if (player == nil) transition += 0.02;
 	else transition -= 0.02;
 	if (transition >= 1.0) {
-		[self setState:stateDict];
+		[self restoreState];
 	}
 	if (transition <= 0.0) {
 		transition = 0.0;
@@ -312,18 +340,14 @@ double getDoubleTime(void)
 			if (outside & UP) startingEdge |= DOWN;
 			if (outside & DOWN) startingEdge |= UP;
 			
-			[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
+			[self saveState];
+			
 			[stateDict setValue:[NSNumber numberWithInt:startingEdge] forKey:@"spawn"];
-			[stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
 			[stateDict setValue:nextRoomName forKey:@"room"];
-			[player updateStateDict:stateDict];
+			
 			[self removeItem:player];
 			[self addAndRemoveItems];
-			player = nil;
-			
-			// [self setState:stateDict];
-			
-			// [self setCurrentRoom:nextRoom fromEdge:startingEdge];
+			player = nil;			
 		}
 		else {
 			// fell off the bottom and no downwards room? die
@@ -346,18 +370,16 @@ double getDoubleTime(void)
 		nearDoor = YES;
 	if (nearDoor && action) {
 		NSString *nextRoomName = [self roomNameInDirection:NOWHERE];
-		[stateDict setValue:NSStringFromClass([player class]) forKey:@"playerClass"];
+
+		[self saveState];
+		
 		[stateDict setValue:[NSNumber numberWithInt:NOWHERE] forKey:@"spawn"];
 		[stateDict setValue:nextRoomName forKey:@"room"];
-		[stateDict setValue:[NSNumber numberWithInt:coinCount] forKey:@"coins"];
 		
-		[player updateStateDict:stateDict];
 		[self removeItem:player];
 		[self addAndRemoveItems];
 		player = nil;
 		door.open = YES;
-		
-		// [self setState:stateDict];
 	}
 	
 	BOOL nearFriend = NO;
