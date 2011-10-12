@@ -3,7 +3,7 @@
 
 @implementation Message
 
-@synthesize alignment, ticker, life, screenSpace;
+@synthesize alignment, ticker, life, screenSpace, string;
 
 - (id)initWithPosition:(pixelCoords)position font:(Font *)newFont string:(NSString *)newString {
 	if ([super initWithPosition:position] == nil) return nil;

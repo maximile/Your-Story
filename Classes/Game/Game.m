@@ -71,6 +71,12 @@ static Game *game = nil;
 	itemsToRemove = [NSMutableArray array];
 	itemsToAdd = [NSMutableArray array];
 	
+	Font *timeFont = [Font fontNamed:@"Geneva9"];
+	pixelCoords timeCoords = pixelCoordsMake(CANVAS_SIZE.width/2, -1);
+	timeLabel = [[Message alloc] initWithPosition:timeCoords font:timeFont string:@"0:00.0"];
+	timeLabel.alignment = NSCenterTextAlignment;
+	timeLabel.screenSpace = YES;
+	
 	space = cpSpaceNew();
 	cpSpaceSetGravity(space, cpv(0, -GRAVITY));
 	cpSpaceSetCollisionSlop(space, COLLISION_SLOP);
@@ -275,6 +281,11 @@ static Game *game = nil;
 	}
 	cpSpaceStep(space, FIXED_DT);
 	[self addAndRemoveItems];
+	
+	timeTaken += FIXED_DT;
+	int minutes = (int)timeTaken / 60;
+	float seconds = timeTaken - (minutes * 60);
+	timeLabel.string = [NSString stringWithFormat:@"%i:%04.1f", minutes, seconds];
 }
 
 #import <mach/mach_time.h>
@@ -332,7 +343,36 @@ double getDoubleTime(void)
 	if (pos.y > (currentRoom.size.height) * TILE_SIZE) outside |= UP;
 	if (outside) {
 		NSString *nextRoomName = [self roomNameInDirection:outside];
-		if ([nextRoomName isEqualToString:@"Win"] && coinCount == 8) nextRoomName = @"SuperWin";
+		if ([nextRoomName isEqualToString:@"Win"]){
+			// finished the game
+			completionTime = timeTaken;
+			timeLabel = nil;
+			int minutes = (int)timeTaken / 60;
+			float seconds = timeTaken - (minutes * 60);
+			NSString *completionTimeString = [NSString stringWithFormat:@"%i:%04.1f", minutes, seconds];
+			NSString *completionLabelMessage1 = [NSString stringWithFormat:@"Congratulations! You finished in %@!", completionTimeString];
+			NSString *completionLabelMessage2 = @"Try collecting all the coins for a better ending!";
+			NSString *completionLabelMessage3 = @"Thanks for playing!";
+			if (coinCount == 8) {
+				nextRoomName = @"SuperWin";
+				completionLabelMessage2 = @"You collected all the coins! You’re awesome!";
+			}
+			pixelCoords completionLabelPos1 = pixelCoordsMake(CANVAS_SIZE.width/2, CANVAS_SIZE.height - 30);
+			pixelCoords completionLabelPos2 = pixelCoordsMake(CANVAS_SIZE.width/2, CANVAS_SIZE.height - 50);
+			pixelCoords completionLabelPos3 = pixelCoordsMake(CANVAS_SIZE.width/2, CANVAS_SIZE.height - 80);
+			Font *completionLabelFont1 = [Font fontNamed:@"Geneva9"];
+			Font *completionLabelFont2 = [Font fontNamed:@"Chicago12"];
+			completionLabel1 = [[Message alloc] initWithPosition:completionLabelPos1 font:completionLabelFont1 string:completionLabelMessage1];
+			completionLabel2 = [[Message alloc] initWithPosition:completionLabelPos2 font:completionLabelFont1 string:completionLabelMessage2];
+			completionLabel3 = [[Message alloc] initWithPosition:completionLabelPos3 font:completionLabelFont2 string:completionLabelMessage3];
+			completionLabel1.alignment = NSCenterTextAlignment;
+			completionLabel1.screenSpace = YES;
+			completionLabel2.alignment = NSCenterTextAlignment;
+			completionLabel2.screenSpace = YES;
+			completionLabel3.alignment = NSCenterTextAlignment;
+			completionLabel3.screenSpace = YES;
+			
+		}
 		if (nextRoomName != nil) {
 			directionMask startingEdge = NOWHERE;
 			if (outside & RIGHT) startingEdge |= LEFT;

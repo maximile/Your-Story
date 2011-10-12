@@ -13,6 +13,7 @@
 @class Door;
 @class Sprite;
 @class Rocket;
+@class Message;
 
 typedef enum {
 	GAME_MODE,
@@ -37,6 +38,13 @@ typedef enum {
 	Rocket *rocket;
 	NSArray *friends;
 	int coinCount;
+	
+	float timeTaken;
+	float completionTime;
+	Message *timeLabel;
+	Message *completionLabel1;
+	Message *completionLabel2;
+	Message *completionLabel3;
 	
 	// transition variables
 	float transition;

@@ -17,6 +17,7 @@
 @property BOOL screenSpace;
 @property BOOL ticker;
 @property NSTextAlignment alignment;
+@property (assign) NSString *string;
 
 - (id)initWithPosition:(pixelCoords)position font:(Font *)newFont string:(NSString *)newString;
 

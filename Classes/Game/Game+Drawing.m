@@ -108,6 +108,14 @@
 	for (Item *item in items) {
 		[item drawInScreenCoords:self];
 	}	
+	
+	[timeLabel drawInScreenCoords:self];
+	if (player) {
+		[completionLabel1 drawInScreenCoords:self];
+		[completionLabel2 drawInScreenCoords:self];
+		[completionLabel3 drawInScreenCoords:self];
+	}
+	
 	[player drawStatus];
 	for (Texture *texture in [Texture textures]) {
 		[texture draw];

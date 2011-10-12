@@ -453,7 +453,7 @@ playerUpdateVelocity(cpBody *body, cpVect gravity, cpFloat damping, cpFloat dt)
 		else [emptyHealth drawAt:iconLoc];
 	}
 	int coinCount = [Game game].coinCount;
-	NSString *coinsString = [NSString stringWithFormat:@"%i out of %i coins", coinCount, 8];
+	NSString *coinsString = [NSString stringWithFormat:@"%i of %i coins", coinCount, 8];
 	[[Font fontNamed:@"Chicago12"] drawString:coinsString at:pixelCoordsMake(CANVAS_SIZE.width - 8, 6) alignment:NSRightTextAlignment];
 }
 
