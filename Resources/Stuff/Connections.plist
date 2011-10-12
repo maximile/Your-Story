@@ -86,6 +86,12 @@
 	</dict>
 	<dict>
 		<key>Name</key>
+		<string>SuperWin</string>
+		<key>Title</key>
+		<string>Balloons!</string>
+	</dict>
+	<dict>
+		<key>Name</key>
 		<string>Warehouse</string>
 		<key>Title</key>
 		<string>Storage Facility</string>
