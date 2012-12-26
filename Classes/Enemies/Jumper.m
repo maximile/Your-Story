@@ -186,6 +186,7 @@ cpfsign(cpFloat f)
 - (void)finalize {
 	cpShapeFree(shape);
 	cpBodyFree(body);
+    [super finalize];
 }
 
 - (void)shotFrom:(cpVect)shotLocation damage:(float)damage;

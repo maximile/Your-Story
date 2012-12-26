@@ -65,15 +65,31 @@
 - (IBAction)openMap:(id)sender {
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	
-	[openPanel beginSheetForDirectory:nil file:nil types:[NSArray arrayWithObject:@"ysroom"] modalForWindow:window modalDelegate:self didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+    
+//    Presents an Open panel as a sheet with the directory specified by absoluteDirectoryPath and optionally the file specified by filename selected. (Deprecated in OS X v10.6. Use beginSheetModalForWindow:completionHandler: instead. You can set absoluteDirectoryPath using setDirectoryURL:, and you can set fileTypes using setAllowedFileTypes:.)
+    
+    // Block to open the new room file
+    void (^openRoom)(NSInteger) = ^(NSInteger result) {
+        NSString *selectedPath = openPanel.URLs.lastObject;
+        if (selectedPath.length) {
+            [game setCurrentRoomFromPath:selectedPath];
+        }
+    };
+    
+    [openPanel setAllowedFileTypes:@[@"ysroom"]];
+    [openPanel beginSheetModalForWindow:window completionHandler:openRoom];
+    
+    
+    
+//	[openPanel beginSheetForDirectory:nil file:nil types:[NSArray arrayWithObject:@"ysroom"] modalForWindow:window modalDelegate:self didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-	roomPath = panel.filenames.lastObject;
-	if (roomPath.length) {
-		[game setCurrentRoomFromPath:roomPath];
-	}
-}
+//- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+//	roomPath = panel.filenames.lastObject;
+//	if (roomPath.length) {
+//		[game setCurrentRoomFromPath:roomPath];
+//	}
+//}
 
 - (IBAction)saveMap:(id)sender {
 	if (!roomPath.length) {

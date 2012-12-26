@@ -46,6 +46,7 @@
 - (void)finalize {
 	cpShapeFree(shape);
 	cpBodyFree(body);
+    [super finalize];
 }
 
 @end
